@@ -16,7 +16,7 @@
 
 ;; Turn off mouse interface early in startup to avoid momentary display
 (if (fboundp 'menu-bar-mode) (menu-bar-mode 1))
-; (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
 ;; Turn off the toolbar and scrollbar
@@ -140,8 +140,17 @@
 ;; Automatically load a gist in the browser when I post one.
 (defvar gist-view-gist 1)
 
-;; Save file of last session
+;; Save all of the buffers I'm working on, for next time
 (desktop-save-mode 1)
+(setq desktop-buffers-not-to-save
+      (concat "\\("
+	      "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
+	      "\\|\\.emacs.*\\|\\.diary\\|\\.newsrc-dribble\\|\\.bbdb"
+	      "\\)$"))
+(add-to-list 'desktop-modes-not-to-save 'dired-mode)
+(add-to-list 'desktop-modes-not-to-save 'Info-mode)
+(add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
+(add-to-list 'desktop-modes-not-to-save 'fundamental-mode)
 
 ;; Keep custom settings in separate file
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
