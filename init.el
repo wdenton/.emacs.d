@@ -303,3 +303,6 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 
+; Make script files executable automatically
+; http://www.masteringemacs.org/articles/2011/01/19/script-files-executable-automatically/
+(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
