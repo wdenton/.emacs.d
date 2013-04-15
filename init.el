@@ -46,14 +46,21 @@
 
 ; Make sure that all of the packages I want are installed. If not, install them.
 (setq my-packages '(auctex 
+		    auto-complete
 		    autopair 
 		    color-theme-solarized
 		    ess 
+		    ess-R-object-popup
 		    expand-region 
+		    flymake-ruby
 		    gist
 		    markdown-mode 
+		    ruby-block
+		    ruby-electric
 		    ruby-mode 
-		    yaml-mode))
+		    yaml-mode
+		    zotelo
+		    ))
 (when (not package-archive-contents) 
   (package-refresh-contents))
 (dolist (p my-packages) 
