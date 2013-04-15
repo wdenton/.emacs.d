@@ -1,0 +1,15 @@
+auto-save-list
+backups
+*~
+.places
+session.*
+tramp
+elpa
+emms
+*.elc
+.yas-compiled-snippets.el
+desktops
+dict
+var
+eshell
+ac-comphist.dat
