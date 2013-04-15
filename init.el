@@ -59,6 +59,7 @@
 		    ruby-electric
 		    ruby-mode 
 		    yaml-mode
+		    yasnippet
 		    zotelo
 		    ))
 (when (not package-archive-contents) 
