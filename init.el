@@ -54,6 +54,7 @@
 		    expand-region 
 		    flymake-ruby
 		    gist
+		    inf-ruby
 		    markdown-mode 
 		    ruby-block
 		    ruby-electric
