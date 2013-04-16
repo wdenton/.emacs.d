@@ -13,6 +13,13 @@
  '(inhibit-startup-screen t)
  '(mouse-wheel-mode t nil (mwheel))
  '(query-user-mail-address nil)
+ '(safe-local-variable-values (quote ((whitespace-style face tabs spaces trailing lines space-before-tab::space newline indentation::space empty space-after-tab::space space-mark tab-mark newline-mark))))
  '(show-paren-mode t nil (paren))
  '(user-mail-address "wtd@pobox.com"))
 
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
