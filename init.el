@@ -56,6 +56,8 @@
 		    gist
 		    inf-ruby
 		    markdown-mode 
+		    org
+		    org-bullets
 		    ruby-block
 		    ruby-electric
 		    ruby-mode 
@@ -170,6 +172,10 @@
 ;;;
 
 ; (require 'centered-cursor-mode)
+
+;; org-mode
+(require 'org-bullets)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
 ;; Emacs Speaks Statistics (for R)
 (require 'ess-site)
