@@ -21,6 +21,21 @@
 ;)
 
 
+; Open a new line above or below the current one, even if the cursor is midsentence.
+(defun open-line-below ()
+  (interactive)
+  (end-of-line)
+  (newline)
+  (indent-for-tab-command))
+(defun open-line-above ()
+  (interactive)
+  (beginning-of-line)
+  (newline)
+  (forward-line -1)
+  (indent-for-tab-command))
+(global-set-key (kbd "<C-return>") 'open-line-below)
+(global-set-key (kbd "<C-S-return>") 'open-line-above)
+
 ;;; Move an entire line up or down with C-S-up or C-S-down
 ; From http://whattheemacsd.com/
 (defun move-line-down ()

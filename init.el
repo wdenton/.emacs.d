@@ -28,8 +28,7 @@
 
 ; user-emacs-directory is ~/.emacs.d/
 ; I keep my local things in ~/.emacs.d/site-lisp/
-; and I want everything in there available, including inside
-; subdirectories
+; and I want everything in there available, including inside subdirectories
 (setq site-lisp-dir (expand-file-name "site-lisp" user-emacs-directory))
 (let ((default-directory site-lisp-dir)) (normal-top-level-add-subdirs-to-load-path))
 
@@ -127,26 +126,10 @@
   (interactive)
   (kill-line 0)))
 
-
 ;; Save point position between sessions
 (require 'saveplace)
 (setq-default save-place t)
 (setq save-place-file (expand-file-name ".places" user-emacs-directory))
-
-; Open a new line above or below the current one, even if the cursor is midsentence.
-(defun open-line-below ()
-  (interactive)
-  (end-of-line)
-  (newline)
-  (indent-for-tab-command))
-(defun open-line-above ()
-  (interactive)
-  (beginning-of-line)
-  (newline)
-  (forward-line -1)
-  (indent-for-tab-command))
-(global-set-key (kbd "<C-return>") 'open-line-below)
-(global-set-key (kbd "<C-S-return>") 'open-line-above)
 
 ;; Automatically load a gist in the browser when I post one.
 (defvar gist-view-gist 1)
@@ -171,20 +154,9 @@
 ;;; Modes.
 ;;;
 
-; (require 'centered-cursor-mode)
-
 ;; org-mode
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-
-;; Emacs Speaks Statistics (for R)
-(require 'ess-site)
-(setq ess-use-auto-complete t)
-;; Make R go to the width of the Emacs frame
-(add-hook 'ess-R-post-run-hook 'ess-execute-screen-options)
-
-(require 'ess-R-object-popup)
-(define-key ess-mode-map "\C-c\C-g" 'ess-R-object-popup)
 
 ;; nxml for HTML etc.
 (add-to-list 'auto-mode-alist
@@ -199,39 +171,15 @@
 (setq cperl-close-paren-offset -2)
 (setq cperl-info-on-command-no-prompt t)
 
-;; Ruby mode
-(autoload 'ruby-mode "ruby-mode" "Mode for editing ruby source files")
-(add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
-(add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
-(autoload 'run-ruby "inf-ruby" "Run an inferior Ruby process")
-(autoload 'inf-ruby-keys "inf-ruby" "Set local key defs for inf-ruby in ruby-mode")
-(add-hook 'ruby-mode-hook '(lambda () (inf-ruby-keys)))
-
-;; avoid ridiculous ruby indentation
-(setq ruby-deep-indent-paren nil)
-
-;; Show the starting point of a block, when I'm at the end
-(require 'ruby-block)
-(ruby-block-mode t)
-(setq ruby-block-highlight-toggle t)
-
-(require 'ruby-electric)
-
-(require 'flymake-ruby)
-(add-hook 'ruby-mode-hook 'flymake-ruby-load)
-
-;; Rinari (for Ruby on Rails)
-; (require 'rinari)
-
 ;; YAML mode
 ;; https://github.com/yoshiki/yaml-mode
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
+(require 'setup-ess)
+(require 'setup-ruby)
 (require 'setup-latex)
-
 (require 'setup-autocomplete)
-
 (require 'setup-useful-functions)
 
 ;; outline-mode
@@ -299,7 +247,7 @@
 ;; Highlight matching parenthesis whenever the point is over one.
 (require 'paren)
 
-;; Make it so down-arrow at the end of a file doesn't add in a new line.
+;; Down-arrow at the end of a file doesn't add in a new line.
 (setq next-line-add-newlines nil)
 
 ;; Silently ensure a file ends in a newline when it's saved.
