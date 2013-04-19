@@ -150,23 +150,21 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
 
-;;;
-;;; Modes.
-;;;
+;; nxml for HTML etc.
+(add-to-list 'auto-mode-alist
+       (cons (concat "\\." (regexp-opt '("xml" "xsd" "sch" "rng" "xslt" "svg" "rss") t) "\\'")
+       'nxml-mode))
+(fset 'html-mode 'nxml-mode)
 
-;; outline-mode
-;; Automatically go into outline mode on any file ending with .outline.txt
-(add-to-list 'auto-mode-alist '("\\.outline\\.txt\\'" . outline-mode))
-(add-hook 'outline-mode-hook 'hide-body)
-(add-hook 'outline-mode-hook 'turn-on-visual-line-mode)
-
-;; markdown-mode
-(autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
-;; I should know how to add both at the same time
-(setq auto-mode-alist (cons '("\\.markdown" . markdown-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.md" . markdown-mode) auto-mode-alist))
-(add-hook 'markdown-mode-hook 'turn-on-outline-minor-mode)
-(add-hook 'markdown-mode-hook 'turn-on-visual-line-mode)
+(require 'setup-ess)
+(require 'setup-ruby)
+(require 'setup-latex)
+(require 'setup-autocomplete)
+(require 'setup-useful-functions) 
+(require 'setup-markdown)
+(require 'setup-orgmode)
+(require 'setup-outline)
+(require 'setup-yaml)
 
 ;; expand-region (see https://github.com/magnars/expand-region.el)
 ;; C-= successively expands the region with great intelligence
@@ -179,8 +177,6 @@
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
-
-;;; Various Little Customizations.
 
 ;; This is adding in the ":" character to the standard set,
 ;; which means M-q will work on paragraphs that start with :
