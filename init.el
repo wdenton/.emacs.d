@@ -154,34 +154,6 @@
 ;;; Modes.
 ;;;
 
-;; org-mode
-(require 'org-bullets)
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-
-;; nxml for HTML etc.
-(add-to-list 'auto-mode-alist
-	     (cons (concat "\\." (regexp-opt '("xml" "xsd" "sch" "rng" "xslt" "svg" "rss") t) "\\'")
-		   'nxml-mode))
-(fset 'html-mode 'nxml-mode)
-
-;; cperl-mode
-(defalias 'perl-mode 'cperl-mode)
-(setq cperl-indent-level 4)
-(setq cperl-continued-statement-offset 3)
-(setq cperl-close-paren-offset -2)
-(setq cperl-info-on-command-no-prompt t)
-
-;; YAML mode
-;; https://github.com/yoshiki/yaml-mode
-(require 'yaml-mode)
-(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
-
-(require 'setup-ess)
-(require 'setup-ruby)
-(require 'setup-latex)
-(require 'setup-autocomplete)
-(require 'setup-useful-functions)
-
 ;; outline-mode
 ;; Automatically go into outline mode on any file ending with .outline.txt
 (add-to-list 'auto-mode-alist '("\\.outline\\.txt\\'" . outline-mode))
@@ -269,3 +241,7 @@
 ; Make script files executable automatically
 ; http://www.masteringemacs.org/articles/2011/01/19/script-files-executable-automatically/
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+
+; I'm old enough to be able to use narrow-to-region
+(put 'narrow-to-region 'disabled nil)
+
