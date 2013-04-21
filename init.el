@@ -156,14 +156,14 @@
        'nxml-mode))
 (fset 'html-mode 'nxml-mode)
 
-(require 'setup-ess)
-(require 'setup-ruby)
-(require 'setup-latex)
 (require 'setup-autocomplete)
-(require 'setup-useful-functions) 
+(require 'setup-ess)
+(require 'setup-latex)
 (require 'setup-markdown)
 (require 'setup-orgmode)
 (require 'setup-outline)
+(require 'setup-ruby)
+(require 'setup-useful-functions) 
 (require 'setup-yaml)
 
 ;; expand-region (see https://github.com/magnars/expand-region.el)
@@ -183,8 +183,8 @@
 ;; (my news quote character).
 (setq adaptive-fill-regexp "[      ]*\\([#:;>*]+ +\\)?")
 
-;; autopair makes matching parentheses always appear
-;; https://code.google.com/p/autopair/
+;; Make matching parentheses and quotes always appear
+;; https://github.com/capitaomorte/autopair
 (require 'autopair)
 (autopair-global-mode) ;; to enable in all buffers
 
@@ -241,3 +241,7 @@
 ; I'm old enough to be able to use narrow-to-region
 (put 'narrow-to-region 'disabled nil)
 
+; Show page-breaking ^Ls as dashes
+; But it doesn't work in C-h m help screens ... hmm
+(require 'page-break-lines)
+(global-page-break-lines-mode)

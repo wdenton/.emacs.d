@@ -1,8 +1,9 @@
 ;; auto-complete
-(require 'auto-complete-config)
-(require 'auto-complete-auctex)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/dict/")
+; https://github.com/auto-complete/auto-complete
 
+(require 'auto-complete-config)
+; Had to add the files in this directory by hand
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict/")
 (ac-config-default)
 
 (setq ac-use-menu-map t)
