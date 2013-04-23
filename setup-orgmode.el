@@ -10,6 +10,8 @@
 
 ; Embed an image with [[file:foo.png]] and then C-c C-x C-v to view
 (setq org-display-inline-images t)
+; Display images when a file is loaded (I can always toggle them off if I don't want them)
+(add-hook 'org-mode-hook (lambda () (org-toggle-inline-images)))
 
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
@@ -22,8 +24,7 @@
       '(("w" "Work todo" entry (file+headline "~/york/gtd/next-actions.org" "Tasks") "* TODO %?\n %u\n %a"))
       )
 
-
-; active Babel languages
+; Active Babel languages
 (org-babel-do-load-languages
  'org-babel-load-languages
  '(
