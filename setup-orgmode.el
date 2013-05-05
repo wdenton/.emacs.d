@@ -25,9 +25,12 @@
       )
 
 ; Active Babel languages
+; See http://orgmode.org/org.html#Languages
 (org-babel-do-load-languages
  'org-babel-load-languages
  '(
+   (ditaa . t)
+   (dot . t)
    (latex . t)
    (R . t)
    (ruby . t)
@@ -35,5 +38,9 @@
    (sql . t)
    )
  )
+
+
+; Requires ditaa to be installed
+(setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
 
 (provide 'setup-orgmode)
