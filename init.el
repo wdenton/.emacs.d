@@ -91,6 +91,7 @@
 
 ;; Matches parentheses and such in every mode
 (show-paren-mode 1)
+(setq show-paren-style 'mixed) ; Values; 'expression, 'parenthesis or 'mixed
 
 ;; Calendar should start on Monday (not that I ever use the calendar)
 (setq calendar-week-start-day 1)
