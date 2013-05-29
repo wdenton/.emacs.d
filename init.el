@@ -57,6 +57,8 @@
 		    markdown-mode 
 		    org
 		    org-bullets
+		    org-reveal
+		    page-break-lines
 		    ruby-block
 		    ruby-electric
 		    ruby-mode 

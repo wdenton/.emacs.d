@@ -17,6 +17,9 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 
+; For org-reveal, which makes presentations using reveal.js
+(require 'org-reveal)
+
 ; Capturing
 (setq org-default-notes-file "~/notes.org") ; Change this when I use it for real
 (define-key global-map "\C-cc" 'org-capture)
