@@ -27,6 +27,7 @@
 (setq biblatex-dialect "biblatex")
 
 ; Zotero integration! (https://github.com/vitoshka/zotelo)
+; Requires MozRepl addon in Firefox
 (require 'zotelo)
 (add-hook 'TeX-mode-hook 'zotelo-minor-mode)
 
