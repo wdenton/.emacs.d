@@ -8,6 +8,9 @@
 ; Hit return on a link to open it in a browser
 (setq org-return-follows-link t)
 
+; Shift and arrow keys to select text works a bit differenty in org-mode
+(setq org-support-shift-select t)
+
 ; Embed an image with [[file:foo.png]] and then C-c C-x C-v to view
 (setq org-display-inline-images t)
 ; Display images when a file is loaded (I can always toggle them off if I don't want them)
@@ -32,10 +35,12 @@
    (ditaa . t)
    (dot . t)
    (latex . t)
+   (python . t)
    (R . t)
    (ruby . t)
    (sh . t)
    (sql . t)
+   (sqlite . t)
    )
  )
 
