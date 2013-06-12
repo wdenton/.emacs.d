@@ -10,8 +10,7 @@
 ; (require 'ess-R-object-popup)
 (define-key ess-mode-map "\C-c\C-g" 'ess-R-object-popup)
 
-
 ; Make all help buffers go into one frame
-(setq ess-help-own-frame 'one)
+(setq ess-help-own-frame 'nil)
 
 (provide 'setup-ess)
