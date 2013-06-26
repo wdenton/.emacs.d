@@ -47,6 +47,8 @@
    )
  )
 
+; Don't always ask about evaluating Babel blocks
+(setq org-confirm-babel-evaluate nil)
 
 ; Requires ditaa to be installed
 (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
