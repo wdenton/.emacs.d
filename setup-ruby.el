@@ -17,10 +17,14 @@
 (ruby-block-mode t)
 (setq ruby-block-highlight-toggle t)
 
-; I don't want autopair working in Ruby buffers ...
+; I don't want autopair or smartparens working in Ruby buffers ...
 (add-hook 'ruby-mode-hook
 	  #'(lambda () 
 	      (autopair-mode -1))
+	  )
+(add-hook 'ruby-mode-hook
+	  #'(lambda () 
+	      (smart-parens-mode -1))
 	  )
 
 ; ... because I use electric mode to do that and more.
@@ -30,7 +34,7 @@
 (require 'flymake-ruby)
 (add-hook 'ruby-mode-hook 'flymake-ruby-load)
 
-;; Rinari (for Ruby on Rails)
+; Rinari (for Ruby on Rails)
 ; (require 'rinari)
 
 (provide 'setup-ruby)

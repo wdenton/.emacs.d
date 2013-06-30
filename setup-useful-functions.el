@@ -1,7 +1,4 @@
-; Various useful functions and special keybindings
-
-;;; Make F11 toggle fullscreen
-
+;; Make F11 toggle fullscreen
 (defun toggle-fullscreen (&optional f)
   (interactive)
   (let ((current-value (frame-parameter nil 'fullscreen)))
@@ -11,17 +8,8 @@
  			   (progn (setq old-fullscreen current-value)
 				  'fullboth)))))
 (global-set-key [f11] 'toggle-fullscreen)
-;; Make new frames fullscreen by default. Note: this hook doesn't do
-;; anything to the initial frame if it's in your .emacs, since that
-;; file is read _after_ the initial frame is created.
 
-;; And when we start up, go full screen right away.
-;(when window-system
-; (toggle-fullscreen)
-;)
-
-
-; Open a new line above or below the current one, even if the cursor is midsentence.
+;; Open a new line above or below the current one, even if the cursor is midsentence.
 (defun open-line-below ()
   (interactive)
   (end-of-line)
@@ -36,8 +24,8 @@
 (global-set-key (kbd "<C-return>") 'open-line-below)
 (global-set-key (kbd "<C-S-return>") 'open-line-above)
 
-;;; Move an entire line up or down with C-S-up or C-S-down
-; From http://whattheemacsd.com/
+;; Move an entire line up or down with C-S-up or C-S-down
+;; From http://whattheemacsd.com/
 (defun move-line-down ()
   (interactive)
   (let ((col (current-column)))
@@ -58,7 +46,7 @@
 (global-set-key (kbd "<C-S-down>") 'move-line-down)
 (global-set-key (kbd "<C-S-up>") 'move-line-up)
 
-;;; For when I need to swap left/right or up/down windows.
+;; For when I need to swap left/right or up/down windows.
 (defun rotate-windows ()
   "Rotate your windows"
   (interactive)
@@ -84,7 +72,7 @@
              (set-window-start w2 s1)
              (setq i (1+ i)))))))
 
-;;; Join the following line onto this one ... good for reformatting
+;; Join the following line onto this one ... good for reformatting
 (global-set-key (kbd "M-j")
             (lambda ()
                   (interactive)

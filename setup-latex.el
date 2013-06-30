@@ -1,20 +1,19 @@
 ;; Everything related to LaTeX and Auctex
 
-; Except auto-completion in Auctex is turned on in 
-; setup-autocomplete.el
+;; Except! auto-completion in Auctex is turned on in setup-autocomplete.el
 
-; Good reading:
-; http://tex.stackexchange.com/questions/50827/a-simpletons-guide-to-tex-workflow-with-emacs/50919#50919
-; http://tex.stackexchange.com/questions/52179/what-is-your-favorite-emacs-and-or-auctex-command-trick 
+;; Good reading:
+;; http://tex.stackexchange.com/questions/50827/a-simpletons-guide-to-tex-workflow-with-emacs/50919#50919
+;; http://tex.stackexchange.com/questions/52179/what-is-your-favorite-emacs-and-or-auctex-command-trick 
 
 (defun turn-on-outline-minor-mode () (outline-minor-mode 1))
 (add-hook 'LaTeX-mode-hook 'turn-on-outline-minor-mode)
 (add-hook 'LaTeX-mode-hook 'turn-on-visual-line-mode)
 
-; Turn on spell-checking in LaTeX
+;; Turn on spell-checking in LaTeX
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 
-; auto-complete-auctex (see setup-autocomplete.el for the rest of the auto-complete setup)
+;; auto-complete-auctex (see setup-autocomplete.el for the rest of the auto-complete setup)
 (require 'auto-complete-auctex)
 (add-hook 'LaTeX-mode-hook 'auto-complete-auctex)
 
@@ -26,27 +25,27 @@
 
 (setq biblatex-dialect "biblatex")
 
-; Zotero integration! (https://github.com/vitoshka/zotelo)
-; Requires MozRepl addon in Firefox
+;; Zotero integration! (https://github.com/vitoshka/zotelo)
+;; Requires MozRepl addon in Firefox
 (require 'zotelo)
 (add-hook 'TeX-mode-hook 'zotelo-minor-mode)
 
-; Automatically activate TeX-fold-mode.
-; C-c C-o C-b is necessary to hide everything (or see LaTeX | Show/Hide)
+;; Automatically activate TeX-fold-mode.
+;; C-c C-o C-b is necessary to hide everything (or see LaTeX | Show/Hide)
 (add-hook 'TeX-mode-hook (lambda () (TeX-fold-mode 1)))
 
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
 
-; So that RefTeX also recognizes \addbibresource. Note that you
-; can't use $HOME in path for \addbibresource but that "~" works.
+;; So that RefTeX also recognizes \addbibresource. Note that you
+;; can't use $HOME in path for \addbibresource but that "~" works.
 (setq reftex-bibliography-commands '("bibliography" "nobibliography" "addbibresource"))
 
-; Remember:
-; When editing tables:
-; M-x align-current
+;; Remember:
+;; When editing tables:
+;; M-x align-current
 
-; From http://tex.stackexchange.com/questions/50827/a-simpletons-guide-to-tex-workflow-with-emacs/50919#50919
+;; From http://tex.stackexchange.com/questions/50827/a-simpletons-guide-to-tex-workflow-with-emacs/50919#50919
 (eval-after-load 'reftex-vars
   '(progn
      ;; (also some other reftex-related customizations)
@@ -58,9 +57,9 @@
              (?o . "\\citepr[]{%l}")
              (?n . "\\nocite{%l}")))))
 
-; Fontification (remove unnecessary entries as you notice them)
-; http://lists.gnu.org/archive/html/emacs-orgmode/2009-05/msg00236.html
-; http://www.gnu.org/software/auctex/manual/auctex/Fontification-of-macros.html
+;; Fontification (remove unnecessary entries as you notice them)
+;; http://lists.gnu.org/archive/html/emacs-orgmode/2009-05/msg00236.html
+;; http://www.gnu.org/software/auctex/manual/auctex/Fontification-of-macros.html
 (setq font-latex-match-reference-keywords
       '(
         ;; biblatex

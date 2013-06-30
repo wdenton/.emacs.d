@@ -7,21 +7,10 @@
 ;; https://gitcafe.com/Leaflet/.emacs.d/blob/master/sane-defaults.el
 ;; And figure out why auctex completion isn't working
 
-;; Good reading
-;; http://tex.stackexchange.com/questions/52179/what-is-your-favorite-emacs-and-or-auctex-command-trick
-;; http://tex.stackexchange.com/questions/50827/a-simpletons-guide-to-tex-workflow-with-emacs/50919
-
-;; Managing Packages in Emacs 24
-;; http://crn.io/2011/12/managing-packages-in-emacs-24/
-
 ;; Turn off mouse interface early in startup to avoid momentary display
 (if (fboundp 'menu-bar-mode) (menu-bar-mode 1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-
-;; Turn off the toolbar and scrollbar
-; (tool-bar-mode 0)
-; (scroll-bar-mode 0)
 
 ;; No startup screen
 (setq inhibit-startup-message t)
@@ -45,8 +34,8 @@
 
 ; Make sure that all of the packages I want are installed. If not, install them.
 (setq my-packages '(auctex 
-		    auto-complete
-		    autopair 
+		    ;auto-complete
+		    ;autopair 
 		    color-theme-solarized
 		    ess 
 		    ess-R-object-popup
@@ -72,16 +61,54 @@
   (when (not (package-installed-p p)) 
     (package-install p)))
 
-;; Configurations
+;;; Parentheses-handling stuff
 
+;; Highlight matching parenthesis whenever the point is over one.
+(require 'paren)
+
+;; Matches parentheses and such in every mode
+(show-paren-mode 1)
+(setq show-paren-style 'mixed) ; Values; 'expression, 'parenthesis or 'mixed
+
+;; Make matching parentheses and quotes always appear
+;; https://github.com/capitaomorte/autopair
+;(require 'autopair)
+;(autopair-global-mode) ;; to enable in all buffers
+
+;; smartparens for good handling of parentheses (https://github.com/Fuco1/smartparens/)
+(smartparens-global-mode t)
+(require 'smartparens-config)
+
+;; Nifty parenthesis thing - hit % to toggle between a pair.
+(defun match-paren (arg)
+  "Go to the matching parenthesis if on parenthesis, otherwise insert %."
+  (interactive "p")
+  (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
+        ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
+        (t (self-insert-command (or arg 1)))))
+(global-set-key "%"             'match-paren)           ; % like vi
+
+;;; General onfigurations
+
+;; Light on dark theme; soothing to my eyes
 (load-theme 'solarized-dark t)
 
+;;
 (setq default-major-mode 'text-mode)
-; (setq text-mode-hook 'turn-on-auto-fill)
 
+;;
 (setq font-lock-maximum-decoration t)
-(setq sentence-end-double-space t)
+
+;; Sentences do not need double spaces to end.
+(set-default 'sentence-end-double-space nil)
+
+;; UTF-8 please (surely this is overkill?)
 (set-language-environment "UTF-8")
+(setq locale-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
 
 ;; Proper line wrapping
 (global-visual-line-mode 1)
@@ -91,13 +118,8 @@
 ;; And set its colour
 ;; (set-face-background hl-line-face "#efefef")
 
-;; Matches parentheses and such in every mode
-(show-paren-mode 1)
-(setq show-paren-style 'mixed) ; Values; 'expression, 'parenthesis or 'mixed
-
 ;; Calendar should start on Monday (not that I ever use the calendar)
 (setq calendar-week-start-day 1)
-
 
 ;; I don't want to type in "yes" or "no" - I want y/n.
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -122,9 +144,9 @@
 ;; Allow pasting selection outside of Emacs
 (setq x-select-enable-clipboard t)
 
-; M-backspace is backward-word-kill, and C-backspace is bound to that
-; by default.  Change that to backword-kill-line so it deletes from
-; the point to the beginning of the line.
+;; M-backspace is backward-word-kill, and C-backspace is bound to that
+;; by default.  Change that to backword-kill-line so it deletes from
+;; the point to the beginning of the line.
 (global-set-key (kbd "C-<backspace>") (lambda ()
   (interactive)
   (kill-line 0)))
@@ -174,23 +196,6 @@
 (require 'expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
 
-;; UTF-8 please
-(setq locale-coding-system 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(set-selection-coding-system 'utf-8)
-(prefer-coding-system 'utf-8)
-
-;; This is adding in the ":" character to the standard set,
-;; which means M-q will work on paragraphs that start with :
-;; (my news quote character).
-(setq adaptive-fill-regexp "[      ]*\\([#:;>*]+ +\\)?")
-
-;; Make matching parentheses and quotes always appear
-;; https://github.com/capitaomorte/autopair
-(require 'autopair)
-(autopair-global-mode) ;; to enable in all buffers
-
 ;; Remove trailing whitespace automatically
 ; (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
@@ -206,18 +211,6 @@
 ;; Make searches case insensitive.
 (setq case-fold-search nil)
 
-;; Nifty parenthesis thing - hit % to toggle between a pair.
-(defun match-paren (arg)
-  "Go to the matching parenthesis if on parenthesis, otherwise insert %."
-  (interactive "p")
-  (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
-        ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
-        (t (self-insert-command (or arg 1)))))
-(global-set-key "%"             'match-paren)           ; % like vi
-
-;; Highlight matching parenthesis whenever the point is over one.
-(require 'paren)
-
 ;; Down-arrow at the end of a file doesn't add in a new line.
 (setq next-line-add-newlines nil)
 
@@ -230,21 +223,18 @@
 ;; Turn on highlighting for search strings.
 (setq search-highlight t)
 
-;; Sentences do not need double spaces to end.
-(set-default 'sentence-end-double-space nil)
-
 ;; Add parts of each file's directory to the buffer name if not unique
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 
-; Make script files executable automatically
+;; Make script files executable automatically
 ; http://www.masteringemacs.org/articles/2011/01/19/script-files-executable-automatically/
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
-; I'm old enough to be able to use narrow-to-region
+;; I'm old enough to be able to use narrow-to-region
 (put 'narrow-to-region 'disabled nil)
 
-; Show page-breaking ^Ls as dashes
-; But it doesn't work in C-h m help screens ... hmm
+;; Show page-breaking ^Ls as dashes
+;; But it doesn't work in C-h m help screens ... hmm
 (require 'page-break-lines)
 (global-page-break-lines-mode)
