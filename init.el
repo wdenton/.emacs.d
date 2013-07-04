@@ -43,6 +43,7 @@
 		    flymake-ruby
 		    gist
 		    inf-ruby
+		    magit
 		    markdown-mode 
 		    org
 		    org-bullets
@@ -51,6 +52,7 @@
 		    ruby-block
 		    ruby-electric
 		    ruby-mode 
+		    smartparens
 		    yaml-mode
 		    yasnippet
 		    zotelo
@@ -161,10 +163,11 @@
 
 ;; Save all of the buffers I'm working on, for next time
 (desktop-save-mode 1)
+(setq history-length 50)
 (setq desktop-buffers-not-to-save
       (concat "\\("
 	      "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
-	      "\\|\\.emacs.*\\|\\.diary\\|\\.newsrc-dribble\\|\\.bbdb"
+	      "\\|\\.emacs.*\\|\\.diary\\|elpa\/*\\|\\.bbdb"
 	      "\\)$"))
 (add-to-list 'desktop-modes-not-to-save 'dired-mode)
 (add-to-list 'desktop-modes-not-to-save 'Info-mode)
