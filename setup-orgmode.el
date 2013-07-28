@@ -26,11 +26,17 @@
 ; For org-reveal, which makes presentations using reveal.js
 ; (require 'org-reveal)
 
+; Exporting
+(setq org-export-backends (quote (html latex odt)))
+
+(setq org-export-with-smart-quotes t)
+
 ; Capturing
-(setq org-default-notes-file "~/notes.org") ; Change this when I use it for real
+(setq org-default-notes-file "~/org/capture.org") ; Change this when I use it for real
 (define-key global-map "\C-cc" 'org-capture)
 (setq org-capture-templates
-      '(("w" "Work todo" entry (file+headline "~/york/gtd/next-actions.org" "Tasks") "* TODO %?\n %u\n %a"))
+      '(("w" "Work todo" entry (file+headline "~/york/gtd/next-actions.org" "Tasks") "* TODO %?\n %u\n %a")
+        ("n" "Note"      entry (file+datetree "~/org/capture.org")                   "* %?\nEntered on %U\n  %i\n %a"))
       )
 
 ; Active Babel languages
