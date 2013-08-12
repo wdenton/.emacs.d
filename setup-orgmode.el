@@ -11,6 +11,13 @@
 ; Shift and arrow keys to select text works a bit differently in org-mode
 (setq org-support-shift-select t)
 
+; Fontify Babel blocks nicely
+(setq org-src-fontify-natively t)
+
+; Let's try speed commands.
+; "Single keys can be made to execute commands when the cursor is at the beginning of a headline, i.e., before the first star."
+(setq org-use-speed-commands t)
+
 ; Embed an image with [[file:foo.png]] and then C-c C-x C-v to view
 (setq org-display-inline-images t)
 ; Display images when a file is loaded (I can always toggle them off if I don't want them)
