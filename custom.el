@@ -10,7 +10,6 @@
  '(global-font-lock-mode t nil (font-lock))
  '(mouse-wheel-mode t nil (mwheel))
  '(query-user-mail-address nil)
- '(safe-local-variable-values (quote ((zotero-collection . #("151" 0 3 (name "Augmented Reality/0 LTR proposal"))) (whitespace-style face tabs spaces trailing lines space-before-tab::space newline indentation::space empty space-after-tab::space space-mark tab-mark newline-mark))))
  '(user-mail-address "wtd@pobox.com"))
 
 (custom-set-faces
