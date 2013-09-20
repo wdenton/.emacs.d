@@ -7,6 +7,9 @@
 ;; https://gitcafe.com/Leaflet/.emacs.d/blob/master/sane-defaults.el
 ;; And figure out why auctex completion isn't working
 
+;; Only on GitHub, possibly worth getting:
+;; google-maps.el http://julien.danjou.info/projects/emacs-packages#google-maps
+
 ;; Turn off mouse interface early in startup to avoid momentary display
 (if (fboundp 'menu-bar-mode) (menu-bar-mode 1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
@@ -49,6 +52,7 @@
 		    org-bullets
 		    org-reveal
 		    page-break-lines
+		    rainbow-mode
 		    ruby-block
 		    ruby-electric
 		    ruby-mode 
@@ -204,6 +208,9 @@
 
 ;; Highlight marked text - only works under X.
 (transient-mark-mode t)
+
+;; "All strings representing colors will be highlighted with the color they represent."
+(rainbow-mode t)
 
 ;; Remove text in active region if inserting text
 (delete-selection-mode 1)
