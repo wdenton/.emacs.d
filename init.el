@@ -44,6 +44,7 @@
 		    ess-R-object-popup
 		    expand-region 
 		    flymake-ruby
+		    gh
 		    gist
 		    inf-ruby
 		    magit
@@ -51,7 +52,7 @@
 		    org
 		    org-bullets
 		    org-reveal
-		    page-break-lines
+		    pcache
 		    rainbow-mode
 		    ruby-block
 		    ruby-electric
@@ -244,7 +245,5 @@
 ;; I'm old enough to be able to use narrow-to-region
 (put 'narrow-to-region 'disabled nil)
 
-;; Show page-breaking ^Ls as dashes
-;; But it doesn't work in C-h m help screens ... hmm
-(require 'page-break-lines)
-(global-page-break-lines-mode)
+;; Use ibuffer, which is a nicer way of showing the buffer list (C-x C-b)
+(defalias 'list-buffers 'ibuffer)
