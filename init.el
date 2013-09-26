@@ -46,6 +46,7 @@
 		    flymake-ruby
 		    gh
 		    gist
+		    ibuffer-vc
 		    inf-ruby
 		    magit
 		    markdown-mode 
@@ -198,6 +199,7 @@
 (require 'setup-ruby)
 (require 'setup-useful-functions) 
 (require 'setup-yaml)
+(require 'setup-ibuffer)
 
 ;; expand-region (see https://github.com/magnars/expand-region.el)
 ;; C-= successively expands the region with great intelligence
@@ -245,9 +247,8 @@
 ;; I'm old enough to be able to use narrow-to-region
 (put 'narrow-to-region 'disabled nil)
 
-;; Use ibuffer, which is a nicer way of showing the buffer list (C-x C-b)
-(defalias 'list-buffers 'ibuffer)
-
 ;; With this, C-x C-j (M-x dired-jump) goes to the current file's position in a dired buffer
 ;; (http://emacsredux.com/blog/2013/09/24/dired-jump/)
 (require 'dired-x)
+
+
