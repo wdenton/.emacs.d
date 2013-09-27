@@ -36,7 +36,8 @@
 (package-initialize)
 
 ; Make sure that all of the packages I want are installed. If not, install them.
-(setq my-packages '(auctex 
+(setq my-packages '(anzu
+		    auctex 
 		    auto-complete
 		    ;autopair 
 		    color-theme-solarized
@@ -251,4 +252,6 @@
 ;; (http://emacsredux.com/blog/2013/09/24/dired-jump/)
 (require 'dired-x)
 
-
+;; anzu-mode provides a "minor mode which display current point and total matched in various search mode."
+;; https://github.com/syohex/emacs-anzu
+(global-anzu-mode t)
