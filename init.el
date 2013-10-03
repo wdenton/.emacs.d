@@ -59,6 +59,7 @@
 		    ruby-block
 		    ruby-electric
 		    ruby-mode 
+		    rvm
 		    smartparens
 		    yaml-mode
 		    yasnippet
