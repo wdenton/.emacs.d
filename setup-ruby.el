@@ -34,6 +34,10 @@
 (require 'flymake-ruby)
 (add-hook 'ruby-mode-hook 'flymake-ruby-load)
 
+; Make Emacs know about RVM (https://github.com/senny/rvm.el)
+(require 'rvm)
+(rvm-use-default) ;; use rvm's default ruby for the current Emacs session
+
 ; Rinari (for Ruby on Rails)
 ; (require 'rinari)
 

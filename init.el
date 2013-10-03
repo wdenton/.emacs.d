@@ -255,3 +255,10 @@
 ;; anzu-mode provides a "minor mode which display current point and total matched in various search mode."
 ;; https://github.com/syohex/emacs-anzu
 (global-anzu-mode t)
+
+; In case I experiment with Gnus
+(setq gnus-home-directory "~/.emacs.d/gnus.d/")
+(setq gnus-directory "~/.emacs.d/gnus.d/News/")
+(setq message-directory "~/.emacs.d/gnus.d/Mail/")
+(setq nnfolder-directory "~/.emacs.d/gnus.d/Mail/archive/")
+(setq gnus-init-file "~/.emacs.d/gnus.d/init.el")
