@@ -2,7 +2,7 @@
 ;;; William Denton <wtd@pobox.com>
 ;;;
 
-;; Look at 
+;; Look at
 ;; https://github.com/magnars/.emacs.d
 ;; https://gitcafe.com/Leaflet/.emacs.d/blob/master/sane-defaults.el
 ;; And figure out why auctex completion isn't working
@@ -37,21 +37,21 @@
 
 ; Make sure that all of the packages I want are installed. If not, install them.
 (setq my-packages '(anzu
-		    auctex 
+		    auctex
 		    auto-complete
-		    ;autopair 
+		    ;autopair
 		    color-theme-solarized
 		    dired+
-		    ess 
+		    ess
 		    ess-R-object-popup
-		    expand-region 
+		    expand-region
 		    flymake-ruby
 		    gh
 		    gist
 		    ibuffer-vc
 		    inf-ruby
 		    magit
-		    markdown-mode 
+		    markdown-mode
 		    org
 		    org-bullets
 		    org-reveal
@@ -59,17 +59,17 @@
 		    rainbow-mode
 		    ruby-block
 		    ruby-electric
-		    ruby-mode 
+		    ruby-mode
 		    rvm
 		    smartparens
 		    yaml-mode
 		    yasnippet
 		    zotelo
 		    ))
-(when (not package-archive-contents) 
+(when (not package-archive-contents)
   (package-refresh-contents))
-(dolist (p my-packages) 
-  (when (not (package-installed-p p)) 
+(dolist (p my-packages)
+  (when (not (package-installed-p p))
     (package-install p)))
 
 ;;; Parentheses-handling stuff
@@ -189,7 +189,7 @@
 (require 'setup-orgmode)
 (require 'setup-outline)
 (require 'setup-ruby)
-(require 'setup-useful-functions) 
+(require 'setup-useful-functions)
 (require 'setup-yaml)
 
 ;; expand-region (see https://github.com/magnars/expand-region.el)
@@ -244,6 +244,16 @@
 
 ;; Automatically load a gist in the browser when I post one.
 (defvar gist-view-gist 1)
+
+;; M-x magit-status is tedious
+(global-set-key (kbd "C-x g") 'magit-status)
+
+;; Settings for command interpreter modes, which I use mostly for R and Ruby.
+(setq ansi-color-for-comint-mode 'filter)
+(setq comint-scroll-to-bottom-on-input t)
+(setq comint-scroll-to-bottom-on-output t)
+(setq comint-move-point-for-output t)
+(setq comint-prompt-read-only t)
 
 ;; In case I experiment with Gnus
 (setq gnus-home-directory "~/.emacs.d/gnus.d/")
