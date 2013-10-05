@@ -24,8 +24,25 @@
 ;; for everything else
 (setq font-lock-maximum-decoration (quote ((dired-mode) (t . t))))
 
-;; File management shortcuts (from Bodil Stokke's setup: https://github.com/bodil/emacs.d)
+;; "Don't show uninteresting files in Emacs completion window"
+;; When the buffer of possible files open, it shows all matches.
+;; If I'm looking for foo.ext and run 'C-x C-f fo TAB' it will show foo.ext and foo.ext~.
+;; Because ~ is in completion-ignored-extensions it won't try to open foo.ext~, but I'd rather
+;; not see it in the first place.
+;;
+;; This solution comes from http://stackoverflow.com/questions/1731634/dont-show-uninteresting-files-in-emacs-completion-window
+(defadvice completion--file-name-table (after
+					ignoring-backups-f-n-completion
+                                        activate)
+  "Filter out results when they match `completion-ignored-extensions'."
+  (let ((res ad-return-value))
+    (if (and (listp res)
+	     (stringp (car res))
+	     (cdr res))                 ; length > 1, don't ignore sole match
+	(setq ad-return-value
+              (completion-pcm--filename-try-filter res)))))
 
+;; File management shortcuts (from Bodil Stokke's setup: https://github.com/bodil/emacs.d)
 (defun delete-current-buffer-file ()
   "Removes file connected to current buffer and kills buffer."
   (interactive)
@@ -38,7 +55,6 @@
         (delete-file filename)
         (kill-buffer buffer)
         (message "File '%s' successfully removed" filename)))))
-
 (global-set-key (kbd "C-x C-k") 'delete-current-buffer-file)
 
 (defun rename-current-buffer-file ()
@@ -57,7 +73,6 @@
           (set-buffer-modified-p nil)
           (message "File '%s' successfully renamed to '%s'"
                    name (file-name-nondirectory new-name)))))))
-
 (global-set-key (kbd "C-x C-r") 'rename-current-buffer-file)
 
 (provide 'setup-file-management)
