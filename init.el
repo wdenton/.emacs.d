@@ -24,18 +24,21 @@
 (setq site-lisp-dir (expand-file-name "site-lisp" user-emacs-directory))
 (let ((default-directory site-lisp-dir)) (normal-top-level-add-subdirs-to-load-path))
 
-; Set up load path
+;; Set up load path
 (add-to-list 'load-path user-emacs-directory)
 (add-to-list 'load-path site-lisp-dir)
 
-;;; Packages
-(require 'package)
+;; Run the server; now I can load any file into Emacs with 'emacsclient file'
+;; Works a treat with the It's All Text! extension in Firefox.
+(server-start)
 
+;;;; Packages
+(require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 ;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (package-initialize)
 
-; Make sure that all of the packages I want are installed. If not, install them.
+;; Make sure that all of the packages I want are installed. If not, install them.
 (setq my-packages '(anzu
 		    auctex
 		    auto-complete
@@ -72,7 +75,7 @@
   (when (not (package-installed-p p))
     (package-install p)))
 
-;;; Parentheses-handling stuff
+;;;; Parentheses-handling stuff
 
 ;; Highlight matching parenthesis whenever the point is over one.
 (require 'paren)
@@ -102,10 +105,8 @@
 ;; Light on dark theme; soothing to my eyes
 (load-theme 'solarized-dark t)
 
-;;
-(setq default-major-mode 'text-mode)
+; (setq default-major-mode 'text-mode)
 
-;;
 (setq font-lock-maximum-decoration t)
 
 ;; Sentences do not need double spaces to end.
