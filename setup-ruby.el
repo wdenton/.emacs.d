@@ -22,13 +22,17 @@
 	  #'(lambda () 
 	      (autopair-mode -1))
 	  )
-(add-hook 'ruby-mode-hook
-	  #'(lambda () 
-	      (smart-parens-mode -1))
-	  )
+;(add-hook 'ruby-mode-hook
+;	  #'(lambda () 
+;	      (smart-parens-mode -1))
+;	  )
+
+; This seems to fix some problems.  I'm trying using this and not ruby-electric,
+; in the hopes that when I type "  I don't get "\""\"
+(require 'smartparens-ruby)
 
 ; ... because I use electric mode to do that and more.
-(require 'ruby-electric)
+; (require 'ruby-electric)
 
 ; Highlight syntax errors on the fly.
 (require 'flymake-ruby)

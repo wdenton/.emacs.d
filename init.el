@@ -41,6 +41,7 @@
 		    auto-complete
 		    ;autopair 
 		    color-theme-solarized
+		    dired+
 		    ess 
 		    ess-R-object-popup
 		    expand-region 
@@ -98,8 +99,6 @@
         (t (self-insert-command (or arg 1)))))
 (global-set-key "%"             'match-paren)           ; % like vi
 
-;;; General onfigurations
-
 ;; Light on dark theme; soothing to my eyes
 (load-theme 'solarized-dark t)
 
@@ -134,14 +133,6 @@
 ;; I don't want to type in "yes" or "no" - I want y/n.
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; Refresh buffers when files change (don't worry, changes won't be lost)
-(global-auto-revert-mode t)
-
-;; Keep a list of recently opened files
-(require 'recentf)
-(recentf-mode 1)
-(global-set-key "\C-xf" 'recentf-open-files)
-
 ;; Split window horizontally, not vertically (I prefer side by side with the newer wider screens)
 (setq split-height-threshold nil)
 (setq split-width-threshold 0)
@@ -165,9 +156,6 @@
 (require 'saveplace)
 (setq-default save-place t)
 (setq save-place-file (expand-file-name ".places" user-emacs-directory))
-
-;; Automatically load a gist in the browser when I post one.
-(defvar gist-view-gist 1)
 
 ;; Save all of the buffers I'm working on, for next time
 (desktop-save-mode 1)
@@ -194,6 +182,8 @@
 
 (require 'setup-autocomplete)
 (require 'setup-ess)
+(require 'setup-file-management)
+(require 'setup-ibuffer)
 (require 'setup-latex)
 (require 'setup-markdown)
 (require 'setup-orgmode)
@@ -201,21 +191,14 @@
 (require 'setup-ruby)
 (require 'setup-useful-functions) 
 (require 'setup-yaml)
-(require 'setup-ibuffer)
 
 ;; expand-region (see https://github.com/magnars/expand-region.el)
 ;; C-= successively expands the region with great intelligence
 (require 'expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
 
-;; Remove trailing whitespace automatically
-; (add-hook 'before-save-hook 'delete-trailing-whitespace)
-
 ;; Highlight marked text - only works under X.
 (transient-mark-mode t)
-
-;; "All strings representing colors will be highlighted with the color they represent."
-(rainbow-mode t)
 
 ;; Remove text in active region if inserting text
 (delete-selection-mode 1)
@@ -226,6 +209,12 @@
 ;; Make searches case insensitive.
 (setq case-fold-search nil)
 
+;; Turn on highlighting for search strings.
+(setq search-highlight t)
+
+;; Remove trailing whitespace automatically
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 ;; Down-arrow at the end of a file doesn't add in a new line.
 (setq next-line-add-newlines nil)
 
@@ -234,9 +223,6 @@
 
 ;; Show me empty lines after buffer end
 (set-default 'indicate-empty-lines t)
-
-;; Turn on highlighting for search strings.
-(setq search-highlight t)
 
 ;; Add parts of each file's directory to the buffer name if not unique
 (require 'uniquify)
@@ -249,15 +235,17 @@
 ;; I'm old enough to be able to use narrow-to-region
 (put 'narrow-to-region 'disabled nil)
 
-;; With this, C-x C-j (M-x dired-jump) goes to the current file's position in a dired buffer
-;; (http://emacsredux.com/blog/2013/09/24/dired-jump/)
-(require 'dired-x)
+;; "All strings representing colors will be highlighted with the color they represent."
+(rainbow-mode t)
 
 ;; anzu-mode provides a "minor mode which display current point and total matched in various search mode."
 ;; https://github.com/syohex/emacs-anzu
 (global-anzu-mode t)
 
-; In case I experiment with Gnus
+;; Automatically load a gist in the browser when I post one.
+(defvar gist-view-gist 1)
+
+;; In case I experiment with Gnus
 (setq gnus-home-directory "~/.emacs.d/gnus.d/")
 (setq gnus-directory "~/.emacs.d/gnus.d/News/")
 (setq message-directory "~/.emacs.d/gnus.d/Mail/")
