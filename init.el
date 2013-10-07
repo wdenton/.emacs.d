@@ -262,3 +262,20 @@
 (setq message-directory "~/.emacs.d/gnus.d/Mail/")
 (setq nnfolder-directory "~/.emacs.d/gnus.d/Mail/archive/")
 (setq gnus-init-file "~/.emacs.d/gnus.d/init.el")
+
+;;; ido
+
+;; I'm trying out ido-mode
+;; See http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode/
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
+
+;; Don't ask for confirmation if I create a new buffer with C-x b)
+(setq ido-create-new-buffer 'always)
+
+;; Customize the order of files shown in the minibuffer
+(setq ido-file-extensions-order '(".org" ".rb" ".ini"))
+
+;; Make ido use completion-ignored-extensions
+(setq ido-ignore-extensions t)
