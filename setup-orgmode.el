@@ -38,7 +38,7 @@
 ; (require 'org-reveal)
 
 ;; Exporting: I will see these export options after C-c C-e
-(setq org-export-backends (quote (html latex odt)))
+(setq org-export-backends (quote (html latex md odt)))
 
 ;; I may need to customize org-html-doctype (default is "xhtml-strict")
 ; (setq org-html-doctype "html5")

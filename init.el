@@ -30,7 +30,7 @@
 
 ;; Run the server; now I can load any file into Emacs with 'emacsclient file'
 ;; Works a treat with the It's All Text! extension in Firefox.
-(server-start)
+(server-mode)
 
 ;;;; Packages
 (require 'package)
@@ -279,3 +279,5 @@
 
 ;; Make ido use completion-ignored-extensions
 (setq ido-ignore-extensions t)
+
+; (require 'twittering-mode)
