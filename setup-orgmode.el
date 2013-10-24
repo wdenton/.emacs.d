@@ -82,6 +82,17 @@
 ;; Requires ditaa to be installed
 (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
 
+;; Org can read RSS feeds (http://orgmode.org/org.html#RSS-Feeds)
+;; "You could use this to make a task out of each new podcast in a
+;; podcast feed. Or you could use a phone-based note-creating service
+;; on the web to import tasks into Org."
+;; I don't have any use for this right now, but perhaps some day.
+(setq org-feed-alist
+      '(
+	("Miskatonic" "http://www.miskatonic.org/feed" "~/org/feeds.org" "Miskatonic")
+	("Mastering Emacs" "http://www.masteringemacs.org/feed" "~/org/feeds.org" "Mastering Emacs")
+	))
+
 ; Integrate RefTeX
 ; From http://orgmode.org/worg/org-faq.html#using-reftex-in-org-mode
 ; Use these lines to generate the bib (Org will recognize them as LaTeX commands):
