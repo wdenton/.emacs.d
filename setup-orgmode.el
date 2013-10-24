@@ -34,6 +34,10 @@
 ;; Use LaTeX spell-check
 (add-hook 'org-mode-hook (lambda () (setq ispell-parser 'tex)))
 
+;; Preview LaTeX equations in buffers by showing images (C-c C-x C-l)
+;; Details: http://orgmode.org/worg/org-tutorials/org-latex-preview.html
+(setq org-latex-create-formula-image-program 'imagemagick)
+
 ; For org-reveal, which makes presentations using reveal.js
 ; (require 'org-reveal)
 
