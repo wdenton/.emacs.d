@@ -78,11 +78,11 @@
 ;;;; Parentheses-handling stuff
 
 ;; Highlight matching parenthesis whenever the point is over one.
-(require 'paren)
+;;;;; (require 'paren)
 
 ;; Matches parentheses and such in every mode
-(show-paren-mode 1)
-(setq show-paren-style 'mixed) ; Values; 'expression, 'parenthesis or 'mixed
+;;;;; (show-paren-mode 1)
+;;;;; (setq show-paren-style 'mixed) ; Values; 'expression, 'parenthesis or 'mixed
 
 ;; Make matching parentheses and quotes always appear
 ;; https://github.com/capitaomorte/autopair
@@ -90,8 +90,9 @@
 ;(autopair-global-mode) ;; to enable in all buffers
 
 ;; smartparens for good handling of parentheses (https://github.com/Fuco1/smartparens/)
-(smartparens-global-mode t)
 (require 'smartparens-config)
+(smartparens-global-mode t)
+(show-smartparens-global-mode +1)
 
 ;; Nifty parenthesis thing - hit % to toggle between a pair.
 (defun match-paren (arg)
@@ -238,6 +239,15 @@
 
 ;; "All strings representing colors will be highlighted with the color they represent."
 (rainbow-mode t)
+
+;; Include the size of the file in the mode line
+(size-indication-mode t)
+
+;; Show which column I'm in in the mode line as well
+(column-number-mode t)
+
+;; Use C-c left or C-c right to go back and forth in window configurations
+(winner-mode t)
 
 ;; anzu-mode provides a "minor mode which display current point and total matched in various search mode."
 ;; https://github.com/syohex/emacs-anzu

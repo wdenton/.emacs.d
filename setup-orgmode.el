@@ -5,6 +5,9 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 
+;; Files to look in for agenda items
+(setq org-agenda-files (quote ("~/york/gtd/ar/diary.org")))
+
 ;; Nice bullets!
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
