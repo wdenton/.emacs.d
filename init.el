@@ -186,6 +186,7 @@
 (require 'setup-ess)
 (require 'setup-file-management)
 (require 'setup-ibuffer)
+(require 'setup-jekyll)
 (require 'setup-latex)
 (require 'setup-markdown)
 (require 'setup-orgmode)
