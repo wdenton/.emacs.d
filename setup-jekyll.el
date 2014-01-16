@@ -8,9 +8,9 @@
 
 ;; All of the below is taken from http://www.gorgnegre.com/linux/using-emacs-orgmode-to-blog-with-jekyll.html
 
-(global-set-key (kbd "C-c C-j n") 'jekyll-draft-post)
-(global-set-key (kbd "C-c C-j p") 'jekyll-publish-post)
-(global-set-key (kbd "C-c C-j t") 'jekyll-timestamp)
+(global-set-key (kbd "C-c j n") 'jekyll-draft-post)
+(global-set-key (kbd "C-c j p") 'jekyll-publish-post)
+(global-set-key (kbd "C-c j t") 'jekyll-timestamp)
 ; (global-set-key (kbd "C-c j p") (lambda () (interactive) (find-file "~/web/_posts/")))
 ; (global-set-key (kbd "C-c j d") (lambda () (interactive) (find-file "~/web/_drafts/")))
 
