@@ -95,13 +95,16 @@
 (show-smartparens-global-mode +1)
 
 ;; Nifty parenthesis thing - hit % to toggle between a pair.
-(defun match-paren (arg)
-  "Go to the matching parenthesis if on parenthesis, otherwise insert %."
-  (interactive "p")
-  (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
-        ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
-        (t (self-insert-command (or arg 1)))))
-(global-set-key "%"             'match-paren)           ; % like vi
+;(defun match-paren (arg)
+;  "Go to the matching parenthesis if on parenthesis, otherwise insert %."
+;  (interactive "p")
+;  (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
+;        ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
+;        (t (self-insert-command (or arg 1)))))
+;(global-set-key "%"             'match-paren)           ; % like vi
+
+; Will be on by default in 24.4
+(electric-indent-mode +1)
 
 ;; Light on dark theme; soothing to my eyes
 (load-theme 'solarized-dark t)

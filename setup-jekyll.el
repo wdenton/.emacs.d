@@ -11,6 +11,8 @@
 (global-set-key (kbd "C-c j n") 'jekyll-draft-post)
 (global-set-key (kbd "C-c j p") 'jekyll-publish-post)
 (global-set-key (kbd "C-c j t") 'jekyll-timestamp)
+(global-set-key (kbd "C-c j o") (lambda () (interactive) (find-file "~/web/")))
+
 ; (global-set-key (kbd "C-c j p") (lambda () (interactive) (find-file "~/web/_posts/")))
 ; (global-set-key (kbd "C-c j d") (lambda () (interactive) (find-file "~/web/_drafts/")))
 
