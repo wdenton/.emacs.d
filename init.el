@@ -53,6 +53,8 @@
 		    gist
 		    ibuffer-vc
 		    inf-ruby
+			js-comint
+			js2-mode
 		    magit
 		    markdown-mode
 		    org
@@ -189,6 +191,7 @@
 (require 'setup-ess)
 (require 'setup-file-management)
 (require 'setup-ibuffer)
+(require 'setup-javascript)
 (require 'setup-jekyll)
 (require 'setup-latex)
 (require 'setup-markdown)
@@ -249,6 +252,9 @@
 
 ;; Show which column I'm in in the mode line as well
 (column-number-mode t)
+
+;; 8 is wrong
+(setq tab-width 4)
 
 ;; Use C-c left or C-c right to go back and forth in window configurations
 (winner-mode t)
