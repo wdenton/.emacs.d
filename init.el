@@ -53,8 +53,8 @@
 		    gist
 		    ibuffer-vc
 		    inf-ruby
-			js-comint
-			js2-mode
+		    js-comint
+		    js2-mode
 		    magit
 		    markdown-mode
 		    org
