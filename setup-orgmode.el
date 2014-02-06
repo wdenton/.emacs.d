@@ -31,6 +31,9 @@
 ;; Embed an image with [[file:foo.png]] and then C-c C-x C-v to view
 (setq org-display-inline-images t)
 
+;; Automatically refresh inline images that are generated from Babel blocks
+(add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
+
 ;; Display images when a file is loaded (I can always toggle them off if I don't want them)
 (add-hook 'org-mode-hook (lambda () (org-toggle-inline-images)))
 
