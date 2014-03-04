@@ -206,6 +206,16 @@
 (require 'expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
 
+;; "The command other-window is normally bound to C-x o but I find
+;; that way too cumbersome for what is such a frequent operation. M-o
+;; is normally bound to some rich text formatting nobody cares about."
+;; --- http://www.masteringemacs.org/articles/2014/02/28/my-emacs-keybindings/
+(global-set-key (kbd "M-o") 'other-window)
+
+;; Make the little calculator easier to get to. I use it quite a bit.
+;; Remember you can hit 'q' to quit the calculator.
+(global-set-key (kbd "<f1>") 'calculator)
+
 ;; Highlight marked text - only works under X.
 (transient-mark-mode t)
 
@@ -268,6 +278,10 @@
 
 ;; M-x magit-status is tedious
 (global-set-key (kbd "C-x g") 'magit-status)
+
+;; I was getting errors about exceeding the defaults on both of these.
+(setq max-specpdl-size 50000)
+(setq max-lisp-eval-depth 25000)
 
 ;; Settings for command interpreter modes, which I use mostly for R and Ruby.
 (setq ansi-color-for-comint-mode 'filter)

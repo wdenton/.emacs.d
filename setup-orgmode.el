@@ -1,5 +1,7 @@
 ;; Configuration for Org mode (http://orgmode.org/)
 
+;; Try this: https://github.com/abo-abo/org-download/blob/master/org-download.el
+
 ;; Common for all Org users
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
@@ -48,7 +50,7 @@
 ; (require 'org-reveal)
 
 ;; Exporting: I will see these export options after C-c C-e
-(setq org-export-backends (quote (html latex md odt)))
+(setq org-export-backends (quote (beamer html latex md odt)))
 
 ;; I may need to customize org-html-doctype (default is "xhtml-strict")
 ; (setq org-html-doctype "html5")
