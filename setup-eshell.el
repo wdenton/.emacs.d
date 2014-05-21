@@ -3,6 +3,8 @@
 ;; For much more see
 ;; http://www.masteringemacs.org/articles/2010/12/13/complete-guide-mastering-eshell/
 
+(require 'em-smart)
+
 (setq eshell-aliases-file "~/.emacs.d/eshell/aliases"
       eshell-cmpl-dir-ignore "\\`\\(\\.\\.?\\|CVS\\|\\.svn\\|\\.git\\)/\\'"
       esehll-review-quick-commands t
