@@ -23,6 +23,10 @@
 ;; Shift and arrow keys to select text works a bit differently in org-mode
 (setq org-support-shift-select t)
 
+;; Make C-a and C-e understand how headings and tags work
+;; Seen at http://schenizzle.wordpress.com/2014/03/26/org-mode-ctrl-a-ctrl-e/
+(setq org-special-ctrl-a/e t)
+
 ;; Fontify Babel blocks nicely
 (setq org-src-fontify-natively t)
 
@@ -50,7 +54,7 @@
 ; (require 'org-reveal)
 
 ;; Exporting: I will see these export options after C-c C-e
-(setq org-export-backends (quote (beamer html latex md odt)))
+(setq org-export-backends (quote (beamer html latex md odt reveal)))
 
 ;; I may need to customize org-html-doctype (default is "xhtml-strict")
 ; (setq org-html-doctype "html5")

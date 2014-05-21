@@ -105,8 +105,14 @@
 ;        (t (self-insert-command (or arg 1)))))
 ;(global-set-key "%"             'match-paren)           ; % like vi
 
-; Will be on by default in 24.4
-(electric-indent-mode +1)
+;; I don't like the way this works with Org.
+;; TODO Fix this problem.
+(electric-indent-mode 1)
+;; From: http://foldl.me/2012/disabling-electric-indent-mode/
+;; (add-hook 'org-mode-hook
+;;           (lambda ()
+;;             (set (make-local-variable 'electric-indent-functions)
+;;                  (list (lambda (arg) 'no-indent)))))
 
 ;; Light on dark theme; soothing to my eyes
 (load-theme 'solarized-dark t)
@@ -188,6 +194,7 @@
 (fset 'html-mode 'nxml-mode)
 
 (require 'setup-autocomplete)
+(require 'setup-eshell)
 (require 'setup-ess)
 (require 'setup-file-management)
 (require 'setup-ibuffer)
