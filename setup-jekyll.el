@@ -1,10 +1,21 @@
 ;; Configuration for Jekyll (http://jekyllrb.com/)
 
 (defun jekyll-timestamp ()
-  "Insert a time stamp suitable for use in a Jekyll page or post.  Replaces current text selection."
+  "Update existing pubDate: timestamp on a Jekyll page or post."
   (interactive)
-  (when (region-active-p) (delete-region (region-beginning) (region-end) ) )
-  (insert (format-time-string "%Y-%m-%d %H:%M:%S %z")))
+  (save-excursion (goto-char 1)
+  (search-forward "pubDate: ")
+  (let ((beg (point)))
+    (end-of-line)
+    (delete-region beg (point)))
+  (insert (format-time-string "%Y-%m-%d %H:%M:%S %z"))))
+;; TODO: Make the function add a pubDate variable if none exists.
+
+;; (defun jekyll-timestamp ()
+;;   "Insert a time stamp suitable for use in a Jekyll page or post.  Replaces current text selection."
+;;   (interactive)
+;;   (when (region-active-p) (delete-region (region-beginning) (region-end) ) )
+;;   (insert (format-time-string "%Y-%m-%d %H:%M:%S %z")))
 
 ;; All of the below is taken from http://www.gorgnegre.com/linux/using-emacs-orgmode-to-blog-with-jekyll.html
 

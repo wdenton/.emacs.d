@@ -94,6 +94,9 @@
 ;; Requires ditaa to be installed
 (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
 
+;; Make ispell skip source blocks
+(add-to-list 'ispell-skip-region-alist '("#\\+begin_src". "#\\+end_src"))
+
 ;; Org can read RSS feeds (http://orgmode.org/org.html#RSS-Feeds)
 ;; "You could use this to make a task out of each new podcast in a
 ;; podcast feed. Or you could use a phone-based note-creating service
