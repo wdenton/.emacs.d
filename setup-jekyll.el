@@ -3,12 +3,14 @@
 (defun jekyll-timestamp ()
   "Update existing pubDate: timestamp on a Jekyll page or post."
   (interactive)
-  (save-excursion (goto-char 1)
-  (search-forward "pubDate: ")
-  (let ((beg (point)))
-    (end-of-line)
-    (delete-region beg (point)))
-  (insert (format-time-string "%Y-%m-%d %H:%M:%S %z"))))
+  (save-excursion (
+		   goto-char 1)
+		  (search-forward "pubDate:")
+		  (let ((beg (point)))
+		    (end-of-line)
+		    (delete-region beg (point)))
+		  (insert (concat " " (format-time-string "%Y-%m-%d %H:%M:%S %z"))))
+  )
 ;; TODO: Make the function add a pubDate variable if none exists.
 
 ;; (defun jekyll-timestamp ()
@@ -18,6 +20,7 @@
 ;;   (insert (format-time-string "%Y-%m-%d %H:%M:%S %z")))
 
 ;; All of the below is taken from http://www.gorgnegre.com/linux/using-emacs-orgmode-to-blog-with-jekyll.html
+;; (Later tweaked a bit.)
 
 (global-set-key (kbd "C-c j n") 'jekyll-draft-post)
 (global-set-key (kbd "C-c j p") 'jekyll-publish-post)
@@ -31,7 +34,7 @@
 (defvar jekyll-drafts-dir "_drafts/" "Relative path to drafts directory.")
 (defvar jekyll-posts-dir "_posts/" "Relative path to posts directory.")
 (defvar jekyll-post-ext ".md"  "File extension of Jekyll posts.")
-(defvar jekyll-post-template "---\nlayout: post\ntitle: %s\ntags:\npublished: false\n---\n"
+(defvar jekyll-post-template "---\nlayout: post\ntitle: %s\ntags:\npublished: false\npubDate: \n---\n"
   "Default template for Jekyll posts. %s will be replace by the post title.")
 
 (defun jekyll-make-slug (s) "Turn a string into a slug."
