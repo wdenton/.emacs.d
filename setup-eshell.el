@@ -16,4 +16,20 @@
                                (define-key eshell-mode-map (kbd "C-p") 'eshell-previous-input)
                                (define-key eshell-mode-map (kbd "C-n") 'eshell-next-input)))
 
+(setq eshell-prompt-function
+  (lambda ()
+    (concat
+     "┌─["
+     (format-time-string "%I:%M %p" (current-time))
+     "]─["
+     (user-login-name)
+     "@"
+     (system-name)
+     "]\n└─> "
+     (eshell/pwd)
+     (if (= (user-uid) 0) " # " " $ ")
+     )
+    )
+  )
+
 (provide 'setup-eshell)

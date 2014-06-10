@@ -1,17 +1,17 @@
 ;; Configuration for Jekyll (http://jekyllrb.com/)
 
 (defun jekyll-timestamp ()
-  "Update existing pubDate: timestamp on a Jekyll page or post."
+  "Update existing date: timestamp on a Jekyll page or post."
   (interactive)
   (save-excursion (
 		   goto-char 1)
-		  (search-forward "pubDate:")
+		  (re-search-forward "^date:")
 		  (let ((beg (point)))
 		    (end-of-line)
 		    (delete-region beg (point)))
 		  (insert (concat " " (format-time-string "%Y-%m-%d %H:%M:%S %z"))))
   )
-;; TODO: Make the function add a pubDate variable if none exists.
+;; TODO: Make the function add a date variable if none exists.
 
 ;; (defun jekyll-timestamp ()
 ;;   "Insert a time stamp suitable for use in a Jekyll page or post.  Replaces current text selection."
@@ -34,7 +34,7 @@
 (defvar jekyll-drafts-dir "_drafts/" "Relative path to drafts directory.")
 (defvar jekyll-posts-dir "_posts/" "Relative path to posts directory.")
 (defvar jekyll-post-ext ".md"  "File extension of Jekyll posts.")
-(defvar jekyll-post-template "---\nlayout: post\ntitle: %s\ntags:\npublished: false\npubDate: \n---\n"
+(defvar jekyll-post-template "---\nlayout: post\ntitle: %s\ntags:\ndate: \n---\n"
   "Default template for Jekyll posts. %s will be replace by the post title.")
 
 (defun jekyll-make-slug (s) "Turn a string into a slug."
