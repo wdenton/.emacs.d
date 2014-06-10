@@ -57,6 +57,7 @@
 		    js2-mode
 		    magit
 		    markdown-mode
+		    multiple-cursors
 		    org
 		    org-bullets
 		    org-reveal
