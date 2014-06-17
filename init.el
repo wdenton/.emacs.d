@@ -60,7 +60,7 @@
 		    multiple-cursors
 		    org
 		    org-bullets
-		    org-reveal
+		    ; org-reveal ;; install by hand https://github.com/yjwen/org-reveal/
 		    pcache
 		    rainbow-mode
 		    ruby-block
