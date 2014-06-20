@@ -42,6 +42,7 @@
 (setq my-packages '(anzu
 		    auctex
 		    auto-complete
+		    auto-complete-auctex
 		    ;autopair
 		    color-theme-solarized
 		    dired+
