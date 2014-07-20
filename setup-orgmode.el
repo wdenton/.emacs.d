@@ -30,6 +30,9 @@
 ;; Fontify Babel blocks nicely
 (setq org-src-fontify-natively t)
 
+;; Allow a) b) c) lists
+(setq org-list-allow-alphabetical t)
+
 ;; Let's try speed commands.
 ;; "Single keys can be made to execute commands when the cursor is at the beginning of a headline, i.e., before the first star."
 (setq org-use-speed-commands t)
