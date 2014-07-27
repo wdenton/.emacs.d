@@ -210,6 +210,12 @@
 (require 'setup-useful-functions)
 (require 'setup-yaml)
 
+;; The *scratch* buffer is lisp-interaction-mode by default, but I use Org more.
+(setq initial-major-mode 'org-mode)
+(setq initial-scratch-message "\
+This buffer is for notes you don't want to save.  It uses Org.
+")
+
 ;; expand-region (see https://github.com/magnars/expand-region.el)
 ;; C-= successively expands the region with great intelligence
 (require 'expand-region)
