@@ -64,6 +64,7 @@
 		    ; org-reveal ;; install by hand https://github.com/yjwen/org-reveal/
 		    pcache
 		    rainbow-mode
+		    rubocop
 		    ruby-block
 		    ruby-electric
 		    ruby-mode

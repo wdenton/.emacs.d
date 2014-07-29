@@ -19,11 +19,11 @@
 
 ; I don't want autopair or smartparens working in Ruby buffers ...
 (add-hook 'ruby-mode-hook
-	  #'(lambda () 
+	  #'(lambda ()
 	      (autopair-mode -1))
 	  )
 ;(add-hook 'ruby-mode-hook
-;	  #'(lambda () 
+;	  #'(lambda ()
 ;	      (smart-parens-mode -1))
 ;	  )
 
@@ -37,6 +37,9 @@
 ; Highlight syntax errors on the fly.
 (require 'flymake-ruby)
 (add-hook 'ruby-mode-hook 'flymake-ruby-load)
+
+; Trying out Rubocop (https://github.com/bbatsov/rubocop)
+(add-hook 'ruby-mode-hook 'rubocop-mode)
 
 ; Make Emacs know about RVM (https://github.com/senny/rvm.el)
 (require 'rvm)
