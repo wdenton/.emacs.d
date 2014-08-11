@@ -17,6 +17,10 @@
 ;; Hide the /italics/ and *bold* markers
 (setq org-hide-emphasis-markers t)
 
+;; Better colouring of TODO keywords
+(setq org-todo-keyword-faces
+  (quote (("TODO" :foreground "green" :weight normal))))
+
 ;; Hit return on a link to open it in a browser
 (setq org-return-follows-link t)
 
