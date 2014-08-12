@@ -8,7 +8,7 @@
 (global-set-key "\C-cb" 'org-iswitchb)
 
 ;; Files to look in for agenda items
-(setq org-agenda-files (quote ("~/york/gtd/ar/diary.org")))
+(setq org-agenda-files (quote ("~/york/shared/ar/diary.org" "~/york/shared/projects.org")))
 
 ;; Nice bullets!
 (require 'org-bullets)
@@ -19,7 +19,10 @@
 
 ;; Better colouring of TODO keywords
 (setq org-todo-keyword-faces
-  (quote (("TODO" :foreground "green" :weight normal))))
+      (quote (
+	      ("TODO" :foreground "SeaGreen" :weight normal)
+	      ("WAITING" :foreground "Purple" :weight normal)
+	      )))
 
 ;; Hit return on a link to open it in a browser
 (setq org-return-follows-link t)
