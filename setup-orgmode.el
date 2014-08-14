@@ -10,9 +10,11 @@
 ;; Files to look in for agenda items
 (setq org-agenda-files (quote ("~/york/shared/ar/diary.org" "~/york/shared/projects.org")))
 
-;; Nice bullets!
+;; Nicer bullets!
+;; Possibilities include:  ◉ ○ ✸ ✿ ♥ ● ◇ ✚ ✜ ☯ ◆ ♠ ♣ ♦ ☢ ❀ ◆ ◖ ▶ ► • ★ ▸
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+(setq org-bullets-bullet-list '("◉" "►" "•" "•")) ; Default is '("◉" "○" "✸" "✿")
 
 ;; Hide the /italics/ and *bold* markers
 (setq org-hide-emphasis-markers t)
@@ -85,7 +87,7 @@
 (setq org-default-notes-file "~/org/capture.org") ; Change this when I use it for real
 (define-key global-map "\C-cc" 'org-capture)
 (setq org-capture-templates
-      '(("w" "Work todo" entry (file+headline "~/york/gtd/next-actions.org" "Tasks") "* TODO %?\n %u\n %a")
+      '(("w" "Work todo" entry (file+headline "~/york/shared/projects.org" "Tasks") "* TODO %?\n %u\n %a")
         ("n" "Note"      entry (file+datetree "~/org/capture.org")                   "* %?\nEntered on %U\n  %i\n %a"))
       )
 
