@@ -28,6 +28,9 @@
 (add-to-list 'load-path user-emacs-directory)
 (add-to-list 'load-path site-lisp-dir)
 
+;; This is bound to f11 in Emacs 24.4
+; (toggle-frame-fullscreen)
+
 ;; Run the server; now I can load any file into Emacs with 'emacsclient file'
 ;; Works a treat with the It's All Text! extension in Firefox.
 (server-mode)
@@ -70,6 +73,7 @@
 		    ruby-mode
 		    rvm
 		    smartparens
+		    undo-tree
 		    yaml-mode
 		    yasnippet
 		    zotelo
@@ -213,9 +217,7 @@
 
 ;; The *scratch* buffer is lisp-interaction-mode by default, but I use Org more.
 (setq initial-major-mode 'org-mode)
-(setq initial-scratch-message "\
-This buffer is for notes you don't want to save.  It uses Org.
-")
+(setq initial-scratch-message "")
 
 ;; expand-region (see https://github.com/magnars/expand-region.el)
 ;; C-= successively expands the region with great intelligence
