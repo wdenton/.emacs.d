@@ -30,6 +30,7 @@
 
 ;; I'm trying out variable pitch (proportional) fonts in Org, but I want fixed pitch (monospaced) in source code and tables.
 ;; Taken from http://yoo2080.wordpress.com/2013/05/30/monospace-font-in-tables-and-source-code-blocks-in-org-mode-proportional-font-in-other-parts/
+;; See also http://stackoverflow.com/questions/3758139/variable-pitch-for-org-mode-fixed-pitch-for-tables
 (defun my-adjoin-to-list-or-symbol (element list-or-symbol)
   (let ((list (if (not (listp list-or-symbol))
                   (list list-or-symbol)
