@@ -98,6 +98,11 @@
         ("n" "Note"      entry (file+datetree "~/org/capture.org")                   "* %?\nEntered on %U\n  %i\n %a"))
       )
 
+;; org-protocol lets me send URLs from Firefox (and more, but that's all I'm doing)
+;; See https://stackoverflow.com/questions/7464951/how-to-make-org-protocol-work
+; (require 'org-protocol)
+; (setq org-protocol-default-template-key "n")
+
 ;; Active Babel languages
 ;; See http://orgmode.org/org.html#Languages
 (org-babel-do-load-languages
