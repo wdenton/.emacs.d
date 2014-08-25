@@ -135,6 +135,13 @@
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
+;; Some modes should use variable pitch fonts.
+(dolist (hook '(erc-mode-hook
+		LaTeX-mode-hook
+		org-mode-hook
+		markdown-mode-hook))
+  (add-hook hook (lambda () (variable-pitch-mode t))))
+
 ;; Proper line wrapping
 (global-visual-line-mode 1)
 
