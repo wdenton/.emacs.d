@@ -11,7 +11,7 @@
 (setq org-agenda-files (quote ("~/york/shared/ar/diary.org" "~/york/shared/projects.org")))
 
 ;; Nicer bullets!
-;; Possibilities include:  ◉ ○ ✸ ✿ ♥ ● ◇ ✚ ✜ ☯ ◆ ♠ ♣ ♦ ☢ ❀ ◆ ◖ ▶ ► • ★ ▸
+;; Possibilities include:  ◉ ○ ✸ ✿ ♥ ● ◇ ✚ ✜ ☯ ◆ ♠ ♣ ♦ ☢ ❀ ◆ ◖ ▶ ► • ★ ▸ or any other amusing Unicode character
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 (setq org-bullets-bullet-list '("◉" "►" "•" "•")) ; Default is '("◉" "○" "✸" "✿")
@@ -21,7 +21,7 @@
 
 ;; Change the sizes of the titles.
 (custom-set-faces
-  '(org-level-1 ((t (:inherit outline-1 :height 1.3))))
+  '(org-level-1 ((t (:inherit outline-1 :height 1.1))))
   '(org-level-2 ((t (:inherit outline-2 :height 1.0))))
   '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
   '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
@@ -102,6 +102,13 @@
 
 ;; Turn ' and " into ‘posh’ “quotes”
 (setq org-export-with-smart-quotes t)
+
+;; Define my own link abbreviations
+(setq org-link-abbrev-alist
+      '(
+	("DOI" . "http://dx.doi.org/%s") ;; Thus [[DOI:10.1108/07378831111138189]]
+	)
+      )
 
 ;; Capturing
 (setq org-default-notes-file "~/org/capture.org") ; Change this when I use it for real
