@@ -9,6 +9,7 @@
  '(font-latex-title-fontity (quote color))
  '(global-font-lock-mode t nil (font-lock))
  '(mouse-wheel-mode t nil (mwheel))
+ '(org-agenda-files nil)
  '(query-user-mail-address nil)
  '(user-mail-address "wtd@pobox.com"))
 

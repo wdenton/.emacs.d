@@ -16,6 +16,12 @@
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 (setq org-bullets-bullet-list '("◉" "►" "•" "•")) ; Default is '("◉" "○" "✸" "✿")
 
+;; org-entities displays \alpha etc. as Unicode characters.
+(setq org-pretty-entities t)
+;; In 24.4 I can generalize this with prettify-symbols-mode (http://ergoemacs.org/emacs/emacs_pretty_lambda.html)
+;; Doesn't handle em and en dashes, though, so let's make that work.
+(add-to-list 'org-entities-user '("my-em-mdash" "---" nil "&mdash;" "--" "--" "—"))
+
 ;; Hide the /italics/ and *bold* markers
 (setq org-hide-emphasis-markers t)
 
@@ -27,6 +33,27 @@
   '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
   '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
 )
+
+;; I'm trying out variable pitch (proportional) fonts in Org, but I want fixed pitch (monospaced) in source code and tables.
+;; Taken from http://yoo2080.wordpress.com/2013/05/30/monospace-font-in-tables-and-source-code-blocks-in-org-mode-proportional-font-in-other-parts/
+;; See also http://stackoverflow.com/questions/3758139/variable-pitch-for-org-mode-fixed-pitch-for-tables
+(defun my-adjoin-to-list-or-symbol (element list-or-symbol)
+  (let ((list (if (not (listp list-or-symbol))
+                  (list list-or-symbol)
+                list-or-symbol)))
+    (require 'cl-lib)
+    (cl-adjoin element list)))
+
+(eval-after-load "org"
+  '(mapc
+    (lambda (face)
+      (set-face-attribute
+       face nil
+       :inherit
+       (my-adjoin-to-list-or-symbol
+        'fixed-pitch
+        (face-attribute face :inherit))))
+    (list 'org-code 'org-block 'org-table 'org-block-background)))
 
 ;; Better colouring of TODO keywords
 (setq org-todo-keyword-faces
@@ -87,6 +114,7 @@
 (setq org-link-abbrev-alist
       '(
 	("DOI" . "http://dx.doi.org/%s") ;; Thus [[DOI:10.1108/07378831111138189]]
+	("→"  . "https://en.wikipedia.org/wiki/%s") ;; Thus [[WP:Toronto, Ontario]]
 	)
       )
 
