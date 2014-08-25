@@ -16,6 +16,12 @@
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 (setq org-bullets-bullet-list '("◉" "►" "•" "•")) ; Default is '("◉" "○" "✸" "✿")
 
+;; org-entities displays \alpha etc. as Unicode characters.
+(setq org-pretty-entities t)
+;; In 24.4 I can generalize this with prettify-symbols-mode (http://ergoemacs.org/emacs/emacs_pretty_lambda.html)
+;; Doesn't handle em and en dashes, though, so let's make that work.
+(add-to-list 'org-entities-user '("my-em-mdash" "---" nil "&mdash;" "--" "--" "—"))
+
 ;; Hide the /italics/ and *bold* markers
 (setq org-hide-emphasis-markers t)
 
@@ -108,6 +114,7 @@
 (setq org-link-abbrev-alist
       '(
 	("DOI" . "http://dx.doi.org/%s") ;; Thus [[DOI:10.1108/07378831111138189]]
+	("→"  . "https://en.wikipedia.org/wiki/%s") ;; Thus [[WP:Toronto, Ontario]]
 	)
       )
 
