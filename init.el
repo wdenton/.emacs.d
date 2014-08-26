@@ -140,11 +140,11 @@
 (prefer-coding-system 'utf-8)
 
 ;; Some modes should use variable pitch fonts.
-(dolist (hook '(erc-mode-hook
-		LaTeX-mode-hook
-		org-mode-hook
-		markdown-mode-hook))
-  (add-hook hook (lambda () (variable-pitch-mode t))))
+;; (dolist (hook '(erc-mode-hook
+;; 		LaTeX-mode-hook
+;; 		org-mode-hook
+;; 		markdown-mode-hook))
+;;   (add-hook hook (lambda () (variable-pitch-mode t))))
 
 ;; Proper line wrapping
 (global-visual-line-mode 1)
@@ -211,6 +211,7 @@
 (require 'setup-eshell)
 (require 'setup-ess)
 (require 'setup-file-management)
+;(require 'setup-fringe)
 (require 'setup-ibuffer)
 (require 'setup-javascript)
 (require 'setup-jekyll)
@@ -290,6 +291,9 @@
 
 ;; 8 is wrong
 (setq tab-width 4)
+
+;; Make the cursor a thin bar, not a block (but I still like it blinking)
+(setq cursor-type 'bar)
 
 ;; Use C-c left or C-c right to go back and forth in window configurations
 (winner-mode t)
