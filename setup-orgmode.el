@@ -21,8 +21,9 @@
 ;; In 24.4 I can generalize this with prettify-symbols-mode (http://ergoemacs.org/emacs/emacs_pretty_lambda.html)
 
 ;; Doesn't handle em and en dashes, though, so let's make that work.
-(setq org-entities-user nil)
-(add-to-list 'org-entities-user '("my-em-mdash" "---" nil "&mdash;" "--" "--" "—"))
+; (setq org-entities-user nil)
+; (add-to-list 'org-entities-user '("my-em-mdash" "---" nil "&mdash;" "--" "--" "—"))
+; Doesn't work ... and anyway on my screen I'd rather see --- than —
 
 ;; Hide the /italics/ and *bold* markers
 (setq org-hide-emphasis-markers t)
