@@ -6,8 +6,7 @@
 
 ; Open up irb with M-x inf-ruby or C-c C-s from a Ruby buffer
 (autoload 'inf-ruby "inf-ruby" "Run an inferior Ruby process" t)
-(autoload 'inf-ruby-setup-keybindings "inf-ruby" "" t)
-(eval-after-load 'ruby-mode '(add-hook 'ruby-mode-hook 'inf-ruby-setup-keybindings))
+(add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
 
 ; Avoid ridiculous Ruby indentation.
 (setq ruby-deep-indent-paren nil)
