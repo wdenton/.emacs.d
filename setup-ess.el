@@ -20,6 +20,9 @@
 ;; Start R in the current directory.  May need to change dirs with setwd() after.
 (setq ess-ask-for-ess-directory nil)
 
+;; indent-guide ... very nice
+(add-hook 'ess-mode-hook 'indent-guide-mode)
+
 (setq ess-local-process-name "R")
 
 ;; This next bit is taken from Kieran Healey (http://kieranhealy.org/blog/archives/2009/10/12/make-shift-enter-do-a-lot-in-ess/),

@@ -56,6 +56,7 @@
 		    gh
 		    gist
 		    ibuffer-vc
+		    indent-guide
 		    inf-ruby
 		    js-comint
 		    js2-mode
@@ -247,6 +248,9 @@
 
 ;; Remove text in active region if inserting text
 (delete-selection-mode 1)
+
+;; I use CamelCase in Ruby and R
+(add-hook 'prog-mode-hook 'subword-mode)
 
 ;; Scroll by one line at a time.
 (setq scroll-step 1)

@@ -41,6 +41,9 @@
 ; Trying out Rubocop (https://github.com/bbatsov/rubocop)
 (add-hook 'ruby-mode-hook 'rubocop-mode)
 
+;; indent-guide ... very nice
+(add-hook 'ruby-mode-hook 'indent-guide-mode)
+
 ; Make Emacs know about RVM (https://github.com/senny/rvm.el)
 (require 'rvm)
 (rvm-use-default) ;; use rvm's default ruby for the current Emacs session
