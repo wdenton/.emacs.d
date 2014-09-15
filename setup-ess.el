@@ -25,6 +25,13 @@
 
 (setq ess-local-process-name "R")
 
+;; Had indent problems where tab would force lines way, way over to the right
+;; https://github.com/emacs-ess/ESS/issues/99
+(add-hook 'ess-mode-hook
+	  (lambda ()
+	    (setq ess-first-continued-statement-offset 2)
+	    (setq ess-continued-statement-offset 0)))
+
 ;; This next bit is taken from Kieran Healey (http://kieranhealy.org/blog/archives/2009/10/12/make-shift-enter-do-a-lot-in-ess/),
 ;; who adapted it from http://www.emacswiki.org/emacs/ESSShiftEnter
 ;; He explains:
