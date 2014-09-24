@@ -65,6 +65,19 @@
 	      ("WAITING" :foreground "Purple" :weight normal)
 	      )))
 
+;; I asked and someone answered on the beta Emacs SE.
+;; https://emacs.stackexchange.com/questions/90/how-to-sometimes-but-not-always-add-a-note-to-an-org-todo-state-change
+;; This lets me force a note for any state change in TODO workflow.
+;; Use C-c C-T (capital T) to make Org ask me for a note, even if the normal workflow doesn't require it.
+(defun org-todo-force-notes ()
+  (interactive)
+  (let ((org-todo-log-states
+         (mapcar (lambda (state)
+                   (list state 'note 'time))
+                 (apply 'append org-todo-sets))))
+    (call-interactively 'org-todo)))
+(define-key org-mode-map (kbd "C-c C-S-t") 'org-todo-force-notes)
+
 ;; Hit return on a link to open it in a browser
 (setq org-return-follows-link t)
 
