@@ -67,12 +67,14 @@
 		    org-bullets
 		    ; org-reveal ;; install by hand https://github.com/yjwen/org-reveal/
 		    pcache
+		    ; powerline
 		    rainbow-mode
 		    rubocop
 		    ruby-block
 		    ruby-electric
 		    ruby-mode
 		    rvm
+		    smart-mode-line
 		    smartparens
 		    undo-tree
 		    yaml-mode
@@ -329,6 +331,14 @@
 (setq message-directory "~/.emacs.d/gnus.d/Mail/")
 (setq nnfolder-directory "~/.emacs.d/gnus.d/Mail/archive/")
 (setq gnus-init-file "~/.emacs.d/gnus.d/init.el")
+
+;;; smart-mode-line ... need to solarize the colours, though.
+(require 'smart-mode-line)
+; (add-to-list 'custom-theme-load-path "~/.emacs.d/")
+(sml/setup)
+(sml/apply-theme 'dark)
+(add-to-list 'sml/replacer-regexp-list '("^~/york/shared/" ":YORK:") t)
+; (setq sml/mode-width "full")
 
 ;;; ido
 
