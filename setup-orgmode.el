@@ -76,7 +76,7 @@
                    (list state 'note 'time))
                  (apply 'append org-todo-sets))))
     (call-interactively 'org-todo)))
-(define-key org-mode-map (kbd "C-c C-S-t") 'org-todo-force-notes)
+; (define-key org-mode-map (kbd "C-c C-S-t") 'org-todo-force-notes)
 
 ;; Hit return on a link to open it in a browser
 (setq org-return-follows-link t)
