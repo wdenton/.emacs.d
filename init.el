@@ -75,6 +75,7 @@
 		    ruby-mode
 		    rvm
 		    smart-mode-line
+		    smart-mode-line-powerline-theme
 		    smartparens
 		    undo-tree
 		    yaml-mode
