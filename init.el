@@ -336,7 +336,7 @@
 (require 'smart-mode-line)
 ; (add-to-list 'custom-theme-load-path "~/.emacs.d/")
 (sml/setup)
-(sml/apply-theme 'dark)
+(sml/apply-theme 'powerline)
 (add-to-list 'sml/replacer-regexp-list '("^~/york/shared/" ":YORK:") t)
 ; (setq sml/mode-width "full")
 
