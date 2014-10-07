@@ -339,8 +339,8 @@
 (sml/setup)
 (sml/apply-theme 'powerline)
 (add-to-list 'sml/replacer-regexp-list '("^~/york/shared/" ":YORK:") t)
+(add-to-list 'sml/replacer-regexp-list '("^~/artsandletters/" ":ALC:") t)
 ; (setq sml/mode-width "full")
-
 ;;; ido
 
 ;; I'm trying out ido-mode
@@ -359,3 +359,24 @@
 (setq ido-ignore-extensions t)
 
 ; (require 'twittering-mode)
+
+;; launcher-map, to make it easier to run common things
+;; http://endlessparentheses.com/launcher-keymap-for-standalone-features.html
+(define-prefix-command 'launcher-map)
+;; C-x l is `count-lines-page' by default. If you use that, you can try s-l or <C-return>.
+(define-key ctl-x-map "l" 'launcher-map)
+(global-set-key (kbd "s-l") 'launcher-map)
+(define-key launcher-map "c" #'calculator) ; calc is too much
+;(define-key launcher-map "d" #'ediff-buffers)
+(define-key launcher-map "f" #'find-dired)
+(define-key launcher-map "g" #'lgrep)
+(define-key launcher-map "G" #'rgrep)
+(define-key launcher-map "h" #'man) ; Help
+(define-key launcher-map "i" #'package-install-from-buffer)
+(define-key launcher-map "n" #'nethack)
+(define-key launcher-map "p" #'list-packages)
+(define-key launcher-map "s" #'eshell)
+(define-key launcher-map "t" #'proced) ; top
+
+;; Perhaps try launching other programs?
+;; http://endlessparentheses.com/keymap-for-launching-external-applications-and-websites.html
