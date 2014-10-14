@@ -26,6 +26,7 @@
 
 ;; Set up load path
 (add-to-list 'load-path user-emacs-directory)
+;; http://stackoverflow.com/questions/24779041/disable-warning-about-emacs-d-in-load-path
 (add-to-list 'load-path site-lisp-dir)
 
 ;; This is bound to f11 in Emacs 24.4
@@ -335,7 +336,6 @@
 
 ;;; smart-mode-line ... need to solarize the colours, though.
 (require 'smart-mode-line)
-; (add-to-list 'custom-theme-load-path "~/.emacs.d/")
 (sml/setup)
 (sml/apply-theme 'powerline)
 (add-to-list 'sml/replacer-regexp-list '("^~/york/shared/" ":YORK:") t)
@@ -380,3 +380,15 @@
 
 ;; Perhaps try launching other programs?
 ;; http://endlessparentheses.com/keymap-for-launching-external-applications-and-websites.html
+
+;; prettify-symbols-mode was introduced in 24.4
+(when (boundp 'global-prettify-symbols-mode)
+  (add-hook 'clojure-mode-hook
+            (lambda  ()
+              (push '("fn" . ?ƒ) prettify-symbols-alist)))
+  (add-hook 'org-mode-hook
+            (lambda  ()
+              (push '("<=" . ?≤) prettify-symbols-alist)
+              (push '(">=" . ?≥) prettify-symbols-alist)
+	      ))
+  (global-prettify-symbols-mode +1))
