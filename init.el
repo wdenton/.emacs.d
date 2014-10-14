@@ -26,11 +26,11 @@
 
 ;; Set up load path
 (add-to-list 'load-path user-emacs-directory)
-;; http://stackoverflow.com/questions/24779041/disable-warning-about-emacs-d-in-load-path
-(add-to-list 'load-path site-lisp-dir)
+;; http://stackoverflow.com/questions/24779041/disable-warning-about-emacs-d-in-load-pathmith(add-to-list 'load-path site-lisp-dir)
 
-;; This is bound to f11 in Emacs 24.4
-; (toggle-frame-fullscreen)
+;; New in 24.4
+;(toggle-frame-fullscreen) ; f11
+(toggle-frame-maximized); f10
 
 ;; Run the server; now I can load any file into Emacs with 'emacsclient file'
 ;; Works a treat with the It's All Text! extension in Firefox.
