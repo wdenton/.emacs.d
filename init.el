@@ -18,6 +18,10 @@
 ;; No startup screen
 (setq inhibit-startup-message t)
 
+;; New in 24.4
+;(toggle-frame-fullscreen) ; f11
+(toggle-frame-maximized); f10
+
 ;; Load paths and where to find things.
 
 ; user-emacs-directory is ~/.emacs.d/
@@ -30,10 +34,6 @@
 ;; http://stackoverflow.com/questions/24779041/disable-warning-about-emacs-d-in-load-path
 ; (add-to-list 'load-path user-emacs-directory)
 ; (add-to-list 'load-path site-lisp-dir)
-
-;; New in 24.4
-;(toggle-frame-fullscreen) ; f11
-(toggle-frame-maximized); f10
 
 ;; Run the server; now I can load any file into Emacs with 'emacsclient file'
 ;; Works a treat with the It's All Text! extension in Firefox.
@@ -71,7 +71,7 @@
 		    org-bullets
 		    ; org-reveal ;; install by hand https://github.com/yjwen/org-reveal/
 		    pcache
-		    ; powerline
+		    powerline ;; For smart-mode-line powerline theme
 		    rainbow-mode
 		    rubocop
 		    ruby-block
@@ -91,6 +91,10 @@
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
+
+;; Keep custom settings in separate file
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(load custom-file)
 
 ;;;; Parentheses-handling stuff
 
@@ -221,9 +225,6 @@
 (add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
 (add-to-list 'desktop-modes-not-to-save 'fundamental-mode)
 
-;; Keep custom settings in separate file
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-(load custom-file)
 
 ;; nxml for HTML etc.
 (add-to-list 'auto-mode-alist
@@ -356,12 +357,14 @@
 ;;; smart-mode-line ... need to solarize the colours, though.
 (require 'smart-mode-line)
 (sml/setup)
-(sml/apply-theme 'powerline)
+;; Getting jillions of errors like this in 25.0:
+;; Error during redisplay: (eval (propertize " " (quote display) (funcall (intern (format "powerline-%s-%s" powerline-default-separator (car powerline-default-separator-dir))) nil (quote powerline-active1)))) signaled (wrong-type-argument hash-table-p "Unprintable entity")
+;;(sml/apply-theme 'powerline)
 (add-to-list 'sml/replacer-regexp-list '("^~/york/shared/" ":YORK:") t)
 (add-to-list 'sml/replacer-regexp-list '("^~/artsandletters/" ":ALC:") t)
 ; (setq sml/mode-width "full")
-;;; ido
 
+;;; ido
 ;; I'm trying out ido-mode
 ;; See http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode/
 (setq ido-enable-flex-matching t)
