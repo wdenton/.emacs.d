@@ -18,6 +18,12 @@
 ;; No startup screen
 (setq inhibit-startup-message t)
 
+;; New in 24.4
+;(toggle-frame-fullscreen) ; f11
+;(toggle-frame-maximized); f10
+(when (fboundp 'toggle-frame-maximized)
+  (toggle-frame-maximized))
+
 ;; Load paths and where to find things.
 
 ; user-emacs-directory is ~/.emacs.d/
@@ -30,10 +36,6 @@
 ;; http://stackoverflow.com/questions/24779041/disable-warning-about-emacs-d-in-load-path
 ; (add-to-list 'load-path user-emacs-directory)
 ; (add-to-list 'load-path site-lisp-dir)
-
-;; New in 24.4
-;(toggle-frame-fullscreen) ; f11
-(toggle-frame-maximized); f10
 
 ;; Run the server; now I can load any file into Emacs with 'emacsclient file'
 ;; Works a treat with the It's All Text! extension in Firefox.
@@ -71,7 +73,7 @@
 		    org-bullets
 		    ; org-reveal ;; install by hand https://github.com/yjwen/org-reveal/
 		    pcache
-		    ; powerline
+		    powerline ;; For smart-mode-line powerline theme
 		    rainbow-mode
 		    rubocop
 		    ruby-block
@@ -91,6 +93,10 @@
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
+
+;; Keep custom settings in separate file
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(load custom-file)
 
 ;;;; Parentheses-handling stuff
 
@@ -170,6 +176,24 @@
 (setq split-height-threshold nil)
 (setq split-width-threshold 0)
 
+;; Make window splitting more useful
+;; http://pages.sachachua.com/.emacs.d/Sacha.html
+(defun wtd/vsplit-last-buffer (prefix)
+  "Split the window vertically and display the previous buffer."
+  (interactive "p")
+  (split-window-vertically)
+  (other-window 1 nil)
+  (unless prefix
+    (switch-to-next-buffer)))
+(defun wtd/hsplit-last-buffer (prefix)
+  "Split the window horizontally and display the previous buffer."
+  (interactive "p")
+  (split-window-horizontally)
+  (other-window 1 nil)
+  (unless prefix (switch-to-next-buffer)))
+(global-set-key (kbd "C-x 2") 'wtd/vsplit-last-buffer)
+(global-set-key (kbd "C-x 3") 'wtd/hsplit-last-buffer)
+
 ;; Enable cutting/pasting and putting results into the X clipboard
 (global-set-key [(shift delete)] 'clipboard-kill-region)
 (global-set-key [(control insert)] 'clipboard-kill-ring-save)
@@ -203,9 +227,6 @@
 (add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
 (add-to-list 'desktop-modes-not-to-save 'fundamental-mode)
 
-;; Keep custom settings in separate file
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-(load custom-file)
 
 ;; nxml for HTML etc.
 (add-to-list 'auto-mode-alist
@@ -338,7 +359,9 @@
 ;;; smart-mode-line ... need to solarize the colours, though.
 (require 'smart-mode-line)
 (sml/setup)
-(sml/apply-theme 'powerline)
+;; Getting jillions of errors like this in 25.0:
+;; Error during redisplay: (eval (propertize " " (quote display) (funcall (intern (format "powerline-%s-%s" powerline-default-separator (car powerline-default-separator-dir))) nil (quote powerline-active1)))) signaled (wrong-type-argument hash-table-p "Unprintable entity")
+;;(sml/apply-theme 'powerline)
 (add-to-list 'sml/replacer-regexp-list '("^~/york/shared/" ":YORK:") t)
 (add-to-list 'sml/replacer-regexp-list '("^~/artsandletters/" ":ALC:") t)
 ; (setq sml/mode-width "full")
