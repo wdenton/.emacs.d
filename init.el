@@ -20,7 +20,9 @@
 
 ;; New in 24.4
 ;(toggle-frame-fullscreen) ; f11
-(toggle-frame-maximized); f10
+;(toggle-frame-maximized); f10
+(when (fboundp 'toggle-frame-maximized)
+  (toggle-frame-maximized))
 
 ;; Load paths and where to find things.
 
@@ -412,5 +414,13 @@
             (lambda ()
               (push '("<=" . ?≤) prettify-symbols-alist)
               (push '(">=" . ?≥) prettify-symbols-alist)
+	      ))
+  (add-hook 'ess-mode-hook
+            (lambda ()
+              (push '("%>%" . ?|) prettify-symbols-alist)
+	      ))
+  (add-hook 'inferior-ess-mode-hook
+            (lambda ()
+              (push '("%>%" . ?|) prettify-symbols-alist)
 	      ))
   (global-prettify-symbols-mode +1))
