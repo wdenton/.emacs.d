@@ -168,6 +168,24 @@
 (setq split-height-threshold nil)
 (setq split-width-threshold 0)
 
+;; Make window splitting more useful
+;; http://pages.sachachua.com/.emacs.d/Sacha.html
+(defun wtd/vsplit-last-buffer (prefix)
+  "Split the window vertically and display the previous buffer."
+  (interactive "p")
+  (split-window-vertically)
+  (other-window 1 nil)
+  (unless prefix
+    (switch-to-next-buffer)))
+(defun wtd/hsplit-last-buffer (prefix)
+  "Split the window horizontally and display the previous buffer."
+  (interactive "p")
+  (split-window-horizontally)
+  (other-window 1 nil)
+  (unless prefix (switch-to-next-buffer)))
+(global-set-key (kbd "C-x 2") 'wtd/vsplit-last-buffer)
+(global-set-key (kbd "C-x 3") 'wtd/hsplit-last-buffer)
+
 ;; Enable cutting/pasting and putting results into the X clipboard
 (global-set-key [(shift delete)] 'clipboard-kill-region)
 (global-set-key [(control insert)] 'clipboard-kill-ring-save)
