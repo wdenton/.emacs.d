@@ -342,8 +342,8 @@
 (add-to-list 'sml/replacer-regexp-list '("^~/york/shared/" ":YORK:") t)
 (add-to-list 'sml/replacer-regexp-list '("^~/artsandletters/" ":ALC:") t)
 ; (setq sml/mode-width "full")
-;;; ido
 
+;;; ido
 ;; I'm trying out ido-mode
 ;; See http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode/
 (setq ido-enable-flex-matching t)
@@ -391,5 +391,9 @@
             (lambda ()
               (push '("<=" . ?≤) prettify-symbols-alist)
               (push '(">=" . ?≥) prettify-symbols-alist)
+	      ))
+  (add-hook 'ess-mode-hook
+            (lambda ()
+              (push '("%>%" . ?|) prettify-symbols-alist)
 	      ))
   (global-prettify-symbols-mode +1))
