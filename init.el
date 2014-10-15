@@ -18,18 +18,22 @@
 ;; No startup screen
 (setq inhibit-startup-message t)
 
+;; Load paths and where to find things.
+
 ; user-emacs-directory is ~/.emacs.d/
 ; I keep my local things in ~/.emacs.d/site-lisp/
 ; and I want everything in there available, including inside subdirectories
 (setq site-lisp-dir (expand-file-name "site-lisp" user-emacs-directory))
 (let ((default-directory site-lisp-dir)) (normal-top-level-add-subdirs-to-load-path))
 
-;; Set up load path
-(add-to-list 'load-path user-emacs-directory)
-(add-to-list 'load-path site-lisp-dir)
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/setup"))
+;; http://stackoverflow.com/questions/24779041/disable-warning-about-emacs-d-in-load-path
+; (add-to-list 'load-path user-emacs-directory)
+; (add-to-list 'load-path site-lisp-dir)
 
-;; This is bound to f11 in Emacs 24.4
-; (toggle-frame-fullscreen)
+;; New in 24.4
+;(toggle-frame-fullscreen) ; f11
+(toggle-frame-maximized); f10
 
 ;; Run the server; now I can load any file into Emacs with 'emacsclient file'
 ;; Works a treat with the It's All Text! extension in Firefox.
@@ -128,11 +132,9 @@
 ;; Light on dark theme; soothing to my eyes
 (load-theme 'solarized-dark t)
 
-; (setq default-major-mode 'text-mode)
-
 (setq font-lock-maximum-decoration t)
 
-;; Sentences do not need double spaces to end.
+;; Sentences do not need double spaces to end.  (But they should.)
 (set-default 'sentence-end-double-space nil)
 
 ;; UTF-8 please (surely this is overkill?)
@@ -353,7 +355,6 @@
 
 ;;; smart-mode-line ... need to solarize the colours, though.
 (require 'smart-mode-line)
-; (add-to-list 'custom-theme-load-path "~/.emacs.d/")
 (sml/setup)
 (sml/apply-theme 'powerline)
 (add-to-list 'sml/replacer-regexp-list '("^~/york/shared/" ":YORK:") t)
@@ -398,3 +399,15 @@
 
 ;; Perhaps try launching other programs?
 ;; http://endlessparentheses.com/keymap-for-launching-external-applications-and-websites.html
+
+;; prettify-symbols-mode was introduced in 24.4
+(when (boundp 'global-prettify-symbols-mode)
+  (add-hook 'clojure-mode-hook
+            (lambda ()
+              (push '("fn" . ?ƒ) prettify-symbols-alist)))
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (push '("<=" . ?≤) prettify-symbols-alist)
+              (push '(">=" . ?≥) prettify-symbols-alist)
+	      ))
+  (global-prettify-symbols-mode +1))
