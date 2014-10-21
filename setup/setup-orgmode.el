@@ -130,7 +130,7 @@
 (setq org-link-abbrev-alist
       '(
 	("DOI" . "http://dx.doi.org/%s") ;; Thus [[DOI:10.1108/07378831111138189]]
-	("→"  . "https://en.wikipedia.org/wiki/%s") ;; Thus [[WP:Toronto, Ontario]]
+	("WP"  . "https://en.wikipedia.org/wiki/%s") ;; Thus [[WP:Toronto, Ontario]]
 	)
       )
 
