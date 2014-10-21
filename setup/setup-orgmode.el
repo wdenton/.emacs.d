@@ -88,6 +88,9 @@
 ;; Seen at http://schenizzle.wordpress.com/2014/03/26/org-mode-ctrl-a-ctrl-e/
 (setq org-special-ctrl-a/e t)
 
+;; Something funny with electric-indent-mode in Emacs 25 and indenting stopped in Org.
+(setq org-startup-indented t)
+
 ;; Fontify Babel blocks nicely
 (setq org-src-fontify-natively t)
 
