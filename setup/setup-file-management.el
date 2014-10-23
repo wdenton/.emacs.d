@@ -17,6 +17,10 @@
 ;; (http://emacsredux.com/blog/2013/09/24/dired-jump/)
 (require 'dired-x)
 
+;; Emacs 24.4 defaults to an ls -1 view, not ls -l, but I want details.
+;; This needs to be specified before requiring dired+ (see http://irreal.org/blog/?p=3341)
+(setq diredp-hide-details-initially-flag nil)
+
 ;; More extra stuff
 (require 'dired+)
 
