@@ -43,12 +43,13 @@
 
 ;;;; Packages
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 ;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (package-initialize)
 
 ;; Make sure that all of the packages I want are installed. If not, install them.
-(setq my-packages '(anzu
+(setq my-packages '(aggressive-indent
+		    anzu
 		    auctex
 		    auto-complete
 		    auto-complete-auctex
@@ -405,7 +406,7 @@
 ;; Perhaps try launching other programs?
 ;; http://endlessparentheses.com/keymap-for-launching-external-applications-and-websites.html
 
-;; aggresive-indent-mode looks nice.
+;; aggressive-indent mode looks nice.
 (global-aggressive-indent-mode 1)
 (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
 
