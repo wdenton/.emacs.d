@@ -405,6 +405,10 @@
 ;; Perhaps try launching other programs?
 ;; http://endlessparentheses.com/keymap-for-launching-external-applications-and-websites.html
 
+;; aggresive-indent-mode looks nice.
+(global-aggressive-indent-mode 1)
+(add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+
 ;; prettify-symbols-mode was introduced in 24.4
 (when (boundp 'global-prettify-symbols-mode)
   (add-hook 'clojure-mode-hook
