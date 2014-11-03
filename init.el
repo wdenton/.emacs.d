@@ -358,13 +358,13 @@
 (setq gnus-init-file "~/.emacs.d/gnus.d/init.el")
 
 ;;; smart-mode-line ... need to solarize the colours, though.
-(require 'smart-mode-line)
-(sml/setup)
+;(require 'smart-mode-line)
+;(sml/setup)
 ;; Getting jillions of errors like this in 25.0:
 ;; Error during redisplay: (eval (propertize " " (quote display) (funcall (intern (format "powerline-%s-%s" powerline-default-separator (car powerline-default-separator-dir))) nil (quote powerline-active1)))) signaled (wrong-type-argument hash-table-p "Unprintable entity")
 ;;(sml/apply-theme 'powerline)
-(add-to-list 'sml/replacer-regexp-list '("^~/york/shared/" ":YORK:") t)
-(add-to-list 'sml/replacer-regexp-list '("^~/artsandletters/" ":ALC:") t)
+;(add-to-list 'sml/replacer-regexp-list '("^~/york/shared/" ":YORK:") t)
+;(add-to-list 'sml/replacer-regexp-list '("^~/artsandletters/" ":ALC:") t)
 ; (setq sml/mode-width "full")
 
 ;;; ido
