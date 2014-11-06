@@ -34,8 +34,8 @@
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/setup"))
 ;; http://stackoverflow.com/questions/24779041/disable-warning-about-emacs-d-in-load-path
-; (add-to-list 'load-path user-emacs-directory)
-; (add-to-list 'load-path site-lisp-dir)
+;; (add-to-list 'load-path user-emacs-directory)
+(add-to-list 'load-path site-lisp-dir)
 
 ;; Run the server; now I can load any file into Emacs with 'emacsclient file'
 ;; Works a treat with the It's All Text! extension in Firefox.

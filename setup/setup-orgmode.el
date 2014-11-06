@@ -117,8 +117,8 @@
 ;; Details: http://orgmode.org/worg/org-tutorials/org-latex-preview.html
 (setq org-latex-create-formula-image-program 'imagemagick)
 
-; For org-reveal, which makes presentations using reveal.js
-; (require 'org-reveal)
+;; For org-reveal, which makes presentations using reveal.js
+(require 'ox-reveal)
 
 ;; Exporting: I will see these export options after C-c C-e
 (setq org-export-backends (quote (beamer html latex md odt reveal)))
