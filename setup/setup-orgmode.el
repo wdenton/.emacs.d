@@ -141,7 +141,9 @@
 (setq org-default-notes-file "~/org/capture.org") ; Change this when I use it for real
 (define-key global-map "\C-cc" 'org-capture)
 (setq org-capture-templates
-      '(("w" "Work todo" entry (file+headline "~/york/shared/projects.org" "Tasks") "* TODO %?\n %u\n %a")
+      '(
+	("w" "Work todo" entry (file+headline "~/york/shared/projects.org" "Tasks") "* TODO %?\n %u\n %a")
+	("d" "Work diary" entry (file+datetree "~/york/shared/workdiary.org" "Tasks") "** %?\n %u\n %a")
         ("n" "Note"      entry (file+datetree "~/org/capture.org")                   "* %?\nEntered on %U\n  %i\n %a"))
       )
 

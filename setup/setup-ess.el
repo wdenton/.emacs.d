@@ -25,6 +25,9 @@
 
 (setq ess-local-process-name "R")
 
+;; I use a lot of snake_case variable names, so disable _ turning into <-
+(ess-toggle-underscore nil)
+
 ;; Had indent problems where tab would force lines way, way over to the right
 ;; https://github.com/emacs-ess/ESS/issues/99
 (add-hook 'ess-mode-hook
