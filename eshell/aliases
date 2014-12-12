@@ -1,0 +1,6 @@
+alias grep grep --color=auto $*
+alias ls ls --color=auto $*
+alias l ls -F $*
+alias la ls -aF $*
+alias ll ls -lF $*
+alias lsort ls -lrS $*

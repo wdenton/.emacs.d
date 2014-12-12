@@ -11,7 +11,8 @@ emms
 desktops
 dict
 var
-eshell
+eshell/history
+eshell/lastdir
 ac-comphist.dat
 bookmarks
 .org-id-locations
