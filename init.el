@@ -425,3 +425,7 @@
               (push '("%>%" . ?|) prettify-symbols-alist)
 	      ))
   (global-prettify-symbols-mode +1))
+
+;; Sonic Pi (https://github.com/repl-electric/sonic-pi.el)
+;; (require 'sonic-pi)
+;; (setq sonic-pi-path "/usr/local/src/sonic-pi")
