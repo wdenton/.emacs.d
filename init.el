@@ -53,7 +53,7 @@
 		    auctex
 		    auto-complete
 		    auto-complete-auctex
-		    ;autopair
+		    ;; autopair
 		    color-theme-solarized
 		    dired+
 		    ess
@@ -72,7 +72,7 @@
 		    multiple-cursors
 		    org
 		    org-bullets
-		    ; org-reveal ;; install by hand https://github.com/yjwen/org-reveal/
+		    ;; org-reveal ;; install by hand https://github.com/yjwen/org-reveal/
 		    pcache
 		    powerline ;; For smart-mode-line powerline theme
 		    rainbow-mode
@@ -163,7 +163,7 @@
 (global-visual-line-mode 1)
 
 ;; Highlight current row
-(global-hl-line-mode 1)
+(global-hl-line-mode 0)
 ;; And set its colour
 ;; (set-face-background hl-line-face "#efefef")
 
@@ -360,8 +360,8 @@
 ;;; smart-mode-line ... need to solarize the colours, though.
 (require 'smart-mode-line)
 (sml/setup)
-;; Getting jillions of errors like this in 25.0:
-;; Error during redisplay: (eval (propertize " " (quote display) (funcall (intern (format "powerline-%s-%s" powerline-default-separator (car powerline-default-separator-dir))) nil (quote powerline-active1)))) signaled (wrong-type-argument hash-table-p "Unprintable entity")
+;;; Getting jillions of errors like this in 25.0:
+;;; Error during redisplay: (eval (propertize " " (quote display) (funcall (intern (format "powerline-%s-%s" powerline-default-separator (car powerline-default-separator-dir))) nil (quote powerline-active1)))) signaled (wrong-type-argument hash-table-p "Unprintable entity")
 (sml/apply-theme 'powerline)
 (add-to-list 'sml/replacer-regexp-list '("^~/york/shared/" ":YORK:") t)
 (add-to-list 'sml/replacer-regexp-list '("^~/artsandletters/" ":ALC:") t)
