@@ -84,6 +84,7 @@
 		    smart-mode-line
 		    smart-mode-line-powerline-theme
 		    smartparens
+		    sonic-pi
 		    undo-tree
 		    yaml-mode
 		    yasnippet
