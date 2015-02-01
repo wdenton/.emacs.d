@@ -44,7 +44,7 @@
 ;;;; Packages
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
+;; (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (package-initialize)
 
 ;; Make sure that all of the packages I want are installed. If not, install them.
@@ -138,7 +138,10 @@
 ;;                  (list (lambda (arg) 'no-indent)))))
 
 ;; Light on dark theme; soothing to my eyes
-(load-theme 'solarized-dark t)
+;;(load-theme 'solarized-dark t)
+(load-theme 'solarized t)
+(set-frame-parameter nil 'background-mode 'dark)
+(enable-theme 'solarized)
 
 (setq font-lock-maximum-decoration t)
 
@@ -434,3 +437,14 @@
             ;; This setq can go here instead if you wish
 	    (setq sonic-pi-path "/usr/local/src/sonic-pi/")
             (define-key ruby-mode-map "\C-c\C-c" 'sonic-pi-send-buffer)))
+
+;; Don't truncate the names in the Package column when viewing packages
+(add-hook 'package-menu-mode-hook
+          (lambda()
+            (setq tabulated-list-format
+                  [("Package" 28 package-menu--name-predicate)
+                   ("Version" 18 nil)
+                   ("Status"  10 package-menu--status-predicate)
+		   ("Archive" 10 package-menu--archive-predicate)
+                   ("Description" 0 nil)])
+            (tabulated-list-init-header)))
