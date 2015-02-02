@@ -65,6 +65,10 @@
 	      ("WAITING" :foreground "Purple" :weight normal)
 	      )))
 
+(defface org-block-background
+  '((t (:background "#dadada")))
+  "Face used for the source block background.")
+
 ;; I asked and someone answered on the beta Emacs SE.
 ;; https://emacs.stackexchange.com/questions/90/how-to-sometimes-but-not-always-add-a-note-to-an-org-todo-state-change
 ;; This lets me force a note for any state change in TODO workflow.
