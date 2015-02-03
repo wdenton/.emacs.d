@@ -48,7 +48,8 @@
 (package-initialize)
 
 ;; Make sure that all of the packages I want are installed. If not, install them.
-(setq my-packages '(aggressive-indent
+(setq my-packages '(ac-inf-ruby
+		    aggressive-indent
 		    anzu
 		    auctex
 		    auto-complete
