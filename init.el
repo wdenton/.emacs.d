@@ -26,9 +26,9 @@
 
 ;; Load paths and where to find things.
 
-; user-emacs-directory is ~/.emacs.d/
-; I keep my local things in ~/.emacs.d/site-lisp/
-; and I want everything in there available, including inside subdirectories
+;; user-emacs-directory is ~/.emacs.d/
+;; I keep my local things in ~/.emacs.d/site-lisp/
+;; and I want everything in there available, including inside subdirectories
 (setq site-lisp-dir (expand-file-name "site-lisp" user-emacs-directory))
 (let ((default-directory site-lisp-dir)) (normal-top-level-add-subdirs-to-load-path))
 
@@ -97,6 +97,19 @@
   (when (not (package-installed-p p))
     (package-install p)))
 
+;; Don't truncate the names in the Package column when viewing packages
+(add-hook 'package-menu-mode-hook
+          (lambda()
+            (setq tabulated-list-format
+                  [("Package" 28 package-menu--name-predicate)
+                   ("Version" 18 nil)
+                   ("Status"  10 package-menu--status-predicate)
+		   ("Archive" 10 package-menu--archive-predicate)
+                   ("Description" 0 nil)])
+            (tabulated-list-init-header)))
+
+;;;; Emacs configuration
+
 ;; Keep custom settings in separate file
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
@@ -112,22 +125,13 @@
 
 ;; Make matching parentheses and quotes always appear
 ;; https://github.com/capitaomorte/autopair
-;(require 'autopair)
-;(autopair-global-mode) ;; to enable in all buffers
+;; (require 'autopair)
+;; (autopair-global-mode) ;; to enable in all buffers
 
 ;; smartparens for good handling of parentheses (https://github.com/Fuco1/smartparens/)
 (require 'smartparens-config)
 (smartparens-global-mode t)
 (show-smartparens-global-mode +1)
-
-;; Nifty parenthesis thing - hit % to toggle between a pair.
-;(defun match-paren (arg)
-;  "Go to the matching parenthesis if on parenthesis, otherwise insert %."
-;  (interactive "p")
-;  (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
-;        ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
-;        (t (self-insert-command (or arg 1)))))
-;(global-set-key "%"             'match-paren)           ; % like vi
 
 ;; I don't like the way this works with Org.
 ;; TODO Fix this problem.
@@ -139,7 +143,7 @@
 ;;                  (list (lambda (arg) 'no-indent)))))
 
 ;; Light on dark theme; soothing to my eyes
-;;(load-theme 'solarized-dark t)
+;; https://github.com/sellout/emacs-color-theme-solarized
 (load-theme 'solarized t)
 (set-frame-parameter nil 'background-mode 'dark)
 (enable-theme 'solarized)
@@ -157,7 +161,7 @@
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
-;; Some modes should use variable pitch fonts.
+;; Some modes can use variable pitch fonts ... but I don't like it.
 ;; (dolist (hook '(erc-mode-hook
 ;; 		LaTeX-mode-hook
 ;; 		org-mode-hook
@@ -212,8 +216,8 @@
 ;; by default.  Change that to backword-kill-line so it deletes from
 ;; the point to the beginning of the line.
 (global-set-key (kbd "C-<backspace>") (lambda ()
-  (interactive)
-  (kill-line 0)))
+					(interactive)
+					(kill-line 0)))
 
 ;; Save point position between sessions
 (require 'saveplace)
@@ -233,11 +237,10 @@
 (add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
 (add-to-list 'desktop-modes-not-to-save 'fundamental-mode)
 
-
 ;; nxml for HTML etc.
 (add-to-list 'auto-mode-alist
-       (cons (concat "\\." (regexp-opt '("xml" "xsd" "sch" "rng" "xslt" "svg" "rss") t) "\\'")
-       'nxml-mode))
+	     (cons (concat "\\." (regexp-opt '("xml" "xsd" "sch" "rng" "xslt" "svg" "rss") t) "\\'")
+		   'nxml-mode))
 (fset 'html-mode 'nxml-mode)
 
 (require 'setup-autocomplete)
@@ -310,7 +313,7 @@
 (setq uniquify-buffer-name-style 'forward)
 
 ;; Make script files executable automatically
-; http://www.masteringemacs.org/articles/2011/01/19/script-files-executable-automatically/
+;; http://www.masteringemacs.org/articles/2011/01/19/script-files-executable-automatically/
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
 ;; I'm old enough to be able to use narrow-to-region
@@ -388,7 +391,7 @@
 ;; Make ido use completion-ignored-extensions
 (setq ido-ignore-extensions t)
 
-; (require 'twittering-mode)
+;; (require 'twittering-mode)
 
 ;; launcher-map, to make it easier to run common things
 ;; http://endlessparentheses.com/launcher-keymap-for-standalone-features.html
@@ -397,7 +400,7 @@
 (define-key ctl-x-map "l" 'launcher-map)
 (global-set-key (kbd "s-l") 'launcher-map)
 (define-key launcher-map "c" #'calculator) ; calc is too much
-;(define-key launcher-map "d" #'ediff-buffers)
+;;(define-key launcher-map "d" #'ediff-buffers)
 (define-key launcher-map "f" #'find-dired)
 (define-key launcher-map "g" #'lgrep)
 (define-key launcher-map "G" #'rgrep)
@@ -438,14 +441,3 @@
             ;; This setq can go here instead if you wish
 	    (setq sonic-pi-path "/usr/local/src/sonic-pi/")
             (define-key ruby-mode-map "\C-c\C-c" 'sonic-pi-send-buffer)))
-
-;; Don't truncate the names in the Package column when viewing packages
-(add-hook 'package-menu-mode-hook
-          (lambda()
-            (setq tabulated-list-format
-                  [("Package" 28 package-menu--name-predicate)
-                   ("Version" 18 nil)
-                   ("Status"  10 package-menu--status-predicate)
-		   ("Archive" 10 package-menu--archive-predicate)
-                   ("Description" 0 nil)])
-            (tabulated-list-init-header)))
