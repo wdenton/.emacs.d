@@ -274,17 +274,13 @@
 ;; --- http://www.masteringemacs.org/articles/2014/02/28/my-emacs-keybindings/
 (global-set-key (kbd "M-o") 'other-window)
 
-;; Make the little calculator easier to get to. I use it quite a bit.
-;; Remember you can hit 'q' to quit the calculator.
-(global-set-key (kbd "<f1>") 'calculator)
-
-;; Highlight marked text - only works under X.
+; Highlight marked text - only works under X.
 (transient-mark-mode t)
 
 ;; Remove text in active region if inserting text
 (delete-selection-mode 1)
 
-;; I use CamelCase in Ruby and R
+;; I sometimes use CamelCase in Ruby and R
 (add-hook 'prog-mode-hook 'subword-mode)
 
 ;; Scroll by one line at a time.
@@ -414,7 +410,7 @@
 ;; Perhaps try launching other programs?
 ;; http://endlessparentheses.com/keymap-for-launching-external-applications-and-websites.html
 
-;; aggressive-indent mode looks nice.
+;; aggressive-indent mode is aggressive indeed, but very handy.
 (global-aggressive-indent-mode 1)
 (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
 
