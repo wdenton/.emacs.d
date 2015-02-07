@@ -63,6 +63,7 @@
 		    flymake-ruby
 		    gh
 		    gist
+		    helm
 		    ibuffer-vc
 		    indent-guide
 		    inf-ruby
@@ -374,9 +375,17 @@
 ;;; ido
 ;; I'm trying out ido-mode
 ;; See http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode/
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
-(ido-mode 1)
+;;(setq ido-enable-flex-matching t)
+;;(setq ido-everywhere t)
+;;(ido-mode 1)
+
+;;; helm
+;; Now I'm trying out helm
+(require 'helm-config)
+(helm-mode 1)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+(global-set-key (kbd "C-x b") 'helm-mini)
 
 ;; Don't ask for confirmation if I create a new buffer with C-x b)
 (setq ido-create-new-buffer 'always)

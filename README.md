@@ -7,9 +7,9 @@ If, for some reason I cannot fathom, you want to try out my Emacs configuration,
     $ mv .emacs .emacs.BAK
 	$ mv .emacs.d .emacs.d.BAK
 	$ git clone https://github.com/wdenton/.emacs.d.git
-	$ emacs -mm
+	$ emacs
 
-When you run Emacs (the `-mm` maximizes the window) it will probably spend a while downloading and installing packages. That's all right. When it's done, kill all of the leftover buffers you don't need.  You'll be left with a dark full-screen Emacs that runs like mine does.
+When you run Emacs it will probably spend a while downloading and installing packages. That's all right. When it's done, kill all of the leftover buffers you don't need.  You'll be left with a dark full-screen Emacs that runs like mine does.
 
 `M-x all-praise-emacs`
 
@@ -21,4 +21,4 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Copyright 2012, 2013 William Denton
+Copyright 2012--2015 William Denton <wtd@pobox.com>
