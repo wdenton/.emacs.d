@@ -390,7 +390,8 @@
 
 ;; Helm looks a bit ugly with a solarized theme.
 ;; http://stackoverflow.com/questions/24505084/helm-chooses-unreadable-highlight-colors-in-solarized-dark
-(set-face-attribute 'helm-selection nil :background "#441100")
+(set-face-attribute 'helm-selection nil :background "#441100") ;; The selected line in the helm buffer
+(set-face-attribute 'helm-source-header nil :background "#441100" :height 1.1) ;; The section headings
 
 ;; Don't ask for confirmation if I create a new buffer with C-x b)
 (setq ido-create-new-buffer 'always)
