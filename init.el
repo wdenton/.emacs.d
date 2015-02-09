@@ -51,6 +51,7 @@
 (setq my-packages '(ac-inf-ruby
 		    aggressive-indent
 		    anzu
+		    async
 		    auctex
 		    auto-complete
 		    auto-complete-auctex
@@ -386,6 +387,10 @@
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
 (global-set-key (kbd "C-x b") 'helm-mini)
+
+;; Helm looks a bit ugly with a solarized theme.
+;; http://stackoverflow.com/questions/24505084/helm-chooses-unreadable-highlight-colors-in-solarized-dark
+(set-face-attribute 'helm-selection nil :background "#441100")
 
 ;; Don't ask for confirmation if I create a new buffer with C-x b)
 (setq ido-create-new-buffer 'always)
