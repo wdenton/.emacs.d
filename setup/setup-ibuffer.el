@@ -31,7 +31,8 @@
  	       ("emacs" (or
  			 (name . "^\\*scratch\\*$")
  			 (name . "^\\*Messages\\*$")))
- 	       ))))
+ 	       ("helm" (name . "^\\*helm\\*$"))
+	       ))))
 
 ;; (add-hook 'ibuffer-mode-hook
 ;; 	  (lambda ()
