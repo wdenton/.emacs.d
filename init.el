@@ -5,7 +5,6 @@
 ;; Look at
 ;; https://github.com/magnars/.emacs.d
 ;; https://gitcafe.com/Leaflet/.emacs.d/blob/master/sane-defaults.el
-;; And figure out why auctex completion isn't working
 
 ;; Only on GitHub, possibly worth getting:
 ;; google-maps.el http://julien.danjou.info/projects/emacs-packages#google-maps
@@ -19,8 +18,8 @@
 (setq inhibit-startup-message t)
 
 ;; New in 24.4
-;(toggle-frame-fullscreen) ; f11
-;(toggle-frame-maximized); f10
+;;(toggle-frame-fullscreen) ; f11
+;;(toggle-frame-maximized); f10
 (when (fboundp 'toggle-frame-maximized)
   (toggle-frame-maximized))
 
@@ -41,7 +40,7 @@
 ;; Works a treat with the It's All Text! extension in Firefox.
 (server-mode)
 
-;;;; Packages
+;; Packages
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 ;; (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
@@ -84,8 +83,6 @@
 		    ruby-electric
 		    ruby-mode
 		    rvm
-		    smart-mode-line
-		    smart-mode-line-powerline-theme
 		    smartparens
 		    sonic-pi
 		    undo-tree
@@ -101,14 +98,14 @@
 
 ;; Don't truncate the names in the Package column when viewing packages
 (add-hook 'package-menu-mode-hook
-          (lambda()
-            (setq tabulated-list-format
-                  [("Package" 28 package-menu--name-predicate)
-                   ("Version" 18 nil)
-                   ("Status"  10 package-menu--status-predicate)
+         (lambda()
+           (setq tabulated-list-format
+                 [("Package" 28 package-menu--name-predicate)
+                  ("Version" 18 nil)
+                  ("Status"  10 package-menu--status-predicate)
 		   ("Archive" 10 package-menu--archive-predicate)
-                   ("Description" 0 nil)])
-            (tabulated-list-init-header)))
+                  ("Description" 0 nil)])
+           (tabulated-list-init-header)))
 
 ;;;; Emacs configuration
 
@@ -119,7 +116,7 @@
 ;;;; Parentheses-handling stuff
 
 ;; Highlight matching parenthesis whenever the point is over one.
-;;;;; (require 'paren)
+;; (require 'paren)
 
 ;; Matches parentheses and such in every mode
 ;;;;; (show-paren-mode 1)
@@ -127,22 +124,15 @@
 
 ;; Make matching parentheses and quotes always appear
 ;; https://github.com/capitaomorte/autopair
-;; (require 'autopair)
-;; (autopair-global-mode) ;; to enable in all buffers
+;;(require 'autopair)
+;;(autopair-global-mode) ;; to enable in all buffers
 
-;; smartparens for good handling of parentheses (https://github.com/Fuco1/smartparens/)
+;;;; smartparens for good handling of parentheses (https://github.com/Fuco1/smartparens/)
 (require 'smartparens-config)
 (smartparens-global-mode t)
 (show-smartparens-global-mode +1)
 
-;; I don't like the way this works with Org.
-;; TODO Fix this problem.
 (electric-indent-mode 1)
-;; From: http://foldl.me/2012/disabling-electric-indent-mode/
-;; (add-hook 'org-mode-hook
-;;           (lambda ()
-;;             (set (make-local-variable 'electric-indent-functions)
-;;                  (list (lambda (arg) 'no-indent)))))
 
 ;; Light on dark theme; soothing to my eyes
 ;; https://github.com/sellout/emacs-color-theme-solarized
@@ -163,18 +153,11 @@
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
-;; Some modes can use variable pitch fonts ... but I don't like it.
-;; (dolist (hook '(erc-mode-hook
-;; 		LaTeX-mode-hook
-;; 		org-mode-hook
-;; 		markdown-mode-hook))
-;;   (add-hook hook (lambda () (variable-pitch-mode t))))
-
 ;; Proper line wrapping
 (global-visual-line-mode 1)
 
 ;; Highlight current row
-(global-hl-line-mode 0)
+(global-hl-line-mode 1)
 ;; And set its colour
 ;; (set-face-background hl-line-face "#efefef")
 
@@ -184,7 +167,7 @@
 ;; I don't want to type in "yes" or "no" - I want y/n.
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; Split window horizontally, not vertically (I prefer side by side with the newer wider screens)
+;;;; Split window horizontally, not vertically (I prefer side by side with the newer wider screens)
 (setq split-height-threshold nil)
 (setq split-width-threshold 0)
 
@@ -196,13 +179,13 @@
   (split-window-vertically)
   (other-window 1 nil)
   (unless prefix
-    (switch-to-next-buffer)))
+   (switch-to-next-buffer)))
 (defun wtd/hsplit-last-buffer (prefix)
-  "Split the window horizontally and display the previous buffer."
-  (interactive "p")
-  (split-window-horizontally)
-  (other-window 1 nil)
-  (unless prefix (switch-to-next-buffer)))
+ "Split the window horizontally and display the previous buffer."
+ (interactive "p")
+ (split-window-horizontally)
+ (other-window 1 nil)
+ (unless prefix (switch-to-next-buffer)))
 (global-set-key (kbd "C-x 2") 'wtd/vsplit-last-buffer)
 (global-set-key (kbd "C-x 3") 'wtd/hsplit-last-buffer)
 
@@ -239,7 +222,7 @@
 (add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
 (add-to-list 'desktop-modes-not-to-save 'fundamental-mode)
 
-;; nxml for HTML etc.
+;;;; nxml for HTML etc.
 (add-to-list 'auto-mode-alist
 	     (cons (concat "\\." (regexp-opt '("xml" "xsd" "sch" "rng" "xslt" "svg" "rss") t) "\\'")
 		   'nxml-mode))
@@ -249,14 +232,12 @@
 (require 'setup-eshell)
 (require 'setup-ess)
 (require 'setup-file-management)
-;(require 'setup-fringe)
 (require 'setup-ibuffer)
-(require 'setup-javascript)
+;;(require 'setup-javascript)
 (require 'setup-jekyll)
 (require 'setup-latex)
 (require 'setup-markdown)
 (require 'setup-orgmode)
-(require 'setup-outline)
 (require 'setup-ruby)
 (require 'setup-useful-functions)
 (require 'setup-yaml)
@@ -276,7 +257,7 @@
 ;; --- http://www.masteringemacs.org/articles/2014/02/28/my-emacs-keybindings/
 (global-set-key (kbd "M-o") 'other-window)
 
-; Highlight marked text - only works under X.
+;; Highlight marked text - only works under X.
 (transient-mark-mode t)
 
 ;; Remove text in active region if inserting text
@@ -317,8 +298,8 @@
 ;; I'm old enough to be able to use narrow-to-region
 (put 'narrow-to-region 'disabled nil)
 
-;; "All strings representing colors will be highlighted with the color they represent."
-(rainbow-mode t)
+;;;; "All strings representing colors will be highlighted with the color they represent."
+;;(rainbow-mode t) ;; #0af
 
 ;; Include the size of the file in the mode line
 (size-indication-mode t)
@@ -329,8 +310,8 @@
 ;; 8 is wrong
 (setq tab-width 4)
 
-;; Make the cursor a thin bar, not a block (but I still like it blinking)
-(setq cursor-type 'bar)
+;; Make the cursor a thin horizontal bar, not a block (but I still like it blinking)
+(setq-default cursor-type '(hbar . 3)) ;; Or 'bar or 'box
 
 ;; Use C-c left or C-c right to go back and forth in window configurations
 (winner-mode t)
@@ -338,12 +319,6 @@
 ;; anzu-mode provides a "minor mode which display current point and total matched in various search mode."
 ;; https://github.com/syohex/emacs-anzu
 (global-anzu-mode t)
-
-;; Automatically load a gist in the browser when I post one.
-(defvar gist-view-gist 1)
-
-;; M-x magit-status is tedious
-(global-set-key (kbd "C-x g") 'magit-status)
 
 ;; I was getting errors about exceeding the defaults on both of these.
 (setq max-specpdl-size 50000)
@@ -354,35 +329,32 @@
 (setq comint-scroll-to-bottom-on-input t)
 (setq comint-scroll-to-bottom-on-output t)
 (setq comint-move-point-for-output t)
-;(setq comint-prompt-read-only t)
+;;(setq comint-prompt-read-only t)
 
-;; In case I experiment with Gnus
-(setq gnus-home-directory "~/.emacs.d/gnus.d/")
-(setq gnus-directory "~/.emacs.d/gnus.d/News/")
-(setq message-directory "~/.emacs.d/gnus.d/Mail/")
-(setq nnfolder-directory "~/.emacs.d/gnus.d/Mail/archive/")
-(setq gnus-init-file "~/.emacs.d/gnus.d/init.el")
+;; Fancy up the modeline!
+(require 'powerline)
+(powerline-default-theme)
+;; And solarize it
+;; Taken from a tip at https://github.com/jonathanchu/emacs-powerline/issues/11
+(setq powerline-color1 "#073642")
+(setq powerline-color2 "#002b36")
+(set-face-attribute 'mode-line nil
+                    :foreground "#fdf6e3"
+                    :background "#2aa198"
+                    :box nil
+		    :inverse-video nil)
+(set-face-attribute 'mode-line-inactive nil
+                    :box nil
+		    :inverse-video nil)
 
-;;; smart-mode-line ... need to solarize the colours, though.
-(require 'smart-mode-line)
-(sml/setup)
-;;; Getting jillions of errors like this in 25.0:
-;;; Error during redisplay: (eval (propertize " " (quote display) (funcall (intern (format "powerline-%s-%s" powerline-default-separator (car powerline-default-separator-dir))) nil (quote powerline-active1)))) signaled (wrong-type-argument hash-table-p "Unprintable entity")
-(sml/apply-theme 'powerline)
-(add-to-list 'sml/replacer-regexp-list '("^~/york/shared/" ":YORK:") t)
-(add-to-list 'sml/replacer-regexp-list '("^~/artsandletters/" ":ALC:") t)
-(setq sml/mode-width "full")
+;;;;; ido
+;;;; I'm trying out ido-mode
+;;;; See http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode/
+;;;;(setq ido-enable-flex-matching t)
+;;;;(setq ido-everywhere t)
+;;;;(ido-mode 1)
 
-;;; ido
-;; I'm trying out ido-mode
-;; See http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode/
-;;(setq ido-enable-flex-matching t)
-;;(setq ido-everywhere t)
-;;(ido-mode 1)
-
-;;; helm
-;; Now I'm trying out helm
-(require 'helm-config)
+;; helm
 (helm-mode 1)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
@@ -399,25 +371,21 @@
 ;; Customize the order of files shown in the minibuffer
 (setq ido-file-extensions-order '(".org" ".rb" ".ini"))
 
-;; Make ido use completion-ignored-extensions
-(setq ido-ignore-extensions t)
-
-;; (require 'twittering-mode)
+;;;; Make ido use completion-ignored-extensions
+;;(setq ido-ignore-extensions t)
 
 ;; launcher-map, to make it easier to run common things
 ;; http://endlessparentheses.com/launcher-keymap-for-standalone-features.html
 (define-prefix-command 'launcher-map)
-;; C-x l is `count-lines-page' by default. If you use that, you can try s-l or <C-return>.
 (define-key ctl-x-map "l" 'launcher-map)
-(global-set-key (kbd "s-l") 'launcher-map)
 (define-key launcher-map "c" #'calculator) ; calc is too much
 ;;(define-key launcher-map "d" #'ediff-buffers)
-(define-key launcher-map "f" #'find-dired)
-(define-key launcher-map "g" #'lgrep)
-(define-key launcher-map "G" #'rgrep)
-(define-key launcher-map "h" #'man) ; Help
-(define-key launcher-map "i" #'package-install-from-buffer)
-(define-key launcher-map "n" #'nethack)
+;;(define-key launcher-map "f" #'find-dired)
+(define-key launcher-map "g" #'magit-status)
+;;(define-key launcher-map "G" #'rgrep)
+;;(define-key launcher-map "h" #'man) ; Help
+;;(define-key launcher-map "i" #'package-install-from-buffer)
+;;(define-key launcher-map "n" #'nethack)
 (define-key launcher-map "p" #'list-packages)
 (define-key launcher-map "s" #'eshell)
 (define-key launcher-map "t" #'proced) ; top
@@ -431,19 +399,19 @@
 
 ;; prettify-symbols-mode was introduced in 24.4
 (when (boundp 'global-prettify-symbols-mode)
-  (add-hook 'clojure-mode-hook
-            (lambda ()
-              (push '("fn" . ?ƒ) prettify-symbols-alist)))
-  (add-hook 'org-mode-hook
-            (lambda ()
-              (push '("<=" . ?≤) prettify-symbols-alist)
-              (push '(">=" . ?≥) prettify-symbols-alist)
+ (add-hook 'clojure-mode-hook
+           (lambda ()
+             (push '("fn" . ?ƒ) prettify-symbols-alist)))
+ (add-hook 'org-mode-hook
+           (lambda ()
+             (push '("<=" . ?≤) prettify-symbols-alist)
+             (push '(">=" . ?≥) prettify-symbols-alist)
 	      ))
-  (add-hook 'ess-mode-hook
-            (lambda ()
-              (push '("%>%" . ?|) prettify-symbols-alist)
+ (add-hook 'ess-mode-hook
+           (lambda ()
+             (push '("%>%" . ?|) prettify-symbols-alist)
 	      ))
-  (global-prettify-symbols-mode +1))
+ (global-prettify-symbols-mode +1))
 
 ;; Sonic Pi (https://github.com/repl-electric/sonic-pi.el)
 (require 'sonic-pi)
