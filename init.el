@@ -354,8 +354,13 @@
 ;;;;(setq ido-everywhere t)
 ;;;;(ido-mode 1)
 
-;; helm
+;;;; helm
 (helm-mode 1)
+
+;; In lists of buffers, show all filenames at full length
+(setq helm-buffer-max-length nil)
+
+;; Rebind some keystrokes so the helm version runs
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
 (global-set-key (kbd "C-x b") 'helm-mini)
@@ -364,6 +369,8 @@
 ;; http://stackoverflow.com/questions/24505084/helm-chooses-unreadable-highlight-colors-in-solarized-dark
 (set-face-attribute 'helm-selection nil :background "#441100") ;; The selected line in the helm buffer
 (set-face-attribute 'helm-source-header nil :background "#441100" :height 1.1) ;; The section headings
+
+;;;; Other
 
 ;; Don't ask for confirmation if I create a new buffer with C-x b)
 (setq ido-create-new-buffer 'always)
