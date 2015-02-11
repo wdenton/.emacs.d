@@ -40,7 +40,10 @@
 ;; Works a treat with the It's All Text! extension in Firefox.
 (server-mode)
 
-;; Packages
+;;;;
+;;;; Packages
+;;;;
+
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 ;; (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
@@ -54,7 +57,6 @@
 		    auctex
 		    auto-complete
 		    auto-complete-auctex
-		    ;; autopair
 		    color-theme-solarized
 		    dired+
 		    ess
@@ -63,8 +65,9 @@
 		    flymake-ruby
 		    gh
 		    gist
-		    helm
 		    ibuffer-vc
+		    ido-ubiquitous
+		    ido-vertical-mode
 		    indent-guide
 		    inf-ruby
 		    js-comint
@@ -76,7 +79,7 @@
 		    org-bullets
 		    ;; org-reveal ;; install by hand https://github.com/yjwen/org-reveal/
 		    pcache
-		    powerline ;; For smart-mode-line powerline theme
+		    powerline
 		    rainbow-mode
 		    rubocop
 		    ruby-block
@@ -98,22 +101,22 @@
 
 ;; Don't truncate the names in the Package column when viewing packages
 (add-hook 'package-menu-mode-hook
-         (lambda()
-           (setq tabulated-list-format
-                 [("Package" 28 package-menu--name-predicate)
-                  ("Version" 18 nil)
-                  ("Status"  10 package-menu--status-predicate)
+	  (lambda()
+	    (setq tabulated-list-format
+		  [("Package" 28 package-menu--name-predicate)
+		   ("Version" 18 nil)
+		   ("Status"  10 package-menu--status-predicate)
 		   ("Archive" 10 package-menu--archive-predicate)
-                  ("Description" 0 nil)])
-           (tabulated-list-init-header)))
-
-;;;; Emacs configuration
+		   ("Description" 0 nil)])
+	    (tabulated-list-init-header)))
 
 ;; Keep custom settings in separate file
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
 
-;;;; Parentheses-handling stuff
+;;;;
+;;;; Parentheses!
+;;;;
 
 ;; Highlight matching parenthesis whenever the point is over one.
 ;; (require 'paren)
@@ -127,12 +130,16 @@
 ;;(require 'autopair)
 ;;(autopair-global-mode) ;; to enable in all buffers
 
-;;;; smartparens for good handling of parentheses (https://github.com/Fuco1/smartparens/)
+;; smartparens for good handling of parentheses (https://github.com/Fuco1/smartparens/)
 (require 'smartparens-config)
 (smartparens-global-mode t)
 (show-smartparens-global-mode +1)
 
 (electric-indent-mode 1)
+
+;;;;
+;;;; Theme: solarized
+;;;;
 
 ;; Light on dark theme; soothing to my eyes
 ;; https://github.com/sellout/emacs-color-theme-solarized
@@ -140,6 +147,7 @@
 (set-frame-parameter nil 'background-mode 'dark)
 (enable-theme 'solarized)
 
+;;
 (setq font-lock-maximum-decoration t)
 
 ;; Sentences do not need double spaces to end.  (But they should.)
@@ -161,7 +169,7 @@
 ;; And set its colour
 ;; (set-face-background hl-line-face "#efefef")
 
-;; Calendar should start on Monday (not that I ever use the calendar)
+;; Calendar should start on Monday
 (setq calendar-week-start-day 1)
 
 ;; I don't want to type in "yes" or "no" - I want y/n.
@@ -204,12 +212,16 @@
 					(interactive)
 					(kill-line 0)))
 
+;;;;
+;;;; Save where I was and what I had open
+;;;;
+
 ;; Save point position between sessions
 (require 'saveplace)
 (setq-default save-place t)
 (setq save-place-file (expand-file-name ".places" user-emacs-directory))
 
-;; Save all of the buffers I'm working on, for next time
+;; Remember all the buffers I have open
 (desktop-save-mode 1)
 (setq history-length 50)
 (setq desktop-buffers-not-to-save
@@ -331,11 +343,14 @@
 (setq comint-move-point-for-output t)
 ;;(setq comint-prompt-read-only t)
 
-;; Fancy up the modeline!
+;;;;
+;;;; powerline: Fancy up the modeline!
+;;;;
+
 (require 'powerline)
 (powerline-default-theme)
-;; And solarize it
-;; Taken from a tip at https://github.com/jonathanchu/emacs-powerline/issues/11
+
+;; And solarize it (https://github.com/jonathanchu/emacs-powerline/issues/11)
 (setq powerline-color1 "#073642")
 (setq powerline-color2 "#002b36")
 (set-face-attribute 'mode-line nil
@@ -347,30 +362,25 @@
                     :box nil
 		    :inverse-video nil)
 
-;;;;; ido
-;;;; I'm trying out ido-mode
-;;;; See http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode/
-;;;;(setq ido-enable-flex-matching t)
-;;;;(setq ido-everywhere t)
-;;;;(ido-mode 1)
+;;;;
+;;;; ido
+;;;;
 
-;;;; helm
-(helm-mode 1)
+;; See http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode/
 
-;; In lists of buffers, show all filenames at full length
-(setq helm-buffer-max-length nil)
+;; Flexible matching on filenames ... don't need to be exact.
+(setq ido-enable-flex-matching t)
 
-;; Rebind some keystrokes so the helm version runs
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "M-y") 'helm-show-kill-ring)
-(global-set-key (kbd "C-x b") 'helm-mini)
+;; Go for it!  Everywhere!
+(setq ido-everywhere t)
 
-;; Helm looks a bit ugly with a solarized theme.
-;; http://stackoverflow.com/questions/24505084/helm-chooses-unreadable-highlight-colors-in-solarized-dark
-(set-face-attribute 'helm-selection nil :background "#441100") ;; The selected line in the helm buffer
-(set-face-attribute 'helm-source-header nil :background "#441100" :height 1.1) ;; The section headings
+;; Turn it all one
+(ido-mode 1)
+(ido-ubiquitous-mode 1)
 
-;;;; Other
+;; Shows options in a nice vertical list in the mini-buffer.  Easier to see.
+(require 'ido-vertical-mode)
+(ido-vertical-mode 1)
 
 ;; Don't ask for confirmation if I create a new buffer with C-x b)
 (setq ido-create-new-buffer 'always)
@@ -378,10 +388,13 @@
 ;; Customize the order of files shown in the minibuffer
 (setq ido-file-extensions-order '(".org" ".rb" ".ini"))
 
-;;;; Make ido use completion-ignored-extensions
-;;(setq ido-ignore-extensions t)
+;; Make ido use completion-ignored-extensions
+(setq ido-ignore-extensions t)
 
-;; launcher-map, to make it easier to run common things
+;;;;
+;;;; launcher-map, to make it easier to run common things
+;;;;
+
 ;; http://endlessparentheses.com/launcher-keymap-for-standalone-features.html
 (define-prefix-command 'launcher-map)
 (define-key ctl-x-map "l" 'launcher-map)
@@ -406,19 +419,19 @@
 
 ;; prettify-symbols-mode was introduced in 24.4
 (when (boundp 'global-prettify-symbols-mode)
- (add-hook 'clojure-mode-hook
-           (lambda ()
-             (push '("fn" . ?ƒ) prettify-symbols-alist)))
- (add-hook 'org-mode-hook
-           (lambda ()
-             (push '("<=" . ?≤) prettify-symbols-alist)
-             (push '(">=" . ?≥) prettify-symbols-alist)
+  (add-hook 'clojure-mode-hook
+	    (lambda ()
+	      (push '("fn" . ?ƒ) prettify-symbols-alist)))
+  (add-hook 'org-mode-hook
+	    (lambda ()
+	      (push '("<=" . ?≤) prettify-symbols-alist)
+	      (push '(">=" . ?≥) prettify-symbols-alist)
 	      ))
- (add-hook 'ess-mode-hook
-           (lambda ()
-             (push '("%>%" . ?|) prettify-symbols-alist)
+  (add-hook 'ess-mode-hook
+	    (lambda ()
+	      (push '("%>%" . ?|) prettify-symbols-alist)
 	      ))
- (global-prettify-symbols-mode +1))
+  (global-prettify-symbols-mode +1))
 
 ;; Sonic Pi (https://github.com/repl-electric/sonic-pi.el)
 (require 'sonic-pi)
