@@ -393,6 +393,9 @@
 ;; Visit recently closed buffers with C-x b (works because recentf is on)
 (setq ido-use-virtual-buffers t)
 
+;; Use cursor up and cursor down to move through the list
+(setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
+
 ;;;;
 ;;;; launcher-map, to make it easier to run common things
 ;;;;
@@ -411,6 +414,7 @@
 (define-key launcher-map "p" #'list-packages)
 (define-key launcher-map "s" #'eshell)
 (define-key launcher-map "t" #'proced) ; top
+(define-key launcher-map "u" #'magit-pull)
 
 ;; Perhaps try launching other programs?
 ;; http://endlessparentheses.com/keymap-for-launching-external-applications-and-websites.html
