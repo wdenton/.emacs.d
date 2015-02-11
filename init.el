@@ -1,13 +1,14 @@
-;;;
-;;; William Denton <wtd@pobox.com>
-;;;
+;;;;
+;;;; William Denton <wtd@pobox.com>
+;;;;
 
 ;; Look at
 ;; https://github.com/magnars/.emacs.d
 ;; https://gitcafe.com/Leaflet/.emacs.d/blob/master/sane-defaults.el
 
-;; Only on GitHub, possibly worth getting:
-;; google-maps.el http://julien.danjou.info/projects/emacs-packages#google-maps
+;;;;
+;;;; Starting up
+;;;;
 
 ;; Turn off mouse interface early in startup to avoid momentary display
 (if (fboundp 'menu-bar-mode) (menu-bar-mode 1))
@@ -17,9 +18,7 @@
 ;; No startup screen
 (setq inhibit-startup-message t)
 
-;; New in 24.4
-;;(toggle-frame-fullscreen) ; f11
-;;(toggle-frame-maximized); f10
+;; Full screen!
 (when (fboundp 'toggle-frame-maximized)
   (toggle-frame-maximized))
 
@@ -37,7 +36,7 @@
 (add-to-list 'load-path site-lisp-dir)
 
 ;; Run the server; now I can load any file into Emacs with 'emacsclient file'
-;; Works a treat with the It's All Text! extension in Firefox.
+;; Works a treat with the It's All Text! extension in Firefox, too.
 (server-mode)
 
 ;;;;
@@ -110,10 +109,6 @@
 		   ("Description" 0 nil)])
 	    (tabulated-list-init-header)))
 
-;; Keep custom settings in separate file
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-(load custom-file)
-
 ;;;;
 ;;;; Parentheses!
 ;;;;
@@ -146,6 +141,10 @@
 (load-theme 'solarized t)
 (set-frame-parameter nil 'background-mode 'dark)
 (enable-theme 'solarized)
+
+;; Keep custom settings in separate file
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(load custom-file)
 
 ;;
 (setq font-lock-maximum-decoration t)
