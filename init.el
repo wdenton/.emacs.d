@@ -311,7 +311,7 @@
 (put 'narrow-to-region 'disabled nil)
 
 ;;;; "All strings representing colors will be highlighted with the color they represent."
-;;(rainbow-mode t) ;; #0af
+(rainbow-mode t) ;; #0af
 
 ;; Include the size of the file in the mode line
 (size-indication-mode t)
@@ -390,6 +390,9 @@
 
 ;; Make ido use completion-ignored-extensions
 (setq ido-ignore-extensions t)
+
+;; Visit recently closed buffers with C-x b (works because recentf is on)
+(setq ido-use-virtual-buffers t)
 
 ;;;;
 ;;;; launcher-map, to make it easier to run common things
