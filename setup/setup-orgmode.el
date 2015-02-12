@@ -5,7 +5,8 @@
 ;; Common for all Org users
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cb" 'org-iswitchb)
+;; I never use this.  Trying the binding to do something different.
+;; (global-set-key "\C-cb" 'org-iswitchb)
 
 ;; Files to look in for agenda items
 (setq org-agenda-files (quote ("~/york/shared/ar/diary.org" "~/york/shared/projects.org")))

@@ -17,3 +17,6 @@ ac-comphist.dat
 bookmarks
 .org-id-locations
 custom.el
+.emacs.desktop
+.emacs.desktop.lock
+.smex-items

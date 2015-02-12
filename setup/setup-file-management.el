@@ -1,4 +1,4 @@
-;; Customizations for doing things with files, in dired and related modes
+;;;; Customizations for doing things with files, in dired and related modes
 
 ;; Keep a list of recently opened files
 ;; C-x f show the list, and it's easy to pick from it (or q to quit it)
@@ -11,7 +11,7 @@
 
 ;; Auto refresh dired, but be quiet about it
 (setq global-auto-revert-non-file-buffers t)
-; (setq auto-revert-verbose nil)
+					; (setq auto-revert-verbose nil)
 
 ;; With this, C-x C-j (M-x dired-jump) goes to the current file's position in a dired buffer
 ;; (http://emacsredux.com/blog/2013/09/24/dired-jump/)

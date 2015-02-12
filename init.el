@@ -86,6 +86,7 @@
 		    ruby-mode
 		    rvm
 		    smartparens
+		    smex
 		    sonic-pi
 		    undo-tree
 		    yaml-mode
@@ -186,7 +187,7 @@
   (split-window-vertically)
   (other-window 1 nil)
   (unless prefix
-   (switch-to-next-buffer)))
+    (switch-to-next-buffer)))
 (defun wtd/hsplit-last-buffer (prefix)
  "Split the window horizontally and display the previous buffer."
  (interactive "p")
@@ -253,9 +254,30 @@
 (require 'setup-useful-functions)
 (require 'setup-yaml)
 
+;;;;
+;;;; *scratch* buffer
+;;;;
+
 ;; The *scratch* buffer is lisp-interaction-mode by default, but I use Org more.
 (setq initial-major-mode 'org-mode)
 (setq initial-scratch-message "")
+
+;; C-c b to create a new scratch buffer.  Default to org-mode.
+;; From milkypostman.
+(defun create-scratch-buffer nil
+  "create a new scratch buffer to work in. (could be *scratch* - *scratchX*)"
+  (interactive)
+  (let ((n 0)
+	bufname)
+    (while (progn
+	     (setq bufname (concat "*scratch"
+				   (if (= n 0) "" (int-to-string n))
+				   "*"))
+	     (setq n (1+ n))
+	     (get-buffer bufname)))
+    (switch-to-buffer (get-buffer-create bufname))
+    (org-mode)))
+(global-set-key (kbd "C-c b") 'create-scratch-buffer)
 
 ;; expand-region (see https://github.com/magnars/expand-region.el)
 ;; C-= successively expands the region with great intelligence
@@ -395,6 +417,20 @@
 
 ;; Use cursor up and cursor down to move through the list
 (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
+
+;; Let ido guess when find-file-at-point is what I want to do---if the point is on a file path, then C-x C-f will open it.
+(setq ido-use-filename-at-point 'guess)
+
+;;;;
+;;;; Trying smex
+;;;;
+
+(setq smex-save-file (expand-file-name ".smex-items" user-emacs-directory))
+(smex-initialize)
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+
+
 
 ;;;;
 ;;;; launcher-map, to make it easier to run common things
