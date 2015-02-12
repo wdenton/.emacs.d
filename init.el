@@ -300,7 +300,8 @@
 (add-hook 'prog-mode-hook 'subword-mode)
 
 ;; Scroll by one line at a time.
-(setq scroll-step 1)
+;; https://www.gnu.org/software/emacs/manual/html_node/efaq/Scrolling-only-one-line.html
+(setq scroll-conservatively 10000)
 
 ;; Make searches case insensitive.
 (setq case-fold-search nil)
