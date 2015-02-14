@@ -265,6 +265,7 @@
 
 ;; C-c b to create a new scratch buffer.  Default to org-mode.
 ;; From milkypostman.
+;; See also https://emacs.stackexchange.com/a/81/145 and maybe try to glom the two together
 (defun create-scratch-buffer nil
   "create a new scratch buffer to work in. (could be *scratch* - *scratchX*)"
   (interactive)
@@ -279,6 +280,8 @@
     (switch-to-buffer (get-buffer-create bufname))
     (org-mode)))
 (global-set-key (kbd "C-c b") 'create-scratch-buffer)
+
+
 
 ;; expand-region (see https://github.com/magnars/expand-region.el)
 ;; C-= successively expands the region with great intelligence
