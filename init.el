@@ -71,6 +71,7 @@
 		    inf-ruby
 		    js-comint
 		    js2-mode
+		    json-mode
 		    magit
 		    markdown-mode
 		    multiple-cursors
