@@ -57,6 +57,7 @@
 		    auto-complete
 		    auto-complete-auctex
 		    color-theme-solarized
+		    diminish
 		    dired+
 		    ess
 		    ess-R-object-popup
@@ -370,8 +371,24 @@
 ;;(setq comint-prompt-read-only t)
 
 ;;;;
-;;;; powerline: Fancy up the modeline!
+;;;; The mode-line
 ;;;;
+
+;;;; Tidy up the mode-line.  I don't need to see everything in there.
+
+(require 'diminish)
+(eval-after-load "aggressive-indent" '(diminish 'aggressive-indent-mode "→ "))
+(eval-after-load "anzu"              '(diminish 'anzu-mode))
+(eval-after-load "auto-complete"     '(diminish 'auto-complete-mode "α"))
+(eval-after-load "flymake"           '(diminish 'flymake-mode))
+(eval-after-load "indent-guide"      '(diminish 'indent-guide-mode))
+(eval-after-load "org-indent"        '(diminish 'org-indent-mode "→"))
+(eval-after-load "ruby-block"        '(diminish 'ruby-block-mode))
+(eval-after-load "simple"            '(diminish 'visual-line-mode))
+(eval-after-load "smartparens"       '(diminish 'smartparens-mode "()"))
+(eval-after-load "subword"           '(diminish 'subword-mode))
+
+;;;; powerline: Fancy up the modeline!
 
 (require 'powerline)
 (powerline-default-theme)
@@ -479,6 +496,8 @@
 	      (push '("%>%" . ?|) prettify-symbols-alist)
 	      ))
   (global-prettify-symbols-mode +1))
+
+
 
 ;; Sonic Pi (https://github.com/repl-electric/sonic-pi.el)
 (require 'sonic-pi)
