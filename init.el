@@ -73,6 +73,7 @@
 		    js-comint
 		    js2-mode
 		    json-mode
+		    list-unicode-display
 		    magit
 		    markdown-mode
 		    multiple-cursors
