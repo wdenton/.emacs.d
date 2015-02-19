@@ -381,18 +381,18 @@
 ;;;; Tidy up the mode-line.  I don't need to see everything in there.
 
 (require 'diminish)
-(eval-after-load "aggressive-indent" '(diminish 'aggressive-indent-mode "→ "))
+(eval-after-load "aggressive-indent" '(diminish 'aggressive-indent-mode " →"))
 (eval-after-load "anzu"              '(diminish 'anzu-mode))
-(eval-after-load "auto-complete"     '(diminish 'auto-complete-mode "α"))
+(eval-after-load "auto-complete"     '(diminish 'auto-complete-mode " α"))
 (eval-after-load "flymake"           '(diminish 'flymake-mode))
 (eval-after-load "indent-guide"      '(diminish 'indent-guide-mode))
 (eval-after-load "magit"             '(diminish 'magit-auto-revert-mode))
-(eval-after-load "org-indent"        '(diminish 'org-indent-mode "→"))
+(eval-after-load "org-indent"        '(diminish 'org-indent-mode " →"))
 (eval-after-load "ruby-block"        '(diminish 'ruby-block-mode))
 (eval-after-load "simple"            '(diminish 'visual-line-mode))
-(eval-after-load "smartparens"       '(diminish 'smartparens-mode "()"))
+(eval-after-load "smartparens"       '(diminish 'smartparens-mode " ()"))
 (eval-after-load "subword"           '(diminish 'subword-mode))
-(eval-after-load "undo-tree"         '(diminish 'undo-tree-mode "τ"))
+(eval-after-load "undo-tree"         '(diminish 'undo-tree-mode " τ"))
 
 ;;;; powerline: Fancy up the modeline!
 
