@@ -351,7 +351,7 @@
 (setq tab-width 4)
 
 ;; Make the cursor a thin horizontal bar, not a block (but I still like it blinking)
-(setq-default cursor-type '(hbar . 3)) ;; Or 'bar or 'box
+(setq-default cursor-type 'bar) ;; Can be 'bar or 'box or '(hbar . 3) etc.
 
 ;; Use C-c left or C-c right to go back and forth in window configurations
 (winner-mode t)
@@ -388,6 +388,7 @@
 (eval-after-load "indent-guide"      '(diminish 'indent-guide-mode))
 (eval-after-load "magit"             '(diminish 'magit-auto-revert-mode))
 (eval-after-load "org-indent"        '(diminish 'org-indent-mode " →"))
+(eval-after-load "rubocop"           '(diminish 'rubocop-mode))
 (eval-after-load "ruby-block"        '(diminish 'ruby-block-mode))
 (eval-after-load "simple"            '(diminish 'visual-line-mode))
 (eval-after-load "smartparens"       '(diminish 'smartparens-mode " ()"))
