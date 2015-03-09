@@ -287,7 +287,9 @@
     (org-mode)))
 (global-set-key (kbd "C-c b") 'create-scratch-buffer)
 
-
+;;;
+;;; One-line customizations
+;;;
 
 ;; expand-region (see https://github.com/magnars/expand-region.el)
 ;; C-= successively expands the region with great intelligence
@@ -378,6 +380,10 @@
 ;; undo-tree-mode (trying out)
 (global-undo-tree-mode)
 
+;; aggressive-indent mode is aggressive indeed, but very handy.
+(global-aggressive-indent-mode 1)
+(add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+
 ;;;;
 ;;;; The mode-line
 ;;;;
@@ -455,15 +461,13 @@
 (setq ido-use-filename-at-point 'guess)
 
 ;;;;
-;;;; Trying smex
+;;;; Smex works nicely with ido.
 ;;;;
 
 (setq smex-save-file (expand-file-name ".smex-items" user-emacs-directory))
 (smex-initialize)
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
-
-
 
 ;;;;
 ;;;; launcher-map, to make it easier to run common things
@@ -476,6 +480,7 @@
 ;;(define-key launcher-map "d" #'ediff-buffers)
 ;;(define-key launcher-map "f" #'find-dired)
 (define-key launcher-map "g" #'magit-status)
+(define-key launcher-map "l" #'goto-line)
 ;;(define-key launcher-map "G" #'rgrep)
 ;;(define-key launcher-map "h" #'man) ; Help
 ;;(define-key launcher-map "i" #'package-install-from-buffer)
@@ -487,10 +492,6 @@
 
 ;; Perhaps try launching other programs?
 ;; http://endlessparentheses.com/keymap-for-launching-external-applications-and-websites.html
-
-;; aggressive-indent mode is aggressive indeed, but very handy.
-(global-aggressive-indent-mode 1)
-(add-to-list 'aggressive-indent-excluded-modes 'html-mode)
 
 ;; prettify-symbols-mode was introduced in 24.4
 (when (boundp 'global-prettify-symbols-mode)
@@ -508,9 +509,10 @@
 	      ))
   (global-prettify-symbols-mode +1))
 
+;;;
+;;; Sonic Pi (https://github.com/repl-electric/sonic-pi.el)
+;;;
 
-
-;; Sonic Pi (https://github.com/repl-electric/sonic-pi.el)
 (require 'sonic-pi)
 (add-hook 'sonic-pi-mode-hook
           (lambda ()
