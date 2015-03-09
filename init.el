@@ -35,6 +35,10 @@
 ;; (add-to-list 'load-path user-emacs-directory)
 (add-to-list 'load-path site-lisp-dir)
 
+;; Try using Org's current development branch, pulled down with git (http://orgmode.org/org.html#Installation)
+(add-to-list 'load-path "/usr/local/src/org-mode/lisp")
+;;(add-to-list 'load-path "/usr/local/src/org-mode/contrib/lisp" t)
+
 ;; Run the server; now I can load any file into Emacs with 'emacsclient file'
 ;; Works a treat with the It's All Text! extension in Firefox, too.
 (server-mode)
@@ -77,7 +81,7 @@
 		    magit
 		    markdown-mode
 		    multiple-cursors
-		    org
+		    ;; org
 		    org-bullets
 		    ;; org-reveal ;; install by hand https://github.com/yjwen/org-reveal/
 		    pcache
