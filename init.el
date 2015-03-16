@@ -384,6 +384,10 @@
 (global-aggressive-indent-mode 1)
 (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
 
+;; Let me upcase or downcase a region, which is disabled by default.
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+
 ;;;;
 ;;;; The mode-line
 ;;;;
