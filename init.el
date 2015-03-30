@@ -464,6 +464,11 @@
 ;; Let ido guess when find-file-at-point is what I want to do---if the point is on a file path, then C-x C-f will open it.
 (setq ido-use-filename-at-point 'guess)
 
+;; Stop ido from switching into other directories when no match in current one.
+;; (Default value is 0.7 (seconds); increase it to 5 or something if I want to keep
+;; it but have it less intrusive.)
+(setq ido-auto-merge-work-directories-length -1)
+
 ;;;;
 ;;;; Smex works nicely with ido.
 ;;;;
