@@ -35,11 +35,13 @@
 ;; (add-to-list 'load-path user-emacs-directory)
 (add-to-list 'load-path site-lisp-dir)
 
-;; Try using Org's current development branch, pulled down with git (http://orgmode.org/org.html#Installation)
+;; Try using Org's current development branch, pulled down with git
+;; (http://orgmode.org/org.html#Installation)
 (add-to-list 'load-path "/usr/local/src/org-mode/lisp")
 ;;(add-to-list 'load-path "/usr/local/src/org-mode/contrib/lisp" t)
 
-;; Run the server; now I can load any file into Emacs with 'emacsclient file'
+;; Run the server; now I can load any file into Emacs with
+;; 'emacsclient file'
 ;; Works a treat with the It's All Text! extension in Firefox, too.
 (server-mode)
 
@@ -133,7 +135,8 @@
 ;;(require 'autopair)
 ;;(autopair-global-mode) ;; to enable in all buffers
 
-;; smartparens for good handling of parentheses (https://github.com/Fuco1/smartparens/)
+;; smartparens for good handling of parentheses
+;; (https://github.com/Fuco1/smartparens/)
 (require 'smartparens-config)
 (smartparens-global-mode t)
 (show-smartparens-global-mode +1)
@@ -182,7 +185,8 @@
 ;; I don't want to type in "yes" or "no" - I want y/n.
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;;;; Split window horizontally, not vertically (I prefer side by side with the newer wider screens)
+;;;; Split window horizontally, not vertically (I prefer side by side
+;;;; with the newer wider screens)
 (setq split-height-threshold nil)
 (setq split-width-threshold 0)
 
@@ -196,11 +200,11 @@
   (unless prefix
     (switch-to-next-buffer)))
 (defun wtd/hsplit-last-buffer (prefix)
- "Split the window horizontally and display the previous buffer."
- (interactive "p")
- (split-window-horizontally)
- (other-window 1 nil)
- (unless prefix (switch-to-next-buffer)))
+  "Split the window horizontally and display the previous buffer."
+  (interactive "p")
+  (split-window-horizontally)
+  (other-window 1 nil)
+  (unless prefix (switch-to-next-buffer)))
 (global-set-key (kbd "C-x 2") 'wtd/vsplit-last-buffer)
 (global-set-key (kbd "C-x 3") 'wtd/hsplit-last-buffer)
 
@@ -213,7 +217,7 @@
 (setq x-select-enable-clipboard t)
 
 ;; M-backspace is backward-word-kill, and C-backspace is bound to that
-;; by default.  Change that to backword-kill-line so it deletes from
+;; by default. Change that to backword-kill-line so it deletes from
 ;; the point to the beginning of the line.
 (global-set-key (kbd "C-<backspace>") (lambda ()
 					(interactive)
@@ -299,7 +303,7 @@
 ;; "The command other-window is normally bound to C-x o but I find
 ;; that way too cumbersome for what is such a frequent operation. M-o
 ;; is normally bound to some rich text formatting nobody cares about."
-;; --- http://www.masteringemacs.org/articles/2014/02/28/my-emacs-keybindings/
+;; http://www.masteringemacs.org/articles/2014/02/28/my-emacs-keybindings/
 (global-set-key (kbd "M-o") 'other-window)
 
 ;; Highlight marked text - only works under X.
@@ -344,7 +348,8 @@
 ;; I'm old enough to be able to use narrow-to-region
 (put 'narrow-to-region 'disabled nil)
 
-;;;; "All strings representing colors will be highlighted with the color they represent."
+;;;; "All strings representing colors will be highlighted with the
+;;;; color they represent."
 (rainbow-mode t) ;; #0af
 
 ;; Include the size of the file in the mode line
@@ -356,13 +361,16 @@
 ;; 8 is wrong
 (setq tab-width 4)
 
-;; Make the cursor a thin horizontal bar, not a block (but I still like it blinking)
+;; Make the cursor a thin horizontal bar, not a block (but I still
+;; like it blinking)
 (setq-default cursor-type 'bar) ;; Can be 'bar or 'box or '(hbar . 3) etc.
 
-;; Use C-c left or C-c right to go back and forth in window configurations
+;; Use C-c left or C-c right to go back and forth in window
+;; configurations
 (winner-mode t)
 
-;; anzu-mode provides a "minor mode which display current point and total matched in various search mode."
+;; anzu-mode provides a "minor mode which display current point and
+;; total matched in various search mode."
 ;; https://github.com/syohex/emacs-anzu
 (global-anzu-mode t)
 
@@ -370,7 +378,8 @@
 (setq max-specpdl-size 50000)
 (setq max-lisp-eval-depth 25000)
 
-;; Settings for command interpreter modes, which I use mostly for R and Ruby.
+;; Settings for command interpreter modes, which I use mostly for R
+;; and Ruby.
 (setq ansi-color-for-comint-mode 'filter)
 (setq comint-scroll-to-bottom-on-input t)
 (setq comint-scroll-to-bottom-on-output t)
@@ -442,7 +451,8 @@
 (ido-mode 1)
 (ido-ubiquitous-mode 1)
 
-;; Shows options in a nice vertical list in the mini-buffer.  Easier to see.
+;; Shows options in a nice vertical list in the mini-buffer. Easier to
+;; see.
 (require 'ido-vertical-mode)
 (ido-vertical-mode 1)
 
@@ -455,18 +465,19 @@
 ;; Make ido use completion-ignored-extensions
 (setq ido-ignore-extensions t)
 
-;; Visit recently closed buffers with C-x b (works because recentf is on)
+;; Visit recently closed buffers with C-x b (works because recentf is
+;; on)
 (setq ido-use-virtual-buffers t)
 
 ;; Use cursor up and cursor down to move through the list
 (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
 
-;; Let ido guess when find-file-at-point is what I want to do---if the point is on a file path, then C-x C-f will open it.
+;; Let ido guess when find-file-at-point is what I want to do---if the
+;; point is on a file path, then C-x C-f will open it.
 (setq ido-use-filename-at-point 'guess)
 
-;; Stop ido from switching into other directories when no match in current one.
-;; (Default value is 0.7 (seconds); increase it to 5 or something if I want to keep
-;; it but have it less intrusive.)
+;; Stop ido from switching into other directories when no match in
+;; current one.
 (setq ido-auto-merge-work-directories-length -1)
 
 ;;;;
