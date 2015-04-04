@@ -1,4 +1,6 @@
-;; Configuration for Org mode (http://orgmode.org/)
+;;;;
+;;;; Configuration for Org mode (http://orgmode.org/)
+;;;;
 
 ;; Try this: https://github.com/abo-abo/org-download/blob/master/org-download.el
 
@@ -19,45 +21,18 @@
 
 ;; org-entities displays \alpha etc. as Unicode characters.
 (setq org-pretty-entities t)
-;; In 24.4 I can generalize this with prettify-symbols-mode (http://ergoemacs.org/emacs/emacs_pretty_lambda.html)
-
-;; Doesn't handle em and en dashes, though, so let's make that work.
-; (setq org-entities-user nil)
-; (add-to-list 'org-entities-user '("my-em-mdash" "---" nil "&mdash;" "--" "--" "—"))
-; Doesn't work ... and anyway on my screen I'd rather see --- than —
 
 ;; Hide the /italics/ and *bold* markers
 (setq org-hide-emphasis-markers t)
 
 ;; Change the sizes of the titles.
 (custom-set-faces
-  '(org-level-1 ((t (:inherit outline-1 :height 1.1))))
-  '(org-level-2 ((t (:inherit outline-2 :height 1.0))))
-  '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
-  '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
-  '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
-)
-
-;; I'm trying out variable pitch (proportional) fonts in Org, but I want fixed pitch (monospaced) in source code and tables.
-;; Taken from http://yoo2080.wordpress.com/2013/05/30/monospace-font-in-tables-and-source-code-blocks-in-org-mode-proportional-font-in-other-parts/
-;; See also http://stackoverflow.com/questions/3758139/variable-pitch-for-org-mode-fixed-pitch-for-tables
-;; (defun my-adjoin-to-list-or-symbol (element list-or-symbol)
-;;   (let ((list (if (not (listp list-or-symbol))
-;;                   (list list-or-symbol)
-;;                 list-or-symbol)))
-;;     (require 'cl-lib)
-;;     (cl-adjoin element list)))
-
-;; (eval-after-load "org"
-;;   '(mapc
-;;     (lambda (face)
-;;       (set-face-attribute
-;;        face nil
-;;        :inherit
-;;        (my-adjoin-to-list-or-symbol
-;;         'fixed-pitch
-;;         (face-attribute face :inherit))))
-;;     (list 'org-code 'org-block 'org-table 'org-block-background)))
+ '(org-level-1 ((t (:inherit outline-1 :height 1.0))))
+ '(org-level-2 ((t (:inherit outline-2 :height 1.0))))
+ '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
+ '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
+ '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
+ )
 
 ;; Better colouring of TODO keywords
 (setq org-todo-keyword-faces
@@ -81,7 +56,7 @@
                    (list state 'note 'time))
                  (apply 'append org-todo-sets))))
     (call-interactively 'org-todo)))
-; (define-key org-mode-map (kbd "C-c C-S-t") 'org-todo-force-notes)
+;; (define-key org-mode-map (kbd "C-c C-S-t") 'org-todo-force-notes)
 
 ;; Hit return on a link to open it in a browser
 (setq org-return-follows-link t)
@@ -93,7 +68,7 @@
 ;; Seen at http://schenizzle.wordpress.com/2014/03/26/org-mode-ctrl-a-ctrl-e/
 (setq org-special-ctrl-a/e t)
 
-;; Something funny with electric-indent-mode in Emacs 25 and indenting stopped in Org.
+;; Visually indent everything nicely, but leave the raw file left-aligned
 (setq org-startup-indented t)
 
 ;; Fontify Babel blocks nicely
@@ -102,8 +77,8 @@
 ;; Allow a) b) c) lists
 (setq org-list-allow-alphabetical t)
 
-;; Let's try speed commands.
-;; "Single keys can be made to execute commands when the cursor is at the beginning of a headline, i.e., before the first star."
+;; "Single keys can be made to execute commands when the cursor is at
+;; the beginning of a headline, i.e., before the first star."
 (setq org-use-speed-commands t)
 
 ;; Embed an image with [[file:foo.png]] and then C-c C-x C-v to view
@@ -142,6 +117,13 @@
 	)
       )
 
+;; Hooks for prettify-symbols-mode
+(add-hook 'org-mode-hook
+	  (lambda ()
+	    (push '("<=" . ?≤) prettify-symbols-alist)
+	    (push '(">=" . ?≥) prettify-symbols-alist)
+	    ))
+
 ;; Capturing
 (setq org-default-notes-file "~/org/capture.org") ; Change this when I use it for real
 (define-key global-map "\C-cc" 'org-capture)
@@ -160,8 +142,8 @@
 
 ;; org-protocol lets me send URLs from Firefox (and more, but that's all I'm doing)
 ;; See https://stackoverflow.com/questions/7464951/how-to-make-org-protocol-work
-					; (require 'org-protocol)
-					; (setq org-protocol-default-template-key "n")
+;; (require 'org-protocol)
+;; '(setq org-protocol-default-template-key "n")
 
 ;; Active Babel languages
 ;; See http://orgmode.org/org.html#Languages
@@ -189,17 +171,6 @@
 
 ;; Make ispell skip source blocks
 (add-to-list 'ispell-skip-region-alist '("#\\+begin_src". "#\\+end_src"))
-
-;; Org can read RSS feeds (http://orgmode.org/org.html#RSS-Feeds)
-;; "You could use this to make a task out of each new podcast in a
-;; podcast feed. Or you could use a phone-based note-creating service
-;; on the web to import tasks into Org."
-;; I don't have any use for this right now, but perhaps some day.
-(setq org-feed-alist
-      '(
-	("Miskatonic" "http://www.miskatonic.org/feed" "~/org/feeds.org" "Miskatonic")
-	("Mastering Emacs" "http://www.masteringemacs.org/feed" "~/org/feeds.org" "Mastering Emacs")
-	))
 
 ; Integrate RefTeX
 ; From http://orgmode.org/worg/org-faq.html#using-reftex-in-org-mode

@@ -251,20 +251,6 @@
 		   'nxml-mode))
 (fset 'html-mode 'nxml-mode)
 
-(require 'setup-autocomplete)
-(require 'setup-eshell)
-(require 'setup-ess)
-(require 'setup-file-management)
-(require 'setup-ibuffer)
-;;(require 'setup-javascript)
-(require 'setup-jekyll)
-(require 'setup-latex)
-(require 'setup-markdown)
-(require 'setup-orgmode)
-(require 'setup-ruby)
-(require 'setup-useful-functions)
-(require 'setup-yaml)
-
 ;;;;
 ;;;; *scratch* buffer
 ;;;;
@@ -397,6 +383,9 @@
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
+;; prettify-symbols-mode was introduced in 24.4
+(global-prettify-symbols-mode +1)
+
 ;;;;
 ;;;; The mode-line
 ;;;;
@@ -513,22 +502,6 @@
 ;; Perhaps try launching other programs?
 ;; http://endlessparentheses.com/keymap-for-launching-external-applications-and-websites.html
 
-;; prettify-symbols-mode was introduced in 24.4
-(when (boundp 'global-prettify-symbols-mode)
-  (add-hook 'clojure-mode-hook
-	    (lambda ()
-	      (push '("fn" . ?ƒ) prettify-symbols-alist)))
-  (add-hook 'org-mode-hook
-	    (lambda ()
-	      (push '("<=" . ?≤) prettify-symbols-alist)
-	      (push '(">=" . ?≥) prettify-symbols-alist)
-	      ))
-  (add-hook 'ess-mode-hook
-	    (lambda ()
-	      (push '("%>%" . ?|) prettify-symbols-alist)
-	      ))
-  (global-prettify-symbols-mode +1))
-
 ;;;
 ;;; Sonic Pi (https://github.com/repl-electric/sonic-pi.el)
 ;;;
@@ -539,3 +512,21 @@
             ;; This setq can go here instead if you wish
 	    (setq sonic-pi-path "/usr/local/src/sonic-pi/")
             (define-key ruby-mode-map "\C-c\C-c" 'sonic-pi-send-buffer)))
+
+;;;;
+;;;; Mode-specific customizations
+;;;;
+
+(require 'setup-autocomplete)
+(require 'setup-eshell)
+(require 'setup-ess)
+(require 'setup-file-management)
+(require 'setup-ibuffer)
+;;(require 'setup-javascript)
+(require 'setup-jekyll)
+(require 'setup-latex)
+(require 'setup-markdown)
+(require 'setup-orgmode)
+(require 'setup-ruby)
+(require 'setup-useful-functions)
+(require 'setup-yaml)

@@ -28,6 +28,11 @@
 (setq inferior-ess-primary-prompt "ℝ> ")
 (setq inferior-S-prompt "[]a-zA-Z0-9.[]*\\(?:[>+.] \\)*ℝ+> ")
 
+;; Display %>% as |, thanks to prettify-symbols-mode
+(add-hook 'inferior-ess-mode-hook
+	  (lambda ()
+	    (push '("%>%" . ?|) prettify-symbols-alist)))
+
 ;;
 (setq ess-local-process-name "R")
 
