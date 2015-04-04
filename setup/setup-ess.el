@@ -23,6 +23,12 @@
 ;; indent-guide ... very nice
 (add-hook 'ess-mode-hook 'indent-guide-mode)
 
+;; Fancy up the prompt (see also ~/.Rprofile)
+;; http://www.wisdomandwonder.com/article/9687/i-wasted-time-with-a-custom-prompt-for-r-with-ess
+(setq inferior-ess-primary-prompt "ℝ> ")
+(setq inferior-S-prompt "[]a-zA-Z0-9.[]*\\(?:[>+.] \\)*ℝ+> ")
+
+;;
 (setq ess-local-process-name "R")
 
 ;; I use a lot of snake_case variable names, so disable _ turning into <-
