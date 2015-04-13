@@ -498,6 +498,7 @@
 (define-key launcher-map "s" #'eshell)
 (define-key launcher-map "t" #'proced) ; top
 (define-key launcher-map "u" #'magit-pull)
+(define-key launcher-map "w" #'count-words-region)
 
 ;; Perhaps try launching other programs?
 ;; http://endlessparentheses.com/keymap-for-launching-external-applications-and-websites.html
