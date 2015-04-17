@@ -77,6 +77,9 @@
 ;; Allow a) b) c) lists
 (setq org-list-allow-alphabetical t)
 
+;; Right-align tags to an indent from the right margin
+(setq org-tags-column (- 50 (window-width)))
+
 ;; "Single keys can be made to execute commands when the cursor is at
 ;; the beginning of a headline, i.e., before the first star."
 (setq org-use-speed-commands t)
