@@ -386,6 +386,9 @@
 ;; prettify-symbols-mode was introduced in 24.4
 (global-prettify-symbols-mode +1)
 
+;; Stop magit from nagging me about a change
+(setq magit-last-seen-setup-instructions "1.4.0")
+
 ;;;;
 ;;;; The mode-line
 ;;;;
