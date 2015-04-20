@@ -17,7 +17,7 @@
 ;; Possibilities include:  ◉ ○ ✸ ✿ ♥ ● ◇ ✚ ✜ ☯ ◆ ♠ ♣ ♦ ☢ ❀ ◆ ◖ ▶ ► • ★ ▸ or any other amusing Unicode character
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-(setq org-bullets-bullet-list '("◉" "►" "•" "•")) ; Default is '("◉" "○" "✸" "✿")
+(setq org-bullets-bullet-list '("◉" "○ ""►" "•" "•")) ; Default is '("◉" "○" "✸" "✿")
 
 ;; org-entities displays \alpha etc. as Unicode characters.
 (setq org-pretty-entities t)
