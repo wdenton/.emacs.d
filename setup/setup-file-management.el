@@ -1,4 +1,6 @@
+;;;;
 ;;;; Customizations for doing things with files, in dired and related modes
+;;;;
 
 ;; Keep a list of recently opened files
 ;; C-x f show the list, and it's easy to pick from it (or q to quit it)
@@ -11,21 +13,33 @@
 
 ;; Auto refresh dired, but be quiet about it
 (setq global-auto-revert-non-file-buffers t)
-					; (setq auto-revert-verbose nil)
+;; (setq auto-revert-verbose nil)
+
+;; Tell dired how to handle, by default, some filetypes
+(setq dired-guess-shell-alist-user
+      '(("\\.pdf\\'" "evince")
+	("\\.tex\\'" "pdflatex")
+	("\\.ods\\'\\|\\.xlsx?\\'\\|\\.docx?\\'\\|\\.csv\\'" "libreoffice")))
 
 ;; With this, C-x C-j (M-x dired-jump) goes to the current file's position in a dired buffer
 ;; (http://emacsredux.com/blog/2013/09/24/dired-jump/)
 (require 'dired-x)
 
-;; Emacs 24.4 defaults to an ls -1 view, not ls -l, but I want details.
-;; This needs to be specified before requiring dired+ (see http://irreal.org/blog/?p=3341)
+;; Emacs 24.4 defaults to an ls -1 view, not ls -l, but I want
+;; details. This needs to be specified before requiring dired+ (see
+;; http://irreal.org/blog/?p=3341)
 (setq diredp-hide-details-initially-flag nil)
+
+;; "In Dired, visit this file or directory instead of the Dired buffer."
+;; Prevents buffers littering up things when moving around in Dired
+(put 'dired-find-alternate-file 'disabled nil)
 
 ;; More extra stuff
 (require 'dired+)
 
-;; dired+ has got some crazy colours by default. This turns that off, but leaves the settings at maximum (the default)
-;; for everything else
+;; dired+ has got some crazy colours by default. This turns that off,
+;; but leaves the settings at maximum (the default) for everything
+;; else
 (setq font-lock-maximum-decoration (quote ((dired-mode) (t . t))))
 
 ;; "Don't show uninteresting files in Emacs completion window"
