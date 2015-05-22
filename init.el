@@ -411,21 +411,11 @@
 (eval-after-load "undo-tree"         '(diminish 'undo-tree-mode " τ"))
 
 ;;;; powerline: Fancy up the modeline!
+;; https://github.com/jonathanchu/emacs-powerline
+;; Sticking with the default seems to be nice enough for me.
 
 (require 'powerline)
 (powerline-default-theme)
-
-;; And solarize it (https://github.com/jonathanchu/emacs-powerline/issues/11)
-(setq powerline-color1 "#073642")
-(setq powerline-color2 "#002b36")
-(set-face-attribute 'mode-line nil
-                    :foreground "#fdf6e3"
-                    :background "#2aa198"
-                    :box nil
-		    :inverse-video nil)
-(set-face-attribute 'mode-line-inactive nil
-                    :box nil
-		    :inverse-video nil)
 
 ;;;;
 ;;;; ido
@@ -534,3 +524,17 @@
 (require 'setup-ruby)
 (require 'setup-useful-functions)
 (require 'setup-yaml)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (powerline zotelo yaml-mode undo-tree sonic-pi smex smartparens rvm ruby-electric ruby-block rubocop rich-minority rainbow-mode pkg-info org-bullets multiple-cursors markdown-mode magit list-unicode-display json-mode js2-mode js-comint indent-guide ido-vertical-mode ido-ubiquitous ibuffer-vc gist flymake-ruby expand-region ess-R-object-popup dired+ diminish color-theme-solarized auto-complete-auctex auctex async anzu aggressive-indent ac-inf-ruby))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
