@@ -106,8 +106,13 @@
 ;; Exporting: I will see these export options after C-c C-e
 (setq org-export-backends (quote (beamer html latex md odt reveal)))
 
+;; In 25 Org started opening exported PDFs in docview, but I prefer
+;; seeing them externally.
+(delete '("\\.pdf\\'" . default) org-file-apps)
+(add-to-list 'org-file-apps '("\\.pdf\\'" . "evince %s"))
+
 ;; I may need to customize org-html-doctype (default is "xhtml-strict")
-; (setq org-html-doctype "html5")
+;; (setq org-html-doctype "html5")
 
 ;; Turn ' and " into ‘posh’ “quotes”
 (setq org-export-with-smart-quotes t)
