@@ -483,11 +483,7 @@
 ;;(define-key launcher-map "f" #'find-dired)
 (define-key launcher-map "g" #'magit-status)
 (define-key launcher-map "l" #'goto-line)
-;;(define-key launcher-map "G" #'rgrep)
-;;(define-key launcher-map "h" #'man) ; Help
-;;(define-key launcher-map "i" #'package-install-from-buffer)
-;;(define-key launcher-map "n" #'nethack)
-(define-key launcher-map "p" #'list-packages)
+(define-key launcher-map "m" #'mc/edit-lines)
 (define-key launcher-map "s" #'eshell)
 (define-key launcher-map "t" #'proced) ; top
 (define-key launcher-map "u" #'magit-pull)
