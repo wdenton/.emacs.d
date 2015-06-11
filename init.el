@@ -74,6 +74,7 @@
 		    ibuffer-vc
 		    ido-ubiquitous
 		    ido-vertical-mode
+		    imenu-anywhere
 		    indent-guide
 		    inf-ruby
 		    js-comint
@@ -389,6 +390,10 @@
 ;; Stop magit from nagging me about a change
 (setq magit-last-seen-setup-instructions "1.4.0")
 
+;; imenu
+(global-set-key (kbd "M-i") 'imenu)
+(global-set-key (kbd "C-.") 'imenu-anywhere)
+
 ;;;;
 ;;;; The mode-line
 ;;;;
@@ -484,6 +489,7 @@
 (define-key launcher-map "g" #'magit-status)
 (define-key launcher-map "l" #'goto-line)
 (define-key launcher-map "m" #'mc/edit-lines)
+(define-key launcher-map "p" #'list-packages)
 (define-key launcher-map "s" #'eshell)
 (define-key launcher-map "t" #'proced) ; top
 (define-key launcher-map "u" #'magit-pull)
