@@ -403,6 +403,18 @@
 (global-set-key (kbd "M-i") 'imenu)
 (global-set-key (kbd "C-.") 'imenu-anywhere)
 
+;; Disable byte-compile warnings, which I don't care about.
+;; http://tsengf.blogspot.ca/2011/06/disable-byte-compile-warning-in-emacs.html
+(setq byte-compile-warnings '(not nresolved
+                                  free-vars
+                                  callargs
+                                  redefine
+                                  obsolete
+                                  noruntime
+                                  cl-functions
+                                  interactive-only
+                                  ))
+
 ;;;;
 ;;;; The mode-line
 ;;;;
