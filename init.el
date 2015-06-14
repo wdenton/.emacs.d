@@ -186,6 +186,15 @@
 ;; I don't want to type in "yes" or "no" - I want y/n.
 (fset 'yes-or-no-p 'y-or-n-p)
 
+;; Lower the time to echo keystrokes
+(setq echo-keystrokes 0.1)
+
+;; Never use an X dialog box; use the minibuffer instead
+(setq use-dialog-box nil)
+
+;; "Insert a newline, then indent according to major mode."
+(global-set-key (kbd "RET") 'newline-and-indent)
+
 ;;;; Split window horizontally, not vertically (I prefer side by side
 ;;;; with the newer wider screens)
 (setq split-height-threshold nil)

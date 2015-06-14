@@ -12,4 +12,7 @@
 ;; Save abbrevs when files are saved
 (setq save-abbrevs t)
 
+;; Don't ask whether to save abbrevs when quitting Emacs
+(setq save-abbrevs nil)
+
 (provide 'setup-expansions)
