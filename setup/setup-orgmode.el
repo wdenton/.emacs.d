@@ -11,7 +11,7 @@
 ;; (global-set-key "\C-cb" 'org-iswitchb)
 
 ;; Files to look in for agenda items
-(setq org-agenda-files (quote ("~/york/shared/ar/diary.org" "~/york/shared/projects.org")))
+(setq org-agenda-files (quote ("~/york/shared/ar/ar-diary.org" "~/york/shared/projects/projects.org")))
 
 ;; Nicer bullets!
 ;; Possibilities include:  ◉ ○ ✸ ✿ ♥ ● ◇ ✚ ✜ ☯ ◆ ♠ ♣ ♦ ☢ ❀ ◆ ◖ ▶ ► • ★ ▸ or any other amusing Unicode character
@@ -116,6 +116,13 @@
 
 ;; Turn ' and " into ‘posh’ “quotes”
 (setq org-export-with-smart-quotes t)
+
+;; Footnotes. I want them defined nearby, not at the bottom of the
+;; document, when I use C-c C-x f.  And I don't want them resorted
+;; or adjusted without my saying so.
+;; Can override with #+STARTUP options.
+; (setq org-footnote-define-inline 'fnlocal)
+(setq org-footnote-auto-adjust 'noadjust)
 
 ;; Define my own link abbreviations
 (setq org-link-abbrev-alist
