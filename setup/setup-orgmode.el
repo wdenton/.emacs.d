@@ -120,9 +120,8 @@
 ;; Footnotes. I want them defined nearby, not at the bottom of the
 ;; document, when I use C-c C-x f.  And I don't want them resorted
 ;; or adjusted without my saying so.
-;; Can override with #+STARTUP options.
-; (setq org-footnote-define-inline 'fnlocal)
-(setq org-footnote-auto-adjust 'noadjust)
+(setq org-footnote-section nil)
+(setq org-footnote-auto-adjust nil)
 
 ;; Define my own link abbreviations
 (setq org-link-abbrev-alist
