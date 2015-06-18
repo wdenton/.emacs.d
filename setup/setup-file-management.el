@@ -37,6 +37,9 @@
 ;; More extra stuff
 (require 'dired+)
 
+;; Make it easier to move and copy files across windows
+(setq dired-dwim-target t)
+
 ;; dired+ has got some crazy colours by default. This turns that off,
 ;; but leaves the settings at maximum (the default) for everything
 ;; else
