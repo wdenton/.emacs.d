@@ -22,11 +22,13 @@
 (when (fboundp 'toggle-frame-maximized)
   (toggle-frame-maximized))
 
-;; Load paths and where to find things.
+;;;;
+;;;; Load paths and where to find things
+;;;;
 
 ;; user-emacs-directory is ~/.emacs.d/
-;; I keep my local things in ~/.emacs.d/site-lisp/
-;; and I want everything in there available, including inside subdirectories
+;; I keep my local things in ~/.emacs.d/site-lisp/ and I want
+;; everything in there available, including inside subdirectories
 (setq site-lisp-dir (expand-file-name "site-lisp" user-emacs-directory))
 (let ((default-directory site-lisp-dir)) (normal-top-level-add-subdirs-to-load-path))
 
@@ -35,10 +37,9 @@
 ;; (add-to-list 'load-path user-emacs-directory)
 (add-to-list 'load-path site-lisp-dir)
 
-;; Try using Org's current development branch, pulled down with git
+;; Use Org's current development branch, pulled down with git
 ;; (http://orgmode.org/org.html#Installation)
 (add-to-list 'load-path "/usr/local/src/org-mode/lisp")
-;;(add-to-list 'load-path "/usr/local/src/org-mode/contrib/lisp" t)
 
 ;; Run the server; now I can load any file into Emacs with
 ;; 'emacsclient file'
@@ -51,8 +52,12 @@
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-;; (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (package-initialize)
+
+(setq package-archive-priorities
+      '(
+	("melpa" . 20)
+        ("gnu" . 10)))
 
 ;; Make sure that all of the packages I want are installed. If not, install them.
 (setq my-packages '(ac-inf-ruby
