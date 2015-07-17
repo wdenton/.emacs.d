@@ -547,7 +547,7 @@
 (require 'setup-expansions)
 (require 'setup-file-management)
 (require 'setup-ibuffer)
-;;(require 'setup-javascript)
+;; (require 'setup-javascript)
 (require 'setup-jekyll)
 (require 'setup-latex)
 (require 'setup-markdown)
