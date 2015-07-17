@@ -197,11 +197,21 @@
 ;; Never use an X dialog box; use the minibuffer instead
 (setq use-dialog-box nil)
 
-;; "Insert a newline, then indent according to major mode."
-(global-set-key (kbd "RET") 'newline-and-indent)
+;; S-<return> to insert line, indent it, and move the cursor there.
+;; http://emacsredux.com/blog/2013/03/26/smarter-open-line/
+(defun wtd/smart-open-line ()
+  "Insert an empty line after the current line.
+Position the cursor at its beginning, according to the current mode."
+  (interactive)
+  (move-end-of-line nil)
+  (newline-and-indent))
+(global-set-key (kbd "s-<return>") 'wtd/smart-open-line)
 
-;;;; Split window horizontally, not vertically (I prefer side by side
-;;;; with the newer wider screens)
+;; Break out of default (especially Org) indentation, and just start a new line.
+(global-set-key (kbd "C-M-<return>") 'electric-indent-just-newline)
+
+;; Split window horizontally, not vertically (I prefer side by side
+;; with the newer wider screens)
 (setq split-height-threshold nil)
 (setq split-width-threshold 0)
 
