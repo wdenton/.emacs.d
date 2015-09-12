@@ -544,7 +544,7 @@ Position the cursor at its beginning, according to the current mode."
 (add-hook 'sonic-pi-mode-hook
           (lambda ()
 	    (setq sonic-pi-path "/usr/local/src/sonic-pi-2.6.0/")
-            (define-key ruby-mode-map "\C-c\C-c" 'sonic-pi-send-buffer)))sc
+            (define-key ruby-mode-map "\C-c\C-c" 'sonic-pi-send-buffer)))
 
 ;;;;
 ;;;; Mode-specific customizations
