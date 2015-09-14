@@ -93,8 +93,23 @@
 ;; Display images when a file is loaded (I can always toggle them off if I don't want them)
 (add-hook 'org-mode-hook (lambda () (org-toggle-inline-images)))
 
+;; imenu integration
+(add-hook 'org-mode-hook
+	  (lambda () (imenu-add-to-menubar "Imenu")))
+
 ;; Use LaTeX spell-check
 (add-hook 'org-mode-hook (lambda () (setq ispell-parser 'tex)))
+
+;; Ispell should ignore some things in Org files
+;; http://endlessparentheses.com/ispell-and-org-mode.html
+(defun endless/org-ispell ()
+  "Configure `ispell-skip-region-alist' for `org-mode'."
+  (make-local-variable 'ispell-skip-region-alist)
+  (add-to-list 'ispell-skip-region-alist '(org-property-drawer-re))
+  (add-to-list 'ispell-skip-region-alist '("~" "~"))
+  (add-to-list 'ispell-skip-region-alist '("=" "="))
+  (add-to-list 'ispell-skip-region-alist '("^#\\+BEGIN_SRC" . "^#\\+END_SRC")))
+(add-hook 'org-mode-hook #'endless/org-ispell)
 
 ;; Preview LaTeX equations in buffers by showing images (C-c C-x C-l)
 ;; Details: http://orgmode.org/worg/org-tutorials/org-latex-preview.html
@@ -182,9 +197,6 @@
 
 ;; Requires ditaa to be installed
 (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
-
-;; Make ispell skip source blocks
-(add-to-list 'ispell-skip-region-alist '("#\\+begin_src". "#\\+end_src"))
 
 ; Integrate RefTeX
 ; From http://orgmode.org/worg/org-faq.html#using-reftex-in-org-mode
