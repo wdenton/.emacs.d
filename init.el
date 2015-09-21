@@ -76,7 +76,7 @@
 		    flymake-ruby
 		    gh
 		    gist
-		    highlight
+		    ;; highlight
 		    ibuffer-vc
 		    ido-ubiquitous
 		    ido-vertical-mode
@@ -103,7 +103,7 @@
 		    rvm
 		    smartparens
 		    smex
-		    sonic-pi
+		    ;; sonic-pi
 		    undo-tree
 		    yaml-mode
 		    yasnippet
@@ -541,11 +541,12 @@ Position the cursor at its beginning, according to the current mode."
 ;;; Sonic Pi (https://github.com/repl-electric/sonic-pi.el)
 ;;;
 
-(require 'sonic-pi)
-(add-hook 'sonic-pi-mode-hook
-          (lambda ()
-	    (setq sonic-pi-path "/usr/local/src/sonic-pi-2.6.0/")
-            (define-key ruby-mode-map "\C-c\C-c" 'sonic-pi-send-buffer)))
+;; (require 'sonic-pi)
+;; (add-hook 'sonic-pi-mode-hook
+;;           (lambda ()
+;; 	    (setq sonic-pi-path "/usr/local/src/sonic-pi/")
+;; 	    ;; (setq sonic-pi-path "/usr/local/src/sonic-pi-2.6.0/")
+;;             (define-key ruby-mode-map "\C-c\C-c" 'sonic-pi-send-buffer)))
 
 ;;;;
 ;;;; Mode-specific customizations
