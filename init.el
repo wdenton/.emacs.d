@@ -76,7 +76,6 @@
 		    flymake-ruby
 		    gh
 		    gist
-		    ;; highlight
 		    ibuffer-vc
 		    ido-ubiquitous
 		    ido-vertical-mode
