@@ -553,6 +553,6 @@ Position the cursor at its beginning, according to the current mode."
 (require 'setup-markdown)
 (require 'setup-orgmode)
 (require 'setup-ruby)
-;; (require 'setup-sonic-pi)
+(require 'setup-sonic-pi)
 (require 'setup-useful-functions)
 (require 'setup-yaml)
