@@ -10,7 +10,7 @@
 ;;;; Starting up
 ;;;;
 
-(setq debug-on-error t)
+;; (setq debug-on-error t)
 
 ;; Turn off mouse interface early in startup to avoid momentary display
 (if (fboundp 'menu-bar-mode) (menu-bar-mode 1))
