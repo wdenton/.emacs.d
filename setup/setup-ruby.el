@@ -22,10 +22,10 @@
 (setq ruby-block-highlight-toggle t)
 
 ;; I don't want autopair or smartparens working in Ruby buffers ...
-(add-hook 'ruby-mode-hook
-	  #'(lambda ()
-	      (autopair-mode -1))
-	  )
+;; (add-hook 'ruby-mode-hook
+;; 	  #'(lambda ()
+;; 	      (autopair-mode -1))
+;; 	  )
 
 ;; This seems to fix some problems.  I'm trying using this and not ruby-electric,
 ;; in the hopes that when I type "  I don't get "\""\"
@@ -45,7 +45,7 @@
 (add-hook 'ruby-mode-hook 'indent-guide-mode)
 
 ;; Make Emacs know about RVM (https://github.com/senny/rvm.el)
-(require 'rvm)
-(rvm-use-default) ;; use rvm's default ruby for the current Emacs session
+;; (require 'rvm)
+;; (rvm-use-default) ;; use rvm's default ruby for the current Emacs session
 
 (provide 'setup-ruby)

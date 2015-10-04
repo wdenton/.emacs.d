@@ -10,6 +10,8 @@
 ;;;; Starting up
 ;;;;
 
+(setq debug-on-error t)
+
 ;; Turn off mouse interface early in startup to avoid momentary display
 (if (fboundp 'menu-bar-mode) (menu-bar-mode 1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
@@ -76,6 +78,7 @@
 		    flymake-ruby
 		    gh
 		    gist
+		    highlight
 		    ibuffer-vc
 		    ido-ubiquitous
 		    ido-vertical-mode
@@ -92,6 +95,7 @@
 		    ;; org
 		    org-bullets
 		    ;; org-reveal ;; install by hand https://github.com/yjwen/org-reveal/
+		    osc
 		    pcache
 		    powerline
 		    rainbow-mode
@@ -102,7 +106,7 @@
 		    rvm
 		    smartparens
 		    smex
-		    ;; sonic-pi
+		    sonic-pi
 		    undo-tree
 		    yaml-mode
 		    yasnippet
@@ -138,8 +142,8 @@
 
 ;; Make matching parentheses and quotes always appear
 ;; https://github.com/capitaomorte/autopair
-;;(require 'autopair)
-;;(autopair-global-mode) ;; to enable in all buffers
+;; (require 'autopair)
+;; (autopair-global-mode) ;; to enable in all buffers
 
 ;; smartparens for good handling of parentheses
 ;; (https://github.com/Fuco1/smartparens/)
@@ -546,7 +550,7 @@ Position the cursor at its beginning, according to the current mode."
 (require 'setup-expansions)
 (require 'setup-file-management)
 (require 'setup-ibuffer)
-;; (require 'setup-javascript)
+;; ;; (require 'setup-javascript)
 (require 'setup-jekyll)
 (require 'setup-latex)
 (require 'setup-markdown)

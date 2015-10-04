@@ -163,16 +163,18 @@
                       ("h" . "HTML")
                       ("a" . "ASCII")))
            (key
-            (key-description
-             (vector
-              (read-key
-               (concat (propertize "Template type: " 'face 'minibuffer-prompt)
-                       (mapconcat (lambda (choice)
-                                    (concat (propertize (car choice) 'face 'font-lock-type-face)
-                                            ": "
-                                            (cdr choice)))
-                                  choices
-                                  ", ")))))))
+	    (key-description
+	     (vector
+	      (read-key
+	       (concat
+		(propertize "Template type: " 'face 'minibuffer-prompt)
+		(mapconcat (lambda (choice)
+			     (concat
+			      (propertize (car choice) 'face 'font-lock-type-face)
+			      ": "
+			      (cdr choice)))
+			   choices
+			   ", ")))))))
       (let ((result (assoc key choices)))
         (when result
           (let ((choice (cdr result)))
