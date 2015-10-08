@@ -191,6 +191,19 @@
               (save-excursion (insert "#+END_" choice))))))))))
 (define-key org-mode-map (kbd "C-<") 'wdenton/org-begin-template)
 
+;; Replace a link with just the descriptive text
+;; https://emacs.stackexchange.com/questions/10707/in-org-mode-how-to-remove-a-link
+(defun wdenton/org-replace-link-by-link-description ()
+    "Replace an org link by its description or if empty its address"
+  (interactive)
+  (if (org-in-regexp org-bracket-link-regexp 1)
+      (let ((remove (list (match-beginning 0) (match-end 0)))
+        (description (if (match-end 3)
+                 (org-match-string-no-properties 3)
+                 (org-match-string-no-properties 1))))
+    (apply 'delete-region remove)
+    (insert description))))
+
 ;; Hooks for prettify-symbols-mode
 (add-hook 'org-mode-hook
 	  (lambda ()
