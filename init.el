@@ -108,6 +108,7 @@
 		    smex
 		    sonic-pi
 		    undo-tree
+		    wrap-region
 		    yaml-mode
 		    yasnippet
 		    zotelo
@@ -435,6 +436,17 @@ Position the cursor at its beginning, according to the current mode."
                                   cl-functions
                                   interactive-only
                                   ))
+
+;; wrap-region to wrap regions in * or / etc.
+;; See http://pragmaticemacs.com/emacs/wrap-text-in-custom-characters/
+(wrap-region-mode t)
+(wrap-region-add-wrappers
+ '(("*" "*" nil org-mode)
+   ("~" "~" nil org-mode)
+   ("/" "/" nil org-mode)
+   ("=" "=" "+" org-mode)
+   ("_" "_" nil org-mode)
+   ("$" "$" nil (org-mode latex-mode))))
 
 ;;;;
 ;;;; The mode-line

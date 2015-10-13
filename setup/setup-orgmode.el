@@ -132,6 +132,9 @@
 ;; Turn ' and " into ‘posh’ “quotes”
 (setq org-export-with-smart-quotes t)
 
+;; Use wrap-region
+(add-hook 'org-mode-hook 'wrap-region-mode)
+
 ;; Footnotes. I want them defined nearby, not at the bottom of the
 ;; document, when I use C-c C-x f.  And I don't want them resorted
 ;; or adjusted without my saying so.

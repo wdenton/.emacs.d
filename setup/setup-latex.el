@@ -4,7 +4,7 @@
 
 ;; Good reading:
 ;; http://tex.stackexchange.com/questions/50827/a-simpletons-guide-to-tex-workflow-with-emacs/50919#50919
-;; http://tex.stackexchange.com/questions/52179/what-is-your-favorite-emacs-and-or-auctex-command-trick 
+;; http://tex.stackexchange.com/questions/52179/what-is-your-favorite-emacs-and-or-auctex-command-trick
 
 (defun turn-on-outline-minor-mode () (outline-minor-mode 1))
 (add-hook 'LaTeX-mode-hook 'turn-on-outline-minor-mode)
@@ -36,6 +36,9 @@
 
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
+
+;; Use wrap-region
+(add-hook 'latex-mode-hook 'wrap-region-mode)
 
 ;; So that RefTeX also recognizes \addbibresource. Note that you
 ;; can't use $HOME in path for \addbibresource but that "~" works.
@@ -137,4 +140,3 @@
         ("restartlist" "{")))
 
 (provide 'setup-latex)
-
