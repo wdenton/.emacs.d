@@ -96,6 +96,7 @@
 		    org-bullets
 		    ;; org-reveal ;; install by hand https://github.com/yjwen/org-reveal/
 		    osc
+		    paradox
 		    pcache
 		    powerline
 		    rainbow-mode
@@ -119,16 +120,17 @@
   (when (not (package-installed-p p))
     (package-install p)))
 
+;; Commented because this conflicts with Paradox
 ;; Don't truncate the names in the Package column when viewing packages
-(add-hook 'package-menu-mode-hook
-	  (lambda()
-	    (setq tabulated-list-format
-		  [("Package" 28 package-menu--name-predicate)
-		   ("Version" 18 nil)
-		   ("Status"  10 package-menu--status-predicate)
-		   ("Archive" 10 package-menu--archive-predicate)
-		   ("Description" 0 nil)])
-	    (tabulated-list-init-header)))
+;; (add-hook 'package-menu-mode-hook
+;; 	  (lambda()
+;; 	    (setq tabulated-list-format
+;; 		  [("Package" 28 package-menu--name-predicate)
+;; 		   ("Version" 18 nil)
+;; 		   ("Status"  10 package-menu--status-predicate)
+;; 		   ("Archive" 10 package-menu--archive-predicate)
+;; 		   ("Description" 0 nil)])
+;; 	    (tabulated-list-init-header)))
 
 ;;;;
 ;;;; Parentheses!
@@ -543,7 +545,7 @@ Position the cursor at its beginning, according to the current mode."
 (define-key launcher-map "g" #'magit-status)
 (define-key launcher-map "l" #'goto-line)
 (define-key launcher-map "m" #'mc/edit-lines)
-(define-key launcher-map "p" #'list-packages)
+(define-key launcher-map "p" #'paradox-list-packages) ;; Or just 'list-packages if not using Paradox
 (define-key launcher-map "s" #'eshell)
 (define-key launcher-map "t" #'proced) ; top
 (define-key launcher-map "u" #'magit-pull)
@@ -567,6 +569,7 @@ Position the cursor at its beginning, according to the current mode."
 (require 'setup-latex)
 (require 'setup-markdown)
 (require 'setup-orgmode)
+(require 'setup-paradox)
 (require 'setup-ruby)
 (require 'setup-sonic-pi)
 (require 'setup-useful-functions)
