@@ -19,6 +19,10 @@
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 (setq org-bullets-bullet-list '("◉" "○ ""►" "•" "•")) ; Default is '("◉" "○" "✸" "✿")
 
+;; Change the ellipsis that indicates hidden content
+;; http://endlessparentheses.com/changing-the-org-mode-ellipsis.html
+(setq org-ellipsis " ⬎") ;; ⤵ ↴ ⬎ ⤷
+
 ;; org-entities displays \alpha etc. as Unicode characters.
 (setq org-pretty-entities t)
 
