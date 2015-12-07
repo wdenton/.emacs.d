@@ -11,7 +11,7 @@
 ;; (global-set-key "\C-cb" 'org-iswitchb)
 
 ;; Files to look in for agenda items
-(setq org-agenda-files (quote ("~/york/shared/ar/ar-diary.org" "~/york/shared/projects/projects.org")))
+(setq org-agenda-files (quote ("~/york/shared/projects/projects.org")))
 
 ;; Nicer bullets!
 ;; Possibilities include:  ◉ ○ ✸ ✿ ♥ ● ◇ ✚ ✜ ☯ ◆ ♠ ♣ ♦ ☢ ❀ ◆ ◖ ▶ ► • ★ ▸ or any other amusing Unicode character
@@ -139,6 +139,15 @@
 ;; Use wrap-region
 (add-hook 'org-mode-hook 'wrap-region-mode)
 
+;; Since I'm using C-x n to narrow and widen source blocks (see
+;; narrow-or-widen-dwim in init.el) I don't need to use C-c ` to enter
+;; and leave them, so I can use C-x C-s to save and exit them, which
+;; is nice.
+;; Taken from http://endlessparentheses.com/emacs-narrow-or-widen-dwim.html
+(eval-after-load 'org-src
+  '(define-key org-src-mode-map
+     "\C-x\C-s" #'org-edit-src-exit))
+
 ;; Footnotes. I want them defined nearby, not at the bottom of the
 ;; document, when I use C-c C-x f.  And I don't want them resorted
 ;; or adjusted without my saying so.
@@ -223,8 +232,8 @@
 (define-key global-map "\C-cc" 'org-capture)
 (setq org-capture-templates
       '(
-	("w" "Work todo" entry (file+headline "~/york/shared/projects.org" "Tasks") "* TODO %?\n %u\n %a")
-	("d" "Work diary" entry (file+datetree "~/york/shared/workdiary.org" "Tasks") "** %?\n %u\n %a")
+	("w" "Work todo" entry (file+headline "~/york/shared/projects/projects.org" "Tasks") "* TODO %?\n %u\n %a")
+	("d" "Work diary" entry (file+datetree "~/york/shared/work-diaries/workdiary.org" "Tasks") "** %?\n %u\n %a")
         ("n" "Note"      entry (file+datetree "~/org/capture.org")                   "* %?\nEntered on %U\n  %i\n %a"))
       )
 
@@ -263,13 +272,13 @@
 ;; Requires ditaa to be installed
 (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
 
-					; Integrate RefTeX
-					; From http://orgmode.org/worg/org-faq.html#using-reftex-in-org-mode
-					; Use these lines to generate the bib (Org will recognize them as LaTeX commands):
-					; \bibliographystyle{plain}
-					; \bibliography{BIB-NAME}
-					;
-					; With this setup, C-c ) will invoke reftex-citation which will insert a reference in the usual way.
+;; Integrate RefTeX
+;; From http://orgmode.org/worg/org-faq.html#using-reftex-in-org-mode
+;; Use these lines to generate the bib (Org will recognize them as LaTeX commands):
+;; \bibliographystyle{plain}
+;; \bibliography{BIB-NAME}
+;;
+;; With this setup, C-c ) will invoke reftex-citation which will insert a reference in the usual way.
 
 (defun org-mode-reftex-setup ()
   (load-library "reftex")

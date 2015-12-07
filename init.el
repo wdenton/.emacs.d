@@ -363,8 +363,43 @@ Position the cursor at its beginning, according to the current mode."
 ;; http://www.masteringemacs.org/articles/2011/01/19/script-files-executable-automatically/
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
+;;;; Narrowing to region
+
 ;; I'm old enough to be able to use narrow-to-region
 (put 'narrow-to-region 'disabled nil)
+
+;; This is taken from http://endlessparentheses.com/emacs-narrow-or-widen-dwim.html
+(defun narrow-or-widen-dwim (p)
+  "Widen if buffer is narrowed, narrow-dwim otherwise.
+Dwim means: region, org-src-block, org-subtree, or defun,
+whichever applies first. Narrowing to org-src-block actually
+calls `org-edit-src-code'.
+
+With prefix P, don't widen, just narrow even if buffer is
+already narrowed."
+  (interactive "P")
+  (declare (interactive-only))
+  (cond ((and (buffer-narrowed-p) (not p)) (widen))
+        ((region-active-p)
+         (narrow-to-region (region-beginning) (region-end)))
+        ((derived-mode-p 'org-mode)
+         ;; `org-edit-src-code' is not a real narrowing
+         ;; command. Remove this first conditional if you
+         ;; don't want it.
+         (cond ((ignore-errors (org-edit-src-code))
+                (delete-other-windows))
+               ((ignore-errors (org-narrow-to-block) t))
+               (t (org-narrow-to-subtree))))
+        ((derived-mode-p 'latex-mode)
+         (LaTeX-narrow-to-environment))
+        (t (narrow-to-defun))))
+
+;; This line actually replaces Emacs' entire narrowing
+;; keymap, that's how much I like this command. Only copy it
+;; if that's what you want.
+(define-key ctl-x-map "n" #'narrow-or-widen-dwim)
+(eval-after-load 'latex
+  '(define-key LaTeX-mode-map "\C-xn" nil))
 
 ;;;; "All strings representing colors will be highlighted with the
 ;;;; color they represent."
