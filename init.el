@@ -594,6 +594,7 @@ already narrowed."
 ;;;;
 
 (require 'setup-autocomplete)
+(require 'setup-elfeed)
 (require 'setup-eshell)
 (require 'setup-ess)
 (require 'setup-expansions)
