@@ -6,4 +6,6 @@
 
 (load-file "~/.emacs.d/setup/setup-elfeed-subscriptions.el")
 
+(require 'elfeed)
+
 (provide 'setup-elfeed)
