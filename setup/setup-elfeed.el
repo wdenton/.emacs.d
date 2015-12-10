@@ -4,6 +4,6 @@
 
 ;; https://github.com/skeeto/elfeed
 
-(load-file "setup-elfeed-subscriptions.el")
+(load-file "~/.emacs.d/setup/setup-elfeed-subscriptions.el")
 
 (provide 'setup-elfeed)
