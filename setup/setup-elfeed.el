@@ -4,6 +4,6 @@
 
 ;; https://github.com/skeeto/elfeed
 
-(load-file "elfeed-subscriptions.el")
+(load-file "setup-elfeed-subscriptions.el")
 
 (provide 'setup-elfeed)
