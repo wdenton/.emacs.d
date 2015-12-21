@@ -120,15 +120,16 @@
 (setq org-latex-create-formula-image-program 'imagemagick)
 
 ;; For org-reveal, which makes presentations using reveal.js
-(require 'ox-reveal)
+;; 21 Dec 2015: Doesn't work with new Org export back end
+;; (require 'ox-reveal)
 
 ;; Exporting: I will see these export options after C-c C-e
-(setq org-export-backends (quote (beamer html latex md odt reveal)))
+(setq org-export-backends (quote (html latex md odt))) ;; beamer reveal
 
 ;; In 25 Org started opening exported PDFs in docview, but I prefer
 ;; seeing them externally.
-(delete '("\\.pdf\\'" . default) org-file-apps)
-(add-to-list 'org-file-apps '("\\.pdf\\'" . "evince %s"))
+;; (delete '("\\.pdf\\'" . default) org-file-apps)
+;; (add-to-list 'org-file-apps '("\\.pdf\\'" . "evince %s"))
 
 ;; I may need to customize org-html-doctype (default is "xhtml-strict")
 ;; (setq org-html-doctype "html5")
@@ -165,82 +166,82 @@
 
 ;; Use C-< to wrap a block of text in a block, like < would create (for SRC or QUOTE)
 ;; From http://pragmaticemacs.com/emacs/wrap-text-in-an-org-mode-block/
-(defun wdenton/org-begin-template ()
-  "Make a template at point."
-  (interactive)
-  (if (org-at-table-p)
-      (call-interactively 'org-table-rotate-recalc-marks)
-    (let* ((choices '(("s" . "SRC")
-                      ("e" . "EXAMPLE")
-                      ("q" . "QUOTE")
-                      ("v" . "VERSE")
-                      ("c" . "CENTER")
-                      ("l" . "LaTeX")
-                      ("h" . "HTML")
-                      ("a" . "ASCII")))
-           (key
-	    (key-description
-	     (vector
-	      (read-key
-	       (concat
-		(propertize "Template type: " 'face 'minibuffer-prompt)
-		(mapconcat (lambda (choice)
-			     (concat
-			      (propertize (car choice) 'face 'font-lock-type-face)
-			      ": "
-			      (cdr choice)))
-			   choices
-			   ", ")))))))
-      (let ((result (assoc key choices)))
-        (when result
-          (let ((choice (cdr result)))
-            (cond
-             ((region-active-p)
-              (let ((start (region-beginning))
-                    (end (region-end)))
-                (goto-char end)
-                (insert "#+END_" choice "\n")
-                (goto-char start)
-                (insert "#+BEGIN_" choice "\n")))
-             (t
-              (insert "#+BEGIN_" choice "\n")
-              (save-excursion (insert "#+END_" choice))))))))))
-(define-key org-mode-map (kbd "C-<") 'wdenton/org-begin-template)
+;; (defun wdenton/org-begin-template ()
+;;   "Make a template at point."
+;;   (interactive)
+;;   (if (org-at-table-p)
+;;       (call-interactively 'org-table-rotate-recalc-marks)
+;;     (let* ((choices '(("s" . "SRC")
+;;                       ("e" . "EXAMPLE")
+;;                       ("q" . "QUOTE")
+;;                       ("v" . "VERSE")
+;;                       ("c" . "CENTER")
+;;                       ("l" . "LaTeX")
+;;                       ("h" . "HTML")
+;;                       ("a" . "ASCII")))
+;;            (key
+;; 	    (key-description
+;; 	     (vector
+;; 	      (read-key
+;; 	       (concat
+;; 		(propertize "Template type: " 'face 'minibuffer-prompt)
+;; 		(mapconcat (lambda (choice)
+;; 			     (concat
+;; 			      (propertize (car choice) 'face 'font-lock-type-face)
+;; 			      ": "
+;; 			      (cdr choice)))
+;; 			   choices
+;; 			   ", ")))))))
+;;       (let ((result (assoc key choices)))
+;;         (when result
+;;           (let ((choice (cdr result)))
+;;             (cond
+;;              ((region-active-p)
+;;               (let ((start (region-beginning))
+;;                     (end (region-end)))
+;;                 (goto-char end)
+;;                 (insert "#+END_" choice "\n")
+;;                 (goto-char start)
+;;                 (insert "#+BEGIN_" choice "\n")))
+;;              (t
+;;               (insert "#+BEGIN_" choice "\n")
+;;               (save-excursion (insert "#+END_" choice))))))))))
+;; (define-key org-mode-map (kbd "C-<") 'wdenton/org-begin-template)
 
 ;; Replace a link with just the descriptive text
 ;; https://emacs.stackexchange.com/questions/10707/in-org-mode-how-to-remove-a-link
 (defun wdenton/org-replace-link-by-link-description ()
-    "Replace an org link by its description or if empty its address"
+  "Replace an org link by its description or if empty its address"
   (interactive)
   (if (org-in-regexp org-bracket-link-regexp 1)
       (let ((remove (list (match-beginning 0) (match-end 0)))
-        (description (if (match-end 3)
-                 (org-match-string-no-properties 3)
-                 (org-match-string-no-properties 1))))
-    (apply 'delete-region remove)
-    (insert description))))
+	    (description (if (match-end 3)
+			     (org-match-string-no-properties 3)
+			   (org-match-string-no-properties 1))))
+	(apply 'delete-region remove)
+	(insert description))))
 
 ;; Hooks for prettify-symbols-mode
 (add-hook 'org-mode-hook
-	  (lambda ()
-	    (push '("<=" . ?≤) prettify-symbols-alist)
-	    (push '(">=" . ?≥) prettify-symbols-alist)
-	    ))
+ 	  (lambda ()
+ 	    (push '("<=" . ?≤) prettify-symbols-alist)
+ 	    (push '(">=" . ?≥) prettify-symbols-alist)
+ 	    ))
 
 ;; Capturing
-(setq org-default-notes-file "~/org/capture.org") ; Change this when I use it for real
-(define-key global-map "\C-cc" 'org-capture)
+;; (setq org-default-notes-file "~/org/capture.org") ; Change this when I use it for real
+;; (define-key global-map "\C-cc" 'org-capture)
 (setq org-capture-templates
       '(
-	("w" "Work todo" entry (file+headline "~/york/shared/projects/projects.org" "Tasks") "* TODO %?\n %u\n %a")
-	("d" "Work diary" entry (file+datetree "~/york/shared/work-diaries/workdiary.org" "Tasks") "** %?\n %u\n %a")
-        ("n" "Note"      entry (file+datetree "~/org/capture.org")                   "* %?\nEntered on %U\n  %i\n %a"))
+      	("w" "Work todo" entry (file+headline "~/york/shared/projects/projects.org" "Tasks") "* TODO %?\n %u\n %a")
+      	("d" "Work diary" entry (file+datetree "~/york/shared/work-diaries/workdiary.org" "Tasks") "** %?\n %u\n %a")
+	("n" "Note"      entry (file+datetree "~/org/capture.org")                   "* %?\nEntered on %U\n  %i\n %a"))
       )
 
 ;; Refiling
 (setq org-refile-targets '(
 			   ("~/york/shared/projects.org" :maxlevel . 1)
-			   ("~/york/shared/3dprinting.org" :maxlevel . 1)
+			   ;; ("~/york/shared/3dprinting.org" :maxlevel . 1)
 			   ))
 
 ;; org-protocol lets me send URLs from Firefox (and more, but that's all I'm doing)
@@ -280,12 +281,12 @@
 ;;
 ;; With this setup, C-c ) will invoke reftex-citation which will insert a reference in the usual way.
 
-(defun org-mode-reftex-setup ()
-  (load-library "reftex")
-  (and (buffer-file-name)
-       (file-exists-p (buffer-file-name))
-       (reftex-parse-all))
-  (define-key org-mode-map (kbd "C-c )") 'reftex-citation))
-(add-hook 'org-mode-hook 'org-mode-reftex-setup)
+;; (defun org-mode-reftex-setup ()
+;;   (load-library "reftex")
+;;   (and (buffer-file-name)
+;;        (file-exists-p (buffer-file-name))
+;;        (reftex-parse-all))
+;;   (define-key org-mode-map (kbd "C-c )") 'reftex-citation))
+;; (add-hook 'org-mode-hook 'org-mode-reftex-setup)
 
 (provide 'setup-orgmode)
