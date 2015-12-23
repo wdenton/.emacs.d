@@ -364,7 +364,9 @@ Position the cursor at its beginning, according to the current mode."
 ;; http://www.masteringemacs.org/articles/2011/01/19/script-files-executable-automatically/
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
+;;;;
 ;;;; Narrowing to region
+;;;;
 
 ;; I'm old enough to be able to use narrow-to-region
 (put 'narrow-to-region 'disabled nil)
@@ -402,8 +404,8 @@ already narrowed."
 (eval-after-load 'latex
   '(define-key LaTeX-mode-map "\C-xn" nil))
 
-;;;; "All strings representing colors will be highlighted with the
-;;;; color they represent."
+;; "All strings representing colors will be highlighted with the
+;; color they represent."
 (rainbow-mode t) ;; #0af
 
 ;; Include the size of the file in the mode line

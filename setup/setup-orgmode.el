@@ -126,11 +126,6 @@
 ;; Exporting: I will see these export options after C-c C-e
 (setq org-export-backends (quote (html latex md odt))) ;; beamer reveal
 
-;; In 25 Org started opening exported PDFs in docview, but I prefer
-;; seeing them externally.
-;; (delete '("\\.pdf\\'" . default) org-file-apps)
-;; (add-to-list 'org-file-apps '("\\.pdf\\'" . "evince %s"))
-
 ;; I may need to customize org-html-doctype (default is "xhtml-strict")
 ;; (setq org-html-doctype "html5")
 
@@ -164,50 +159,6 @@
 	)
       )
 
-;; Use C-< to wrap a block of text in a block, like < would create (for SRC or QUOTE)
-;; From http://pragmaticemacs.com/emacs/wrap-text-in-an-org-mode-block/
-;; (defun wdenton/org-begin-template ()
-;;   "Make a template at point."
-;;   (interactive)
-;;   (if (org-at-table-p)
-;;       (call-interactively 'org-table-rotate-recalc-marks)
-;;     (let* ((choices '(("s" . "SRC")
-;;                       ("e" . "EXAMPLE")
-;;                       ("q" . "QUOTE")
-;;                       ("v" . "VERSE")
-;;                       ("c" . "CENTER")
-;;                       ("l" . "LaTeX")
-;;                       ("h" . "HTML")
-;;                       ("a" . "ASCII")))
-;;            (key
-;; 	    (key-description
-;; 	     (vector
-;; 	      (read-key
-;; 	       (concat
-;; 		(propertize "Template type: " 'face 'minibuffer-prompt)
-;; 		(mapconcat (lambda (choice)
-;; 			     (concat
-;; 			      (propertize (car choice) 'face 'font-lock-type-face)
-;; 			      ": "
-;; 			      (cdr choice)))
-;; 			   choices
-;; 			   ", ")))))))
-;;       (let ((result (assoc key choices)))
-;;         (when result
-;;           (let ((choice (cdr result)))
-;;             (cond
-;;              ((region-active-p)
-;;               (let ((start (region-beginning))
-;;                     (end (region-end)))
-;;                 (goto-char end)
-;;                 (insert "#+END_" choice "\n")
-;;                 (goto-char start)
-;;                 (insert "#+BEGIN_" choice "\n")))
-;;              (t
-;;               (insert "#+BEGIN_" choice "\n")
-;;               (save-excursion (insert "#+END_" choice))))))))))
-;; (define-key org-mode-map (kbd "C-<") 'wdenton/org-begin-template)
-
 ;; Replace a link with just the descriptive text
 ;; https://emacs.stackexchange.com/questions/10707/in-org-mode-how-to-remove-a-link
 (defun wdenton/org-replace-link-by-link-description ()
@@ -234,13 +185,13 @@
 (setq org-capture-templates
       '(
       	("w" "Work todo" entry (file+headline "~/york/shared/projects/projects.org" "Tasks") "* TODO %?\n %u\n %a")
-      	("d" "Work diary" entry (file+datetree "~/york/shared/work-diaries/workdiary.org" "Tasks") "** %?\n %u\n %a")
+      	("d" "Work diary" entry (file+datetree "~/york/shared/work-diaries/work-diary.org" "Tasks") "** %?\n %u\n %a")
 	("n" "Note"      entry (file+datetree "~/org/capture.org")                   "* %?\nEntered on %U\n  %i\n %a"))
       )
 
 ;; Refiling
 (setq org-refile-targets '(
-			   ("~/york/shared/projects.org" :maxlevel . 1)
+			   ("~/york/shared/projects/projects.org" :maxlevel . 1)
 			   ;; ("~/york/shared/3dprinting.org" :maxlevel . 1)
 			   ))
 
@@ -270,8 +221,57 @@
 ;; Evaluate Babel blocks without asking for confirmation
 (setq org-confirm-babel-evaluate nil)
 
+;; In 25 Org started opening exported PDFs in docview, but I prefer
+;; seeing them externally.
+(delete '("\\.pdf\\'" . default) org-file-apps)
+(add-to-list 'org-file-apps '("\\.pdf\\'" . "evince %s"))
+
 ;; Requires ditaa to be installed
 (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
+
+;; Use C-< to wrap a block of text in a block, like < would create (for SRC or QUOTE)
+;; From http://pragmaticemacs.com/emacs/wrap-text-in-an-org-mode-block/
+(defun wdenton/org-begin-template ()
+  "Make a template at point."
+  (interactive)
+  (if (org-at-table-p)
+      (call-interactively 'org-table-rotate-recalc-marks)
+    (let* ((choices '(("s" . "SRC")
+                      ("e" . "EXAMPLE")
+                      ("q" . "QUOTE")
+                      ("v" . "VERSE")
+                      ("c" . "CENTER")
+                      ("l" . "LaTeX")
+                      ("h" . "HTML")
+                      ("a" . "ASCII")))
+           (key
+	    (key-description
+	     (vector
+	      (read-key
+	       (concat
+		(propertize "Template type: " 'face 'minibuffer-prompt)
+		(mapconcat (lambda (choice)
+			     (concat
+			      (propertize (car choice) 'face 'font-lock-type-face)
+			      ": "
+			      (cdr choice)))
+			   choices
+			   ", ")))))))
+      (let ((result (assoc key choices)))
+        (when result
+          (let ((choice (cdr result)))
+            (cond
+             ((region-active-p)
+              (let ((start (region-beginning))
+                    (end (region-end)))
+                (goto-char end)
+                (insert "#+END_" choice "\n")
+                (goto-char start)
+                (insert "#+BEGIN_" choice "\n")))
+             (t
+              (insert "#+BEGIN_" choice "\n")
+              (save-excursion (insert "#+END_" choice))))))))))
+(define-key org-mode-map (kbd "C-<") 'wdenton/org-begin-template)
 
 ;; Integrate RefTeX
 ;; From http://orgmode.org/worg/org-faq.html#using-reftex-in-org-mode
