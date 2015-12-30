@@ -1049,6 +1049,9 @@ already narrowed."
 ;; 		   ("Description" 0 nil)])
 ;; 	    (tabulated-list-init-header)))
 
+;; I prefer package updates not to happen in the background
+(setq paradox-execute-asynchronously nil)
+
 ;;;;
 ;;;; Parentheses!
 ;;;;
