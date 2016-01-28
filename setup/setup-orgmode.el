@@ -212,7 +212,7 @@
    (python . t)
    (R . t)
    (ruby . t)
-   (sh . t)
+   (shell . t)
    (sql . t)
    (sqlite . t)
    )
