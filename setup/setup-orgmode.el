@@ -221,6 +221,30 @@
 ;; Evaluate Babel blocks without asking for confirmation
 (setq org-confirm-babel-evaluate nil)
 
+;; Use C-c t to toggle ":eval no|yes" status in source blocks
+;; https://emacs.stackexchange.com/questions/13869/how-to-toggle-org-mode-source-code-block-eval-no-status
+(defun org-toggle-src-eval-no ()
+  "Will toggle ':eval no' on the src block begin line"
+  (defun in-src-block-p ()
+    "Returns t when the point is inside a source code block"
+    (string= "src" (org-in-block-p '("src"))))
+  (defun beginning-src ()
+    "Find the beginning of the src block"
+    (let ((case-fold-search t)) (search-backward "#+BEGIN_SRC")))
+  (defun toggle-eval-no ()
+    "Handles the toggling of ' :eval no'"
+    (save-excursion
+      (end-of-line)
+      (let ((case-fold-search t)) (search-backward "#+BEGIN_SRC")
+	   (if (search-forward " :eval no" (line-end-position) "f")
+	       (replace-match "")
+	     (insert " :eval no")
+	     ))))
+  (if (in-src-block-p) (toggle-eval-no)))
+(defun add-org-toggle-src-key ()
+  (local-set-key (kbd "C-c t") (lambda () (interactive) (org-toggle-src-eval-no))))
+(add-hook 'org-mode-hook 'add-org-toggle-src-key)
+
 ;; In 25 Org started opening exported PDFs in docview, but I prefer
 ;; seeing them externally.
 (delete '("\\.pdf\\'" . default) org-file-apps)
