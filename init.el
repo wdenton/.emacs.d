@@ -158,6 +158,12 @@
 (electric-indent-mode 1)
 
 ;;;;
+;;;; Faces 'n' fonts
+;;;;
+
+(set-face-attribute 'default nil :height 110) ;; Measured in 0.1 pts
+
+;;;;
 ;;;; Theme: solarized
 ;;;;
 
