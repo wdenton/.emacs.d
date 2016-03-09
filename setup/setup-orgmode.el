@@ -297,6 +297,17 @@
               (save-excursion (insert "#+END_" choice))))))))))
 (define-key org-mode-map (kbd "C-<") 'wdenton/org-begin-template)
 
+;; Stop ispell from looking where it shouldn't.
+;; http://endlessparentheses.com/ispell-and-org-mode.html
+(defun wdenton/org-ispell ()
+  "Configure `ispell-skip-region-alist' for `org-mode'."
+  (make-local-variable 'ispell-skip-region-alist)
+  (add-to-list 'ispell-skip-region-alist '(org-property-drawer-re))
+  (add-to-list 'ispell-skip-region-alist '("~" "~"))
+  (add-to-list 'ispell-skip-region-alist '("=" "="))
+  (add-to-list 'ispell-skip-region-alist '("^#\\+BEGIN_SRC" . "^#\\+END_SRC")))
+(add-hook 'org-mode-hook #'wdenton/org-ispell)
+
 ;; Integrate RefTeX
 ;; From http://orgmode.org/worg/org-faq.html#using-reftex-in-org-mode
 ;; Use these lines to generate the bib (Org will recognize them as LaTeX commands):
