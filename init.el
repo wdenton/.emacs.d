@@ -121,6 +121,9 @@
   (when (not (package-installed-p p))
     (package-install p)))
 
+;; I prefer package updates not to happen in the background
+(setq paradox-execute-asynchronously nil)
+
 ;; Commented because this conflicts with Paradox
 ;; Don't truncate the names in the Package column when viewing packages
 ;; (add-hook 'package-menu-mode-hook
