@@ -1,4 +1,6 @@
-;; Emacs Speaks Statistics (for R)
+;;;;
+;;;; Emacs Speaks Statistics (for R)
+;;;;
 
 (require 'ess-site)
 
