@@ -5,6 +5,8 @@
 ;; Look at
 ;; https://github.com/magnars/.emacs.d
 ;; https://gitcafe.com/Leaflet/.emacs.d/blob/master/sane-defaults.el
+;; https://ogbe.net/emacsconfig.html
+
 
 ;;;;
 ;;;; Starting up
@@ -164,7 +166,9 @@
 ;;;; Faces 'n' fonts
 ;;;;
 
-(set-face-attribute 'default nil :height 110) ;; Measured in 0.1 pts
+;; (set-face-attribute 'default nil :height 110) ;; Measured in 0.1 pts
+(set-face-attribute 'default nil :font "Inconsolata" :height 120) ;; Measured in 0.1 pts
+;; (set-face-attribute 'default nil :font "DejaVu Sans Mono" :height 120) ;; Measured in 0.1 pts
 
 ;;;;
 ;;;; Theme: solarized
@@ -613,7 +617,7 @@ already narrowed."
 (require 'setup-expansions)
 (require 'setup-file-management)
 (require 'setup-ibuffer)
-;; ;; (require 'setup-javascript)
+;; (require 'setup-javascript)
 (require 'setup-jekyll)
 (require 'setup-latex)
 (require 'setup-markdown)

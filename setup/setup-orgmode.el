@@ -4,6 +4,9 @@
 
 ;; Try this: https://github.com/abo-abo/org-download/blob/master/org-download.el
 
+;; I should try org-ref
+;; https://github.com/jkitchin/org-ref
+
 ;; Common for all Org users
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
