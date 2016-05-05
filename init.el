@@ -167,7 +167,7 @@
 ;;;;
 
 ;; (set-face-attribute 'default nil :height 110) ;; Measured in 0.1 pts
-(set-face-attribute 'default nil :font "DejaVu Sans Mono" :height 110) ;; Measured in 0.1 pts
+(set-face-attribute 'default nil :font "DejaVu Sans Mono" :height 100) ;; Measured in 0.1 pts
 
 ;;;;
 ;;;; Theme: solarized
