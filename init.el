@@ -168,7 +168,12 @@
 
 ;; (set-face-attribute 'default nil :height 110) ;; Measured in 0.1 pts
 ;; (set-face-attribute 'default nil :font "DejaVu Sans Mono Book" :height 110) ;; Measured in 0.1 pts
-(set-face-attribute 'default nil :font "Deja Vu Sans Mono" :height 110) ;; Measured in 0.1 pts
+(setq wtd-font-height-for-this-machine 110)
+(when (string= system-name "work")
+  ;; Need it a little bigger on my work machine
+  (setq wtd-font-height-for-this-machine 115))
+
+(set-face-attribute 'default nil :font "Deja Vu Sans Mono" :height wtd-font-height-for-this-machine) ;; Measured in 0.1 pts
 
 ;;;;
 ;;;; Theme: solarized
