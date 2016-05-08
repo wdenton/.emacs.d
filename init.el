@@ -7,7 +7,6 @@
 ;; https://gitcafe.com/Leaflet/.emacs.d/blob/master/sane-defaults.el
 ;; https://ogbe.net/emacsconfig.html
 
-
 ;;;;
 ;;;; Starting up
 ;;;;
@@ -126,6 +125,9 @@
 ;; I prefer package updates not to happen in the background
 (setq paradox-execute-asynchronously nil)
 
+;; If I install a package, don't automatically star it on GitHub.
+(setq paradox-automatically-star nil)
+
 ;; Commented because this conflicts with Paradox
 ;; Don't truncate the names in the Package column when viewing packages
 ;; (add-hook 'package-menu-mode-hook
@@ -146,8 +148,8 @@
 ;; (require 'paren)
 
 ;; Matches parentheses and such in every mode
-;;;;; (show-paren-mode 1)
-;;;;; (setq show-paren-style 'mixed) ; Values; 'expression, 'parenthesis or 'mixed
+;; (show-paren-mode 1)
+;; (setq show-paren-style 'mixed) ; Values; 'expression, 'parenthesis or 'mixed
 
 ;; Make matching parentheses and quotes always appear
 ;; https://github.com/capitaomorte/autopair
@@ -166,14 +168,14 @@
 ;;;; Faces 'n' fonts
 ;;;;
 
-;; (set-face-attribute 'default nil :height 110) ;; Measured in 0.1 pts
-;; (set-face-attribute 'default nil :font "DejaVu Sans Mono Book" :height 110) ;; Measured in 0.1 pts
-(setq wtd-font-height-for-this-machine 105)
+;; Measured in 0.1 pts
+(setq wtd-font-height-for-this-machine 110)
 (when (string= system-name "work")
   ;; Need it a little bigger on my work machine
   (setq wtd-font-height-for-this-machine 115))
 
-(set-face-attribute 'default nil :font "Deja Vu Sans Mono" :height wtd-font-height-for-this-machine) ;; Measured in 0.1 pts
+;; (set-face-attribute 'default nil :height wtd-font-height-for-this-machine)
+(set-face-attribute 'default nil :font "Ubuntu Mono" :height wtd-font-height-for-this-machine)
 
 ;;;;
 ;;;; Theme: solarized
