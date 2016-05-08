@@ -33,8 +33,8 @@
 (setq org-hide-emphasis-markers t)
 
 ;; Change the sizes of the titles.
-(set-face-attribute 'org-level-1 nil :inherit 'outline-1 :height 1.2)
-(set-face-attribute 'org-level-2 nil :inherit 'outline-2 :height 1.1)
+;; (set-face-attribute 'org-level-1 nil :inherit 'outline-1 :height 1.2)
+;; (set-face-attribute 'org-level-2 nil :inherit 'outline-2 :height 1.1)
 
 ;; Better colouring of TODO keywords
 (setq org-todo-keyword-faces
