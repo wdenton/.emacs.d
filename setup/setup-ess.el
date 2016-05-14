@@ -4,7 +4,8 @@
 
 (require 'ess-site)
 
-(setq ess-use-auto-complete t)
+;; Going to try this turned off and see if I notice.
+(setq ess-use-auto-complete f)
 
 ;; Make R go to the width of the Emacs frame
 (add-hook 'ess-R-post-run-hook 'ess-execute-screen-options)
@@ -12,8 +13,8 @@
 ;; Make knitr files be recognized as R
 (add-to-list 'auto-mode-alist '("\\.Rmd$" . R-mode))
 
-; (autoload 'ess-R-object-popup "ess-R-object-popup" "Get info for object at point, and display it in a popup" t)
-; (require 'ess-R-object-popup)
+;; (autoload 'ess-R-object-popup "ess-R-object-popup" "Get info for object at point, and display it in a popup" t)
+;; (require 'ess-R-object-popup)
 (define-key ess-mode-map "\C-c\C-g" 'ess-R-object-popup)
 
 ;; Make all help buffers go into one frame
