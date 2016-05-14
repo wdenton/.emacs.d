@@ -172,7 +172,7 @@
 (setq wtd-font-height-for-this-machine 110)
 (when (string= system-name "work")
   ;; Need it a little bigger on my work machine
-  (setq wtd-font-height-for-this-machine 115))
+  (setq wtd-font-height-for-this-machine 120))
 
 ;; (set-face-attribute 'default nil :height wtd-font-height-for-this-machine)
 (set-face-attribute 'default nil :font "Ubuntu Mono" :height wtd-font-height-for-this-machine)
