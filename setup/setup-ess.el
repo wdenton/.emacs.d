@@ -5,7 +5,7 @@
 (require 'ess-site)
 
 ;; Going to try this turned off and see if I notice.
-(setq ess-use-auto-complete f)
+(setq ess-use-auto-complete nil)
 
 ;; Make R go to the width of the Emacs frame
 (add-hook 'ess-R-post-run-hook 'ess-execute-screen-options)

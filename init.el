@@ -101,6 +101,8 @@
 		    paradox
 		    pcache
 		    powerline
+		    ;; rainbow-identifiers ;; Too much
+		    rainbow-delimiters
 		    rainbow-mode
 		    rubocop
 		    ruby-block
@@ -424,9 +426,12 @@ already narrowed."
 (eval-after-load 'latex
   '(define-key LaTeX-mode-map "\C-xn" nil))
 
-;; "All strings representing colors will be highlighted with the
-;; color they represent."
+;; "All strings representing colors will be highlighted with the color they represent."
 (rainbow-mode t) ;; #0af
+(add-hook 'prog-mode-hook 'rainbow-mode)
+
+;; "Highlights delimiters such as parentheses, brackets or braces according to their depth."
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 ;; Include the size of the file in the mode line
 (size-indication-mode t)
