@@ -26,6 +26,9 @@
 ;; indent-guide ... very nice
 (add-hook 'ess-mode-hook 'indent-guide-mode)
 
+;; "Highlights delimiters such as parentheses, brackets or braces according to their depth."
+(add-hook 'ess-mode-hook #'rainbow-delimiters-mode)
+
 ;; Fancy up the prompt (see also ~/.Rprofile)
 ;; http://www.wisdomandwonder.com/article/9687/i-wasted-time-with-a-custom-prompt-for-r-with-ess
 (setq inferior-ess-primary-prompt "ℝ> ")

@@ -37,6 +37,9 @@
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
 
+;; "Highlights delimiters such as parentheses, brackets or braces according to their depth."
+(add-hook 'latex-mode-hook #'rainbow-delimiters-mode)
+
 ;; Use wrap-region
 (add-hook 'latex-mode-hook 'wrap-region-mode)
 

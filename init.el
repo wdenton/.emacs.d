@@ -430,9 +430,6 @@ already narrowed."
 (rainbow-mode t) ;; #0af
 (add-hook 'prog-mode-hook 'rainbow-mode)
 
-;; "Highlights delimiters such as parentheses, brackets or braces according to their depth."
-(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-
 ;; Include the size of the file in the mode line
 (size-indication-mode t)
 

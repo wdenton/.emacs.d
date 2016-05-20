@@ -31,6 +31,9 @@
 ;; in the hopes that when I type "  I don't get "\""\"
 (require 'smartparens-ruby)
 
+;; "Highlights delimiters such as parentheses, brackets or braces according to their depth."
+(add-hook 'ruby-mode-hook #'rainbow-delimiters-mode)
+
 ;; ... because I use electric mode to do that and more.
 ;; (require 'ruby-electric)
 
