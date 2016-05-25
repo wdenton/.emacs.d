@@ -426,12 +426,14 @@ already narrowed."
 (eval-after-load 'latex
   '(define-key LaTeX-mode-map "\C-xn" nil))
 
+;; rainbow-mode
 ;; "All strings representing colors will be highlighted with the color they represent."
 (use-package rainbow-mode
   :ensure t
+  :init
+  (add-hook 'prog-mode-hook 'rainbow-mode)
   :config
   (rainbow-mode t) ;; #0af
-  (add-hook 'prog-mode-hook 'rainbow-mode)
   )
 
 ;; Include the size of the file in the mode line
