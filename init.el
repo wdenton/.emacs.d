@@ -428,10 +428,11 @@ already narrowed."
 
 ;; "All strings representing colors will be highlighted with the color they represent."
 (use-package rainbow-mode
-	     :config
-	     (rainbow-mode t) ;; #0af
-	     (add-hook 'prog-mode-hook 'rainbow-mode)
-	     )
+  :ensure t
+  :config
+  (rainbow-mode t) ;; #0af
+  (add-hook 'prog-mode-hook 'rainbow-mode)
+  )
 
 ;; Include the size of the file in the mode line
 (size-indication-mode t)
