@@ -98,7 +98,6 @@
 		    org-bullets
 		    ;; org-reveal ;; install by hand https://github.com/yjwen/org-reveal/
 		    osc
-		    paradox
 		    pcache
 		    powerline
 		    ;; rainbow-identifiers ;; Too much
@@ -108,7 +107,6 @@
 		    ruby-electric
 		    ruby-mode
 		    rvm
-		    smartparens
 		    smex
 		    sonic-pi
 		    undo-tree
@@ -124,11 +122,23 @@
   (when (not (package-installed-p p))
     (package-install p)))
 
-;; I prefer package updates not to happen in the background
-(setq paradox-execute-asynchronously nil)
+;;;;
+;;;; Package management
+;;;;
 
-;; If I install a package, don't automatically star it on GitHub.
-(setq paradox-automatically-star nil)
+;; Paradox
+;; A nice package management layer.
+;; (https://github.com/Malabarba/paradox/)
+(use-package paradox
+  :ensure t
+  :config
+  ;; I prefer package updates not to happen in the background
+  (setq paradox-execute-asynchronously nil)
+  ;; For starring on GitHub (see ~/.bash.$HOSTNAME.rc)
+  (setq paradox-github-token (getenv "PARADOX_TOKEN"))
+  ;; But if I install a package, don't automatically star it.
+  (setq paradox-automatically-star nil)
+  )
 
 ;; Commented because this conflicts with Paradox
 ;; Don't truncate the names in the Package column when viewing packages
@@ -158,11 +168,15 @@
 ;; (require 'autopair)
 ;; (autopair-global-mode) ;; to enable in all buffers
 
-;; smartparens for good handling of parentheses
-;; (https://github.com/Fuco1/smartparens/)
-(require 'smartparens-config)
-(smartparens-global-mode t)
-(show-smartparens-global-mode +1)
+;; smartparens
+;; https://github.com/Fuco1/smartparens/
+(use-package smartparens
+  :ensure t
+  :config
+  (require 'smartparens-config)
+  (smartparens-global-mode t)
+  (show-smartparens-global-mode +1)
+  )
 
 (electric-indent-mode 1)
 
@@ -522,7 +536,6 @@ already narrowed."
 ;;;;
 
 ;;;; Tidy up the mode-line.  I don't need to see everything in there.
-
 (require 'diminish)
 (eval-after-load "aggressive-indent" '(diminish 'aggressive-indent-mode " →"))
 (eval-after-load "anzu"              '(diminish 'anzu-mode))
@@ -637,7 +650,6 @@ already narrowed."
 (require 'setup-latex)
 (require 'setup-markdown)
 (require 'setup-orgmode)
-(require 'setup-paradox)
 (require 'setup-ruby)
 (require 'setup-sonic-pi)
 (require 'setup-useful-functions)
