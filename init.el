@@ -103,7 +103,6 @@
 		    powerline
 		    ;; rainbow-identifiers ;; Too much
 		    rainbow-delimiters
-		    rainbow-mode
 		    rubocop
 		    ruby-block
 		    ruby-electric
@@ -113,6 +112,7 @@
 		    smex
 		    sonic-pi
 		    undo-tree
+		    use-package
 		    wrap-region
 		    yaml-mode
 		    yasnippet
@@ -427,8 +427,11 @@ already narrowed."
   '(define-key LaTeX-mode-map "\C-xn" nil))
 
 ;; "All strings representing colors will be highlighted with the color they represent."
-(rainbow-mode t) ;; #0af
-(add-hook 'prog-mode-hook 'rainbow-mode)
+(use-package rainbow-mode
+	     :config
+	     (rainbow-mode t) ;; #0af
+	     (add-hook 'prog-mode-hook 'rainbow-mode)
+	     )
 
 ;; Include the size of the file in the mode line
 (size-indication-mode t)

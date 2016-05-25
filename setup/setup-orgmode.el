@@ -2,6 +2,9 @@
 ;;;; Configuration for Org mode (http://orgmode.org/)
 ;;;;
 
+;; Note I made on 16 April 2013:
+;; "Started using org-mode ... I could really get into this."
+
 ;; Try this: https://github.com/abo-abo/org-download/blob/master/org-download.el
 
 ;; I should try org-ref
