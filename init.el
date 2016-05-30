@@ -7,6 +7,9 @@
 ;; https://gitcafe.com/Leaflet/.emacs.d/blob/master/sane-defaults.el
 ;; https://ogbe.net/emacsconfig.html
 
+;; To try
+;; pdf-tools: https://github.com/politza/pdf-tools
+
 ;;;;
 ;;;; Starting up
 ;;;;
