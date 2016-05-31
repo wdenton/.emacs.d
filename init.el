@@ -9,6 +9,7 @@
 
 ;; To try
 ;; pdf-tools: https://github.com/politza/pdf-tools
+;;; projectile: https://github.com/bbatsov/projectile
 
 ;;;;
 ;;;; Starting up
