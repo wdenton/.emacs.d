@@ -182,7 +182,37 @@
   (show-smartparens-global-mode +1)
   )
 
+;; Indenting
 (electric-indent-mode 1)
+
+;;;;
+;;;; Editing
+;;;;
+
+;;;
+;;; Markdown
+;;;
+
+(use-package markdown-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
+  (add-hook 'markdown-mode-hook 'turn-on-outline-minor-mode)
+  (add-hook 'markdown-mode-hook 'turn-on-visual-line-mode)
+  )
+
+;;;
+;;; Polymode, for Markdown + R + Yaml etc.
+;;;
+
+(use-package polymode
+  :ensure t
+  :config
+  (require 'poly-R)
+  (require 'poly-markdown)
+  (add-to-list 'auto-mode-alist '("\\.md$" . poly-markdown-mode))
+  (add-to-list 'auto-mode-alist '("\\.Rmd$" . poly-markdown+r+yaml-mode))
+  )
 
 ;;;;
 ;;;; Faces 'n' fonts
@@ -496,6 +526,7 @@ already narrowed."
 ;; aggressive-indent mode is aggressive indeed, but very handy.
 (global-aggressive-indent-mode 1)
 (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+(add-to-list 'aggressive-indent-excluded-modes 'html-mode)
 
 ;; Let me upcase or downcase a region, which is disabled by default.
 (put 'downcase-region 'disabled nil)
@@ -652,7 +683,7 @@ already narrowed."
 ;; (require 'setup-javascript)
 (require 'setup-jekyll)
 (require 'setup-latex)
-(require 'setup-markdown)
+;; (require 'setup-markdown)
 (require 'setup-orgmode)
 (require 'setup-ruby)
 (require 'setup-sonic-pi)
