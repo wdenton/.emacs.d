@@ -9,7 +9,7 @@
 
 ;; To try
 ;; pdf-tools: https://github.com/politza/pdf-tools
-;;; projectile: https://github.com/bbatsov/projectile
+;; projectile: https://github.com/bbatsov/projectile
 
 ;;;;
 ;;;; Starting up
@@ -525,7 +525,6 @@ already narrowed."
 
 ;; aggressive-indent mode is aggressive indeed, but very handy.
 (global-aggressive-indent-mode 1)
-(add-to-list 'aggressive-indent-excluded-modes 'html-mode)
 (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
 
 ;; Let me upcase or downcase a region, which is disabled by default.
