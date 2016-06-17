@@ -16,4 +16,7 @@
 ;; Stop feed fetches from timing out so quickly
 (setf url-queue-timeout 30)
 
+;; Turn on curl, which is new and not the default
+(setq elfeed-use-curl t)
+
 (provide 'setup-elfeed)
