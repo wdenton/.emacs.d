@@ -84,7 +84,8 @@
 (setq org-list-allow-alphabetical t)
 
 ;; Right-align tags to an indent from the right margin
-(setq org-tags-column (- 50 (window-width)))
+;; (setq org-tags-column (- 50 (window-width)))
+(setq org-tags-column 120)
 
 ;; "Single keys can be made to execute commands when the cursor is at
 ;; the beginning of a headline, i.e., before the first star."
