@@ -434,6 +434,10 @@ Position the cursor at its beginning, according to the current mode."
 ;; http://www.masteringemacs.org/articles/2011/01/19/script-files-executable-automatically/
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
+;; When I want to kill a buffer, it's always the current one, so don't ask.
+;; http://pragmaticemacs.com/emacs/dont-kill-buffer-kill-this-buffer-instead/
+(global-set-key (kbd "C-x k") 'kill-this-buffer)
+
 ;;;;
 ;;;; Narrowing to region
 ;;;;
