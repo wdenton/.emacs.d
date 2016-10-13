@@ -115,6 +115,7 @@
 		    sonic-pi
 		    undo-tree
 		    use-package
+		    visual-fill-column
 		    wrap-region
 		    yaml-mode
 		    yasnippet
@@ -595,6 +596,25 @@ already narrowed."
 
 (require 'powerline)
 (powerline-default-theme)
+
+;;;;
+;;;; visual-fill-column to give margins
+;;;;
+
+;; See http://www.lunaryorn.com/posts/center-buffer-text-in-emacs.html
+
+(use-package visual-fill-column
+  :ensure t
+  :defer t
+  :bind (("C-c t v" . visual-fill-column-mode))
+  :init
+  (dolist (hook '(ruby-mode-hook)) ;; prog-mode-hook?
+    (add-hook hook #'visual-fill-column-mode))
+  :config (setq-default visual-fill-column-center-text t
+                        visual-fill-column-fringes-outside-margins nil
+			fill-column 120))
+
+
 
 ;;;;
 ;;;; ido
