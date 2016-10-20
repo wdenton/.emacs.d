@@ -75,6 +75,7 @@
 		    auto-complete
 		    auto-complete-auctex
 		    color-theme-solarized
+		    csv-mode
 		    diminish
 		    dired+
 		    elfeed
