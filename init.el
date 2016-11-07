@@ -66,6 +66,15 @@
 	("melpa" . 20)
         ("gnu" . 10)))
 
+;; use-package
+;; https://github.com/jwiegley/use-package
+;; Docs say this should go at the start of the init file.
+(eval-when-compile
+  (require 'use-package))
+(require 'diminish) ;; if you use :diminish
+;; (require 'bind-key) ;; if you use any :bind variant
+(setq use-package-always-ensure t)
+
 ;; Make sure that all of the packages I want are installed. If not, install them.
 (setq my-packages '(ac-inf-ruby
 		    aggressive-indent
@@ -136,7 +145,6 @@
 ;; A nice package management layer.
 ;; (https://github.com/Malabarba/paradox/)
 (use-package paradox
-  :ensure t
   :config
   ;; I prefer package updates not to happen in the background
   (setq paradox-execute-asynchronously nil)
@@ -177,7 +185,6 @@
 ;; smartparens
 ;; https://github.com/Fuco1/smartparens/
 (use-package smartparens
-  :ensure t
   :config
   (require 'smartparens-config)
   (smartparens-global-mode t)
@@ -196,7 +203,6 @@
 ;;;
 
 (use-package markdown-mode
-  :ensure t
   :config
   (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
   (add-hook 'markdown-mode-hook 'turn-on-outline-minor-mode)
@@ -208,7 +214,6 @@
 ;;;
 
 (use-package polymode
-  :ensure t
   :config
   (require 'poly-R)
   (require 'poly-markdown)
@@ -483,7 +488,6 @@ already narrowed."
 ;; rainbow-mode
 ;; "All strings representing colors will be highlighted with the color they represent."
 (use-package rainbow-mode
-  :ensure t
   :init
   (add-hook 'prog-mode-hook 'rainbow-mode)
   :config
@@ -576,7 +580,7 @@ already narrowed."
 ;;;;
 
 ;;;; Tidy up the mode-line.  I don't need to see everything in there.
-(require 'diminish)
+;; (require 'diminish) ;; At top of file, where use-pockage is called.
 (eval-after-load "aggressive-indent" '(diminish 'aggressive-indent-mode " →"))
 (eval-after-load "anzu"              '(diminish 'anzu-mode))
 (eval-after-load "auto-complete"     '(diminish 'auto-complete-mode " α"))
@@ -605,7 +609,6 @@ already narrowed."
 ;; See http://www.lunaryorn.com/posts/center-buffer-text-in-emacs.html
 
 (use-package visual-fill-column
-  :ensure t
   :defer t
   :bind (("C-c t v" . visual-fill-column-mode))
   :init
