@@ -73,6 +73,7 @@
   (require 'use-package))
 (require 'diminish) ;; if you use :diminish
 ;; (require 'bind-key) ;; if you use any :bind variant
+;; Make sure that if I want a package, it gets installed automatically.
 (setq use-package-always-ensure t)
 
 ;; Make sure that all of the packages I want are installed. If not, install them.
