@@ -34,6 +34,11 @@
 ;; "Highlights delimiters such as parentheses, brackets or braces according to their depth."
 (add-hook 'ruby-mode-hook #'rainbow-delimiters-mode)
 
+;; "Finds all the URLs in the buffer, highlights them, and turns them into clickable buttons."
+;; Use C-c RET to follow a link.
+;; TODO Make Org's C-c C-o more general and follow these links too.
+(add-hook 'ruby-mode-hook #'goto-address-mode)
+
 ;; ... because I use electric mode to do that and more.
 ;; (require 'ruby-electric)
 
