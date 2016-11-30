@@ -68,6 +68,11 @@
 
 ;; use-package
 ;; https://github.com/jwiegley/use-package
+
+;; Install it if needed, because everything following depends on it.
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+
 ;; Docs say this should go at the start of the init file.
 (eval-when-compile
   (require 'use-package))
@@ -126,7 +131,6 @@
 		    smex
 		    sonic-pi
 		    undo-tree
-		    use-package
 		    visual-fill-column
 		    wrap-region
 		    yaml-mode
