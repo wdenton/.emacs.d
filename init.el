@@ -12,10 +12,13 @@
 ;; projectile: https://github.com/bbatsov/projectile
 
 ;;;;
+;;;; Turn this on when needed
+;;;;
+;; (setq debug-on-error t)
+
+;;;;
 ;;;; Starting up
 ;;;;
-
-;; (setq debug-on-error t)
 
 ;; Turn off mouse interface early in startup to avoid momentary display
 (if (fboundp 'menu-bar-mode) (menu-bar-mode 1))
@@ -247,6 +250,8 @@
 (enable-theme 'solarized)
 
 ;; Keep custom settings in separate file
+;; TODO Create this file if it doesn't exist
+;; (for starting from scratch).
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
 
@@ -546,9 +551,6 @@ already narrowed."
 ;; prettify-symbols-mode was introduced in 24.4
 (global-prettify-symbols-mode +1)
 (setq prettify-symbols-unprettify-at-point 'right-edge)
-
-;; abbrevs
-(setq abbrev-file-name "~/.emacs.d/abbrev_defs")
 
 ;; Stop magit from nagging me about a change
 (setq magit-last-seen-setup-instructions "1.4.0")
