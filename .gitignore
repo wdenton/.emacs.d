@@ -21,3 +21,4 @@ custom.el
 .emacs.desktop.lock
 .smex-items
 setup/setup-elfeed-subscriptions.el
+recentf
