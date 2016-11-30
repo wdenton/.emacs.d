@@ -4,6 +4,14 @@
 (add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
 (add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
 
+;; Make Emacs know about rbenv
+(require 'rbenv)
+(global-rbenv-mode)
+(setq rbenv-show-active-ruby-in-modeline nil)
+(setq rbenv-modeline-function 'rbenv--modeline-plain)
+(add-hook 'ruby-mode-hook 'global-rbenv-mode)
+(add-hook 'ruby-mode-hook 'rbenv-use-corresponding)
+
 ;; Open up irb with M-x inf-ruby or C-c C-s from a Ruby buffer
 (autoload 'inf-ruby "inf-ruby" "Run an inferior Ruby process" t)
 (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
@@ -51,13 +59,5 @@
 
 ;; indent-guide ... very nice
 (add-hook 'ruby-mode-hook 'indent-guide-mode)
-
-;; Make Emacs know about rbenv
-(require 'rbenv)
-(global-rbenv-mode)
-(setq rbenv-show-active-ruby-in-modeline nil)
-(setq rbenv-modeline-function 'rbenv--modeline-plain)
-(add-hook 'ruby-mode-hook 'global-rbenv-mode)
-(add-hook 'ruby-mode-hook 'rbenv-use-corresponding)
 
 (provide 'setup-ruby)
