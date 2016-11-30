@@ -66,21 +66,6 @@
 	("melpa" . 20)
         ("gnu" . 10)))
 
-;; use-package
-;; https://github.com/jwiegley/use-package
-
-;; Install it if needed, because everything following depends on it.
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package))
-
-;; Docs say this should go at the start of the init file.
-(eval-when-compile
-  (require 'use-package))
-(require 'diminish) ;; if you use :diminish
-;; (require 'bind-key) ;; if you use any :bind variant
-;; Make sure that if I want a package, it gets installed automatically.
-(setq use-package-always-ensure t)
-
 ;; Make sure that all of the packages I want are installed. If not, install them.
 (setq my-packages '(ac-inf-ruby
 		    aggressive-indent
@@ -131,6 +116,7 @@
 		    smex
 		    sonic-pi
 		    undo-tree
+		    use-package
 		    visual-fill-column
 		    wrap-region
 		    yaml-mode
@@ -142,6 +128,16 @@
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
+
+;; use-package
+;; https://github.com/jwiegley/use-package
+;; Docs say this should go at the start of the init file.
+(eval-when-compile
+  (require 'use-package))
+(require 'diminish) ;; if you use :diminish
+;; (require 'bind-key) ;; if you use any :bind variant
+;; Make sure that if I want a package, it gets installed automatically.
+(setq use-package-always-ensure t)
 
 ;;;;
 ;;;; Package management
@@ -550,6 +546,9 @@ already narrowed."
 ;; prettify-symbols-mode was introduced in 24.4
 (global-prettify-symbols-mode +1)
 (setq prettify-symbols-unprettify-at-point 'right-edge)
+
+;; abbrevs
+(setq abbrev-file-name "~/.emacs.d/abbrev_defs")
 
 ;; Stop magit from nagging me about a change
 (setq magit-last-seen-setup-instructions "1.4.0")
