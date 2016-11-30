@@ -7,7 +7,9 @@
 (require 'elfeed)
 
 ;; See example file for what this should look like
-(load-file "~/.emacs.d/setup/setup-elfeed-subscriptions.el")
+(setq elfeed-subscription-list "~/.emacs.d/setup/setup-elfeed-subscriptions.el")
+(if (file-exists-p elfeed-subscription-list)
+    (load-file elfeed-subscription-list))
 
 ;; Show date as "10 Dec 2015"
 (defun elfeed-search-format-date (date)
