@@ -1,16 +1,19 @@
-;;;; Ruby mode
+;;;;
+;;;; Ruby
+;;;;
 
 (autoload 'ruby-mode "ruby-mode" "Mode for editing Ruby")
 (add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
 (add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
 
-;; Make Emacs know about rbenv
+;; I use rbenv, so Emacs needs to know about it
+;; https://github.com/senny/rbenv.el
 (require 'rbenv)
-(global-rbenv-mode)
+;; (global-rbenv-mode)
 (setq rbenv-show-active-ruby-in-modeline nil)
 (setq rbenv-modeline-function 'rbenv--modeline-plain)
 (add-hook 'ruby-mode-hook 'global-rbenv-mode)
-(add-hook 'ruby-mode-hook 'rbenv-use-corresponding)
+;; (add-hook 'ruby-mode-hook 'rbenv-use-corresponding)
 
 ;; Open up irb with M-x inf-ruby or C-c C-s from a Ruby buffer
 (autoload 'inf-ruby "inf-ruby" "Run an inferior Ruby process" t)
