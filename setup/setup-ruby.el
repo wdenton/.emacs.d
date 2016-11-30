@@ -52,8 +52,12 @@
 ;; indent-guide ... very nice
 (add-hook 'ruby-mode-hook 'indent-guide-mode)
 
-;; Make Emacs know about RVM (https://github.com/senny/rvm.el)
-;; (require 'rvm)
-;; (rvm-use-default) ;; use rvm's default ruby for the current Emacs session
+;; Make Emacs know about rbenv
+(require 'rbenv)
+(global-rbenv-mode)
+(setq rbenv-show-active-ruby-in-modeline nil)
+(setq rbenv-modeline-function 'rbenv--modeline-plain)
+(add-hook 'ruby-mode-hook 'global-rbenv-mode)
+(add-hook 'ruby-mode-hook 'rbenv-use-corresponding)
 
 (provide 'setup-ruby)

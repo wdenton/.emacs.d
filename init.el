@@ -117,11 +117,12 @@
 		    powerline
 		    ;; rainbow-identifiers ;; Too much
 		    rainbow-delimiters
+		    rbenv
 		    rubocop
 		    ruby-block
 		    ruby-electric
 		    ruby-mode
-		    rvm
+		    ;; rvm
 		    smex
 		    sonic-pi
 		    undo-tree
