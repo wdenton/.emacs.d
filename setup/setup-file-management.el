@@ -7,6 +7,7 @@
 (require 'recentf)
 (recentf-mode 1)
 (global-set-key "\C-xf" 'recentf-open-files)
+(setq recentf-save-file "~/.recentf")
 
 ;; Refresh buffers when files change (don't worry, changes won't be lost)
 (global-auto-revert-mode t)
