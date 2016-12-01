@@ -674,6 +674,9 @@ already narrowed."
 ;; current one.
 (setq ido-auto-merge-work-directories-length -1)
 
+;; Save the state file in ~
+(setq ido-save-directory-list-file "~/.ido.last")
+
 ;;;;
 ;;;; Smex works nicely with ido.
 ;;;;
