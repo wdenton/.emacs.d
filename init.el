@@ -252,7 +252,7 @@
 ;; Keep custom settings in separate file
 ;; If custom.el doesn't exist, create an empty file
 ;; (for starting from scratch).
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(setq custom-file "~/.custom.el")
 (unless (file-exists-p custom-file)
   (write-region "" nil custom-file))
 (load custom-file)
