@@ -250,12 +250,14 @@
 (enable-theme 'solarized)
 
 ;; Keep custom settings in separate file
-;; TODO Create this file if it doesn't exist
+;; If custom.el doesn't exist, create an empty file
 ;; (for starting from scratch).
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(unless (file-exists-p custom-file)
+  (write-region "" nil custom-file))
 (load custom-file)
 
-;;
+;; Always with the font-locking
 (setq font-lock-maximum-decoration t)
 
 ;; Sentences do not need double spaces to end.  (But it's better when they do.)
