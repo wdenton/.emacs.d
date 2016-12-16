@@ -78,6 +78,9 @@
 ;; Fontify Babel blocks nicely
 (setq org-src-fontify-natively t)
 
+;; Preserve indentation when tangling source blocks (important for makefiles)
+(setq org-src-preserve-indentation t)
+
 ;; Allow a) b) c) lists
 (setq org-list-allow-alphabetical t)
 
