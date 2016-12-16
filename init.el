@@ -71,6 +71,7 @@
 
 ;; Make sure that all of the packages I want are installed. If not, install them.
 (setq my-packages '(ac-inf-ruby
+		    ag
 		    aggressive-indent
 		    anzu
 		    async
