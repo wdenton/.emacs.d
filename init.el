@@ -702,6 +702,8 @@ already narrowed."
 ;;;; Projectile (https://github.com/bbatsov/projectile)
 ;;;;
 
+(projectile-mode)
+
 ;; Key bindings: https://projectile.readthedocs.io/en/latest/usage/
 
 ;; Customize mode line
