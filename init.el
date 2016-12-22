@@ -9,7 +9,6 @@
 
 ;; To try
 ;; pdf-tools: https://github.com/politza/pdf-tools
-;; projectile: https://github.com/bbatsov/projectile
 
 ;;;;
 ;;;; Turn this on when needed
@@ -86,11 +85,12 @@
 		    ess
 		    ess-R-object-popup
 		    expand-region
+		    flx-ido
 		    flymake-ruby
 		    gh
 		    gist
 		    highlight
-		    ibuffer-vc
+		    ;; ibuffer-vc
 		    ido-ubiquitous
 		    ido-vertical-mode
 		    imenu-anywhere
@@ -110,6 +110,7 @@
 		    pcache
 		    powerline
 		    ;; rainbow-identifiers ;; Too much
+		    projectile
 		    rainbow-delimiters
 		    rbenv
 		    rubocop
@@ -628,8 +629,6 @@ already narrowed."
                         visual-fill-column-fringes-outside-margins nil
 			fill-column 120))
 
-
-
 ;;;;
 ;;;; ido
 ;;;;
@@ -686,6 +685,27 @@ already narrowed."
 (smex-initialize)
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+
+;;;;
+;;;; flx and flx-ido for better fuzzy matching (https://github.com/lewang/flx)
+;;;;
+
+(require 'flx-ido)
+(ido-mode 1)
+(ido-everywhere 1)
+(flx-ido-mode 1)
+;; disable ido faces to see flx highlights.
+(setq ido-enable-flex-matching t)
+(setq ido-use-faces nil)
+
+;;;;
+;;;; Projectile (https://github.com/bbatsov/projectile)
+;;;;
+
+;; Key bindings: https://projectile.readthedocs.io/en/latest/usage/
+
+;; Customize mode line
+(setq projectile-mode-line '(:eval (format " ᴨ(%s)" (projectile-project-name))))
 
 ;;;;
 ;;;; launcher-map, to make it easier to run common things
