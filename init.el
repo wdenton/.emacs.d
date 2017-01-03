@@ -90,6 +90,7 @@
 		    gh
 		    gist
 		    highlight
+		    ibuffer-projectile
 		    ;; ibuffer-vc
 		    ido-ubiquitous
 		    ido-vertical-mode

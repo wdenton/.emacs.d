@@ -1,9 +1,5 @@
 ;; ibuffer is a nicer way of showing the buffer list (C-x C-b)
 
-;; ibuffer-vc extends it to automatically group buffers by the parent
-;; version control directory
-;; See https://github.com/purcell/ibuffer-vc
-
 ;; Alias the usual buffer list command to ibuffer
 (defalias 'list-buffers 'ibuffer)
 
@@ -17,8 +13,12 @@
  			 (name . "^\\*Messages\\*$")))
 	       ))))
 
-;; (add-hook 'ibuffer-mode-hook
-;; 	  (lambda ()
-;; 	    (ibuffer-switch-to-saved-filter-groups "default")))
+;; For ibuffer-projectile
+;; https://github.com/purcell/ibuffer-projectile
+(add-hook 'ibuffer-hook
+	  (lambda ()
+	    (ibuffer-projectile-set-filter-groups)
+	    (unless (eq ibuffer-sorting-mode 'alphabetic)
+	      (ibuffer-do-sort-by-alphabetic))))
 
 (provide 'setup-ibuffer)
