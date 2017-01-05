@@ -78,6 +78,7 @@
 		    auto-complete
 		    auto-complete-auctex
 		    color-theme-solarized
+		    counsel
 		    csv-mode
 		    diminish
 		    dired+
@@ -97,6 +98,7 @@
 		    imenu-anywhere
 		    indent-guide
 		    inf-ruby
+		    ivy
 		    js-comint
 		    js2-mode
 		    json-mode
@@ -121,6 +123,7 @@
 		    ;; rvm
 		    smex
 		    sonic-pi
+		    swiper
 		    undo-tree
 		    use-package
 		    visual-fill-column
@@ -682,10 +685,13 @@ already narrowed."
 ;;;; Smex works nicely with ido.
 ;;;;
 
-(setq smex-save-file (expand-file-name ".smex-items" user-emacs-directory))
-(smex-initialize)
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+;; Now that I'm using Counsel I don't want M-x bound for smex,
+;; but Counsel does "piggyback on smex for sorting, if smex is installed,"
+;; so keep it around.
+;; (setq smex-save-file (expand-file-name ".smex-items" user-emacs-directory))
+;; (smex-initialize)
+;; (global-set-key (kbd "M-x") 'smex)
+;; (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
 ;;;;
 ;;;; flx and flx-ido for better fuzzy matching (https://github.com/lewang/flx)
@@ -698,6 +704,31 @@ already narrowed."
 ;; disable ido faces to see flx highlights.
 (setq ido-enable-flex-matching t)
 (setq ido-use-faces nil)
+
+;;;;
+;;;; Ivy and Swiper
+;;;;
+
+;; https://github.com/abo-abo/swiper
+
+(ivy-mode 1)
+(setq ivy-use-virtual-buffers t)
+(global-set-key "\C-s" 'swiper)
+(global-set-key (kbd "C-c C-r") 'ivy-resume)
+(global-set-key (kbd "<f6>") 'ivy-resume)
+(global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+(global-set-key (kbd "<f1> f") 'counsel-describe-function)
+(global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+(global-set-key (kbd "<f1> l") 'counsel-find-library)
+(global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+(global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+(global-set-key (kbd "C-c g") 'counsel-git)
+;; (global-set-key (kbd "C-c j") 'counsel-git-grep) ;; I use C-c j for Jekyll
+(global-set-key (kbd "C-c k") 'counsel-ag)
+(global-set-key (kbd "C-x l") 'counsel-locate)
+(global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+(define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
 
 ;;;;
 ;;;; Projectile (https://github.com/bbatsov/projectile)
