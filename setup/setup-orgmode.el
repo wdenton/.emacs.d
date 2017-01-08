@@ -338,4 +338,7 @@
 (setq org-ellipsis " ⬎") ;; ⤵ ↴ ⬎ ⤷
 (set-face-attribute 'org-ellipsis nil :underline nil)
 
+;; Zotxt
+(add-hook 'org-mode-hook (lambda () (org-zotxt-mode 1)))
+
 (provide 'setup-orgmode)
