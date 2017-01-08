@@ -774,12 +774,6 @@ already narrowed."
 ;; See http://www.mkbehr.com/posts/a-research-workflow-with-zotero-and-org-mode/
 ;; In setup-org I turn on org-zotxt-mode in all Org files.
 
-;; Bind something to replace the awkward C-u C-c " i
-;; to insert link to currently highlighted entry in Zotero
-(define-key org-mode-map
-  (kbd "C-c \" \"") (lambda () (interactive)
-                      (org-zotxt-insert-reference-link '(4))))
-
 ;;;;
 ;;;; Mode-specific customizations
 ;;;;
