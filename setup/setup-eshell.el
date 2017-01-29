@@ -7,7 +7,7 @@
 
 (setq eshell-aliases-file "~/.emacs.d/eshell/aliases"
       eshell-cmpl-dir-ignore "\\`\\(\\.\\.?\\|CVS\\|\\.svn\\|\\.git\\)/\\'"
-      esehll-review-quick-commands t
+      eshell-review-quick-commands t
       eshell-smart-space-goes-to-end t
       eshell-where-to-jump 'begin
       )
