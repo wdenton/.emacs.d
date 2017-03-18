@@ -94,6 +94,7 @@
     ("teh" "the" nil 1)
    ))
 
+
 (define-abbrev-table 'help-mode-abbrev-table '())
 
 (define-abbrev-table 'image-dired-display-image-mode-abbrev-table '())
@@ -165,4 +166,3 @@
 (define-abbrev-table 'vc-git-region-history-mode-abbrev-table '())
 
 (define-abbrev-table 'yaml-mode-abbrev-table '())
-

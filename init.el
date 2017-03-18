@@ -6,6 +6,7 @@
 ;; https://github.com/magnars/.emacs.d
 ;; https://gitcafe.com/Leaflet/.emacs.d/blob/master/sane-defaults.el
 ;; https://ogbe.net/emacsconfig.html
+;; https://github.com/therockmandolinist/dotfiles/blob/master/rc.org
 
 ;; To try
 ;; pdf-tools: https://github.com/politza/pdf-tools
