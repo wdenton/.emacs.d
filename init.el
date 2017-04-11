@@ -89,8 +89,8 @@
 		    expand-region
 		    flx-ido
 		    flymake-ruby
-		    gh
-		    gist
+		    ;; gh
+		    ;; gist
 		    highlight
 		    ibuffer-projectile
 		    ;; ibuffer-vc
@@ -226,13 +226,13 @@
 ;;; Polymode, for Markdown + R + Yaml etc.
 ;;;
 
-(use-package polymode
-  :config
-  (require 'poly-R)
-  (require 'poly-markdown)
-  (add-to-list 'auto-mode-alist '("\\.md$" . poly-markdown-mode))
-  (add-to-list 'auto-mode-alist '("\\.Rmd$" . poly-markdown+r+yaml-mode))
-  )
+;;(use-package polymode
+;;  :config
+;;  (require 'poly-R)
+;;  (require 'poly-markdown)
+;;  (add-to-list 'auto-mode-alist '("\\.md$" . poly-markdown-mode))
+;;  (add-to-list 'auto-mode-alist '("\\.Rmd$" . poly-markdown+r+yaml-mode))
+;;  )
 
 ;;;;
 ;;;; Faces 'n' fonts
