@@ -199,7 +199,7 @@
 ;; Refiling
 (setq org-refile-targets '(
 			   ("~/york/shared/projects/projects.org" :maxlevel . 1)
-			   ;; ("~/york/shared/3dprinting.org" :maxlevel . 1)
+			   ("~/york/shared/reports/annual/2017-annual-report/denton-2016-2017-annual-report.org" :maxlevel . 2)
 			   ))
 
 ;; org-protocol lets me send URLs from Firefox (and more, but that's all I'm doing)
