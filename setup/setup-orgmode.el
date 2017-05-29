@@ -44,6 +44,13 @@
 	      ("WAITING" :foreground "Purple" :weight normal)
 	      )))
 
+;; Make completed items in a checkbox list less noticeable
+;; https://fuco1.github.io/2017-05-25-Fontify-done-checkbox-items-in-org-mode.html
+(font-lock-add-keywords
+ 'org-mode
+ `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 'org-headline-done prepend))
+ 'append)
+
 ;; Removed from Org a while back.
 ;; (defface org-block-background
 ;;   '((t (:background "#dadada")))
