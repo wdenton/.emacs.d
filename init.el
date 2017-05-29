@@ -6,8 +6,11 @@
 ;; https://github.com/magnars/.emacs.d
 ;; https://gitcafe.com/Leaflet/.emacs.d/blob/master/sane-defaults.el
 ;; https://ogbe.net/emacsconfig.html
+
+;; Org inits:
 ;; https://github.com/therockmandolinist/dotfiles/blob/master/rc.org
 ;; https://github.com/thblt/dotfiles/blob/master/.emacs.d/dotemacs.org
+;; https://github.com/marcowahl/.emacs.d/blob/master/init.org
 
 ;; To try
 ;; pdf-tools: https://github.com/politza/pdf-tools
