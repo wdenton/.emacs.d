@@ -115,6 +115,7 @@
 		    org-bullets
 		    ;; org-reveal ;; install by hand https://github.com/yjwen/org-reveal/
 		    osc
+		    package-lint
 		    pcache
 		    powerline
 		    ;; rainbow-identifiers ;; Too much
@@ -153,6 +154,10 @@
 ;; (require 'bind-key) ;; if you use any :bind variant
 ;; Make sure that if I want a package, it gets installed automatically.
 (setq use-package-always-ensure t)
+
+;;;; moon-phase-mode-line
+(require 'moon-phase-mode-line)
+(display-moon-phase-mode t)
 
 ;;;;
 ;;;; Package management
