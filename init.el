@@ -157,7 +157,7 @@
 
 ;;;; moon-phase-mode-line
 (require 'moon-phase-mode-line)
-(display-moon-phase-mode t)
+(moon-phase-mode-line-display t)
 
 ;;;;
 ;;;; Package management
