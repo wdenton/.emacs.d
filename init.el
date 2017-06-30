@@ -11,6 +11,7 @@
 ;; https://github.com/therockmandolinist/dotfiles/blob/master/rc.org
 ;; https://github.com/thblt/dotfiles/blob/master/.emacs.d/dotemacs.org
 ;; https://github.com/marcowahl/.emacs.d/blob/master/init.org
+;; http://karl-voit.at/2017/06/03/emacs-org/
 
 ;; To try
 ;; pdf-tools: https://github.com/politza/pdf-tools
