@@ -108,6 +108,9 @@
 ;; Display images when a file is loaded (I can always toggle them off if I don't want them)
 (add-hook 'org-mode-hook (lambda () (org-toggle-inline-images)))
 
+;; Show line numbers (trying this out)
+;; (add-hook 'org-mode-hook (lambda () (setq display-line-numbers t)))
+
 ;; imenu integration
 (add-hook 'org-mode-hook
 	  (lambda () (imenu-add-to-menubar "Imenu")))
