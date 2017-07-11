@@ -63,4 +63,7 @@
 ;; indent-guide ... very nice
 (add-hook 'ruby-mode-hook 'indent-guide-mode)
 
+;; Show line numbers (trying this out)
+(add-hook 'ruby-mode-hook (lambda () (setq display-line-numbers 'relative)))
+
 (provide 'setup-ruby)
