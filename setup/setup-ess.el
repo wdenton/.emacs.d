@@ -9,6 +9,7 @@
 
 ;; Make R go to the width of the Emacs frame
 (add-hook 'ess-R-post-run-hook 'ess-execute-screen-options)
+(add-hook 'ess-post-run-hook 'ess-execute-screen-options)
 
 ;; Make knitr files be recognized as R
 (add-to-list 'auto-mode-alist '("\\.Rmd$" . R-mode))
