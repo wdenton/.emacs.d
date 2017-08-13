@@ -111,6 +111,7 @@
 		    list-unicode-display
 		    magit
 		    markdown-mode
+		    memoize
 		    multiple-cursors
 		    ;; org
 		    org-bullets
