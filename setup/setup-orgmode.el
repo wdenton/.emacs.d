@@ -12,12 +12,12 @@
 
 ;; Common for all Org users
 (global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-ca" 'org-agenda)
+;; (global-set-key "\C-ca" 'org-agenda)
 ;; I never use this.  Trying the binding to do something different.
 ;; (global-set-key "\C-cb" 'org-iswitchb)
 
 ;; Files to look in for agenda items
-(setq org-agenda-files (quote ("~/york/shared/projects/projects.org")))
+;; (setq org-agenda-files (quote ("~/york/shared/projects/projects.org")))
 
 ;; Nicer bullets!
 ;; Possibilities include:  ◉ ○ ✸ ✿ ♥ ● ◇ ✚ ✜ ☯ ◆ ♠ ♣ ♦ ☢ ❀ ◆ ◖ ▶ ► • ★ ▸ or any other amusing Unicode character
@@ -267,7 +267,7 @@
 (delete '("\\.pdf\\'" . default) org-file-apps)
 (add-to-list 'org-file-apps '("\\.pdf\\'" . "evince %s"))
 
-;; Requires ditaa to be installed
+;; For this to work, ditaa must be installed
 (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
 
 ;; Use C-< to wrap a block of text in a block, like < would create (for SRC or QUOTE)
@@ -349,6 +349,6 @@
 (set-face-attribute 'org-ellipsis nil :underline nil)
 
 ;; Zotxt
-(add-hook 'org-mode-hook (lambda () (org-zotxt-mode 1)))
+;; (add-hook 'org-mode-hook (lambda () (org-zotxt-mode 1)))
 
 (provide 'setup-orgmode)
