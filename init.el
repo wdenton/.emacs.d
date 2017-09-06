@@ -113,6 +113,7 @@
 		    markdown-mode
 		    memoize
 		    multiple-cursors
+		    nov
 		    ;; org
 		    org-bullets
 		    ;; org-reveal ;; install by hand https://github.com/yjwen/org-reveal/
@@ -777,6 +778,12 @@ already narrowed."
 
 ;; Perhaps try launching other programs?
 ;; http://endlessparentheses.com/keymap-for-launching-external-applications-and-websites.html
+
+;;;;
+;;;; EPUB
+;;;;
+
+(push '("\\.epub\\'" . nov-mode) auto-mode-alist)
 
 ;;;;
 ;;;; Zotero
