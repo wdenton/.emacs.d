@@ -25,7 +25,7 @@
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 ;; (setq org-bullets-bullet-list '("◉" "○ ""►" "•" "•"))
-(setq org-bullets-bullet-list '("⊢" "⋮" "⋱" " "))
+(setq org-bullets-bullet-list '("⊢" "⋮" "⋱" "⋱"))
 
 ;; org-entities displays \alpha etc. as Unicode characters.
 (setq org-pretty-entities t)
