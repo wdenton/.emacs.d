@@ -82,6 +82,9 @@
 ;; Visually indent everything nicely, but leave the raw file left-aligned
 (setq org-startup-indented t)
 
+;; Never show blank lines in condensed view
+(setq org-cycle-separator-lines 0)
+
 ;; Fontify Babel blocks nicely
 (setq org-src-fontify-natively t)
 
