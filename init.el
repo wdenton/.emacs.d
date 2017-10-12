@@ -637,15 +637,19 @@ already narrowed."
 
 ;; See http://www.lunaryorn.com/posts/center-buffer-text-in-emacs.html
 
-(use-package visual-fill-column
-  :defer t
-  :bind (("C-c t v" . visual-fill-column-mode))
-  :init
-  (dolist (hook '(ruby-mode-hook)) ;; prog-mode-hook?
-    (add-hook hook #'visual-fill-column-mode))
-  :config (setq-default visual-fill-column-center-text t
-                        visual-fill-column-fringes-outside-margins nil
-			fill-column 120))
+;; (use-package visual-fill-column
+;;   :defer t
+;;   :bind (("C-c t v" . visual-fill-column-mode))
+;;   :init
+;;   (dolist (hook '(ruby-mode-hook)) ;; prog-mode-hook?
+;;     (add-hook hook #'visual-fill-column-mode))
+;;   :config (setq-default visual-fill-column-center-text t
+;;                         visual-fill-column-fringes-outside-margins nil
+;; 			fill-column 120))
+
+
+;; I don't think I like that.
+;; (remove-hook 'ruby-mode-hook 'visual-fill-column-mode)
 
 ;;;;
 ;;;; ido
