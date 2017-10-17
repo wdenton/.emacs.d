@@ -140,8 +140,8 @@
 		    yaml-mode
 		    yari
 		    yasnippet
-		    zotelo
-		    zotxt
+		    ;; zotelo
+		    ;; zotxt
 		    ))
 (when (not package-archive-contents)
   (package-refresh-contents))
