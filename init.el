@@ -138,6 +138,7 @@
 		    visual-fill-column
 		    wrap-region
 		    yaml-mode
+		    yari
 		    yasnippet
 		    zotelo
 		    zotxt
