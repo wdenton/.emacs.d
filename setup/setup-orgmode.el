@@ -136,6 +136,9 @@
 ;; Details: http://orgmode.org/worg/org-tutorials/org-latex-preview.html
 (setq org-latex-create-formula-image-program 'imagemagick)
 
+;; Highlight inline LaTeX
+(setq org-highlight-latex-and-related '(latex))
+
 ;; For org-reveal, which makes presentations using reveal.js
 ;; 21 Dec 2015: Doesn't work with new Org export back end
 ;; (require 'ox-reveal)

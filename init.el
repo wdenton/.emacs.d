@@ -559,7 +559,7 @@ already narrowed."
 (setq comint-move-point-for-output t)
 ;;(setq comint-prompt-read-only t)
 
-;; undo-tree-mode (trying out)
+;; undo-tree-mode
 (global-undo-tree-mode)
 
 ;; aggressive-indent mode is aggressive indeed, but very handy.
@@ -646,7 +646,6 @@ already narrowed."
 ;;   :config (setq-default visual-fill-column-center-text t
 ;;                         visual-fill-column-fringes-outside-margins nil
 ;; 			fill-column 120))
-
 
 ;; I don't think I like that.
 ;; (remove-hook 'ruby-mode-hook 'visual-fill-column-mode)
