@@ -27,8 +27,8 @@
 
 ;; Zotero integration! (https://github.com/vitoshka/zotelo)
 ;; Requires MozRepl addon in Firefox
-(require 'zotelo)
-(add-hook 'TeX-mode-hook 'zotelo-minor-mode)
+;; (require 'zotelo)
+;; (add-hook 'TeX-mode-hook 'zotelo-minor-mode)
 
 ;; Automatically activate TeX-fold-mode.
 ;; C-c C-o C-b is necessary to hide everything (or see LaTeX | Show/Hide)
