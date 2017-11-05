@@ -224,16 +224,7 @@
 ;;;; Editing
 ;;;;
 
-;;;
-;;; Markdown
-;;;
 
-(use-package markdown-mode
-  :config
-  (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
-  (add-hook 'markdown-mode-hook 'turn-on-outline-minor-mode)
-  (add-hook 'markdown-mode-hook 'turn-on-visual-line-mode)
-  )
 
 ;;;
 ;;; Polymode, for Markdown + R + Yaml etc.
@@ -813,7 +804,7 @@ already narrowed."
 ;; (require 'setup-javascript)
 (require 'setup-jekyll)
 (require 'setup-latex)
-;; (require 'setup-markdown)
+(require 'setup-markdown)
 (require 'setup-orgmode)
 (require 'setup-ruby)
 (require 'setup-sonic-pi)

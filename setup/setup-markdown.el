@@ -1,9 +1,22 @@
-;; markdown-mode
-(autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
-;; I should know how to add both at the same time
-(setq auto-mode-alist (cons '("\\.markdown" . markdown-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.md" . markdown-mode) auto-mode-alist))
-(add-hook 'markdown-mode-hook 'turn-on-outline-minor-mode)
-(add-hook 'markdown-mode-hook 'turn-on-visual-line-mode)
+;;;;
+;;;; Configuration for Markdown
+;;;;
+
+;; https://github.com/jrblevin/markdown-mode
+
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init
+  (setq markdown-command "multimarkdown")
+  (setq markdown-hide-urls t)
+  (setq markdown-hide-markup t)
+  (setq markdown-url-compose-char "⋯")
+  (add-hook 'markdown-mode-hook 'turn-on-outline-minor-mode)
+  (add-hook 'markdown-mode-hook 'turn-on-visual-line-mode)
+  )
 
 (provide 'setup-markdown)
