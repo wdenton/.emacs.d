@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: New day in work diary
+# key: day_
+# --
+** `(format-time-string "[%Y-%m-%d %a]" (current-time))`
+$0
+*** PPK
+
+*** PCS
+
+*** Service

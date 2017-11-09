@@ -781,6 +781,22 @@ already narrowed."
 (push '("\\.epub\\'" . nov-mode) auto-mode-alist)
 
 ;;;;
+;;;; YASnippet
+;;;;
+
+;;
+
+(use-package yasnippet
+  :ensure t
+  :config
+
+  (use-package yasnippet-snippets
+    :ensure t)
+
+  (yas-global-mode 1)
+  )
+
+;;;;
 ;;;; Zotero
 ;;;;
 

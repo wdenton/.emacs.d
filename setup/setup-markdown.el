@@ -15,6 +15,7 @@
   (setq markdown-hide-urls t)
   (setq markdown-hide-markup t)
   (setq markdown-url-compose-char "⋯")
+  (setq markdown-header-scaling t)
   (add-hook 'markdown-mode-hook 'turn-on-outline-minor-mode)
   (add-hook 'markdown-mode-hook 'turn-on-visual-line-mode)
   )
