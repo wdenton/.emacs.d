@@ -784,7 +784,7 @@ already narrowed."
 ;;;; YASnippet
 ;;;;
 
-;;
+;; https://joaotavora.github.io/yasnippet/
 
 (use-package yasnippet
   :ensure t

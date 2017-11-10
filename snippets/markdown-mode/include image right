@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: include image right
+# key: imager_
+# --
+{% include image-float-right.html url = "/images/$1" caption = "$2" %}
