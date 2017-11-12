@@ -140,6 +140,7 @@
 		    yaml-mode
 		    yari
 		    yasnippet
+		    yasnippet-snippets
 		    ;; zotelo
 		    ;; zotxt
 		    ))
