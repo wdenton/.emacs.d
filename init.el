@@ -795,7 +795,7 @@ already narrowed."
 
 (use-package yasnippet
   :ensure t
-  :diminish yasnippet
+  :diminish yas-minor-mode
   :config
 
   (use-package yasnippet-snippets
