@@ -212,6 +212,7 @@
 ;; smartparens
 ;; https://github.com/Fuco1/smartparens/
 (use-package smartparens
+  :diminish smartparens-mode
   :config
   (require 'smartparens-config)
   (smartparens-global-mode t)
@@ -617,7 +618,6 @@ already narrowed."
 (eval-after-load "rubocop"           '(diminish 'rubocop-mode))
 (eval-after-load "ruby-block"        '(diminish 'ruby-block-mode))
 (eval-after-load "simple"            '(diminish 'visual-line-mode))
-(eval-after-load "smartparens"       '(diminish 'smartparens-mode))
 (eval-after-load "smerge-mode"       '(diminish 'smerge-mode))
 (eval-after-load "subword"           '(diminish 'subword-mode))
 (eval-after-load "undo-tree"         '(diminish 'undo-tree-mode))
@@ -731,6 +731,7 @@ already narrowed."
 (use-package swiper
   :ensure t
   :diminish ivy-mode
+  :diminish ivy
   :bind (("C-s" . swiper)
          ("C-c C-r" . ivy-resume)
          ("M-x" . counsel-M-x)
