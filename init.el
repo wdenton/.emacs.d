@@ -66,7 +66,7 @@
 ;;;;
 
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
 (setq package-archive-priorities
@@ -83,6 +83,7 @@
 		    auctex
 		    auto-complete
 		    auto-complete-auctex
+		    celestial-mode-line
 		    color-theme-solarized
 		    counsel
 		    csv-mode
@@ -159,10 +160,6 @@
 ;; (require 'bind-key) ;; if you use any :bind variant
 ;; Make sure that if I want a package, it gets installed automatically.
 (setq use-package-always-ensure t)
-
-;;;; moon-phase-mode-line
-(require 'moon-phase-mode-line)
-(moon-phase-mode-line-display t)
 
 ;;;;
 ;;;; Package management
@@ -629,6 +626,23 @@ already narrowed."
 
 (require 'powerline)
 (powerline-default-theme)
+
+;;;;
+;;;; Moon phases
+;;;;
+
+;; moon-phase-mode-line (my rough beginning)
+;; (require 'moon-phase-mode-line)
+;; (moon-phase-mode-line-display t)
+
+;; https://github.com/ecraven/celestial-mode-line
+;; TODO Convert to use-package
+(require 'celestial-mode-line)
+(setq calendar-longitude -79.4)
+(setq calendar-latitude 43.7)
+(setq calendar-location-name "Toronto")
+(push 'celestial-mode-line-string global-mode-string)
+(celestial-mode-line-start-timer)
 
 ;;;;
 ;;;; visual-fill-column to give margins
