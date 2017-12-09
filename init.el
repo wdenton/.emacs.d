@@ -641,8 +641,9 @@ already narrowed."
   :config
   (setq calendar-longitude -79.4
         calendar-latitude 43.7
-        calendar-location-name "Toronto"
-        global-mode-string '(""))
+        calendar-location-name "Toronto")
+  (if (null global-mode-string)
+    (setq global-mode-string '("" celestial-mode-line-string))
   (add-to-list 'global-mode-string 'celestial-mode-line-string t)
   (celestial-mode-line-start-timer))
 
