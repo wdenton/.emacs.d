@@ -636,13 +636,15 @@ already narrowed."
 ;; (moon-phase-mode-line-display t)
 
 ;; https://github.com/ecraven/celestial-mode-line
-;; TODO Convert to use-package
-(require 'celestial-mode-line)
-(setq calendar-longitude -79.4)
-(setq calendar-latitude 43.7)
-(setq calendar-location-name "Toronto")
-(push 'celestial-mode-line-string global-mode-string)
-(celestial-mode-line-start-timer)
+(use-package celestial-mode-line
+  :ensure t
+  :config
+  (setq calendar-longitude -79.4
+        calendar-latitude 43.7
+        calendar-location-name "Toronto"
+        global-mode-string '(""))
+  (add-to-list 'global-mode-string 'celestial-mode-line-string t)
+  (celestial-mode-line-start-timer))
 
 ;;;;
 ;;;; visual-fill-column to give margins
