@@ -83,7 +83,6 @@
 		    auctex
 		    auto-complete
 		    auto-complete-auctex
-		    celestial-mode-line
 		    color-theme-solarized
 		    counsel
 		    csv-mode
@@ -643,8 +642,8 @@ already narrowed."
         calendar-latitude 43.7
         calendar-location-name "Toronto")
   (if (null global-mode-string)
-    (setq global-mode-string '("" celestial-mode-line-string))
-  (add-to-list 'global-mode-string 'celestial-mode-line-string t)
+      (setq global-mode-string '("" celestial-mode-line-string))
+	(add-to-list 'global-mode-string 'celestial-mode-line-string t))
   (celestial-mode-line-start-timer))
 
 ;;;;
