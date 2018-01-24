@@ -333,6 +333,12 @@
   )
 (add-hook 'org-mode-hook #'wdenton/org-ispell)
 
+;; (defun wdenton/r-clocktable ()
+;;   "Set up the clocktable for my work diary"
+;;   (save-excursion (org-babel-goto-named-src-block "set_up_r_clocktable_session")
+;; 		  (org-babel-execute-src-block)))
+;; (define-key launcher-map "t" #'wdenton/r-clocktable)
+
 ;; Integrate RefTeX
 ;; From http://orgmode.org/worg/org-faq.html#using-reftex-in-org-mode
 ;; Use these lines to generate the bib (Org will recognize them as LaTeX commands):

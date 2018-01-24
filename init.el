@@ -791,7 +791,7 @@ already narrowed."
 (define-key launcher-map "m" #'mc/edit-lines)
 (define-key launcher-map "p" #'paradox-list-packages) ;; Or just 'list-packages if not using Paradox
 (define-key launcher-map "s" #'eshell)
-(define-key launcher-map "t" #'proced) ; top
+;;(define-key launcher-map "t" #'proced) ; top
 (define-key launcher-map "u" #'magit-pull-from-upstream)
 (define-key launcher-map "w" #'count-words-region)
 
