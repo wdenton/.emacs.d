@@ -132,6 +132,9 @@
   (add-to-list 'ispell-skip-region-alist '("^#\\+BEGIN_SRC" . "^#\\+END_SRC")))
 (add-hook 'org-mode-hook #'endless/org-ispell)
 
+;; Use flyspell to check spelling as I go
+(add-hook 'org-mode-hook 'turn-on-flyspell)
+
 ;; Preview LaTeX equations in buffers by showing images (C-c C-x C-l)
 ;; Details: http://orgmode.org/worg/org-tutorials/org-latex-preview.html
 (setq org-latex-create-formula-image-program 'imagemagick)
