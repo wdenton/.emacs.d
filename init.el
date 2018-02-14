@@ -464,6 +464,9 @@ Position the cursor at its beginning, according to the current mode."
 ;; http://pragmaticemacs.com/emacs/dont-kill-buffer-kill-this-buffer-instead/
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
 
+;; Use C-x f to open up a file under point
+(global-set-key (kbd "C-x f") 'find-file-at-point)
+
 ;;;;
 ;;;; Narrowing to region
 ;;;;
