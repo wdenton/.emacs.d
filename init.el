@@ -863,6 +863,7 @@ already narrowed."
 (require 'setup-markdown)
 (require 'setup-orgmode)
 (require 'setup-ruby)
+(require 'setup-shell-scripts)
 (require 'setup-sonic-pi)
 (require 'setup-useful-functions)
 (require 'setup-yaml)
