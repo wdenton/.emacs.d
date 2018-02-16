@@ -374,6 +374,7 @@
 (org-clock-persistence-insinuate)
 
 ;; Count things in hours, not days and hours
-(setq org-duration-format '(("h" . h:mm) ("min" . h:mm)))
+;; No: messes up my clocktable figuring.
+;; (setq org-duration-format '(("h" . h:mm) ("min" . h:mm)))
 
 (provide 'setup-orgmode)
