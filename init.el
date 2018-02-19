@@ -72,7 +72,7 @@
 (setq package-archive-priorities
       '(
 	("melpa" . 20)
-        ("gnu" . 10)))
+	("gnu" . 10)))
 
 ;; Make sure that all of the packages I want are installed. If not, install them.
 (setq my-packages '(ac-inf-ruby
@@ -648,17 +648,6 @@ already narrowed."
       (setq global-mode-string '("" celestial-mode-line-string))
     (add-to-list 'global-mode-string 'celestial-mode-line-string t))
   (celestial-mode-line-start-timer))
-
-;; Put the weather in the mode line
-;; https://github.com/emacsmirror/yahoo-weather/blob/master/yahoo-weather.el
-
-(use-package yahoo-weather
-  :ensure t
-  :config
-  (setq yahoo-weather-location "Toronto, Ontario"
-	yahoo-weather-format " [%(weather) | %(atmosphere-humidity) | %(temperature)° ] ")
-  (yahoo-weather-mode)
-  )
 
 ;;;;
 ;;;; visual-fill-column to give margins
