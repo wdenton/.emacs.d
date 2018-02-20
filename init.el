@@ -825,6 +825,18 @@ already narrowed."
   )
 
 ;;;;
+;;;; Git stuff
+;;;;
+
+;; git-gutter
+;; https://github.com/syohex/emacs-git-gutter
+(use-package git-gutter
+  :ensure t
+  :config
+  (global-git-gutter-mode t)
+  )
+
+;;;;
 ;;;; which-key
 ;;;;
 
