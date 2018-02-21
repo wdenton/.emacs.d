@@ -3,11 +3,15 @@
 ;;;;
 
 ;; Keep a list of recently opened files
-;; C-x f show the list, and it's easy to pick from it (or q to quit it)
 (require 'recentf)
 (recentf-mode 1)
-(global-set-key "\C-xf" 'recentf-open-files)
 (setq recentf-save-file "~/.recentf")
+
+;; C-x f show the list, and it's easy to pick from it (or q to quit it)
+;; (global-set-key "\C-xf" 'recentf-open-files)
+
+;; Use C-x f to open up a file under point
+(global-set-key (kbd "C-x f") 'find-file-at-point)
 
 ;; Refresh buffers when files change (don't worry, changes won't be lost)
 (global-auto-revert-mode t)
