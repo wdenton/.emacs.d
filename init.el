@@ -1,3 +1,4 @@
+
 ;;;;
 ;;;; William Denton <wtd@pobox.com>
 ;;;;
@@ -433,6 +434,9 @@ Position the cursor at its beginning, according to the current mode."
 ;; Scroll by one line at a time.
 ;; https://www.gnu.org/software/emacs/manual/html_node/efaq/Scrolling-only-one-line.html
 (setq scroll-conservatively 10000)
+
+;; https://emacs.stackexchange.com/questions/28736/emacs-pointcursor-movement-lag
+(setq auto-window-vscroll nil)
 
 ;; Make searches case insensitive.
 (setq case-fold-search nil)
