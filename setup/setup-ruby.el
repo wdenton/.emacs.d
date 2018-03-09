@@ -40,7 +40,7 @@
 
 ;; This seems to fix some problems.  I'm trying using this and not ruby-electric,
 ;; in the hopes that when I type "  I don't get "\""\"
-;; (require 'smartparens-ruby)
+(require 'smartparens-ruby)
 
 ;; "Highlights delimiters such as parentheses, brackets or braces according to their depth."
 (add-hook 'ruby-mode-hook #'rainbow-delimiters-mode)

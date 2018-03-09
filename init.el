@@ -208,13 +208,13 @@
 
 ;; smartparens
 ;; https://github.com/Fuco1/smartparens/
-;; (use-package smartparens
-;;   :diminish smartparens-mode
-;;   :config
-;;   (require 'smartparens-config)
-;;   (smartparens-global-mode t)
-;;   (show-smartparens-global-mode +1)
-;;   )
+(use-package smartparens
+  :diminish smartparens-mode
+  :config
+  (require 'smartparens-config)
+  (smartparens-global-mode t)
+  (show-smartparens-global-mode +1)
+  )
 
 ;; Indenting
 (electric-indent-mode 1)
