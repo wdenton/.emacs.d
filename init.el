@@ -194,18 +194,6 @@
 ;;;; Parentheses!
 ;;;;
 
-;; Highlight matching parenthesis whenever the point is over one.
-;; (require 'paren)
-
-;; Matches parentheses and such in every mode
-;; (show-paren-mode 1)
-;; (setq show-paren-style 'mixed) ; Values; 'expression, 'parenthesis or 'mixed
-
-;; Make matching parentheses and quotes always appear
-;; https://github.com/capitaomorte/autopair
-;; (require 'autopair)
-;; (autopair-global-mode) ;; to enable in all buffers
-
 ;; smartparens
 ;; https://github.com/Fuco1/smartparens/
 (use-package smartparens
@@ -213,7 +201,9 @@
   :config
   (require 'smartparens-config)
   (smartparens-global-mode t)
-  (show-smartparens-global-mode +1)
+  (show-smartparens-global-mode t)
+  `(sp-show-pair-match-face :inverse-video t :bold t)
+  `(sp-show-pair-mismatch-face :inverse-video t :bold t)
   )
 
 ;; Indenting
@@ -222,8 +212,6 @@
 ;;;;
 ;;;; Editing
 ;;;;
-
-
 
 ;;;
 ;;; Polymode, for Markdown + R + Yaml etc.
