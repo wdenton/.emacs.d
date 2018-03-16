@@ -821,6 +821,7 @@ already narrowed."
 ;; https://github.com/syohex/emacs-git-gutter
 (use-package git-gutter
   :ensure t
+  :diminish git-gutter-mode
   :config
   (global-git-gutter-mode t)
   )
@@ -833,6 +834,7 @@ already narrowed."
 
 (use-package which-key
   :ensure t
+  :diminish which-key-mode
   :config
   (which-key-mode)
   )
