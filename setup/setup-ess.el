@@ -5,7 +5,7 @@
 (require 'ess-site)
 
 ;; Going to try this turned off and see if I notice.
-(setq ess-use-auto-complete nil)
+(setq ess-use-auto-complete t)
 
 ;; Make R go to the width of the Emacs frame
 (add-hook 'ess-R-post-run-hook 'ess-execute-screen-options)
@@ -25,7 +25,7 @@
 (setq ess-ask-for-ess-directory nil)
 
 ;; indent-guide ... very nice
-(add-hook 'ess-mode-hook 'indent-guide-mode)
+;; (add-hook 'ess-mode-hook 'indent-guide-mode)
 
 ;; "Highlights delimiters such as parentheses, brackets or braces according to their depth."
 (add-hook 'ess-mode-hook #'rainbow-delimiters-mode)
@@ -53,8 +53,46 @@
 ;; https://github.com/emacs-ess/ESS/issues/99
 (add-hook 'ess-mode-hook
 	  (lambda ()
+	    (setq ess-indent-level 4)
 	    (setq ess-first-continued-statement-offset 2)
-	    (setq ess-continued-statement-offset 0)))
+	    (setq ess-continued-statement-offset 0)
+	    (setq ess-brace-offset -4)
+            (setq ess-expression-offset 4)
+            (setq ess-else-offset 0)
+            (setq ess-close-brace-offset 0)
+            (setq ess-brace-imaginary-offset 0)
+            (setq ess-continued-brace-offset 0)
+            (setq ess-arg-function-offset 4)
+	    (setq ess-arg-function-offset-new-line '(4))
+	    ))
+
+(setq ess-R-font-lock-keywords
+      '((ess-R-fl-keyword:modifiers . t)
+        (ess-R-fl-keyword:fun-defs . t)
+        (ess-R-fl-keyword:keywords . t)
+        (ess-R-fl-keyword:assign-ops . t)
+        (ess-R-fl-keyword:constants . t)
+        (ess-fl-keyword:fun-calls . t)
+        (ess-R-fl-keyword:F&T . t)
+	))
+
+;; Be more colourful
+(setq ess-R-font-lock-keywords
+      (quote
+       ((ess-R-fl-keyword:modifiers . t)
+        (ess-R-fl-keyword:fun-defs . t)
+        (ess-R-fl-keyword:keywords . t)
+        (ess-R-fl-keyword:assign-ops . t)
+        (ess-R-fl-keyword:constants . t)
+        (ess-fl-keyword:fun-calls . t)
+        (ess-fl-keyword:numbers . t)
+        (ess-fl-keyword:operators . t)
+        (ess-fl-keyword:delimiters . t)
+        (ess-fl-keyword:=)
+	(ess-R-fl-keyword:F&T))))
+
+;; Colourise the comint buffer
+(setq ansi-color-for-comint-mode 'filter)
 
 ;; This next bit is taken from Kieran Healey (http://kieranhealy.org/blog/archives/2009/10/12/make-shift-enter-do-a-lot-in-ess/),
 ;; who adapted it from http://www.emacswiki.org/emacs/ESSShiftEnter
