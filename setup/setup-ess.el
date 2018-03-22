@@ -56,6 +56,7 @@
 	    (setq ess-indent-level 4)
 	    (setq ess-first-continued-statement-offset 2)
 	    (setq ess-continued-statement-offset 0)
+	    (setq ess-offset-continued 'cascade)
 	    (setq ess-brace-offset -4)
             (setq ess-expression-offset 4)
             (setq ess-else-offset 0)
