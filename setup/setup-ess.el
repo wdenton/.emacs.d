@@ -4,12 +4,12 @@
 
 (require 'ess-site)
 
-;; Going to try this turned off and see if I notice.
-(setq ess-use-auto-complete t)
-
 ;; Make R go to the width of the Emacs frame
 (add-hook 'ess-R-post-run-hook 'ess-execute-screen-options)
 (add-hook 'ess-post-run-hook 'ess-execute-screen-options)
+
+;; Auto-completion on.
+(setq ess-use-auto-complete t)
 
 ;; Make knitr files be recognized as R
 (add-to-list 'auto-mode-alist '("\\.Rmd$" . R-mode))
@@ -24,13 +24,10 @@
 ;; Start R in the current directory.  May need to change dirs with setwd() after.
 (setq ess-ask-for-ess-directory nil)
 
-;; indent-guide ... very nice
-;; (add-hook 'ess-mode-hook 'indent-guide-mode)
-
 ;; "Highlights delimiters such as parentheses, brackets or braces according to their depth."
 (add-hook 'ess-mode-hook #'rainbow-delimiters-mode)
 
-;; Show line numbers (trying this out)
+;; Show line numbers
 (add-hook 'ess-mode-hook (lambda () (setq display-line-numbers 'relative)))
 
 ;; Fancy up the prompt (see also ~/.Rprofile)
@@ -49,14 +46,15 @@
 ;; I use a lot of snake_case variable names, so disable _ turning into <-
 (ess-toggle-underscore nil)
 
-;; Had indent problems where tab would force lines way, way over to the right
-;; https://github.com/emacs-ess/ESS/issues/99
+;; I'm not sure what all this does, but it works.
+;; Stops comments from flying all the way over to the right, and
+;; makes %>% chains indent nicely (if the newline is after the pipe).
 (add-hook 'ess-mode-hook
 	  (lambda ()
 	    (setq ess-indent-level 4)
 	    (setq ess-first-continued-statement-offset 2)
 	    (setq ess-continued-statement-offset 0)
-	    (setq ess-offset-continued 'cascade)
+	    (setq ess-offset-continued 'straight)
 	    (setq ess-brace-offset -4)
             (setq ess-expression-offset 4)
             (setq ess-else-offset 0)
@@ -67,15 +65,9 @@
 	    (setq ess-arg-function-offset-new-line '(4))
 	    ))
 
-(setq ess-R-font-lock-keywords
-      '((ess-R-fl-keyword:modifiers . t)
-        (ess-R-fl-keyword:fun-defs . t)
-        (ess-R-fl-keyword:keywords . t)
-        (ess-R-fl-keyword:assign-ops . t)
-        (ess-R-fl-keyword:constants . t)
-        (ess-fl-keyword:fun-calls . t)
-        (ess-R-fl-keyword:F&T . t)
-	))
+;; indent-guide ... very nice
+;; (I no longer know what this does.)
+;; (add-hook 'ess-mode-hook 'indent-guide-mode)
 
 ;; Be more colourful
 (setq ess-R-font-lock-keywords
