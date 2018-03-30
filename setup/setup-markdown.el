@@ -18,6 +18,7 @@
   (setq markdown-header-scaling t)
   (add-hook 'markdown-mode-hook 'turn-on-outline-minor-mode)
   (add-hook 'markdown-mode-hook 'turn-on-visual-line-mode)
+  (add-hook 'markdown-mode-hook (lambda () (setq display-line-numbers 'relative)))
   )
 
 (provide 'setup-markdown)

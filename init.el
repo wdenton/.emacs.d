@@ -215,15 +215,16 @@
 
 ;;;
 ;;; Polymode, for Markdown + R + Yaml etc.
+;;; https://github.com/vspinu/polymode/
 ;;;
 
-;;(use-package polymode
-;;  :config
-;;  (require 'poly-R)
-;;  (require 'poly-markdown)
-;;  (add-to-list 'auto-mode-alist '("\\.md$" . poly-markdown-mode))
-;;  (add-to-list 'auto-mode-alist '("\\.Rmd$" . poly-markdown+r+yaml-mode))
-;;  )
+(use-package polymode
+  :config
+  (require 'poly-R)
+  (require 'poly-markdown)
+  (add-to-list 'auto-mode-alist '("\\.md$" . poly-markdown-mode))
+  (add-to-list 'auto-mode-alist '("\\.Rmd$" . poly-markdown+r-mode))
+  )
 
 ;;;;
 ;;;; Faces 'n' fonts

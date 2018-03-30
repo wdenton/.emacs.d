@@ -66,8 +66,7 @@
 	    ))
 
 ;; indent-guide ... very nice
-;; (I no longer know what this does.)
-;; (add-hook 'ess-mode-hook 'indent-guide-mode)
+(add-hook 'ess-mode-hook 'indent-guide-mode)
 
 ;; Be more colourful
 (setq ess-R-font-lock-keywords
