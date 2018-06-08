@@ -28,7 +28,7 @@
 (add-hook 'ess-mode-hook #'rainbow-delimiters-mode)
 
 ;; Show line numbers
-(add-hook 'ess-mode-hook (lambda () (setq display-line-numbers 'relative)))
+;; (add-hook 'ess-mode-hook (lambda () (setq display-line-numbers 'relative)))
 
 ;; Fancy up the prompt (see also ~/.Rprofile)
 ;; http://www.wisdomandwonder.com/article/9687/i-wasted-time-with-a-custom-prompt-for-r-with-ess

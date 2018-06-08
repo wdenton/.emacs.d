@@ -64,6 +64,6 @@
 (add-hook 'ruby-mode-hook 'indent-guide-mode)
 
 ;; Show line numbers
-(add-hook 'ruby-mode-hook (lambda () (setq display-line-numbers 'relative)))
+;; (add-hook 'ruby-mode-hook (lambda () (setq display-line-numbers 'relative)))
 
 (provide 'setup-ruby)
