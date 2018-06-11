@@ -43,9 +43,6 @@
 ;;
 (setq ess-local-process-name "R")
 
-;; I use a lot of snake_case variable names, so disable _ turning into <-
-(ess-toggle-underscore nil)
-
 ;; I'm not sure what all this does, but it works.
 ;; Stops comments from flying all the way over to the right, and
 ;; makes %>% chains indent nicely (if the newline is after the pipe).
