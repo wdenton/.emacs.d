@@ -94,7 +94,6 @@
 		    ess-R-object-popup
 		    expand-region
 		    flx-ido
-		    flymake-ruby
 		    ;; gh
 		    ;; gist
 		    highlight
@@ -311,14 +310,14 @@ Position the cursor at its beginning, according to the current mode."
 
 ;; Make window splitting more useful
 ;; http://pages.sachachua.com/.emacs.d/Sacha.html
-(defun wtd/vsplit-last-buffer (prefix)
+(defun wtd/vsplit-last-buffer (PREFIX)
   "Split the window vertically and display the previous buffer."
   (interactive "p")
   (split-window-vertically)
   (other-window 1 nil)
   (unless prefix
     (switch-to-next-buffer)))
-(defun wtd/hsplit-last-buffer (prefix)
+(defun wtd/hsplit-last-buffer (PREFIX)
   "Split the window horizontally and display the previous buffer."
   (interactive "p")
   (split-window-horizontally)
@@ -333,7 +332,7 @@ Position the cursor at its beginning, according to the current mode."
 (global-set-key [(shift insert)] 'clipboard-yank)
 
 ;; Allow pasting selection outside of Emacs
-(setq x-select-enable-clipboard t)
+(setq select-enable-clipboard t)
 
 ;; M-backspace is backward-word-kill, and C-backspace is bound to that
 ;; by default. Change that to backword-kill-line so it deletes from
@@ -382,7 +381,7 @@ Position the cursor at its beginning, according to the current mode."
 ;; From milkypostman.
 ;; See also https://emacs.stackexchange.com/a/81/145 and maybe try to glom the two together
 (defun create-scratch-buffer nil
-  "create a new scratch buffer to work in. (could be *scratch* - *scratchX*)"
+  "Create a new scratch buffer to work in (could be *scratch* - *scratchX*)."
   (interactive)
   (let ((n 0)
 	bufname)
@@ -599,7 +598,7 @@ already narrowed."
 (eval-after-load "auto-complete"     '(diminish 'auto-complete-mode)) ;; α
 (eval-after-load "autorevert"        '(diminish 'auto-revert-mode))
 (eval-after-load "eldoc"             '(diminish 'eldoc-mode))
-(eval-after-load "flymake"           '(diminish 'flymake-mode))
+;; (eval-after-load "flymake"           '(diminish 'flymake-mode))
 (eval-after-load "indent-guide"      '(diminish 'indent-guide-mode))
 ;;(eval-after-load "magit"             '(diminish 'magit-auto-revert-mode))
 (eval-after-load "org-indent"        '(diminish 'org-indent-mode)) ;; →
@@ -820,12 +819,23 @@ already narrowed."
 
 ;; git-gutter
 ;; https://github.com/syohex/emacs-git-gutter
-(use-package git-gutter
+;; (use-package git-gutter
+;;   :ensure t
+;;   :diminish git-gutter-mode
+;;   :config
+;;   (global-git-gutter-mode t)
+;;   )
+
+;; git-gutter
+;; https://github.com/syohex/emacs-git-gutter
+(use-package git-gutter-fringe
   :ensure t
-  :diminish git-gutter-mode
+  :diminish git-gutter-fringe-mode
   :config
   (global-git-gutter-mode t)
+  (setq git-gutter-fr:side 'right-fringe)
   )
+
 
 ;;;;
 ;;;; which-key
@@ -838,6 +848,15 @@ already narrowed."
   :diminish which-key-mode
   :config
   (which-key-mode)
+  )
+
+;;;;
+;;;; flycheck
+;;;;
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode)
+  :diminish flycheck-mode
   )
 
 ;;;;
@@ -871,3 +890,5 @@ already narrowed."
 (require 'setup-sonic-pi)
 (require 'setup-useful-functions)
 (require 'setup-yaml)
+
+;;; init.el ends here

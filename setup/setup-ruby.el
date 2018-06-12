@@ -54,8 +54,8 @@
 ;; (require 'ruby-electric)
 
 ;; Highlight syntax errors on the fly.
-(require 'flymake-ruby)
-(add-hook 'ruby-mode-hook 'flymake-ruby-load)
+;; (require 'flymake-ruby)
+;; (add-hook 'ruby-mode-hook 'flymake-ruby-load)
 
 ;; Trying out Rubocop (https://github.com/bbatsov/rubocop)
 (add-hook 'ruby-mode-hook 'rubocop-mode)
@@ -67,3 +67,4 @@
 ;; (add-hook 'ruby-mode-hook (lambda () (setq display-line-numbers 'relative)))
 
 (provide 'setup-ruby)
+;;; setup-ruby.el ends here
