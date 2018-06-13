@@ -830,12 +830,11 @@ already narrowed."
 ;; https://github.com/syohex/emacs-git-gutter
 (use-package git-gutter-fringe
   :ensure t
-  :diminish git-gutter-fringe-mode
+  :diminish git-gutter-mode
   :config
   (global-git-gutter-mode t)
   (setq git-gutter-fr:side 'right-fringe)
   )
-
 
 ;;;;
 ;;;; which-key
