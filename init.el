@@ -859,6 +859,18 @@ already narrowed."
   )
 
 ;;;;
+;;;; Copying and pasting with volatile-mode
+;;;;
+(use-package volatile-highlights
+  :ensure t
+  :init (volatile-highlights-mode t)
+  :diminish volatile-highlights-mode
+  :config
+  (vhl/define-extension 'undo-tree 'undo-tree-yank 'undo-tree-move)
+  (vhl/install-extension 'undo-tree)
+  )
+
+;;;;
 ;;;; Zotero
 ;;;;
 
