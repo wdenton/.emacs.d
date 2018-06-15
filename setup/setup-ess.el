@@ -83,6 +83,14 @@
 ;; Colourise the comint buffer
 (setq ansi-color-for-comint-mode 'filter)
 
+;; Flycheck and lintr
+(setq-default flycheck-lintr-linters
+              (concat "with_defaults(line_length_linter(120), "
+                      "absolute_paths_linter = NULL, "
+		      ;; "camel_case_linter = NULL, "
+		      ;; "snake_case_linter = NULL, "
+		      "commented_code_linter = NULL)"))
+
 ;; This next bit is taken from Kieran Healey (http://kieranhealy.org/blog/archives/2009/10/12/make-shift-enter-do-a-lot-in-ess/),
 ;; who adapted it from http://www.emacswiki.org/emacs/ESSShiftEnter
 ;; He explains:
