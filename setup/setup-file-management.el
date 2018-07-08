@@ -39,9 +39,6 @@
 ;; Prevents buffers littering up things when moving around in Dired
 (put 'dired-find-alternate-file 'disabled nil)
 
-;; More extra stuff
-(require 'dired+)
-
 ;; Make it easier to move and copy files across windows
 (setq dired-dwim-target t)
 
