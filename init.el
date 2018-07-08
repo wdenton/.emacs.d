@@ -98,7 +98,6 @@
 		    highlight
 		    ibuffer-projectile
 		    ;; ibuffer-vc
-		    ido-ubiquitous
 		    ido-vertical-mode
 		    imenu-anywhere
 		    indent-guide
@@ -662,6 +661,9 @@ already narrowed."
 
 ;; See http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode/
 
+;; July 2018: Need to add ido-completing-read-+
+;; (ido-ubiquitous is gone)
+
 ;; Flexible matching on filenames ... don't need to be exact.
 (setq ido-enable-flex-matching t)
 
@@ -670,7 +672,6 @@ already narrowed."
 
 ;; Turn it all one
 (ido-mode 1)
-(ido-ubiquitous-mode 1)
 
 ;; Shows options in a nice vertical list in the mini-buffer. Easier to
 ;; see.
