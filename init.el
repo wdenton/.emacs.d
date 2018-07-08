@@ -90,7 +90,7 @@
 		    diminish
 		    elfeed
 		    ess
-		    ess-R-object-popup
+		    ;; ess-R-object-popup ;; July 2018: Not in MELPA (temporarily?) for license reasons
 		    expand-region
 		    flx-ido
 		    ;; gh

@@ -17,9 +17,10 @@
 ;; Make knitr files be recognized as R
 (add-to-list 'auto-mode-alist '("\\.Rmd$" . R-mode))
 
+;; July 2018: Not in MELPA right now.
 ;; (autoload 'ess-R-object-popup "ess-R-object-popup" "Get info for object at point, and display it in a popup" t)
 ;; (require 'ess-R-object-popup)
-(define-key ess-mode-map "\C-c\C-g" 'ess-R-object-popup)
+;; (define-key ess-mode-map "\C-c\C-g" 'ess-R-object-popup)
 
 ;; Make all help buffers go into one frame
 (setq ess-help-own-frame 'nil)
