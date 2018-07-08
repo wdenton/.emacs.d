@@ -88,7 +88,6 @@
 		    counsel
 		    csv-mode
 		    diminish
-		    dired+
 		    elfeed
 		    ess
 		    ess-R-object-popup
