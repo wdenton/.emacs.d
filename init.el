@@ -124,7 +124,7 @@
 		    rainbow-delimiters
 		    rbenv
 		    rubocop
-		    ruby-block
+		    ;; ruby-block ;; July 2018: Not in MELPA
 		    ruby-electric
 		    ruby-mode
 		    ;; rvm

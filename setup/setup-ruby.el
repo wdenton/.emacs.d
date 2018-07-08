@@ -27,10 +27,10 @@
 ;; Avoid ridiculous Ruby indentation.
 (setq ruby-deep-indent-paren nil)
 
+;; July 2018: Not in MELPA
 ;; Show the starting point of a block when I'm at the end.
-(require 'ruby-block)
-(ruby-block-mode t)
-(setq ruby-block-highlight-toggle t)
+;; (ruby-block-mode t)
+;; (setq ruby-block-highlight-toggle t)
 
 ;; I don't want autopair or smartparens working in Ruby buffers ...
 ;; (add-hook 'ruby-mode-hook
