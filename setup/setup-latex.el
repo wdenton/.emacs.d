@@ -13,21 +13,28 @@
 ;; (setq font-latex-fontify-script nil)
 ;; (setq font-latex-fontify-sectioning 'color)
 
-(defun turn-on-outline-minor-mode () (outline-minor-mode 1))
-(add-hook 'LaTeX-mode-hook 'turn-on-outline-minor-mode)
+;; (defun turn-on-outline-minor-mode () (outline-minor-mode 1))
+;; (add-hook 'LaTeX-mode-hook 'turn-on-outline-minor-mode)
+
+;;; Code:
+
 (add-hook 'LaTeX-mode-hook 'turn-on-visual-line-mode)
 
 ;; Turn on spell-checking in LaTeX
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 
 ;; auto-complete-auctex (see setup-autocomplete.el for the rest of the auto-complete setup)
-(require 'auto-complete-auctex)
-(add-hook 'LaTeX-mode-hook 'auto-complete-auctex)
+;; (require 'auto-complete-auctex)
+;; (add-hook 'LaTeX-mode-hook 'auto-complete-auctex)
+(use-package auto-complete-auctex
+  :config
+  (add-hook 'LaTeX-mode-hook 'auto-complete-auctex)
+  )
 
-; (setq latex-run-command "pdflatex")
-; Use pdflatex to make PDFs
-; For some reason this value isn't respected and I had to set
-; it through Custom. Don't know why.
+;; (setq latex-run-command "pdflatex")
+;; Use pdflatex to make PDFs
+;; For some reason this value isn't respected and I had to set
+;; it through Custom. Don't know why.
 (setq TeX-PDF-mode t)
 
 (setq biblatex-dialect "biblatex")
@@ -69,84 +76,5 @@
              (?p . "\\parencite[]{%l}")
              (?o . "\\citepr[]{%l}")
              (?n . "\\nocite{%l}")))))
-
-;; Fontification (remove unnecessary entries as you notice them)
-;; http://lists.gnu.org/archive/html/emacs-orgmode/2009-05/msg00236.html
-;; http://www.gnu.org/software/auctex/manual/auctex/Fontification-of-macros.html
-(setq font-latex-match-reference-keywords
-      '(
-        ;; biblatex
-        ("printbibliography" "[{")
-        ("addbibresource" "[{")
-        ;; Standard commands
-        ;; ("cite" "[{")
-        ("Cite" "[{")
-        ("parencite" "[{")
-        ("Parencite" "[{")
-        ("footcite" "[{")
-        ("footcitetext" "[{")
-        ;; ;; Style-specific commands
-        ("textcite" "[{")
-        ("Textcite" "[{")
-        ("smartcite" "[{")
-        ("Smartcite" "[{")
-        ("cite*" "[{")
-        ("parencite*" "[{")
-        ("supercite" "[{")
-        ; Qualified citation lists
-        ("cites" "[{")
-        ("Cites" "[{")
-        ("parencites" "[{")
-        ("Parencites" "[{")
-        ("footcites" "[{")
-        ("footcitetexts" "[{")
-        ("smartcites" "[{")
-        ("Smartcites" "[{")
-        ("textcites" "[{")
-        ("Textcites" "[{")
-        ("supercites" "[{")
-        ;; Style-independent commands
-        ("autocite" "[{")
-        ("Autocite" "[{")
-        ("autocite*" "[{")
-        ("Autocite*" "[{")
-        ("autocites" "[{")
-        ("Autocites" "[{")
-        ;; Text commands
-        ("citeauthor" "[{")
-        ("Citeauthor" "[{")
-        ("citetitle" "[{")
-        ("citetitle*" "[{")
-        ("citeyear" "[{")
-        ("citedate" "[{")
-        ("citeurl" "[{")
-        ;; Special commands
-        ("fullcite" "[{")))
-
-(setq font-latex-match-textual-keywords
-      '(
-        ;; biblatex brackets
-        ("parentext" "{")
-        ("brackettext" "{")
-        ("hybridblockquote" "[{")
-        ;; Auxiliary Commands
-        ("textelp" "{")
-        ("textelp*" "{")
-        ("textins" "{")
-        ("textins*" "{")
-        ;; supcaption
-        ("subcaption" "[{")))
-
-(setq font-latex-match-variable-keywords
-      '(
-        ;; amsmath
-        ("numberwithin" "{")
-        ;; enumitem
-        ("setlist" "[{")
-        ("setlist*" "[{")
-        ("newlist" "{")
-        ("renewlist" "{")
-        ("setlistdepth" "{")
-        ("restartlist" "{")))
 
 (provide 'setup-latex)
