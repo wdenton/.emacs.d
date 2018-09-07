@@ -115,8 +115,8 @@
 ;; (add-hook 'org-mode-hook (lambda () (setq display-line-numbers t)))
 
 ;; imenu integration
-(add-hook 'org-mode-hook
-	  (lambda () (imenu-add-to-menubar "Imenu")))
+;; (add-hook 'org-mode-hook
+;; (lambda () (imenu-add-to-menubar "Imenu")))
 
 ;; Use LaTeX spell-check
 (add-hook 'org-mode-hook (lambda () (setq ispell-parser 'tex)))
@@ -279,50 +279,6 @@
 ;; For this to work, ditaa must be installed
 (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
 
-;; Use C-< to wrap a block of text in a block, like < would create (for SRC or QUOTE)
-;; From http://pragmaticemacs.com/emacs/wrap-text-in-an-org-mode-block/
-(defun wdenton/org-begin-template ()
-  "Make a template at point."
-  (interactive)
-  (if (org-at-table-p)
-      (call-interactively 'org-table-rotate-recalc-marks)
-    (let* ((choices '(("s" . "SRC")
-                      ("e" . "EXAMPLE")
-                      ("q" . "QUOTE")
-                      ("v" . "VERSE")
-                      ("c" . "CENTER")
-                      ("l" . "LaTeX")
-                      ("h" . "HTML")
-                      ("a" . "ASCII")))
-           (key
-	    (key-description
-	     (vector
-	      (read-key
-	       (concat
-		(propertize "Template type: " 'face 'minibuffer-prompt)
-		(mapconcat (lambda (choice)
-			     (concat
-			      (propertize (car choice) 'face 'font-lock-type-face)
-			      ": "
-			      (cdr choice)))
-			   choices
-			   ", ")))))))
-      (let ((result (assoc key choices)))
-        (when result
-          (let ((choice (cdr result)))
-            (cond
-             ((region-active-p)
-              (let ((start (region-beginning))
-                    (end (region-end)))
-                (goto-char end)
-                (insert "#+END_" choice "\n")
-                (goto-char start)
-                (insert "#+BEGIN_" choice "\n")))
-             (t
-              (insert "#+BEGIN_" choice "\n")
-              (save-excursion (insert "#+END_" choice))))))))))
-(define-key org-mode-map (kbd "C-<") 'wdenton/org-begin-template)
-
 ;; Stop ispell from looking where it shouldn't.
 ;; http://endlessparentheses.com/ispell-and-org-mode.html
 (defun wdenton/org-ispell ()
@@ -335,12 +291,6 @@
   (add-to-list 'ispell-skip-region-alist '("^#\\+BEGIN_EXAMPLE ". "#\\+END_EXAMPLE"))
   )
 (add-hook 'org-mode-hook #'wdenton/org-ispell)
-
-;; (defun wdenton/r-clocktable ()
-;;   "Set up the clocktable for my work diary"
-;;   (save-excursion (org-babel-goto-named-src-block "set_up_r_clocktable_session")
-;; 		  (org-babel-execute-src-block)))
-;; (define-key launcher-map "t" #'wdenton/r-clocktable)
 
 ;; Integrate RefTeX
 ;; From http://orgmode.org/worg/org-faq.html#using-reftex-in-org-mode
@@ -376,5 +326,11 @@
 ;; Count things in hours, not days and hours
 ;; No: messes up my clocktable figuring.
 ;; (setq org-duration-format '(("h" . h:mm) ("min" . h:mm)))
+
+;; (defun wdenton/r-clocktable ()
+;;   "Set up the clocktable for my work diary"
+;;   (save-excursion (org-babel-goto-named-src-block "set_up_r_clocktable_session")
+;; 		  (org-babel-execute-src-block)))
+;; (define-key launcher-map "t" #'wdenton/r-clocktable)
 
 (provide 'setup-orgmode)
