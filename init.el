@@ -217,10 +217,16 @@
 
 (use-package polymode
   :config
-  (require 'poly-R)
-  (require 'poly-markdown)
   (add-to-list 'auto-mode-alist '("\\.md$" . poly-markdown-mode))
   (add-to-list 'auto-mode-alist '("\\.Rmd$" . poly-markdown+r-mode))
+  )
+
+(use-package poly-R
+  :ensure t
+  )
+
+(use-package poly-markdown
+  :ensure t
   )
 
 ;;;;
@@ -228,7 +234,7 @@
 ;;;;
 
 ;; Measured in 0.1 pts
-(setq wtd-font-height-for-this-machine 120)
+(setq wtd-font-height-for-this-machine 110)
 (when (string= system-name "work")
   ;; Need it a little bigger on my work machine
   (setq wtd-font-height-for-this-machine 160))
