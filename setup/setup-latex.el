@@ -1,10 +1,17 @@
-;; Everything related to LaTeX and Auctex
+;;;;
+;;;; LaTeX and AucTeX
+;;;;
 
 ;; Except! auto-completion in Auctex is turned on in setup-autocomplete.el
 
 ;; Good reading:
 ;; http://tex.stackexchange.com/questions/50827/a-simpletons-guide-to-tex-workflow-with-emacs/50919#50919
 ;; http://tex.stackexchange.com/questions/52179/what-is-your-favorite-emacs-and-or-auctex-command-trick
+
+;; Simplify everything below
+;; Try these to simplify highlighting
+;; (setq font-latex-fontify-script nil)
+;; (setq font-latex-fontify-sectioning 'color)
 
 (defun turn-on-outline-minor-mode () (outline-minor-mode 1))
 (add-hook 'LaTeX-mode-hook 'turn-on-outline-minor-mode)
