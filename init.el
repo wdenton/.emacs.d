@@ -234,7 +234,7 @@
 ;;;;
 
 ;; Measured in 0.1 pts
-(setq wtd-font-height-for-this-machine 110)
+(setq wtd-font-height-for-this-machine 130)
 (when (string= system-name "work")
   ;; Need it a little bigger on my work machine
   (setq wtd-font-height-for-this-machine 160))
