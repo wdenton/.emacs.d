@@ -68,7 +68,7 @@
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(package-initialize)
+;; (package-initialize)
 
 (setq package-archive-priorities
       '(
@@ -216,16 +216,24 @@
 ;;;
 
 (use-package polymode
-  :config
-  (add-to-list 'auto-mode-alist '("\\.md$" . poly-markdown-mode))
-  (add-to-list 'auto-mode-alist '("\\.Rmd$" . poly-markdown+r-mode))
-  )
-
-(use-package poly-R
   :ensure t
   )
 
 (use-package poly-markdown
+  :config
+  (add-to-list 'auto-mode-alist '("\\.md$" . poly-markdown-mode))
+  )
+
+(use-package poly-R
+  :config
+  (add-to-list 'auto-mode-alist '("\\.Rmd$" . poly-markdown+r-mode))
+  )
+
+(use-package poly-noweb
+  :ensure t
+  )
+
+(use-package poly-org
   :ensure t
   )
 

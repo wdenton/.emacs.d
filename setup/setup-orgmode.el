@@ -10,6 +10,8 @@
 ;; I should try org-ref
 ;; https://github.com/jkitchin/org-ref
 
+(setq org-fontify-whole-heading-line t)
+
 ;; Common for all Org users
 (global-set-key "\C-cl" 'org-store-link)
 ;; (global-set-key "\C-ca" 'org-agenda)
@@ -34,8 +36,9 @@
 (setq org-hide-emphasis-markers t)
 
 ;; Change the sizes of the titles.
-;; (set-face-attribute 'org-level-1 nil :inherit 'outline-1 :height 1.2)
-;; (set-face-attribute 'org-level-2 nil :inherit 'outline-2 :height 1.1)
+(set-face-attribute 'org-level-1 nil :inherit 'outline-1 :height 1.1)
+(set-face-attribute 'org-level-2 nil :inherit 'outline-2 :height 1.1)
+(set-face-attribute 'org-level-2 nil :inherit 'outline-3 :height 1.1)
 
 ;; Better colouring of TODO keywords
 (setq org-todo-keyword-faces
@@ -104,6 +107,9 @@
 
 ;; Embed an image with [[file:foo.png]] and then C-c C-x C-v to view
 (setq org-display-inline-images t)
+
+;; Show on startup
+(setq org-startup-with-inline-images t)
 
 ;; Automatically refresh inline images that are generated from Babel blocks
 (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)

@@ -14,8 +14,8 @@
 ;; Auto-completion on.
 (setq ess-use-auto-complete t)
 
-;; Make knitr files be recognized as R
-(add-to-list 'auto-mode-alist '("\\.Rmd$" . R-mode))
+;; Use polymode (see elsewhere) for Rmd files
+;; (add-to-list 'auto-mode-alist '("\\.Rmd$" . R-mode))
 
 ;; July 2018: Not in MELPA right now.
 ;; (autoload 'ess-R-object-popup "ess-R-object-popup" "Get info for object at point, and display it in a popup" t)
