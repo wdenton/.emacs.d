@@ -219,6 +219,8 @@
   :ensure t
   )
 
+;; Polymode is nice everywhere, except I do not want it in Org.
+
 (use-package poly-markdown
   :config
   (add-to-list 'auto-mode-alist '("\\.md$" . poly-markdown-mode))
@@ -230,10 +232,6 @@
   )
 
 (use-package poly-noweb
-  :ensure t
-  )
-
-(use-package poly-org
   :ensure t
   )
 

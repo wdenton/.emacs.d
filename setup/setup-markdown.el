@@ -10,7 +10,8 @@
   :mode (("README\\.md\\'" . gfm-mode)
 	 ;; Defined elsewhere: use polymode
          ;; ("\\.md\\'" . markdown-mode)
-         ;; ("\\.markdown\\'" . markdown-mode))
+         ;; ("\\.markdown\\'" . markdown-mode)
+	 )
   :init
   ;; (setq markdown-command "multimarkdown")
   (setq markdown-hide-urls t)
