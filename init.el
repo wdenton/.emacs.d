@@ -210,30 +210,6 @@
 ;;;; Editing
 ;;;;
 
-;;;
-;;; Polymode, for Markdown + R + Yaml etc.
-;;; https://github.com/vspinu/polymode/
-;;;
-
-(use-package polymode
-  :ensure t
-  )
-
-;; Polymode is nice everywhere, except I do not want it in Org.
-
-(use-package poly-markdown
-  :config
-  (add-to-list 'auto-mode-alist '("\\.md$" . poly-markdown-mode))
-  )
-
-(use-package poly-R
-  :config
-  (add-to-list 'auto-mode-alist '("\\.Rmd$" . poly-markdown+r-mode))
-  )
-
-(use-package poly-noweb
-  :ensure t
-  )
 
 ;;;;
 ;;;; Faces 'n' fonts
@@ -916,5 +892,6 @@ already narrowed."
 (require 'setup-sonic-pi)
 (require 'setup-useful-functions)
 (require 'setup-yaml)
+(require 'setup-polymode) ;; Keep this last, after Markdown stuff is defined.
 
 ;;; init.el ends here
