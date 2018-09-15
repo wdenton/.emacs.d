@@ -9,7 +9,6 @@
 ;; I use rbenv, so Emacs needs to know about it
 ;; https://github.com/senny/rbenv.el
 (require 'rbenv)
-;; (global-rbenv-mode)
 (setq rbenv-show-active-ruby-in-modeline nil)
 (setq rbenv-modeline-function 'rbenv--modeline-plain)
 (add-hook 'ruby-mode-hook 'global-rbenv-mode)
@@ -27,19 +26,8 @@
 ;; Avoid ridiculous Ruby indentation.
 (setq ruby-deep-indent-paren nil)
 
-;; July 2018: Not in MELPA
-;; Show the starting point of a block when I'm at the end.
-;; (ruby-block-mode t)
-;; (setq ruby-block-highlight-toggle t)
-
-;; I don't want autopair or smartparens working in Ruby buffers ...
-;; (add-hook 'ruby-mode-hook
-;; 	  #'(lambda ()
-;; 	      (autopair-mode -1))
-;; 	  )
-
 ;; This seems to fix some problems.  I'm trying using this and not ruby-electric,
-;; in the hopes that when I type "  I don't get "\""\"
+;; in the hopes that when I type " I don't get "\""\"
 (require 'smartparens-ruby)
 
 ;; "Highlights delimiters such as parentheses, brackets or braces according to their depth."
@@ -50,14 +38,7 @@
 ;; TODO Make Org's C-c C-o more general and follow these links too.
 (add-hook 'ruby-mode-hook #'goto-address-mode)
 
-;; ... because I use electric mode to do that and more.
-;; (require 'ruby-electric)
-
-;; Highlight syntax errors on the fly.
-;; (require 'flymake-ruby)
-;; (add-hook 'ruby-mode-hook 'flymake-ruby-load)
-
-;; Trying out Rubocop (https://github.com/bbatsov/rubocop)
+;; Rubocop for pointing out errors (https://github.com/bbatsov/rubocop)
 (add-hook 'ruby-mode-hook 'rubocop-mode)
 
 ;; indent-guide ... very nice

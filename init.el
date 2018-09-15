@@ -203,13 +203,14 @@
   `(sp-show-pair-mismatch-face :inverse-video t :bold t)
   )
 
-;; Indenting
+;;;;
+;;;; Indenting
+;;;;
 (electric-indent-mode 1)
 
-;;;;
-;;;; Editing
-;;;;
-
+;; aggressive-indent mode is aggressive indeed, but very handy.
+(global-aggressive-indent-mode 1)
+(add-to-list 'aggressive-indent-excluded-modes 'html-mode)
 
 ;;;;
 ;;;; Faces 'n' fonts
@@ -530,10 +531,6 @@ already narrowed."
 ;; undo-tree-mode
 (global-undo-tree-mode)
 
-;; aggressive-indent mode is aggressive indeed, but very handy.
-(global-aggressive-indent-mode 1)
-(add-to-list 'aggressive-indent-excluded-modes 'html-mode)
-
 ;; Let me upcase or downcase a region, which is disabled by default.
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
@@ -623,25 +620,6 @@ already narrowed."
       (setq global-mode-string '("" celestial-mode-line-string))
     (add-to-list 'global-mode-string 'celestial-mode-line-string t))
   (celestial-mode-line-start-timer))
-
-;;;;
-;;;; visual-fill-column to give margins
-;;;;
-
-;; See http://www.lunaryorn.com/posts/center-buffer-text-in-emacs.html
-
-;; (use-package visual-fill-column
-;;   :defer t
-;;   :bind (("C-c t v" . visual-fill-column-mode))
-;;   :init
-;;   (dolist (hook '(ruby-mode-hook)) ;; prog-mode-hook?
-;;     (add-hook hook #'visual-fill-column-mode))
-;;   :config (setq-default visual-fill-column-center-text t
-;;                         visual-fill-column-fringes-outside-margins nil
-;; 			fill-column 120))
-
-;; I don't think I like that.
-;; (remove-hook 'ruby-mode-hook 'visual-fill-column-mode)
 
 ;;;;
 ;;;; ido
