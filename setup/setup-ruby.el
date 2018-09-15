@@ -8,15 +8,20 @@
 
 ;; I use rbenv, so Emacs needs to know about it
 ;; https://github.com/senny/rbenv.el
-(require 'rbenv)
-(setq rbenv-show-active-ruby-in-modeline nil)
-(setq rbenv-modeline-function 'rbenv--modeline-plain)
-(add-hook 'ruby-mode-hook 'global-rbenv-mode)
-;; (add-hook 'ruby-mode-hook 'rbenv-use-corresponding)
+(use-package rbenv
+  :config
+  (setq rbenv-show-active-ruby-in-modeline nil)
+  (setq rbenv-modeline-function 'rbenv--modeline-plain)
+  (add-hook 'ruby-mode-hook 'global-rbenv-mode)
+  ;; (add-hook 'ruby-mode-hook 'rbenv-use-corresponding)
+  )
 
 ;; Open up irb with M-x inf-ruby or C-c C-s from a Ruby buffer
-(autoload 'inf-ruby "inf-ruby" "Run an inferior Ruby process" t)
-(add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
+(use-package inf-ruby
+  :config
+  (autoload 'inf-ruby "inf-ruby" "Run an inferior Ruby process" t)
+  (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
+  )
 
 ;; Enable auto-completion in inf-ruby
 (eval-after-load 'auto-complete
@@ -39,7 +44,10 @@
 (add-hook 'ruby-mode-hook #'goto-address-mode)
 
 ;; Rubocop for pointing out errors (https://github.com/bbatsov/rubocop)
-(add-hook 'ruby-mode-hook 'rubocop-mode)
+(use-package rubocop
+  :config
+  (add-hook 'ruby-mode-hook 'rubocop-mode)
+  )
 
 ;; indent-guide ... very nice
 (add-hook 'ruby-mode-hook 'indent-guide-mode)

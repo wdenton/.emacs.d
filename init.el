@@ -101,14 +101,12 @@
 		    ido-vertical-mode
 		    imenu-anywhere
 		    indent-guide
-		    inf-ruby
 		    ivy
 		    js-comint
 		    js2-mode
 		    json-mode
 		    list-unicode-display
 		    magit
-		    markdown-mode
 		    memoize
 		    multiple-cursors
 		    nov
@@ -122,8 +120,6 @@
 		    ;; rainbow-identifiers ;; Too much
 		    projectile
 		    rainbow-delimiters
-		    rbenv
-		    rubocop
 		    ;; ruby-block ;; July 2018: Not in MELPA
 		    ruby-electric
 		    ruby-mode
