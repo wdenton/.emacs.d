@@ -2,6 +2,11 @@
 ;;;; Emacs Speaks Statistics (for R)
 ;;;;
 
+;; ESS requires this, for some reason.
+(use-package
+  julia-mode
+  )
+
 (require 'ess-site)
 
 ;; Don't let _ turn into <-
