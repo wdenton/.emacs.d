@@ -846,6 +846,23 @@ already narrowed."
 ;; In setup-org I turn on org-zotxt-mode in all Org files.
 
 ;;;;
+;;;; Window management
+;;;;
+
+;; eyebrowse
+;; https://github.com/wasamasa/eyebrowse
+(use-package eyebrowse
+  :ensure t
+  ;; :diminish eyebrowse-mode
+  :init
+  (eyebrowse-setup-opinionated-keys)
+  :config
+  (eyebrowse-mode t)
+  ;; (setq eyebrowse-new-workspace t)
+  (setq eyebrowse-wrap-around t)
+  )
+
+;;;;
 ;;;; Mode-specific customizations
 ;;;;
 
