@@ -112,6 +112,10 @@
 ;; Display images when a file is loaded (I can always toggle them off if I don't want them)
 (add-hook 'org-mode-hook (lambda () (org-toggle-inline-images)))
 
+;; How to rearrange things when I edit a source block
+;; default is regorganize-frame
+(setq org-src-window-setup 'current-window)
+
 ;; Show line numbers (trying this out)
 ;; (add-hook 'org-mode-hook (lambda () (setq display-line-numbers t)))
 
@@ -333,5 +337,18 @@
 ;;   (save-excursion (org-babel-goto-named-src-block "set_up_r_clocktable_session")
 ;; 		  (org-babel-execute-src-block)))
 ;; (define-key launcher-map "t" #'wdenton/r-clocktable)
+
+;; So I can use Memoir
+(with-eval-after-load 'ox-latex
+  (add-to-list 'org-latex-classes
+               '("memoir"
+                 "\\documentclass{memoir}"
+                 ("\\book{%s}" . "\\book*{%s}")
+                 ("\\part{%s}" . "\\part*{%s}")
+                 ("\\chapter{%s}" . "\\chapter*{%s}")
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
+
 
 (provide 'setup-orgmode)
