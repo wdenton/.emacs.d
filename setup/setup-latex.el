@@ -57,6 +57,9 @@
 ;; Use wrap-region
 (add-hook 'latex-mode-hook 'wrap-region-mode)
 
+;; Indent lists by 2 (default is -2)
+(setq LaTeX-item-indent 0)
+
 ;; So that RefTeX also recognizes \addbibresource. Note that you
 ;; can't use $HOME in path for \addbibresource but that "~" works.
 (setq reftex-bibliography-commands '("bibliography" "nobibliography" "addbibresource"))
