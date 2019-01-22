@@ -836,6 +836,17 @@ already narrowed."
   )
 
 ;;;;
+;;;; esonify
+;;;;
+
+;; "An Emacs extension that sonifies your code."
+;; https://github.com/oflatt/esonify/tree/bdc79d4ab2e3c449b5bef46e5cabc552beeed5c6
+;; M-x esonify-mode to toggle on/off
+(use-package esonify
+  :ensure t
+  )
+
+;;;;
 ;;;; Zotero
 ;;;;
 
