@@ -122,7 +122,6 @@
 		    rainbow-delimiters
 		    ;; ruby-block ;; July 2018: Not in MELPA
 		    ruby-electric
-		    ruby-mode
 		    ;; rvm
 		    smex
 		    sonic-pi
