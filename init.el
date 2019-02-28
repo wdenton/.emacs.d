@@ -76,14 +76,11 @@
 	("gnu" . 10)))
 
 ;; Make sure that all of the packages I want are installed. If not, install them.
-(setq my-packages '(ac-inf-ruby
-		    ag
+(setq my-packages '(ag
 		    aggressive-indent
 		    anzu
 		    async
 		    auctex
-		    auto-complete
-		    auto-complete-auctex
 		    color-theme-solarized
 		    counsel
 		    csv-mode

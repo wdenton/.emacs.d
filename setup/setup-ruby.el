@@ -23,10 +23,10 @@
   (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
   )
 
-;; Enable auto-completion in inf-ruby
-(eval-after-load 'auto-complete
-  '(add-to-list 'ac-modes 'inf-ruby-mode))
-(add-hook 'inf-ruby-mode-hook 'ac-inf-ruby-enable)
+;; ;; Enable auto-completion in inf-ruby
+;; (eval-after-load 'auto-complete
+;;   '(add-to-list 'ac-modes 'inf-ruby-mode))
+;; (add-hook 'inf-ruby-mode-hook 'ac-inf-ruby-enable)
 
 ;; Avoid ridiculous Ruby indentation.
 (setq ruby-deep-indent-paren nil)
