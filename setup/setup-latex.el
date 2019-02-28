@@ -23,13 +23,13 @@
 ;; Turn on spell-checking in LaTeX
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 
-;; auto-complete-auctex (see setup-autocomplete.el for the rest of the auto-complete setup)
-;; (require 'auto-complete-auctex)
-;; (add-hook 'LaTeX-mode-hook 'auto-complete-auctex)
-(use-package auto-complete-auctex
-  :config
-  (add-hook 'LaTeX-mode-hook 'auto-complete-auctex)
-  )
+;; ;; auto-complete-auctex (see setup-autocomplete.el for the rest of the auto-complete setup)
+;; ;; (require 'auto-complete-auctex)
+;; ;; (add-hook 'LaTeX-mode-hook 'auto-complete-auctex)
+;; (use-package auto-complete-auctex
+;;   :config
+;;   (add-hook 'LaTeX-mode-hook 'auto-complete-auctex)
+;;   )
 
 ;; (setq latex-run-command "pdflatex")
 ;; Use pdflatex to make PDFs

@@ -208,6 +208,10 @@
  	    (push '(">=" . ?≥) prettify-symbols-alist)
  	    (push '("#+BEGIN_SRC" . ?✎) prettify-symbols-alist)
  	    (push '("#+END_SRC" . ?□) prettify-symbols-alist)
+ 	    (push '("#+BEGIN_QUOTE" . ?❝) prettify-symbols-alist)
+ 	    (push '("#+END_QUOTE" . ?❞) prettify-symbols-alist)
+ 	    (push '("#+begin_quote" . ?❝) prettify-symbols-alist)
+ 	    (push '("#+end_quote" . ?❞) prettify-symbols-alist)
  	    ))
 
 ;; Capturing

@@ -876,7 +876,7 @@ already narrowed."
 ;;;; Mode-specific customizations
 ;;;;
 
-(require 'setup-autocomplete)
+(require 'setup-completion)
 (require 'setup-elfeed)
 (require 'setup-eshell)
 (require 'setup-ess)
