@@ -795,6 +795,22 @@ already narrowed."
   )
 
 ;;;;
+;;;; all-the-icons
+;;;;
+(use-package all-the-icons
+  :ensure t
+  :defer 0.5
+  :config
+  (all-the-icons-install-fonts)
+  )
+
+(use-package all-the-icons-ivy
+  :ensure t
+  :config
+  (all-the-icons-ivy-setup)
+  )
+
+;;;;
 ;;;; which-key
 ;;;;
 
