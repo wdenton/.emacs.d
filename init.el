@@ -801,8 +801,10 @@ already narrowed."
   :ensure t
   :defer 0.5
   :config
-  (all-the-icons-install-fonts)
   )
+;; Run M-x all-the-icons-install-fonts the first time, to get the fonts installed.
+;; Is there a use-package command to run a command once after the package is
+;; first installed?
 
 (use-package all-the-icons-ivy
   :ensure t
