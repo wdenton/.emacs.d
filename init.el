@@ -87,7 +87,6 @@
 		    diminish
 		    elfeed
 		    ess
-		    ;; ess-R-object-popup ;; July 2018: Not in MELPA (temporarily?) for license reasons
 		    expand-region
 		    flx-ido
 		    ;; gh
@@ -119,7 +118,6 @@
 		    rainbow-delimiters
 		    ;; ruby-block ;; July 2018: Not in MELPA
 		    ruby-electric
-		    ;; rvm
 		    smex
 		    sonic-pi
 		    swiper
@@ -178,6 +176,13 @@
 ;; 		   ("Archive" 10 package-menu--archive-predicate)
 ;; 		   ("Description" 0 nil)])
 ;; 	    (tabulated-list-init-header)))
+
+;;;;
+;;;; System tweaks
+;;;;
+
+;; Don't garbage clean so often
+(setq gc-cons-threshold 100000000)
 
 ;;;;
 ;;;; Parentheses!
