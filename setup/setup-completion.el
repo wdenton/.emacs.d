@@ -8,6 +8,7 @@
 (use-package company
   :ensure t
   :init (global-company-mode)
+  :diminish company-mode
   :config
   (setq company-minimum-prefix-length 1)
   (setq company-idle-delay 1)

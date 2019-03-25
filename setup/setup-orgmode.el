@@ -21,14 +21,20 @@
 ;; Files to look in for agenda items
 ;; (setq org-agenda-files (quote ("~/york/shared/projects/projects.org")))
 
-;; Nicer bullets!
-;; Possibilities include:  ◉ ○ ✸ ✿ ♥ ● ◇ ✚ ✜ ☯ ◆ ♠ ♣ ♦ ☢ ❀ ◆ ◖ ▶ ► • ★ ▸ or any other amusing Unicode character
+
+;;;;
+;;;; org-bullets (https://github.com/sabof/org-bullets)
+;;;;
+
+;; Possibilities include:  ◉ ○ ✸ ✿ ♥ ● ◇ ✚ ✜ ☯ ◆ ♠ ♣ ♦ ☢ ❀ ◆ ◖ ▶ ► • ★ ▸ or any other Unicode character
 ;; Default is '("◉" "○" "✸" "✿")
+;; I've used ("◉" "○ ""►" "•" "•"))
+
 (use-package org-bullets
   :config
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-  ;; (setq org-bullets-bullet-list '("◉" "○ ""►" "•" "•"))
   (setq org-bullets-bullet-list '("⊢" "⋮" "⋱" "⋱" "⋱"))
+  :init
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
   )
 
 ;; org-entities displays \alpha etc. as Unicode characters.
