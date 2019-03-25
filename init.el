@@ -919,6 +919,6 @@ already narrowed."
 (require 'setup-sonic-pi)
 (require 'setup-useful-functions)
 (require 'setup-yaml)
-(require 'setup-polymode) ;; Keep this last, after Markdown stuff is defined.
+;; (require 'setup-polymode) ;; Keep this last, after Markdown stuff is defined.
 
 ;;; init.el ends here
