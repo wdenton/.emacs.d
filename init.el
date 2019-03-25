@@ -800,30 +800,6 @@ already narrowed."
   )
 
 ;;;;
-;;;; all-the-icons
-;;;;
-(use-package all-the-icons
-  :ensure t
-  :defer 0.5
-  :config
-  )
-;; Run M-x all-the-icons-install-fonts the first time, to get the fonts installed.
-;; Is there a use-package command to run a command once after the package is
-;; first installed?
-
-(use-package all-the-icons-ivy
-  :ensure t
-  :config
-  (all-the-icons-ivy-setup)
-  )
-
-(use-package all-the-icons-dired
-  :ensure t
-  :config
-  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
-  )
-
-;;;;
 ;;;; which-key
 ;;;;
 
