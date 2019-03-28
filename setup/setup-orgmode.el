@@ -168,6 +168,9 @@
 ;; Turn ' and " into ‘posh’ “quotes”
 (setq org-export-with-smart-quotes t)
 
+;; Date format on exports
+;; (setq org-export-date-timestamp-format "%d %m %Y")
+
 ;; Use wrap-region
 (add-hook 'org-mode-hook 'wrap-region-mode)
 
