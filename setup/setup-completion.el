@@ -7,7 +7,8 @@
 
 (use-package company
   :ensure t
-  :init (global-company-mode)
+  :init ;; (global-company-mode)
+  (add-hook 'ruby-mode-hook 'company-mode)
   :diminish company-mode
   :config
   (setq company-minimum-prefix-length 1)
