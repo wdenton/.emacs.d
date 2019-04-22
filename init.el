@@ -114,7 +114,6 @@
 		    pcache
 		    powerline
 		    ;; rainbow-identifiers ;; Too much
-		    projectile
 		    rainbow-delimiters
 		    ;; ruby-block ;; July 2018: Not in MELPA
 		    ruby-electric
@@ -724,12 +723,13 @@ already narrowed."
 ;;;; Projectile (https://github.com/bbatsov/projectile)
 ;;;;
 
-(projectile-mode)
-
-;; Key bindings: https://projectile.readthedocs.io/en/latest/usage/
-
-;; Customize mode line
-(setq projectile-mode-line '(:eval (format " ᴨ(%s)" (projectile-project-name))))
+(use-package projectile
+  :ensure t
+  :config
+  (projectile-mode)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (setq projectile-mode-line '(:eval (format " ᴨ(%s)" (projectile-project-name))))
+  )
 
 ;;;;
 ;;;; launcher-map, to make it easier to run common things
