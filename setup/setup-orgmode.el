@@ -315,29 +315,10 @@
   )
 (add-hook 'org-mode-hook #'wdenton/org-ispell)
 
-;; Integrate RefTeX
-;; From http://orgmode.org/worg/org-faq.html#using-reftex-in-org-mode
-;; Use these lines to generate the bib (Org will recognize them as LaTeX commands):
-;; \bibliographystyle{plain}
-;; \bibliography{BIB-NAME}
-;;
-;; With this setup, C-c ) will invoke reftex-citation which will insert a reference in the usual way.
-
-;; (defun org-mode-reftex-setup ()
-;;   (load-library "reftex")
-;;   (and (buffer-file-name)
-;;        (file-exists-p (buffer-file-name))
-;;        (reftex-parse-all))
-;;   (define-key org-mode-map (kbd "C-c )") 'reftex-citation))
-;; (add-hook 'org-mode-hook 'org-mode-reftex-setup)
-
 ;; Change the ellipsis that indicates hidden content
 ;; http://endlessparentheses.com/changing-the-org-mode-ellipsis.html
 (setq org-ellipsis " ⬎") ;; ⤵ ↴ ⬎ ⤷
 (set-face-attribute 'org-ellipsis nil :underline nil)
-
-;; Zotxt
-;; (add-hook 'org-mode-hook (lambda () (org-zotxt-mode 1)))
 
 ;;;;
 ;;;; Clocking

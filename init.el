@@ -848,16 +848,6 @@ already narrowed."
   )
 
 ;;;;
-;;;; Zotero
-;;;;
-
-;; Zotxt
-;; https://gitlab.com/egh/zotxt
-;; https://github.com/egh/zotxt-emacs
-;; See http://www.mkbehr.com/posts/a-research-workflow-with-zotero-and-org-mode/
-;; In setup-org I turn on org-zotxt-mode in all Org files.
-
-;;;;
 ;;;; Window management
 ;;;;
 
