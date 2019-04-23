@@ -10,6 +10,10 @@
 ;; I should try org-ref
 ;; https://github.com/jkitchin/org-ref
 
+;; Use Org's current development branch, pulled down with git
+;; (http://orgmode.org/org.html#Installation)
+(add-to-list 'load-path "/usr/local/src/org-mode/lisp")
+
 (setq org-fontify-whole-heading-line t)
 
 ;; Common for all Org users

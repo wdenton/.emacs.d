@@ -54,7 +54,7 @@
 
 ;; Use Org's current development branch, pulled down with git
 ;; (http://orgmode.org/org.html#Installation)
-(add-to-list 'load-path "/usr/local/src/org-mode/lisp")
+;; (add-to-list 'load-path "/usr/local/src/org-mode/lisp")
 
 ;; Run the server; now I can load any file into Emacs with
 ;; 'emacsclient file'
@@ -106,16 +106,11 @@
 		    memoize
 		    multiple-cursors
 		    nov
-		    ;; org
-		    org-bullets
 		    ;; org-reveal ;; install by hand https://github.com/yjwen/org-reveal/
 		    osc
 		    package-lint
 		    pcache
 		    powerline
-		    ;; rainbow-identifiers ;; Too much
-		    rainbow-delimiters
-		    ;; ruby-block ;; July 2018: Not in MELPA
 		    ruby-electric
 		    smex
 		    sonic-pi
@@ -128,8 +123,6 @@
 		    yari
 		    yasnippet
 		    yasnippet-snippets
-		    ;; zotelo
-		    ;; zotxt
 		    ))
 (when (not package-archive-contents)
   (package-refresh-contents))

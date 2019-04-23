@@ -6,17 +6,6 @@
 
 (require 'elfeed)
 
-;; (require 'elfeed-org)
-;; (elfeed-org)
-;; (setq rmh-elfeed-org-files (list "~/.emacs.d/setup/setup-elfeed-subscriptions.org"))
-
-;; (use-package elfeed-org
-;;   :pin manual
-;;   :config
-;;   (setq rmh-elfeed-org-files (list "~/.emacs.d/setup/setup-elfeed-subscriptions.org"))
-;;   (elfeed-org)
-;;   )
-
 ;; See example file for what this should look like
 (setq elfeed-subscription-list "~/.emacs.d/setup/setup-elfeed-subscriptions.el")
 (if (file-exists-p elfeed-subscription-list)
