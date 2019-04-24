@@ -808,14 +808,14 @@ already narrowed."
 ;;;;
 ;;;; flycheck
 ;;;;
-(use-package flycheck
-  :ensure t
-  :init (global-flycheck-mode)
-  :diminish flycheck-mode
-  :config
-  (setq flycheck-global-modes '(not org-mode))
-  ;; Could also set :modes to list where I want it.
-  )
+;; (use-package flycheck
+;;   :ensure t
+;;   :init (global-flycheck-mode)
+;;   :diminish flycheck-mode
+;;   :config
+;;   (setq flycheck-global-modes '(not org-mode))
+;;   ;; Could also set :modes to list where I want it.
+;;   )
 
 ;;;;
 ;;;; Copying and pasting with volatile-mode
