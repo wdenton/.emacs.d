@@ -14,7 +14,7 @@
 (global-set-key (kbd "C-x f") 'find-file-at-point)
 
 ;; Refresh buffers when files change (don't worry, changes won't be lost)
-(global-auto-revert-mode t)
+;;;;  BROKEN??? (global-auto-revert-mode t)
 
 ;; Auto refresh dired, but be quiet about it
 (setq global-auto-revert-non-file-buffers t)
