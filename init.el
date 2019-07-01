@@ -88,13 +88,11 @@
 		    elfeed
 		    ess
 		    expand-region
-		    flx-ido
 		    ;; gh
 		    ;; gist
 		    highlight
 		    ibuffer-projectile
 		    ;; ibuffer-vc
-		    ido-vertical-mode
 		    imenu-anywhere
 		    indent-guide
 		    ivy
@@ -112,7 +110,6 @@
 		    pcache
 		    powerline
 		    ruby-electric
-		    smex
 		    sonic-pi
 		    swiper
 		    undo-tree
@@ -609,80 +606,6 @@ already narrowed."
       (setq global-mode-string '("" celestial-mode-line-string))
     (add-to-list 'global-mode-string 'celestial-mode-line-string t))
   (celestial-mode-line-start-timer))
-
-;;;;
-;;;; ido
-;;;;
-
-;; See http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode/
-
-;; July 2018: Need to add ido-completing-read-+
-;; (ido-ubiquitous is gone)
-
-;; Flexible matching on filenames ... don't need to be exact.
-(setq ido-enable-flex-matching t)
-
-;; Go for it!  Everywhere!
-(setq ido-everywhere t)
-
-;; Turn it all one
-(ido-mode 1)
-
-;; Shows options in a nice vertical list in the mini-buffer. Easier to
-;; see.
-(require 'ido-vertical-mode)
-(ido-vertical-mode 1)
-
-;; Don't ask for confirmation if I create a new buffer with C-x b)
-(setq ido-create-new-buffer 'always)
-
-;; Customize the order of files shown in the minibuffer
-(setq ido-file-extensions-order '(".org" ".rb" ".ini"))
-
-;; Make ido use completion-ignored-extensions
-(setq ido-ignore-extensions t)
-
-;; Visit recently closed buffers with C-x b (works because recentf is
-;; on)
-(setq ido-use-virtual-buffers t)
-
-;; Use cursor up and cursor down to move through the list
-(setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
-
-;; Let ido guess when find-file-at-point is what I want to do---if the
-;; point is on a file path, then C-x C-f will open it.
-(setq ido-use-filename-at-point 'guess)
-
-;; Stop ido from switching into other directories when no match in
-;; current one.
-(setq ido-auto-merge-work-directories-length -1)
-
-;; Save the state file in ~
-(setq ido-save-directory-list-file "~/.ido.last")
-
-;;;;
-;;;; Smex works nicely with ido.
-;;;;
-
-;; Now that I'm using Counsel I don't want M-x bound for smex,
-;; but Counsel does "piggyback on smex for sorting, if smex is installed,"
-;; so keep it around.
-;; (setq smex-save-file (expand-file-name ".smex-items" user-emacs-directory))
-;; (smex-initialize)
-;; (global-set-key (kbd "M-x") 'smex)
-;; (global-set-key (kbd "M-X") 'smex-major-mode-commands)
-
-;;;;
-;;;; flx and flx-ido for better fuzzy matching (https://github.com/lewang/flx)
-;;;;
-
-(require 'flx-ido)
-(ido-mode 1)
-(ido-everywhere 1)
-(flx-ido-mode 1)
-;; disable ido faces to see flx highlights.
-(setq ido-enable-flex-matching t)
-(setq ido-use-faces nil)
 
 ;;;;
 ;;;; Ivy and Swiper
