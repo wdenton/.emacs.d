@@ -588,26 +588,6 @@ already narrowed."
 (powerline-default-theme)
 
 ;;;;
-;;;; Moon phases
-;;;;
-
-;; moon-phase-mode-line (my rough beginning)
-;; (require 'moon-phase-mode-line)
-;; (moon-phase-mode-line-display t)
-
-;; https://github.com/ecraven/celestial-mode-line
-(use-package celestial-mode-line
-  :ensure t
-  :config
-  (setq calendar-longitude -79.4
-        calendar-latitude 43.7
-        calendar-location-name "Toronto")
-  (if (null global-mode-string)
-      (setq global-mode-string '("" celestial-mode-line-string))
-    (add-to-list 'global-mode-string 'celestial-mode-line-string t))
-  (celestial-mode-line-start-timer))
-
-;;;;
 ;;;; Ivy and Swiper
 ;;;;
 
