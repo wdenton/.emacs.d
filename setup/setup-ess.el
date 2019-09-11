@@ -33,9 +33,6 @@
 ;; Start R in the current directory.  May need to change dirs with setwd() after.
 (setq ess-ask-for-ess-directory nil)
 
-;; "Highlights delimiters such as parentheses, brackets or braces according to their depth."
-(add-hook 'ess-mode-hook #'rainbow-delimiters-mode)
-
 ;; Show line numbers
 ;; (add-hook 'ess-mode-hook (lambda () (setq display-line-numbers 'relative)))
 
