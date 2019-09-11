@@ -588,6 +588,15 @@ already narrowed."
 (powerline-default-theme)
 
 ;;;;
+;;;; amx for completion
+;;;;
+(use-package amx
+  :ensure t
+  :custom
+  (amx-backend 'ivy)
+  )
+
+;;;;
 ;;;; Ivy and Swiper
 ;;;;
 
