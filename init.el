@@ -144,15 +144,15 @@
 ;; Paradox
 ;; A nice package management layer.
 ;; (https://github.com/Malabarba/paradox/)
-(use-package paradox
-  :config
-  ;; I prefer package updates not to happen in the background
-  (setq paradox-execute-asynchronously nil)
-  ;; For starring on GitHub (see ~/.bash.$HOSTNAME.rc)
-  (setq paradox-github-token (getenv "PARADOX_TOKEN"))
-  ;; But if I install a package, don't automatically star it.
-  (setq paradox-automatically-star nil)
-  )
+;; (use-package paradox
+;;   :config
+;;   ;; I prefer package updates not to happen in the background
+;;   (setq paradox-execute-asynchronously nil)
+;;   ;; For starring on GitHub (see ~/.bash.$HOSTNAME.rc)
+;;   (setq paradox-github-token (getenv "PARADOX_TOKEN"))
+;;   ;; But if I install a package, don't automatically star it.
+;;   (setq paradox-automatically-star nil)
+;;   )
 
 ;; Commented because this conflicts with Paradox
 ;; Don't truncate the names in the Package column when viewing packages
@@ -649,7 +649,8 @@ already narrowed."
 (define-key launcher-map "g" #'magit-status)
 (define-key launcher-map "l" #'goto-line)
 (define-key launcher-map "m" #'mc/edit-lines)
-(define-key launcher-map "p" #'paradox-list-packages) ;; Or just 'list-packages if not using Paradox
+;; (define-key launcher-map "p" #'paradox-list-packages) ;; Or just 'list-packages if not using Paradox
+(define-key launcher-map "p" #'list-packages) ;; Or just 'list-packages if not using Paradox
 (define-key launcher-map "s" #'eshell)
 ;;(define-key launcher-map "t" #'proced) ; top
 (define-key launcher-map "u" #'magit-pull-from-upstream)
