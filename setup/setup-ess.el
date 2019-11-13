@@ -19,6 +19,9 @@
 ;; Auto-completion on.
 (setq ess-use-auto-complete t)
 
+;; Don't run flymake on ESS buffers (may help speed things up)
+(setq ess-use-flymake nil)
+
 ;; Use polymode (see elsewhere) for Rmd files
 ;; (add-to-list 'auto-mode-alist '("\\.Rmd$" . R-mode))
 
