@@ -17,9 +17,10 @@
 ;; (add-hook 'ess-post-run-hook 'ess-execute-screen-options)
 
 ;; Open R buffers in new windows, so they take up the whole width right from the start
-(setq display-buffer-alist
-      '(("R*" . ((display-buffer-same-window) (inhibit-same-window . nil)))
-        ("\\.R$" . ((display-buffer-same-window) (inhibit-same-window . nil)))))
+;; Ugh, this messes up Magit and other places where the window splits
+;; (setq display-buffer-alist
+;;       '(("R*" . ((display-buffer-same-window) (inhibit-same-window . nil)))
+;;         ("\\.R$" . ((display-buffer-same-window) (inhibit-same-window . nil)))))
 
 ;; Auto-completion on.
 (setq ess-use-auto-complete t)
