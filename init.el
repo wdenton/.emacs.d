@@ -462,12 +462,8 @@ already narrowed."
          (LaTeX-narrow-to-environment))
         (t (narrow-to-defun))))
 
-;; This line actually replaces Emacs' entire narrowing
-;; keymap, that's how much I like this command. Only copy it
-;; if that's what you want.
-(define-key ctl-x-map "n" #'narrow-or-widen-dwim)
-(eval-after-load 'latex
-  '(define-key LaTeX-mode-map "\C-xn" nil))
+(define-key ctl-x-map "w" #'narrow-or-widen-dwim)
+(eval-after-load 'latex '(define-key LaTeX-mode-map "\C-xw" nil))
 
 ;; rainbow-mode
 ;; "All strings representing colors will be highlighted with the color they represent."
@@ -489,7 +485,8 @@ already narrowed."
 
 ;; Make the cursor a thin horizontal bar, not a block (but I still
 ;; like it blinking)
-(setq-default cursor-type 'bar) ;; Can be 'bar or 'box or '(hbar . 3) etc.
+;; Can be 'bar or 'box or '(hbar . 3) etc.
+(set-default 'cursor-type '(bar . 4))
 
 ;; Use C-c left or C-c right to go back and forth in window
 ;; configurations
@@ -792,5 +789,3 @@ already narrowed."
 (require 'setup-useful-functions)
 (require 'setup-yaml)
 ;; (require 'setup-polymode) ;; Keep this last, after Markdown stuff is defined.
-
-;;; init.el ends here

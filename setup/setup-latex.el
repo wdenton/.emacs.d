@@ -57,6 +57,12 @@
 ;; Indent lists by 2 (default is -2)
 (setq LaTeX-item-indent 0)
 
+;; Let me do some narrowing in LaTeX documents ...
+;; but narrow-or-widen-dwim (C-x w) doesn't focus
+;; on a section or subsection?!
+(put 'LaTeX-narrow-to-environment 'disabled nil)
+(put 'TeX-narrow-to-group 'disabled nil)
+
 ;; So that RefTeX also recognizes \addbibresource. Note that you
 ;; can't use $HOME in path for \addbibresource but that "~" works.
 (setq reftex-bibliography-commands '("bibliography" "nobibliography" "addbibresource"))
