@@ -89,6 +89,8 @@
   '(
     ("Y U" "York University" nil 1)
     ("Y U L" "York University Libraries" nil 1)
+    ("YFUA" "YUFA" nil 1)
+    ("Y U F A" "York University Faculty Association" nil 1)
     ("libarian" "librarian" nil 1)
     ("libary" "library" nil 1)
     ("teh" "the" nil 1)
