@@ -324,6 +324,9 @@
 (setq org-ellipsis " ⬎") ;; ⤵ ↴ ⬎ ⤷
 (set-face-attribute 'org-ellipsis nil :underline nil)
 
+;; Make LOGBOOK and such fainter.  Default bold is too loud.
+(face-spec-set 'org-drawer '((t (:foreground "dim gray" :weight normal))))
+
 ;;;;
 ;;;; Clocking
 ;;;;
