@@ -202,14 +202,22 @@
 ;;;; Faces 'n' fonts
 ;;;;
 
+;; Maybe try this again one day?
+;; (use-package mixed-pitch
+;;   :hook
+;;   ;; If you want it in all text modes:
+;;   (text-mode . mixed-pitch-mode))
+
 ;; Measured in 0.1 pts
 (setq wtd-font-height-for-this-machine 130)
 (when (string= system-name "work")
   ;; Need it a little bigger on my work machine
-  (setq wtd-font-height-for-this-machine 160))
+  (setq wtd-font-height-for-this-machine 170))
 
 ;; (set-face-attribute 'default nil :height wtd-font-height-for-this-machine)
 (set-face-attribute 'default nil :font "Ubuntu Mono" :height wtd-font-height-for-this-machine)
+;; (set-face-attribute 'default nil :font "Fira Code" :height wtd-font-height-for-this-machine)
+;; (set-face-attribute 'variable-pitch nil :family "Baskerville")
 
 ;;;;
 ;;;; Theme: solarized
@@ -246,7 +254,7 @@
 ;; Proper line wrapping
 (global-visual-line-mode 1)
 
-;; Highlight current row
+;; Highlight current line
 (global-hl-line-mode 1)
 ;; And set its colour
 ;; (set-face-background hl-line-face "#efefef")
