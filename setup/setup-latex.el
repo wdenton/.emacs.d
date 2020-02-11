@@ -50,10 +50,10 @@
 
 ;; latex-extra makes tabs work on headings like they do in Org
 ;; https://github.com/Malabarba/latex-extra
-(use-package latex-extra
-  :config
-  (add-hook 'LaTeX-mode-hook #'latex-extra-mode)
-  )
+;; (use-package latex-extra
+;;   :config
+;;   (add-hook 'LaTeX-mode-hook #'latex-extra-mode)
+;;   )
 
 ;; RefTeX
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
