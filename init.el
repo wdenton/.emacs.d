@@ -189,11 +189,6 @@
   `(sp-show-pair-mismatch-face :inverse-video t :bold t)
   )
 
-;; Show matching brackets
-(show-paren-mode 1)
-;; Highlight brackets if visible, else entire expression
-(setq show-paren-style 'expression)
-
 ;;;;
 ;;;; Indenting
 ;;;;
