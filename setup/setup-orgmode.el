@@ -128,6 +128,11 @@
 ;; default is regorganize-frame
 (setq org-src-window-setup 'current-window)
 
+;; Use C-c d to close all the open drawers in a file
+(defun add-org-close-all-drawers-key ()
+  (local-set-key (kbd "C-c d") (lambda () (interactive) (org-cycle-hide-drawers 'all))))
+(add-hook 'org-mode-hook 'add-org-close-all-drawers-key)
+
 ;; Show line numbers (trying this out)
 ;; (add-hook 'org-mode-hook (lambda () (setq display-line-numbers t)))
 
@@ -326,6 +331,10 @@
 
 ;; Make LOGBOOK and such fainter.  Default bold is too loud.
 (face-spec-set 'org-drawer '((t (:foreground "dim gray" :weight normal))))
+
+(face-spec-set 'org-level-1 '((t (:height 1.05))))
+(face-spec-set 'org-level-2 '((t (:height 1.05))))
+(face-spec-set 'org-level-3 '((t (:height 1.0))))
 
 ;;;;
 ;;;; Clocking
