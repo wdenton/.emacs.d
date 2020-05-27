@@ -70,15 +70,26 @@
 	("melpa" . 20)
 	("gnu" . 10)))
 
+;; use-package
+;; https://github.com/jwiegley/use-package
+;; Docs say this should go at the start of the init file.
+(eval-when-compile
+  (require 'use-package))
+(require 'diminish) ;; if you use :diminish
+(require 'bind-key) ;; if you use any :bind variant
+;; Make sure that if I want a package, it gets installed automatically.
+(setq use-package-always-ensure t)
+
 ;; Make sure that all of the packages I want are installed. If not, install them.
 (setq my-packages '(;; ? ag
 		    ;; aggressive-indent ;; use-package
 		    ;; anzu ;; use-package
 		    async
 		    auctex
+		    bind-key
 		    color-theme-solarized
-		    counsel
-		    csv-mode
+		    ;; counsel ;; use-package
+		    ;; csv-mode ;; use-package
 		    diminish
 		    elfeed
 		    ess
@@ -101,11 +112,11 @@
 		    osc
 		    package-lint
 		    ;; pcache ;; Dropped 20200527
-		    powerline
+		    ;; powerline ;; use-package
 		    ruby-electric
 		    sonic-pi
-		    swiper
-		    undo-tree
+		    ;; swiper ;; use-package
+		    ;; undo-tree ;; use-package
 		    use-package
 		    visual-fill-column
 		    wrap-region
@@ -120,15 +131,6 @@
   (when (not (package-installed-p p))
     (package-install p)))
 
-;; use-package
-;; https://github.com/jwiegley/use-package
-;; Docs say this should go at the start of the init file.
-(eval-when-compile
-  (require 'use-package))
-(require 'diminish) ;; if you use :diminish
-;; (require 'bind-key) ;; if you use any :bind variant
-;; Make sure that if I want a package, it gets installed automatically.
-(setq use-package-always-ensure t)
 
 ;;;;
 ;;;; Package management
@@ -529,7 +531,11 @@ already narrowed."
 ;;(setq comint-prompt-read-only t)
 
 ;; undo-tree-mode
-(global-undo-tree-mode)
+(use-package undo-tree
+  :ensure t
+  :config
+  (global-undo-tree-mode)
+  )
 
 ;; Let me upcase or downcase a region, which is disabled by default.
 (put 'downcase-region 'disabled nil)
@@ -615,14 +621,18 @@ already narrowed."
 ;; https://github.com/jonathanchu/emacs-powerline
 ;; Sticking with the default seems to be nice enough for me.
 
-(require 'powerline)
-(powerline-default-theme)
+(use-package powerline
+  :ensure t
+  :config
+  (powerline-default-theme)
+  )
 
 ;;;;
 ;;;; amx for completion
 ;;;;
 (use-package amx
   :ensure t
+  :after ivy
   :custom
   (amx-backend 'ivy)
   )
@@ -634,10 +644,23 @@ already narrowed."
 ;; https://github.com/abo-abo/swiper
 ;; See also http://irreal.org/blog/?p=6419
 
-(use-package swiper
+(use-package counsel
+  :ensure t
+  )
+
+(use-package ivy
   :ensure t
   :diminish ivy-mode
   :diminish ivy
+  :config
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "%d/%d ")
+  )
+
+(use-package swiper
+  :ensure t
+  :after ivy
   :bind (("C-s" . swiper)
          ("C-c C-r" . ivy-resume)
          ("M-x" . counsel-M-x)
@@ -650,10 +673,8 @@ already narrowed."
          ("C-c v" . ivy-push-view)
          ("C-c V" . ivy-pop-view)
          ("M-y" . counsel-yank-pop))
-  :config
-  (ivy-mode 1)
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-count-format "%d/%d "))
+  ;; :config
+  )
 
 ;;;;
 ;;;; Projectile (https://github.com/bbatsov/projectile)
@@ -696,6 +717,13 @@ already narrowed."
 
 ;; Use nov if I ever want to read EPUBs in Emacs.
 ;; (push '("\\.epub\\'" . nov-mode) auto-mode-alist)
+
+;;;;
+;;;; CSV files
+;;;;
+(use-package csv-mode
+  :ensure t
+  )
 
 ;;;;
 ;;;; YASnippet
