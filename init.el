@@ -100,7 +100,7 @@
 		    ;; org-reveal ;; install by hand https://github.com/yjwen/org-reveal/
 		    osc
 		    package-lint
-		    pcache
+		    ;; pcache ;; Dropped 20200527
 		    powerline
 		    ruby-electric
 		    sonic-pi
