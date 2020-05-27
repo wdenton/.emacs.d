@@ -70,16 +70,6 @@
 	("melpa" . 20)
 	("gnu" . 10)))
 
-;; use-package
-;; https://github.com/jwiegley/use-package
-;; Docs say this should go at the start of the init file.
-(eval-when-compile
-  (require 'use-package))
-(require 'diminish) ;; if you use :diminish
-(require 'bind-key) ;; if you use any :bind variant
-;; Make sure that if I want a package, it gets installed automatically.
-(setq use-package-always-ensure t)
-
 ;; Make sure that all of the packages I want are installed. If not, install them.
 (setq my-packages '(;; ? ag
 		    ;; aggressive-indent ;; use-package
@@ -99,7 +89,7 @@
 		    highlight
 		    ibuffer-projectile
 		    ;; ibuffer-vc
-		    imenu-anywhere
+		    ;; imenu-anywhere
 		    indent-guide
 		    ;; ? ivy
 		    js-comint
@@ -130,6 +120,15 @@
   (when (not (package-installed-p p))
     (package-install p)))
 
+;; use-package
+;; https://github.com/jwiegley/use-package
+;; Docs say this should go at the start of the init file.
+(eval-when-compile
+  (require 'use-package))
+(require 'diminish) ;; if you use :diminish
+(require 'bind-key) ;; if you use any :bind variant
+;; Make sure that if I want a package, it gets installed automatically.
+(setq use-package-always-ensure t)
 
 ;;;;
 ;;;; Package management
@@ -631,6 +630,7 @@ already narrowed."
 ;;;;
 (use-package amx
   :ensure t
+  :requires helm
   :after ivy
   :custom
   (amx-backend 'ivy)
