@@ -56,11 +56,6 @@
 ;; (http://orgmode.org/org.html#Installation)
 ;; (add-to-list 'load-path "/usr/local/src/org-mode/lisp")
 
-;; Run the server; now I can load any file into Emacs with
-;; 'emacsclient file'
-;; Works a treat with the It's All Text! extension in Firefox, too.
-(server-mode)
-
 ;;;;
 ;;;; Packages
 ;;;;
@@ -76,9 +71,9 @@
 	("gnu" . 10)))
 
 ;; Make sure that all of the packages I want are installed. If not, install them.
-(setq my-packages '(ag
-		    aggressive-indent
-		    anzu
+(setq my-packages '(;; ? ag
+		    ;; aggressive-indent ;; use-package
+		    ;; anzu ;; use-package
 		    async
 		    auctex
 		    color-theme-solarized
@@ -95,15 +90,13 @@
 		    ;; ibuffer-vc
 		    imenu-anywhere
 		    indent-guide
-		    ivy
+		    ;; ? ivy
 		    js-comint
 		    js2-mode
 		    json-mode
-		    list-unicode-display
-		    magit
-		    memoize
-		    multiple-cursors
-		    nov
+		    ;; list-unicode-display ;; use-package
+		    ;; magit ;; use-package
+		    ;; memoize ;; Dropped 20200527
 		    ;; org-reveal ;; install by hand https://github.com/yjwen/org-reveal/
 		    osc
 		    package-lint
@@ -117,7 +110,7 @@
 		    visual-fill-column
 		    wrap-region
 		    yaml-mode
-		    yari
+		    ;; yari ;; Dropped 20200527
 		    yasnippet
 		    yasnippet-snippets
 		    ))
@@ -166,6 +159,14 @@
 ;; 		   ("Description" 0 nil)])
 ;; 	    (tabulated-list-init-header)))
 
+;; Run the server; now I can load any file into Emacs with
+;; 'emacsclient file'
+;; Works a treat with the It's All Text! extension in Firefox, too.
+(server-mode)
+;; (use-package with-editor
+;;   ;; https://github.com/magit/with-editor
+;;   :ensure t)
+
 ;;;;
 ;;;; System tweaks
 ;;;;
@@ -194,9 +195,13 @@
 ;;;;
 (electric-indent-mode 1)
 
-;; aggressive-indent mode is aggressive indeed, but very handy.
-(global-aggressive-indent-mode 1)
-(add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+(use-package aggressive-indent
+  ;; Indeed aggressive, but very handy.
+  :ensure t
+  :config
+  (global-aggressive-indent-mode 1)
+  (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+  )
 
 ;;;;
 ;;;; Faces 'n' fonts
@@ -503,9 +508,13 @@ already narrowed."
 ;; anzu-mode provides a "minor mode which display current point and
 ;; total matched in various search mode."
 ;; https://github.com/syohex/emacs-anzu
-(global-anzu-mode t)
-(global-set-key (kbd "M-%") 'anzu-query-replace)
-(global-set-key (kbd "C-M-%") 'anzu-query-replace-regexp)
+(use-package anzu
+  :ensure t
+  :config
+  (global-anzu-mode t)
+  (global-set-key (kbd "M-%") 'anzu-query-replace)
+  (global-set-key (kbd "C-M-%") 'anzu-query-replace-regexp)
+  )
 
 ;; I was getting errors about exceeding the defaults on both of these.
 (setq max-specpdl-size 50000)
@@ -530,8 +539,13 @@ already narrowed."
 (global-prettify-symbols-mode +1)
 (setq prettify-symbols-unprettify-at-point 'right-edge)
 
-;; Stop magit from nagging me about a change
-(setq magit-last-seen-setup-instructions "1.4.0")
+(use-package magit
+  ;; Will install with-editor, which it needs.
+  :ensure t
+  :config
+  ;; Stop magit from nagging me about a change
+  (setq magit-last-seen-setup-instructions "1.4.0")
+  )
 
 ;; imenu
 (global-set-key (kbd "M-i") 'imenu)
@@ -559,6 +573,18 @@ already narrowed."
    ("=" "=" "+" org-mode)
    ("_" "_" nil org-mode)
    ("$" "$" nil (org-mode latex-mode))))
+
+
+;; multiple-cursors
+(use-package multiple-cursors
+  :ensure t
+  )
+
+;; Allow searching for Unicode characters by name
+(use-package list-unicode-display
+  ;; https://github.com/purcell/list-unicode-display
+  :ensure t
+  )
 
 ;;;;
 ;;;; The mode-line
@@ -668,7 +694,8 @@ already narrowed."
 ;;;; EPUB
 ;;;;
 
-(push '("\\.epub\\'" . nov-mode) auto-mode-alist)
+;; Use nov if I ever want to read EPUBs in Emacs.
+;; (push '("\\.epub\\'" . nov-mode) auto-mode-alist)
 
 ;;;;
 ;;;; YASnippet
