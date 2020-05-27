@@ -110,10 +110,9 @@
 		    ;; memoize ;; Dropped 20200527
 		    ;; org-reveal ;; install by hand https://github.com/yjwen/org-reveal/
 		    osc
-		    package-lint
+		    ;; package-lint ;; Dropped 20200527
 		    ;; pcache ;; Dropped 20200527
 		    ;; powerline ;; use-package
-		    ruby-electric
 		    sonic-pi
 		    ;; swiper ;; use-package
 		    ;; undo-tree ;; use-package

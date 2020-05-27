@@ -31,8 +31,7 @@
 ;; Avoid ridiculous Ruby indentation.
 (setq ruby-deep-indent-paren nil)
 
-;; This seems to fix some problems.  I'm trying using this and not ruby-electric,
-;; in the hopes that when I type " I don't get "\""\"
+;; Parentheses.
 (require 'smartparens-ruby)
 
 ;; "Finds all the URLs in the buffer, highlights them, and turns them into clickable buttons."
