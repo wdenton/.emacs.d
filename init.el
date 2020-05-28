@@ -159,13 +159,10 @@
 ;;;; Theme: solarized
 ;;;;
 
-;; Light on dark theme; soothing to my eyes
-;; https://github.com/sellout/emacs-color-theme-solarized
-(use-package color-theme-solarized
+(use-package solarized-theme
+  ;; https://github.com/bbatsov/solarized-emacs
   :config
-  (load-theme 'solarized t)
-  (set-frame-parameter nil 'background-mode 'dark)
-  (enable-theme 'solarized)
+  (load-theme 'solarized-dark t)
   )
 
 ;; Keep custom settings in separate file
