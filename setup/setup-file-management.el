@@ -27,7 +27,7 @@
 	("\\.ods\\'\\|\\.xlsx?\\'\\|\\.docx?\\'\\|\\.csv\\'" "libreoffice")))
 
 ;; With this, C-x C-j (M-x dired-jump) goes to the current file's position in a dired buffer
-;; (http://emacsredux.com/blog/2013/09/24/dired-jump/)
+;; https://emacsredux.com/blog/2013/09/24/dired-jump/
 (require 'dired-x)
 
 ;; Emacs 24.4 defaults to an ls -1 view, not ls -l, but I want
@@ -53,10 +53,8 @@
 ;; Because ~ is in completion-ignored-extensions it won't try to open foo.ext~, but I'd rather
 ;; not see it in the first place.
 ;;
-;; This solution comes from http://stackoverflow.com/questions/1731634/dont-show-uninteresting-files-in-emacs-completion-window
-(defadvice completion--file-name-table (after
-					ignoring-backups-f-n-completion
-                                        activate)
+;; https://stackoverflow.com/questions/1731634/dont-show-uninteresting-files-in-emacs-completion-window
+(defadvice completion--file-name-table (after ignoring-backups-f-n-completion activate)
   "Filter out results when they match `completion-ignored-extensions'."
   (let ((res ad-return-value))
     (if (and (listp res)
@@ -67,7 +65,7 @@
 
 ;; File management shortcuts (from Bodil Stokke's setup: https://github.com/bodil/emacs.d)
 (defun delete-current-buffer-file ()
-  "Removes file connected to current buffer and kills buffer."
+  "Remove file connected to current buffer and kills buffer."
   (interactive)
   (let ((filename (buffer-file-name))
         (buffer (current-buffer))
@@ -81,7 +79,7 @@
 (global-set-key (kbd "C-x C-k") 'delete-current-buffer-file)
 
 (defun rename-current-buffer-file ()
-  "Renames current buffer and file it is visiting."
+  "Rename current buffer and file it is visiting."
   (interactive)
   (let ((name (buffer-name))
         (filename (buffer-file-name)))

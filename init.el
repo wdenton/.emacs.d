@@ -146,7 +146,7 @@
 
 ;; Measured in 0.1 pts
 (setq wtd-font-height-for-this-machine 130)
-(when (string= system-name "work")
+(when (string= (system-name) "work")
   ;; Need it a little bigger on my work machine
   (setq wtd-font-height-for-this-machine 170))
 
@@ -563,7 +563,7 @@ already narrowed."
 (eval-after-load "subword"           '(diminish 'subword-mode))
 
 ;;;; powerline: Fancy up the mode line!
-;; http://github.com/milkypostman/powerline/
+;; https://github.com/milkypostman/powerline/
 ;; Sticking with the default seems to be nice enough for me.
 (use-package powerline
   :config
@@ -620,7 +620,6 @@ already narrowed."
 ;;;;
 
 (use-package projectile
-  ;; :diminish " π"
   :config
   (projectile-mode)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
@@ -635,27 +634,13 @@ already narrowed."
 (define-prefix-command 'launcher-map)
 (define-key ctl-x-map "l" 'launcher-map)
 (define-key launcher-map "c" #'calculator) ; calc is too much
-;;(define-key launcher-map "d" #'ediff-buffers)
-;;(define-key launcher-map "f" #'find-dired)
 (define-key launcher-map "g" #'magit-status)
 (define-key launcher-map "l" #'goto-line)
 (define-key launcher-map "m" #'mc/edit-lines)
-;; (define-key launcher-map "p" #'paradox-list-packages) ;; Or just 'list-packages if not using Paradox
-(define-key launcher-map "p" #'list-packages) ;; Or just 'list-packages if not using Paradox
+(define-key launcher-map "p" #'list-packages)
 (define-key launcher-map "s" #'eshell)
-;;(define-key launcher-map "t" #'proced) ; top
 (define-key launcher-map "u" #'magit-pull-from-upstream)
 (define-key launcher-map "w" #'count-words-region)
-
-;; Perhaps try launching other programs?
-;; http://endlessparentheses.com/keymap-for-launching-external-applications-and-websites.html
-
-;;;;
-;;;; EPUB
-;;;;
-
-;; Use nov if I ever want to read EPUBs in Emacs.
-;; (push '("\\.epub\\'" . nov-mode) auto-mode-alist)
 
 ;;;;
 ;;;; CSV files
@@ -764,7 +749,7 @@ already narrowed."
 
 (require 'setup-completion)
 (require 'setup-elfeed)
-(require 'setup-eshell)
+;; (require 'setup-eshell) ;; I never use eshell
 (require 'setup-ess)
 (require 'setup-expansions)
 (require 'setup-file-management)
