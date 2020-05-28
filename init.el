@@ -80,8 +80,8 @@
 		    highlight
 		    ibuffer-projectile
 		    json-mode
-		    osc
-		    sonic-pi
+		    ;; osc
+		    ;; sonic-pi
 		    use-package
 		    visual-fill-column
 		    wrap-region
@@ -843,7 +843,7 @@ already narrowed."
 (require 'setup-orgmode)
 (require 'setup-ruby)
 (require 'setup-shell-scripts)
-(require 'setup-sonic-pi)
+;; (require 'setup-sonic-pi)
 (require 'setup-useful-functions)
 (require 'setup-yaml)
 ;; (require 'setup-polymode) ;; Keep this last, after Markdown stuff is defined.

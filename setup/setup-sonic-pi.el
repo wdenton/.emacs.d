@@ -2,7 +2,14 @@
 ;;; Sonic Pi (https://github.com/repl-electric/sonic-pi.el)
 ;;;
 
-;; (require 'sonic-pi)
+(use-package sonic-pi
+  :ensure t
+
+  :config
+  (setq sonic-pi-path "/usr/lib/sonic-pi/")
+  ;; .spi seems to be the suffix for Sonic Pi scripts
+  (setq auto-mode-alist (cons '("\\.spi" . ruby-mode) auto-mode-alist))
+  )
 
 ;; (add-hook 'sonic-pi-mode-hook
 ;; 	  (lambda ()
@@ -12,10 +19,5 @@
 ;; 	    (define-key ruby-mode-map "\C-c\C-c" 'sonic-pi-send-buffer)))
 
 ;; (setq false nil)
-
-(setq sonic-pi-path "/usr/lib/sonic-pi/")
-
-;; .spi seems to be the suffix for Sonic Pi scripts
-(setq auto-mode-alist (cons '("\\.spi" . ruby-mode) auto-mode-alist))
 
 (provide 'setup-sonic-pi)
