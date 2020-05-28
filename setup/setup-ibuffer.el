@@ -17,7 +17,6 @@
 ;; For ibuffer-projectile
 ;; https://github.com/purcell/ibuffer-projectile
 (use-package ibuffer-projectile
-  :ensure t
   :defer t
   :init
   (add-hook 'ibuffer-hook

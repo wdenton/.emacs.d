@@ -542,14 +542,15 @@ already narrowed."
 (use-package list-unicode-display)
 
 ;;;;
-;;;; The mode-line
+;;;; The mode line
 ;;;;
 
-;;;; Tidy up the mode-line.  I don't need to see everything in there.
-(eval-after-load "abbrev"            '(diminish 'abbrev-mode))
+;;;; Tidy up the mode line.  I don't need to see everything in there.
+(diminish 'abbrev-mode)
 (eval-after-load "autorevert"        '(diminish 'auto-revert-mode))
 (eval-after-load "eldoc"             '(diminish 'eldoc-mode))
 ;; (eval-after-load "flymake"           '(diminish 'flymake-mode))
+(eval-after-load "flyspell" '(diminish 'flyspell-mode " Ⓢ"))
 ;;(eval-after-load "magit"             '(diminish 'magit-auto-revert-mode))
 (eval-after-load "org-indent"        '(diminish 'org-indent-mode)) ;; →
 (eval-after-load "rainbow-mode"      '(diminish 'rainbow-mode))
@@ -557,10 +558,9 @@ already narrowed."
 (eval-after-load "smerge-mode"       '(diminish 'smerge-mode))
 (eval-after-load "subword"           '(diminish 'subword-mode))
 
-;;;; powerline: Fancy up the modeline!
+;;;; powerline: Fancy up the mode line!
 ;; https://github.com/jonathanchu/emacs-powerline
 ;; Sticking with the default seems to be nice enough for me.
-
 (use-package powerline
   :config
   (powerline-default-theme)
@@ -616,10 +616,11 @@ already narrowed."
 ;;;;
 
 (use-package projectile
+  ;; :diminish " π"
   :config
   (projectile-mode)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (setq projectile-mode-line '(:eval (format " ᴨ(%s)" (projectile-project-name))))
+  (setq projectile-mode-line-function '(lambda () (format " ᴨ[%s]" (projectile-project-name))))
   )
 
 ;;;;
@@ -699,6 +700,11 @@ already narrowed."
   :config
   (which-key-mode)
   )
+
+;;;;
+;;;; Spelling and abbreviations and dictionaries etc.
+;;;;
+
 
 ;;;;
 ;;;; flycheck
