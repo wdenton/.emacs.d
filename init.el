@@ -162,6 +162,10 @@
 (use-package solarized-theme
   ;; https://github.com/bbatsov/solarized-emacs
   :config
+  ;; Stop the theme from messing up Org headlines and using variable pitch everywhere.
+  (setq solarized-use-variable-pitch nil
+	solarized-scale-org-headlines nil)
+  (setq x-underline-at-descent-line t) ;; Try this out.
   (load-theme 'solarized-dark t)
   )
 

@@ -332,9 +332,9 @@
 ;; Make LOGBOOK and such fainter.  Default bold is too loud.
 (face-spec-set 'org-drawer '((t (:foreground "dim gray" :weight normal))))
 
-(face-spec-set 'org-level-1 '((t (:height 1.05))))
-(face-spec-set 'org-level-2 '((t (:height 1.05))))
-(face-spec-set 'org-level-3 '((t (:height 1.0))))
+;; (face-spec-set 'org-level-1 '((t (:height 1.05))))
+;; (face-spec-set 'org-level-2 '((t (:height 1.05))))
+;; (face-spec-set 'org-level-3 '((t (:height 1.0))))
 
 ;;;;
 ;;;; Clocking
