@@ -7,6 +7,7 @@
 
 (use-package company
   :ensure t
+  :diminish company-mode
   :init ;; (global-company-mode)
   (add-hook 'ruby-mode-hook 'company-mode)
   :diminish company-mode

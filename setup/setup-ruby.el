@@ -2,6 +2,9 @@
 ;;;; Ruby
 ;;;;
 
+;; I used ruby-block once, but seem to have stopped.
+;; https://github.com/juszczakn/ruby-block
+
 (autoload 'ruby-mode "ruby-mode" "Mode for editing Ruby")
 (add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
 (add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
@@ -9,6 +12,7 @@
 ;; I use rbenv, so Emacs needs to know about it
 ;; https://github.com/senny/rbenv.el
 (use-package rbenv
+  :ensure t
   :config
   (setq rbenv-show-active-ruby-in-modeline nil)
   (setq rbenv-modeline-function 'rbenv--modeline-plain)
@@ -18,15 +22,11 @@
 
 ;; Open up irb with M-x inf-ruby or C-c C-s from a Ruby buffer
 (use-package inf-ruby
+  :ensure t
   :config
   (autoload 'inf-ruby "inf-ruby" "Run an inferior Ruby process" t)
   (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
   )
-
-;; ;; Enable auto-completion in inf-ruby
-;; (eval-after-load 'auto-complete
-;;   '(add-to-list 'ac-modes 'inf-ruby-mode))
-;; (add-hook 'inf-ruby-mode-hook 'ac-inf-ruby-enable)
 
 ;; Avoid ridiculous Ruby indentation.
 (setq ruby-deep-indent-paren nil)
@@ -41,6 +41,8 @@
 
 ;; Rubocop for pointing out errors (https://github.com/bbatsov/rubocop)
 (use-package rubocop
+  :ensure t
+  :diminish rubocop-mode
   :config
   (add-hook 'ruby-mode-hook 'rubocop-mode)
   )

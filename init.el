@@ -63,71 +63,40 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
-;; (package-initialize)
-
 (setq package-archive-priorities
-      '(
-	("melpa" . 20)
+      '(("melpa" . 20)
 	("gnu" . 10)))
 
-;; Make sure that all of the packages I want are installed. If not, install them.
-(setq my-packages '(bind-key
-		    diminish
-		    use-package
-		    ))
+;;;;
+;;;; use-package
+;;;;
 
-(when (not package-archive-contents)
-  (package-refresh-contents))
-(dolist (p my-packages)
-  (when (not (package-installed-p p))
-    (package-install p)))
-
-;; use-package
+;; Thank you, John Wiegley!
 ;; https://github.com/jwiegley/use-package
-;; Docs say this should go at the start of the init file.
+
+;; If it's not installed, get it.
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
 (eval-when-compile
   (require 'use-package))
-(require 'diminish) ;; if you use :diminish
-(require 'bind-key) ;; if you use any :bind variant
+
 ;; Make sure that if I want a package, it gets installed automatically.
 (setq use-package-always-ensure t)
 
+;; These two go with use-package
+(use-package diminish)
+;; (require 'diminish)
+(use-package bind-key)
+;; (require 'bind-key) ;; if you use any :bind variant
+
 ;;;;
-;;;; Package management
+;;;; Emacs server
 ;;;;
 
-;; Paradox
-;; A nice package management layer.
-;; (https://github.com/Malabarba/paradox/)
-;; (use-package paradox
-;;   :config
-;;   ;; I prefer package updates not to happen in the background
-;;   (setq paradox-execute-asynchronously nil)
-;;   ;; For starring on GitHub (see ~/.bash.$HOSTNAME.rc)
-;;   (setq paradox-github-token (getenv "PARADOX_TOKEN"))
-;;   ;; But if I install a package, don't automatically star it.
-;;   (setq paradox-automatically-star nil)
-;;   )
-
-;; Commented because this conflicts with Paradox
-;; Don't truncate the names in the Package column when viewing packages
-;; (add-hook 'package-menu-mode-hook
-;; 	  (lambda()
-;; 	    (setq tabulated-list-format
-;; 		  [("Package" 28 package-menu--name-predicate)
-;; 		   ("Version" 18 nil)
-;; 		   ("Status"  10 package-menu--status-predicate)
-;; 		   ("Archive" 10 package-menu--archive-predicate)
-;; 		   ("Description" 0 nil)])
-;; 	    (tabulated-list-init-header)))
-
-;; Run the server; now I can load any file into Emacs with
-;; 'emacsclient file'
-;; Works a treat with the It's All Text! extension in Firefox, too.
+;; Run the server; now I can load any file into Emacs with 'emacsclient file'
 (server-mode)
-;; (use-package with-editor
-;;   ;; https://github.com/magit/with-editor
-;;   :ensure t)
 
 ;;;;
 ;;;; System tweaks
@@ -157,16 +126,15 @@
 ;;;;
 (electric-indent-mode 1)
 
-
 ;; Show vertical lines to guide indentation
 ;; https://github.com/zk-phi/indent-guide
 (use-package indent-guide
-  :ensure t
+  :diminish indent-guide
   )
 
+;; aggressive-indent is indeed aggressive, but it's very handy.
 (use-package aggressive-indent
-  ;; Indeed aggressive, but very handy.
-  :ensure t
+  :diminish aggressive-indent-mode ;; "→"
   :config
   (global-aggressive-indent-mode 1)
   (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
@@ -175,12 +143,6 @@
 ;;;;
 ;;;; Faces 'n' fonts
 ;;;;
-
-;; Maybe try this again one day?
-;; (use-package mixed-pitch
-;;   :hook
-;;   ;; If you want it in all text modes:
-;;   (text-mode . mixed-pitch-mode))
 
 ;; Measured in 0.1 pts
 (setq wtd-font-height-for-this-machine 130)
@@ -200,7 +162,6 @@
 ;; Light on dark theme; soothing to my eyes
 ;; https://github.com/sellout/emacs-color-theme-solarized
 (use-package color-theme-solarized
-  :ensure t
   :config
   (load-theme 'solarized t)
   (set-frame-parameter nil 'background-mode 'dark)
@@ -361,7 +322,6 @@ Position the cursor at its beginning, according to the current mode."
 ;; expand-region (see https://github.com/magnars/expand-region.el)
 ;; C-= successively expands the region with great intelligence
 (use-package expand-region
-  :ensure t
   :defer t
   :init
   (global-set-key (kbd "C-=") 'er/expand-region)
@@ -486,7 +446,7 @@ already narrowed."
 ;; total matched in various search mode."
 ;; https://github.com/syohex/emacs-anzu
 (use-package anzu
-  :ensure t
+  :diminish anzu-mode
   :config
   (global-anzu-mode t)
   (global-set-key (kbd "M-%") 'anzu-query-replace)
@@ -507,7 +467,7 @@ already narrowed."
 
 ;; undo-tree-mode
 (use-package undo-tree
-  :ensure t
+  :diminish undo-tree-mode
   :config
   (global-undo-tree-mode)
   )
@@ -522,7 +482,6 @@ already narrowed."
 
 ;;
 (use-package async
-  :ensure t
   :defer t
   :config
   (dired-async-mode 1)
@@ -534,7 +493,6 @@ already narrowed."
 
 (use-package magit
   ;; It will install with-editor
-  :ensure t
   :config
   ;; Stop magit from nagging me about a change
   (setq magit-last-seen-setup-instructions "1.4.0")
@@ -559,8 +517,8 @@ already narrowed."
 ;; wrap-region to wrap regions in * or / etc.
 ;; See http://pragmaticemacs.com/emacs/wrap-text-in-custom-characters/
 (use-package wrap-region
-  :ensure t
   :defer t
+  :diminish wrap-region-mode
   :config
   ;; (wrap-region-mode t)
   (wrap-region-add-wrappers
@@ -576,47 +534,33 @@ already narrowed."
   )
 
 ;; multiple-cursors
-(use-package multiple-cursors
-  :ensure t
-  )
+(use-package multiple-cursors)
 
 ;; Allow searching for Unicode characters by name
-(use-package list-unicode-display
-  ;; https://github.com/purcell/list-unicode-display
-  :ensure t
-  )
+;; https://github.com/purcell/list-unicode-display
+(use-package list-unicode-display)
 
 ;;;;
 ;;;; The mode-line
 ;;;;
 
 ;;;; Tidy up the mode-line.  I don't need to see everything in there.
-;; (require 'diminish) ;; At top of file, where use-pockage is called.
 (eval-after-load "abbrev"            '(diminish 'abbrev-mode))
-(eval-after-load "aggressive-indent" '(diminish 'aggressive-indent-mode)) ;; →
-(eval-after-load "anzu"              '(diminish 'anzu-mode))
-(eval-after-load "auto-complete"     '(diminish 'auto-complete-mode)) ;; α
 (eval-after-load "autorevert"        '(diminish 'auto-revert-mode))
 (eval-after-load "eldoc"             '(diminish 'eldoc-mode))
 ;; (eval-after-load "flymake"           '(diminish 'flymake-mode))
-(eval-after-load "indent-guide"      '(diminish 'indent-guide-mode))
 ;;(eval-after-load "magit"             '(diminish 'magit-auto-revert-mode))
 (eval-after-load "org-indent"        '(diminish 'org-indent-mode)) ;; →
 (eval-after-load "rainbow-mode"      '(diminish 'rainbow-mode))
-(eval-after-load "rubocop"           '(diminish 'rubocop-mode))
-(eval-after-load "ruby-block"        '(diminish 'ruby-block-mode))
 (eval-after-load "simple"            '(diminish 'visual-line-mode))
 (eval-after-load "smerge-mode"       '(diminish 'smerge-mode))
 (eval-after-load "subword"           '(diminish 'subword-mode))
-(eval-after-load "undo-tree"         '(diminish 'undo-tree-mode))
-(eval-after-load "wrap-region"       '(diminish 'wrap-region-mode))
 
 ;;;; powerline: Fancy up the modeline!
 ;; https://github.com/jonathanchu/emacs-powerline
 ;; Sticking with the default seems to be nice enough for me.
 
 (use-package powerline
-  :ensure t
   :config
   (powerline-default-theme)
   )
@@ -625,7 +569,6 @@ already narrowed."
 ;;;; amx for completion
 ;;;;
 (use-package amx
-  :ensure t
   :requires helm
   :after ivy
   :custom
@@ -639,12 +582,9 @@ already narrowed."
 ;; https://github.com/abo-abo/swiper
 ;; See also http://irreal.org/blog/?p=6419
 
-(use-package counsel
-  :ensure t
-  )
+(use-package counsel)
 
 (use-package ivy
-  :ensure t
   :diminish ivy-mode
   :diminish ivy
   :config
@@ -654,7 +594,6 @@ already narrowed."
   )
 
 (use-package swiper
-  :ensure t
   :after ivy
   :bind (("C-s" . swiper)
          ("C-c C-r" . ivy-resume)
@@ -676,7 +615,6 @@ already narrowed."
 ;;;;
 
 (use-package projectile
-  :ensure t
   :config
   (projectile-mode)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
@@ -716,18 +654,12 @@ already narrowed."
 ;;;;
 ;;;; CSV files
 ;;;;
-(use-package csv-mode
-  :ensure t
-  :defer t
-  )
+(use-package csv-mode)
 
 ;;;;
 ;;;; JSON
 ;;;;
-(use-package json-mode
-  :ensure t
-  :defer t
-  )
+(use-package json-mode)
 
 ;;;;
 ;;;; YASnippet
@@ -736,13 +668,9 @@ already narrowed."
 ;; https://joaotavora.github.io/yasnippet/
 
 (use-package yasnippet
-  :ensure t
   :diminish yas-minor-mode
   :config
-
-  (use-package yasnippet-snippets
-    :ensure t)
-
+  (use-package yasnippet-snippets)
   (yas-global-mode 1)
   )
 
@@ -752,17 +680,7 @@ already narrowed."
 
 ;; git-gutter
 ;; https://github.com/syohex/emacs-git-gutter
-;; (use-package git-gutter
-;;   :ensure t
-;;   :diminish git-gutter-mode
-;;   :config
-;;   (global-git-gutter-mode t)
-;;   )
-
-;; git-gutter
-;; https://github.com/syohex/emacs-git-gutter
 (use-package git-gutter-fringe
-  :ensure t
   :diminish git-gutter-mode
   :config
   (global-git-gutter-mode t)
@@ -776,7 +694,6 @@ already narrowed."
 ;; https://github.com/justbur/emacs-which-key
 
 (use-package which-key
-  :ensure t
   :diminish which-key-mode
   :config
   (which-key-mode)
@@ -798,7 +715,6 @@ already narrowed."
 ;;;; Copying and pasting with volatile-mode
 ;;;;
 (use-package volatile-highlights
-  :ensure t
   :init (volatile-highlights-mode t)
   :diminish volatile-highlights-mode
   :config
@@ -813,9 +729,7 @@ already narrowed."
 ;; "An Emacs extension that sonifies your code."
 ;; https://github.com/oflatt/esonify
 ;; M-x esonify-mode to toggle on/off
-(use-package esonify
-  :ensure t
-  )
+(use-package esonify)
 
 ;;;;
 ;;;; Window management
@@ -824,10 +738,8 @@ already narrowed."
 ;; eyebrowse
 ;; https://github.com/wasamasa/eyebrowse
 (use-package eyebrowse
-  :ensure t
-  ;; :diminish eyebrowse-mode
-  :init
-  (eyebrowse-setup-opinionated-keys)
+  :diminish eyebrowse-mode
+  :init (eyebrowse-setup-opinionated-keys)
   :config
   (eyebrowse-mode t)
   ;; (setq eyebrowse-new-workspace t)
