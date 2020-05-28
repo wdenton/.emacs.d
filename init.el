@@ -71,22 +71,11 @@
 	("gnu" . 10)))
 
 ;; Make sure that all of the packages I want are installed. If not, install them.
-(setq my-packages '(auctex
-		    bind-key
+(setq my-packages '(bind-key
 		    diminish
-		    elfeed
-		    ess
-		    expand-region
-		    highlight
-		    ibuffer-projectile
-		    json-mode
-		    ;; osc
-		    ;; sonic-pi
 		    use-package
-		    visual-fill-column
-		    wrap-region
-		    yaml-mode
 		    ))
+
 (when (not package-archive-contents)
   (package-refresh-contents))
 (dolist (p my-packages)
@@ -371,8 +360,12 @@ Position the cursor at its beginning, according to the current mode."
 
 ;; expand-region (see https://github.com/magnars/expand-region.el)
 ;; C-= successively expands the region with great intelligence
-(require 'expand-region)
-(global-set-key (kbd "C-=") 'er/expand-region)
+(use-package expand-region
+  :ensure t
+  :defer t
+  :init
+  (global-set-key (kbd "C-=") 'er/expand-region)
+  )
 
 ;; "The command other-window is normally bound to C-x o but I find
 ;; that way too cumbersome for what is such a frequent operation. M-o
@@ -565,15 +558,22 @@ already narrowed."
 
 ;; wrap-region to wrap regions in * or / etc.
 ;; See http://pragmaticemacs.com/emacs/wrap-text-in-custom-characters/
-(wrap-region-mode t)
-(wrap-region-add-wrappers
- '(("*" "*" nil org-mode)
-   ("~" "~" nil org-mode)
-   ("/" "/" nil org-mode)
-   ("=" "=" "+" org-mode)
-   ("_" "_" nil org-mode)
-   ("$" "$" nil (org-mode latex-mode))))
-
+(use-package wrap-region
+  :ensure t
+  :defer t
+  :config
+  ;; (wrap-region-mode t)
+  (wrap-region-add-wrappers
+   '(("*" "*" nil org-mode)
+     ("~" "~" nil org-mode)
+     ("/" "/" nil org-mode)
+     ("=" "=" "+" org-mode)
+     ("_" "_" nil org-mode)
+     ("$" "$" nil (org-mode latex-mode))))
+  :init
+  (add-hook 'org-mode-hook 'wrap-region-mode)
+  (add-hook 'latex-mode-hook 'wrap-region-mode)
+  )
 
 ;; multiple-cursors
 (use-package multiple-cursors
@@ -718,6 +718,15 @@ already narrowed."
 ;;;;
 (use-package csv-mode
   :ensure t
+  :defer t
+  )
+
+;;;;
+;;;; JSON
+;;;;
+(use-package json-mode
+  :ensure t
+  :defer t
   )
 
 ;;;;

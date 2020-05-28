@@ -1,4 +1,5 @@
 ;; ibuffer is a nicer way of showing the buffer list (C-x C-b)
+;; It's built into Emacs.
 
 ;; Alias the usual buffer list command to ibuffer
 (defalias 'list-buffers 'ibuffer)
@@ -15,10 +16,15 @@
 
 ;; For ibuffer-projectile
 ;; https://github.com/purcell/ibuffer-projectile
-(add-hook 'ibuffer-hook
-	  (lambda ()
-	    (ibuffer-projectile-set-filter-groups)
-	    (unless (eq ibuffer-sorting-mode 'alphabetic)
-	      (ibuffer-do-sort-by-alphabetic))))
+(use-package ibuffer-projectile
+  :ensure t
+  :defer t
+  :init
+  (add-hook 'ibuffer-hook
+	    (lambda ()
+	      (ibuffer-projectile-set-filter-groups)
+	      (unless (eq ibuffer-sorting-mode 'alphabetic)
+		((insert) buffer-do-sort-by-alphabetic))))
+  )
 
 (provide 'setup-ibuffer)

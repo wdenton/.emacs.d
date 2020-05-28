@@ -2,53 +2,30 @@
 ;;;; Emacs Speaks Statistics (for R)
 ;;;;
 
-;; ESS requires this, for some reason.
-(use-package
-  julia-mode
+(use-package ess
+  :ensure t
+  :defer t
+  :config
+  (setq ess-smart-S-assign-key nil) ;; Don't let _ turn into <-
+  (setq ess-use-auto-complete t) ;; Auto-completion on.
+  (setq ess-use-flymake nil) ;; Don't run flymake on ESS buffers
+  (setq ess-help-own-frame 'nil) ;; Make all help buffers go into one frame
+  (setq inferior-ess-primary-prompt "ℝ> ") ;; Fancier prompt (see also ~/.Rprofile)
+  (setq inferior-S-prompt "[]a-zA-Z0-9.[]*\\(?:[>+.] \\)*ℝ+> ")
+  :init
+  (add-hook 'ess-R-post-run-hook 'ess-execute-screen-options) ;; Use the full width of the Emacs frame
+  (add-hook 'ess-post-run-hook 'ess-execute-screen-options)
+  (add-hook 'ess-mode-hook 'indent-guide-mode)   ;; indent-guide ... very nice
   )
-
-(require 'ess-site)
-
-;; Don't let _ turn into <-
-(setq ess-smart-S-assign-key nil)
-
-;; Make R go to the width of the Emacs frame
-(add-hook 'ess-R-post-run-hook 'ess-execute-screen-options)
-;; (add-hook 'ess-post-run-hook 'ess-execute-screen-options)
-
-;; Open R buffers in new windows, so they take up the whole width right from the start
-;; Ugh, this messes up Magit and other places where the window splits
-;; (setq display-buffer-alist
-;;       '(("R*" . ((display-buffer-same-window) (inhibit-same-window . nil)))
-;;         ("\\.R$" . ((display-buffer-same-window) (inhibit-same-window . nil)))))
-
-;; Auto-completion on.
-(setq ess-use-auto-complete t)
-
-;; Don't run flymake on ESS buffers (may help speed things up)
-(setq ess-use-flymake nil)
 
 ;; Use polymode (see elsewhere) for Rmd files
 ;; (add-to-list 'auto-mode-alist '("\\.Rmd$" . R-mode))
-
-;; July 2018: Not in MELPA right now.
-;; (autoload 'ess-R-object-popup "ess-R-object-popup" "Get info for object at point, and display it in a popup" t)
-;; (require 'ess-R-object-popup)
-;; (define-key ess-mode-map "\C-c\C-g" 'ess-R-object-popup)
-
-;; Make all help buffers go into one frame
-(setq ess-help-own-frame 'nil)
 
 ;; Start R in the current directory.  May need to change dirs with setwd() after.
 (setq ess-ask-for-ess-directory nil)
 
 ;; Show line numbers
 ;; (add-hook 'ess-mode-hook (lambda () (setq display-line-numbers 'relative)))
-
-;; Fancy up the prompt (see also ~/.Rprofile)
-;; http://www.wisdomandwonder.com/article/9687/i-wasted-time-with-a-custom-prompt-for-r-with-ess
-(setq inferior-ess-primary-prompt "ℝ> ")
-(setq inferior-S-prompt "[]a-zA-Z0-9.[]*\\(?:[>+.] \\)*ℝ+> ")
 
 ;; Display %>% as |, thanks to prettify-symbols-mode
 (add-hook 'inferior-ess-mode-hook
@@ -76,9 +53,6 @@
             (setq ess-arg-function-offset 4)
 	    (setq ess-arg-function-offset-new-line '(4))
 	    ))
-
-;; indent-guide ... very nice
-(add-hook 'ess-mode-hook 'indent-guide-mode)
 
 ;; Be more colourful
 (setq ess-R-font-lock-keywords
