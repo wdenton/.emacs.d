@@ -71,48 +71,21 @@
 	("gnu" . 10)))
 
 ;; Make sure that all of the packages I want are installed. If not, install them.
-(setq my-packages '(;; ? ag
-		    ;; aggressive-indent ;; use-package
-		    ;; anzu ;; use-package
-		    async
-		    auctex
+(setq my-packages '(auctex
 		    bind-key
-		    color-theme-solarized
-		    ;; counsel ;; use-package
-		    ;; csv-mode ;; use-package
 		    diminish
 		    elfeed
 		    ess
 		    expand-region
-		    ;; gh
-		    ;; gist
 		    highlight
 		    ibuffer-projectile
-		    ;; ibuffer-vc
-		    ;; imenu-anywhere
-		    indent-guide
-		    ;; ? ivy
-		    js-comint
-		    js2-mode
 		    json-mode
-		    ;; list-unicode-display ;; use-package
-		    ;; magit ;; use-package
-		    ;; memoize ;; Dropped 20200527
-		    ;; org-reveal ;; install by hand https://github.com/yjwen/org-reveal/
 		    osc
-		    ;; package-lint ;; Dropped 20200527
-		    ;; pcache ;; Dropped 20200527
-		    ;; powerline ;; use-package
 		    sonic-pi
-		    ;; swiper ;; use-package
-		    ;; undo-tree ;; use-package
 		    use-package
 		    visual-fill-column
 		    wrap-region
 		    yaml-mode
-		    ;; yari ;; Dropped 20200527
-		    yasnippet
-		    yasnippet-snippets
 		    ))
 (when (not package-archive-contents)
   (package-refresh-contents))
@@ -195,6 +168,13 @@
 ;;;;
 (electric-indent-mode 1)
 
+
+;; Show vertical lines to guide indentation
+;; https://github.com/zk-phi/indent-guide
+(use-package indent-guide
+  :ensure t
+  )
+
 (use-package aggressive-indent
   ;; Indeed aggressive, but very handy.
   :ensure t
@@ -230,9 +210,13 @@
 
 ;; Light on dark theme; soothing to my eyes
 ;; https://github.com/sellout/emacs-color-theme-solarized
-(load-theme 'solarized t)
-(set-frame-parameter nil 'background-mode 'dark)
-(enable-theme 'solarized)
+(use-package color-theme-solarized
+  :ensure t
+  :config
+  (load-theme 'solarized t)
+  (set-frame-parameter nil 'background-mode 'dark)
+  (enable-theme 'solarized)
+  )
 
 ;; Keep custom settings in separate file
 ;; If custom.el doesn't exist, create an empty file
@@ -543,8 +527,20 @@ already narrowed."
 (global-prettify-symbols-mode +1)
 (setq prettify-symbols-unprettify-at-point 'right-edge)
 
+;;
+(use-package async
+  :ensure t
+  :defer t
+  :config
+  (dired-async-mode 1)
+  )
+
+;;;;
+;;;; Git
+;;;;
+
 (use-package magit
-  ;; Will install with-editor, which it needs.
+  ;; It will install with-editor
   :ensure t
   :config
   ;; Stop magit from nagging me about a change
