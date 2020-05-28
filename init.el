@@ -129,7 +129,7 @@
 ;; Show vertical lines to guide indentation
 ;; https://github.com/zk-phi/indent-guide
 (use-package indent-guide
-  :diminish indent-guide
+  :diminish indent-guide-mode
   )
 
 ;; aggressive-indent is indeed aggressive, but it's very handy.
@@ -547,19 +547,23 @@ already narrowed."
 
 ;;;; Tidy up the mode line.  I don't need to see everything in there.
 (diminish 'abbrev-mode)
+
+(diminish 'emacs-lisp-d-mode " Ⓛ")
+
 (eval-after-load "autorevert"        '(diminish 'auto-revert-mode))
 (eval-after-load "eldoc"             '(diminish 'eldoc-mode))
 ;; (eval-after-load "flymake"           '(diminish 'flymake-mode))
-(eval-after-load "flyspell" '(diminish 'flyspell-mode " Ⓢ"))
+(eval-after-load "flyspell" '(diminish 'flyspell-mode ""))
 ;;(eval-after-load "magit"             '(diminish 'magit-auto-revert-mode))
 (eval-after-load "org-indent"        '(diminish 'org-indent-mode)) ;; →
+(eval-after-load "outline"        '(diminish 'outline-minor-mode))
 (eval-after-load "rainbow-mode"      '(diminish 'rainbow-mode))
 (eval-after-load "simple"            '(diminish 'visual-line-mode))
 (eval-after-load "smerge-mode"       '(diminish 'smerge-mode))
 (eval-after-load "subword"           '(diminish 'subword-mode))
 
 ;;;; powerline: Fancy up the mode line!
-;; https://github.com/jonathanchu/emacs-powerline
+;; http://github.com/milkypostman/powerline/
 ;; Sticking with the default seems to be nice enough for me.
 (use-package powerline
   :config
@@ -705,18 +709,19 @@ already narrowed."
 ;;;; Spelling and abbreviations and dictionaries etc.
 ;;;;
 
+;; Turn on spell-checking in comments in programs.
+(add-hook 'prog-mode-hook #'flyspell-prog-mode)
 
 ;;;;
 ;;;; flycheck
 ;;;;
-;; (use-package flycheck
-;;   :ensure t
-;;   :init (global-flycheck-mode)
-;;   :diminish flycheck-mode
-;;   :config
-;;   (setq flycheck-global-modes '(not org-mode))
-;;   ;; Could also set :modes to list where I want it.
-;;   )
+(use-package flycheck
+  :init (global-flycheck-mode)
+  :diminish flycheck-mode
+  :config
+  (setq flycheck-global-modes '(not org-mode))
+  ;; Could also set :modes to list where I want it.
+  )
 
 ;;;;
 ;;;; Copying and pasting with volatile-mode

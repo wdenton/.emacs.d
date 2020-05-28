@@ -3,9 +3,7 @@
 ;;; https://github.com/vspinu/polymode/
 ;;;
 
-(use-package polymode
-  :ensure t
-  )
+(use-package polymode)
 
 ;; Polymode is nice everywhere, except I do not want it in Org.
 
@@ -24,8 +22,6 @@
   (add-to-list 'auto-mode-alist '("\\.Rmd$" . poly-markdown+r-mode))
   )
 
-(use-package poly-noweb
-  :ensure t
-  )
+(use-package poly-noweb)
 
 (provide 'setup-polymode)

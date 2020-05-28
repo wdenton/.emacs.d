@@ -3,8 +3,6 @@
 ;;;;
 
 (use-package ess
-  :ensure t
-  :defer t
   :config
   (setq ess-smart-S-assign-key nil) ;; Don't let _ turn into <-
   (setq ess-use-auto-complete t) ;; Auto-completion on.

@@ -13,20 +13,24 @@
 ;; (setq font-latex-fontify-script nil)
 ;; (setq font-latex-fontify-sectioning 'color)
 
-;; (defun turn-on-outline-minor-mode () (outline-minor-mode 1))
-;; (add-hook 'LaTeX-mode-hook 'turn-on-outline-minor-mode)
+(add-hook 'LaTeX-mode-hook #'outline-minor-mode)
+
+;; Remember:
+;; When editing tables:
+;; M-x align-current
 
 ;;; Code:
 
 ;; auctex
 (use-package auctex
-  :ensure t
   :defer t
+  :diminish auctex
   )
 
+;; Always use visual-line-mode
 (add-hook 'LaTeX-mode-hook 'turn-on-visual-line-mode)
 
-;; Turn on spell-checking in LaTeX
+;; Turn on spell-checking
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 
 ;; (setq latex-run-command "pdflatex")
@@ -46,9 +50,6 @@
 ;; C-c C-o C-b is necessary to hide everything (or see LaTeX | Show/Hide)
 (add-hook 'TeX-mode-hook (lambda () (TeX-fold-mode 1)))
 
-(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-(setq reftex-plug-into-AUCTeX t)
-
 ;; Use wrap-region
 (add-hook 'latex-mode-hook 'wrap-region-mode)
 
@@ -61,13 +62,11 @@
 (put 'LaTeX-narrow-to-environment 'disabled nil)
 (put 'TeX-narrow-to-group 'disabled nil)
 
-;; So that RefTeX also recognizes \addbibresource. Note that you
-;; can't use $HOME in path for \addbibresource but that "~" works.
+;;; RefTeX
+(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(setq reftex-plug-into-AUCTeX t)
+(eval-after-load "reftex" '(diminish 'reftex-mode))
 (setq reftex-bibliography-commands '("bibliography" "nobibliography" "addbibresource"))
-
-;; Remember:
-;; When editing tables:
-;; M-x align-current
 
 ;; From http://tex.stackexchange.com/questions/50827/a-simpletons-guide-to-tex-workflow-with-emacs/50919#50919
 (eval-after-load 'reftex-vars

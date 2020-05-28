@@ -12,17 +12,14 @@
 ;; I use rbenv, so Emacs needs to know about it
 ;; https://github.com/senny/rbenv.el
 (use-package rbenv
-  :ensure t
   :config
   (setq rbenv-show-active-ruby-in-modeline nil)
   (setq rbenv-modeline-function 'rbenv--modeline-plain)
   (add-hook 'ruby-mode-hook 'global-rbenv-mode)
-  ;; (add-hook 'ruby-mode-hook 'rbenv-use-corresponding)
   )
 
 ;; Open up irb with M-x inf-ruby or C-c C-s from a Ruby buffer
 (use-package inf-ruby
-  :ensure t
   :config
   (autoload 'inf-ruby "inf-ruby" "Run an inferior Ruby process" t)
   (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
@@ -41,7 +38,6 @@
 
 ;; Rubocop for pointing out errors (https://github.com/bbatsov/rubocop)
 (use-package rubocop
-  :ensure t
   :diminish rubocop-mode
   :config
   (add-hook 'ruby-mode-hook 'rubocop-mode)

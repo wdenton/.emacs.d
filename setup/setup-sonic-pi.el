@@ -3,8 +3,6 @@
 ;;;
 
 (use-package sonic-pi
-  :ensure t
-
   :config
   (setq sonic-pi-path "/usr/lib/sonic-pi/")
   ;; .spi seems to be the suffix for Sonic Pi scripts

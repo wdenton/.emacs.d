@@ -6,9 +6,9 @@
 ;; https://company-mode.github.io/
 
 (use-package company
-  :ensure t
   :diminish company-mode
-  :init ;; (global-company-mode)
+  :init
+  ;; (global-company-mode)
   (add-hook 'ruby-mode-hook 'company-mode)
   :diminish company-mode
   :config

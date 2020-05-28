@@ -5,8 +5,6 @@
 ;; https://github.com/skeeto/elfeed
 
 (use-package elfeed
-  :ensure t
-  :defer t
   :config
   ;; See example file for what this should look like
   (setq elfeed-subscription-list "~/.emacs.d/setup/setup-elfeed-subscriptions.el")

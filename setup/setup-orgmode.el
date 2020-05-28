@@ -54,6 +54,8 @@
 	      ("WAITING" :foreground "Purple" :weight normal)
 	      )))
 
+(set-face-attribute 'org-link nil :foreground "Steel Blue")
+
 ;; Make completed items in a checkbox list less noticeable
 ;; https://fuco1.github.io/2017-05-25-Fontify-done-checkbox-items-in-org-mode.html
 (font-lock-add-keywords
