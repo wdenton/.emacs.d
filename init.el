@@ -232,14 +232,14 @@ Position the cursor at its beginning, according to the current mode."
 ;; Make window splitting more useful
 ;; http://pages.sachachua.com/.emacs.d/Sacha.html
 (defun wtd/vsplit-last-buffer (PREFIX)
-  "Split the window vertically and display the previous buffer."
+  "Split the window vertically and display the previous buffer.  By default, switch to that new window; with PREFIX, stay where you are."
   (interactive "p")
   (split-window-vertically)
   (other-window 1 nil)
   (unless prefix
     (switch-to-next-buffer)))
 (defun wtd/hsplit-last-buffer (PREFIX)
-  "Split the window horizontally and display the previous buffer."
+  "Split the window horizontally and display the previous buffer.  By default, switch to that new window; with PREFIX, stay where you are."
   (interactive "p")
   (split-window-horizontally)
   (other-window 1 nil)
