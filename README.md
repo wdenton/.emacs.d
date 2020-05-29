@@ -1,6 +1,6 @@
 # My Emacs config
 
-Inspired by https://github.com/magnars/.emacs.d and https://gitcafe.com/Leaflet/.emacs.d/ and others.
+Inspired by https://github.com/magnars/.emacs.d and https://gitcafe.com/Leaflet/.emacs.d/ and others.  Uses [use-package](https://github.com/jwiegley/use-package).
 
 If, for some reason I cannot fathom, you want to try out my Emacs configuration, run these commands. First you'll move your existing Emacs configuration out of the way, then you'll clone mine.
 
@@ -9,7 +9,7 @@ If, for some reason I cannot fathom, you want to try out my Emacs configuration,
 	$ git clone https://github.com/wdenton/.emacs.d.git
 	$ emacs
 
-When you run Emacs it will probably spend a while downloading and installing packages. That's all right. When it's done, kill all of the leftover buffers you don't need.  You'll be left with a dark full-screen Emacs that runs like mine does.
+When you run Emacs it will probably spend a while downloading and installing packages. It may complain some are missing.  That's all right. When it's done, close it (Ctrl-X Ctrl-C) and then restart.  You'll be left with an Emacs that runs just like mine.
 
 `M-x all-praise-emacs`
 
@@ -21,4 +21,4 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Copyright 2012–2019 William Denton <wtd@pobox.com>.
+Copyright 2012–2020 William Denton <wtd@pobox.com>.
