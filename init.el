@@ -284,12 +284,6 @@ Position the cursor at its beginning, according to the current mode."
 (add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
 (add-to-list 'desktop-modes-not-to-save 'fundamental-mode)
 
-;;;; nxml for HTML etc.
-(add-to-list 'auto-mode-alist
-	     (cons (concat "\\." (regexp-opt '("xml" "xsd" "sch" "rng" "xslt" "svg" "rss") t) "\\'")
-		   'nxml-mode))
-(fset 'html-mode 'nxml-mode)
-
 ;;;;
 ;;;; *scratch* buffer
 ;;;;
@@ -747,22 +741,32 @@ already narrowed."
 ;;;; nXML
 ;;;;
 
+;;;; Use nxml for HTML etc.
+(add-to-list 'auto-mode-alist
+	     (cons (concat "\\." (regexp-opt '("xml" "xsd" "sch" "rng" "xslt" "svg" "rss") t) "\\'")
+		   'nxml-mode))
+(fset 'html-mode 'nxml-mode)
+
 ;; Why isn't folding built in?
 ;; Taken from https://emacs.stackexchange.com/a/3157/145
 
-;; (require 'hideshow)
-;; (require 'sgml-mode)
+;; (require 'sgml-mode)-
 ;; (require 'nxml-mode)
+;; (require 'hideshow)
 
 (add-to-list 'hs-special-modes-alist
-             '(nxml-mode
+	     '(nxml-mode
                "<!--\\|<[^/>]*[^/]>"
                "-->\\|</[^/>]*[^/]>"
                "<!--"
                sgml-skip-tag-forward
                nil))
 (add-hook 'nxml-mode-hook 'hs-minor-mode)
-(define-key nxml-mode-map (kbd "C-c h") 'hs-toggle-hiding)
+;; (define-key nxml-mode-map (kbd "C-c h") 'hs-toggle-hiding)
+
+(with-eval-after-load "nxml-mode"
+  ;; Need to define this only after nxml-mode has been loaded
+  (define-key nxml-mode-map "\C-c h" 'hs-toggle-hiding))
 
 ;;;;
 ;;;; Mode-specific customizations
