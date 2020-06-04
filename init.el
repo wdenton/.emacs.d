@@ -129,7 +129,9 @@
 ;; Show vertical lines to guide indentation
 ;; https://github.com/zk-phi/indent-guide
 (use-package indent-guide
-  :diminish indent-guide-mode
+  :diminish
+  :config
+  (indent-guide-global-mode)
   )
 
 ;; aggressive-indent is indeed aggressive, but it's very handy.
@@ -268,8 +270,8 @@ Position the cursor at its beginning, according to the current mode."
 
 ;; Save point position between sessions
 (require 'saveplace)
-(setq-default save-place t)
 (setq save-place-file (expand-file-name ".places" user-emacs-directory))
+(save-place-mode)
 
 ;; Remember all the buffers I have open
 (desktop-save-mode 1)
