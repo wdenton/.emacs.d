@@ -8,6 +8,7 @@
 ;; https://ogbe.net/emacsconfig.html
 
 ;; Org inits:
+;; https://github.com/zzamboni/dot-emacs/
 ;; https://github.com/therockmandolinist/dotfiles/blob/master/rc.org
 ;; https://github.com/thblt/dotfiles/blob/master/.emacs.d/dotemacs.org
 ;; https://github.com/marcowahl/.emacs.d/blob/master/init.org

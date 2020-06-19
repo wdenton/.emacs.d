@@ -384,5 +384,4 @@
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
   )
 
-
 (provide 'setup-orgmode)
