@@ -224,14 +224,16 @@
 
 ;; Hooks for prettify-symbols-mode
 ;; See also https://pank.eu/blog/pretty-babel-src-blocks.html for some cool stuff
+;; And https://github.com/zzamboni/dot-emacs/blob/master/init.org#source-code-blocks
+;; some stuff I tried out but decided was a bit too much for me.
 (add-hook 'org-mode-hook
  	  (lambda ()
  	    (push '("<=" . ?≤) prettify-symbols-alist)
  	    (push '(">=" . ?≥) prettify-symbols-alist)
- 	    (push '("#+BEGIN_SRC" . ?✎) prettify-symbols-alist)
- 	    (push '("#+END_SRC" . ?□) prettify-symbols-alist)
- 	    (push '("#+begin_src" . ?✎) prettify-symbols-alist)
- 	    (push '("#+end_src" . ?□) prettify-symbols-alist)
+ 	    (push '("#+BEGIN_SRC" . ?⎡) prettify-symbols-alist) ;;  ⎡ ➤ 🖝 ➟ ➤ ✎
+ 	    (push '("#+END_SRC" . ?⎣) prettify-symbols-alist) ;; ⎣ ✐
+ 	    (push '("#+begin_src" . ?⎡) prettify-symbols-alist)
+ 	    (push '("#+end_src" . ?⎣) prettify-symbols-alist)
  	    (push '("#+BEGIN_QUOTE" . ?❝) prettify-symbols-alist)
  	    (push '("#+END_QUOTE" . ?❞) prettify-symbols-alist)
  	    (push '("#+begin_quote" . ?❝) prettify-symbols-alist)
@@ -251,7 +253,7 @@
 ;; Refiling
 (setq org-refile-targets '(
 			   ("~/york/shared/projects/projects.org" :maxlevel . 1)
-			   ("~/york/shared/reports/annual/2017-annual-report/denton-2016-2017-annual-report.org" :maxlevel . 2)
+			   ;; ("~/york/shared/reports/annual/2017-annual-report/denton-2016-2017-annual-report.org" :maxlevel . 2)
 			   ))
 
 ;; org-protocol lets me send URLs from Firefox (and more, but that's all I'm doing)
@@ -276,6 +278,13 @@
    (sqlite . t)
    )
  )
+
+;;;;
+;;;; Source code blocks
+;;;;
+
+(set-face-attribute 'org-block-begin-line nil :underline nil)
+(set-face-attribute 'org-block-end-line nil :overline nil)
 
 ;; Evaluate Babel blocks without asking for confirmation
 (setq org-confirm-babel-evaluate nil)
