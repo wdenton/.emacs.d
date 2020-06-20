@@ -1,3 +1,10 @@
+;;; init.el --- Initialization file for Emacs
+
+;;; Commentary: Emacs Startup File --- initialization for Emacs
+;;
+
+;; Here is some commentary.
+
 ;;;;
 ;;;; William Denton <wtd@pobox.com>
 ;;;;
@@ -27,6 +34,8 @@
 ;;;;
 
 ;; Turn off mouse interface early in startup to avoid momentary display
+;;; Code:
+
 (if (fboundp 'menu-bar-mode) (menu-bar-mode 1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
@@ -138,15 +147,17 @@
 ;;;;
 
 ;; Measured in 0.1 pts
-(setq wtd-font-height-for-this-machine 130)
+;; (setq wtd-ubuntu-mono-height-for-this-machine 130)
+(setq wtd/fira-code-height-for-this-machine 120)
 (when (string= (system-name) "work")
   ;; Need it a little bigger on my work machine
-  (setq wtd-font-height-for-this-machine 170))
+  ;; (setq wtd-ubuntu-mono-height-for-this-machine 170)
+  (setq wtd-fira-code-height-for-this-machine 160)
+  )
 
-;; (set-face-attribute 'default nil :height wtd-font-height-for-this-machine)
-(set-face-attribute 'default nil :font "Ubuntu Mono" :height wtd-font-height-for-this-machine)
-;; (set-face-attribute 'default nil :font "Fira Code" :height wtd-font-height-for-this-machine)
-(set-face-attribute 'variable-pitch nil :family "Baskervald ADF Std" :height wtd-font-height-for-this-machine)
+;; (set-face-attribute 'default nil :font "Ubuntu Mono" :height wtd-ubuntu-mono-height-for-this-machine)
+(set-face-attribute 'default nil :font "Fira Code" :height wtd-fira-code-height-for-this-machine)
+;; (set-face-attribute 'variable-pitch nil :family "Baskervald ADF Std" :height wtd-font-height-for-this-machine)
 
 ;; This would be the best way to go with mixed variable and fixed pitches,
 ;; but every time I try it, I go back to fixed pitch everywhere.
@@ -795,3 +806,7 @@ already narrowed."
 (require 'setup-useful-functions)
 (require 'setup-yaml)
 ;; (require 'setup-polymode) ;; Keep this last, after Markdown stuff is defined.
+
+(provide 'init)
+
+;;; init.el ends here

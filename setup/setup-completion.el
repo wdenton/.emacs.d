@@ -1,11 +1,13 @@
-;;;;
-;;;; completion
-;;;;
+;;; setup-completion.el --- Set up completions.
 
-;; company
-;; https://company-mode.github.io/
+;;; Commentary:
+
+;; Configuration for completions, which I do with company.
+
+;;; Code:
 
 (use-package company
+  ;; https://company-mode.github.io/
   :diminish company-mode
   :init
   ;; (global-company-mode)
@@ -20,3 +22,5 @@
   )
 
 (provide 'setup-completion)
+
+;;; setup-completion.el ends here

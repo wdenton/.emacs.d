@@ -1,6 +1,6 @@
-;;;;
-;;;; Configuration for Org mode (https://orgmode.org/)
-;;;;
+;;; setup-orgmode.el --- Set up Org.
+
+;;; Commentary:
 
 ;; Note I made on 16 April 2013:
 ;; "Started using org-mode ... I could really get into this."
@@ -12,7 +12,7 @@
 ;; when I move all my Emacs config under Org
 ;; https://leanpub.com/lit-config/read
 
-
+;;; Code:
 
 (use-package org
   ;; Use Org's current development branch, pulled down with git
@@ -114,7 +114,7 @@
 
   ;; Preview LaTeX equations in buffers by showing images (C-c C-x C-l)
   ;; Details: http://orgmode.org/worg/org-tutorials/org-latex-preview.html
-  (setq org-latex-create-formula-image-program 'imagemagick)
+  ;;  (setq org-preview-latex-default-process 'imagemagick)
 
   ;; Highlight inline LaTeX
   (setq org-highlight-latex-and-related '(latex))
@@ -261,15 +261,14 @@
 ;; https://emacs.stackexchange.com/questions/90/how-to-sometimes-but-not-always-add-a-note-to-an-org-todo-state-change
 ;; This lets me force a note for any state change in TODO workflow.
 ;; Use C-c C-T (capital T) to make Org ask me for a note, even if the normal workflow doesn't require it.
-(defun org-todo-force-notes ()
-  (interactive)
-  (let ((org-todo-log-states
-         (mapcar (lambda (state)
-                   (list state 'note 'time))
-                 (apply 'append org-todo-sets))))
-    (call-interactively 'org-todo)))
+;; (defun org-todo-force-notes ()
+;;   (interactive)
+;;   (let ((org-todo-log-states
+;;          (mapcar (lambda (state)
+;;                    (list state 'note 'time))
+;;                  (apply 'append org-todo-sets))))
+;;     (call-interactively 'org-todo)))
 ;; (define-key org-mode-map (kbd "C-c C-S-t") 'org-todo-force-notes)
-
 
 ;; Ispell should ignore some things in Org files
 ;; http://endlessparentheses.com/ispell-and-org-mode.html
@@ -291,23 +290,26 @@
   '(define-key org-src-mode-map
      "\C-x\C-s" #'org-edit-src-exit))
 
-;; Replace a link with just the descriptive text
-;; https://emacs.stackexchange.com/questions/10707/in-org-mode-how-to-remove-a-link
-(defun wdenton/org-replace-link-by-link-description ()
-  "Replace an org link by its description or if empty its address"
+;; Replace a link with just the descriptive text.
+;; https://emacs.stackexchange.com/a/49068/145
+(defun wdenton/org-link-delete-link ()
+  "Remove the link from an Org link at point and keep only the description."
   (interactive)
-  (if (org-in-regexp org-bracket-link-regexp 1)
-      (let ((remove (list (match-beginning 0) (match-end 0)))
-	    (description (if (match-end 3)
-			     (org-match-string-no-properties 3)
-			   (org-match-string-no-properties 1))))
-	(apply 'delete-region remove)
-	(insert description))))
+  (let ((elem (org-element-context)))
+    (if (eq (car elem) 'link)
+        (let* ((content-begin (org-element-property :contents-begin elem))
+               (content-end  (org-element-property :contents-end elem))
+               (link-begin (org-element-property :begin elem))
+               (link-end (org-element-property :end elem)))
+          (if (and content-begin content-end)
+              (let ((content (buffer-substring-no-properties content-begin content-end)))
+                (delete-region link-begin link-end)
+                (insert content)))))))
 
 ;; Use C-c t to toggle ":eval no|yes" status in source blocks
 ;; https://emacs.stackexchange.com/questions/13869/how-to-toggle-org-mode-source-code-block-eval-no-status
 (defun org-toggle-src-eval-no ()
-  "Will toggle ':eval no' on the src block begin line"
+  "Toggle ':eval no' on the src block begin line."
   (defun in-src-block-p ()
     "Returns t when the point is inside a source code block"
     (string= "src" (org-in-block-p '("src"))))
@@ -363,3 +365,5 @@
 ;;   )
 
 (provide 'setup-orgmode)
+
+;;; setup-orgmode.el ends here
