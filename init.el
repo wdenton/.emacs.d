@@ -16,10 +16,11 @@
 
 ;; Org inits:
 ;; https://github.com/zzamboni/dot-emacs/
+;; https://github.com/sachac/.emacs.d
 ;; https://github.com/therockmandolinist/dotfiles/blob/master/rc.org
 ;; https://github.com/thblt/dotfiles/blob/master/.emacs.d/dotemacs.org
 ;; https://github.com/marcowahl/.emacs.d/blob/master/init.org
-;; http://karl-voit.at/2017/06/03/emacs-org/
+;; https://github.com/novoid/dot-emacs
 
 ;; To try
 ;; pdf-tools: https://github.com/politza/pdf-tools
@@ -34,6 +35,10 @@
 ;;;;
 
 ;; Turn off mouse interface early in startup to avoid momentary display
+
+;;; Commentary:
+;;
+
 ;;; Code:
 
 (if (fboundp 'menu-bar-mode) (menu-bar-mode 1))
@@ -147,17 +152,17 @@
 ;;;;
 
 ;; Measured in 0.1 pts
-;; (setq wtd-ubuntu-mono-height-for-this-machine 130)
-(setq wtd/fira-code-height-for-this-machine 120)
+(setq wtd-ubuntu-mono-height 140)
+;; (setq wtd/fira-code-height 120)
 (when (string= (system-name) "work")
   ;; Need it a little bigger on my work machine
-  ;; (setq wtd-ubuntu-mono-height-for-this-machine 170)
-  (setq wtd-fira-code-height-for-this-machine 160)
+  (setq wtd-ubuntu-mono-height 180)
+  ;; (setq wtd-fira-code-height 160)
   )
 
-;; (set-face-attribute 'default nil :font "Ubuntu Mono" :height wtd-ubuntu-mono-height-for-this-machine)
-(set-face-attribute 'default nil :font "Fira Code" :height wtd-fira-code-height-for-this-machine)
-;; (set-face-attribute 'variable-pitch nil :family "Baskervald ADF Std" :height wtd-font-height-for-this-machine)
+(set-face-attribute 'default nil :font "Ubuntu Mono" :height wtd-ubuntu-mono-height)
+;; (set-face-attribute 'default nil :font "Fira Code" :height wtd-fira-code-height)
+;; (set-face-attribute 'variable-pitch nil :family "Baskervald ADF Std" :height wtd-font-height)
 
 ;; This would be the best way to go with mixed variable and fixed pitches,
 ;; but every time I try it, I go back to fixed pitch everywhere.
@@ -447,7 +452,7 @@ already narrowed."
 ;; Make the cursor a thin horizontal bar, not a block (but I still
 ;; like it blinking)
 ;; Can be 'bar or 'box or '(hbar . 3) etc.
-(set-default 'cursor-type '(bar . 4))
+(set-default 'cursor-type '(bar . 2))
 
 ;; Use C-c left or C-c right to go back and forth in window
 ;; configurations
@@ -481,13 +486,16 @@ already narrowed."
   :diminish undo-tree-mode
   :config
   (global-undo-tree-mode)
+  :custom
+  (undo-tree-visualizer-timestamps t)
+  (undo-tree-visualizer-diff t)
   )
 
-;; Let me upcase or downcase a region, which is disabled by default.
+;; Let me upcase or downcase aregion, which is disabled by default.
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
-;; prettify-symbols-mode was introduced in 24.4
+;; prettify-symbols
 (global-prettify-symbols-mode +1)
 (setq prettify-symbols-unprettify-at-point 'right-edge)
 
@@ -504,14 +512,11 @@ already narrowed."
 
 (use-package magit
   ;; It will install with-editor
-  :config
-  ;; Stop magit from nagging me about a change
-  (setq magit-last-seen-setup-instructions "1.4.0")
+  ;; :config
   )
 
 ;; imenu
 (global-set-key (kbd "M-i") 'imenu)
-(global-set-key (kbd "C-.") 'imenu-anywhere)
 
 ;; Disable byte-compile warnings, which I don't care about.
 ;; http://tsengf.blogspot.ca/2011/06/disable-byte-compile-warning-in-emacs.html
