@@ -146,7 +146,19 @@
 ;; (set-face-attribute 'default nil :height wtd-font-height-for-this-machine)
 (set-face-attribute 'default nil :font "Ubuntu Mono" :height wtd-font-height-for-this-machine)
 ;; (set-face-attribute 'default nil :font "Fira Code" :height wtd-font-height-for-this-machine)
-;; (set-face-attribute 'variable-pitch nil :family "Baskerville")
+(set-face-attribute 'variable-pitch nil :family "Baskervald ADF Std" :height wtd-font-height-for-this-machine)
+
+;; This would be the best way to go with mixed variable and fixed pitches,
+;; but every time I try it, I go back to fixed pitch everywhere.
+
+;; (use-package mixed-pitch
+;;   ;; https://gitlab.com/jabranham/mixed-pitch
+;;   :diminish
+;;   :hook
+;;   (org-mode markdown-mode)
+;;   :config
+;;   (set-face-attribute 'variable-pitch nil :family "Baskervald ADF Std" :height 200)
+;;   )
 
 ;;;;
 ;;;; Theme: solarized
