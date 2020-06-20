@@ -43,19 +43,9 @@
 ;;;;
 
 ;; user-emacs-directory is ~/.emacs.d/
-;; I keep my local things in ~/.emacs.d/site-lisp/ and I want
-;; everything in there available, including inside subdirectories
-(setq site-lisp-dir (expand-file-name "site-lisp" user-emacs-directory))
-(let ((default-directory site-lisp-dir)) (normal-top-level-add-subdirs-to-load-path))
 
+;; Various specific config stuff is in setup files in setup/
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/setup"))
-;; http://stackoverflow.com/questions/24779041/disable-warning-about-emacs-d-in-load-path
-;; (add-to-list 'load-path user-emacs-directory)
-(add-to-list 'load-path site-lisp-dir)
-
-;; Use Org's current development branch, pulled down with git
-;; (http://orgmode.org/org.html#Installation)
-;; (add-to-list 'load-path "/usr/local/src/org-mode/lisp")
 
 ;;;;
 ;;;; Packages
