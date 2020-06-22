@@ -491,7 +491,7 @@ already narrowed."
   (undo-tree-visualizer-diff t)
   )
 
-;; Let me upcase or downcase aregion, which is disabled by default.
+;; Let me upcase or downcase a region, which is disabled by default.
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
@@ -583,6 +583,19 @@ already narrowed."
 (use-package powerline
   :config
   (powerline-default-theme)
+  )
+
+;;;;
+;;;; Margins
+;;;;
+
+(use-package perfect-margin
+  ;; https://github.com/mpwang/perfect-margin
+  :custom
+  ;; (perfect-margin-visible-width 120)
+  (perfect-margin-visible-width (- (window-total-width) 12));; Set margin width dynamically.  12 = 6 per side.
+  :config
+  (perfect-margin-mode t)
   )
 
 ;;;;
