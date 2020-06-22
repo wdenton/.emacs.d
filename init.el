@@ -1,45 +1,37 @@
 ;;; init.el --- Initialization file for Emacs
 
-;;; Commentary: Emacs Startup File --- initialization for Emacs
-;;
+;;;
+;;; William Denton <wtd@pobox.com>
+;;;
 
-;; Here is some commentary.
+;; Turn this on when needed
+;; (setq debug-on-error t)
 
-;;;;
-;;;; William Denton <wtd@pobox.com>
-;;;;
+;;; Commentary:
 
-;; Look at
-;; https://github.com/magnars/.emacs.d
-;; https://gitcafe.com/Leaflet/.emacs.d/blob/master/sane-defaults.el
-;; https://ogbe.net/emacsconfig.html
+;; This is my Emacs init file.  One day I will move it all into an Org file!
 
-;; Org inits:
+;; Diego Zambonis' Literature Configuration will be good to read when I do.
+;; https://leanpub.com/lit-config/read
+
+;; Org inits to look at:
 ;; https://github.com/zzamboni/dot-emacs/
 ;; https://github.com/sachac/.emacs.d
-;; https://github.com/therockmandolinist/dotfiles/blob/master/rc.org
-;; https://github.com/thblt/dotfiles/blob/master/.emacs.d/dotemacs.org
-;; https://github.com/marcowahl/.emacs.d/blob/master/init.org
+;; https://github.com/dieggsy/dotfiles/tree/master/emacs/.emacs.d
+;; https://github.com/thblt/.emacs.d
+;; https://gitlab.com/marcowahl/mw.emacs.d
 ;; https://github.com/novoid/dot-emacs
 
 ;; To try
 ;; pdf-tools: https://github.com/politza/pdf-tools
 
-;;;;
-;;;; Turn this on when needed
-;;;;
-;; (setq debug-on-error t)
+;;; Code:
 
 ;;;;
 ;;;; Starting up
 ;;;;
 
 ;; Turn off mouse interface early in startup to avoid momentary display
-
-;;; Commentary:
-;;
-
-;;; Code:
 
 (if (fboundp 'menu-bar-mode) (menu-bar-mode 1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))

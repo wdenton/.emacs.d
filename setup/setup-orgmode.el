@@ -8,10 +8,6 @@
 ;; I should try org-ref
 ;; https://github.com/jkitchin/org-ref
 
-;; Diego Zambonis' Literature Configuration will be good to read
-;; when I move all my Emacs config under Org
-;; https://leanpub.com/lit-config/read
-
 ;;; Code:
 
 (use-package org
