@@ -586,19 +586,6 @@ already narrowed."
   )
 
 ;;;;
-;;;; Margins
-;;;;
-
-(use-package perfect-margin
-  ;; https://github.com/mpwang/perfect-margin
-  :custom
-  ;; (perfect-margin-visible-width 120)
-  (perfect-margin-visible-width (- (window-total-width) 12));; Set margin width dynamically.  12 = 6 per side.
-  :config
-  (perfect-margin-mode t)
-  )
-
-;;;;
 ;;;; amx for completion
 ;;;;
 (use-package amx
