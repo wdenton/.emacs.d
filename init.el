@@ -144,11 +144,11 @@
 ;;;;
 
 ;; Measured in 0.1 pts
-(setq wtd-ubuntu-mono-height 140)
+(setq wtd-ubuntu-mono-height 130)
 ;; (setq wtd/fira-code-height 120)
 (when (string= (system-name) "work")
   ;; Need it a little bigger on my work machine
-  (setq wtd-ubuntu-mono-height 180)
+  (setq wtd-ubuntu-mono-height 170)
   ;; (setq wtd-fira-code-height 160)
   )
 
