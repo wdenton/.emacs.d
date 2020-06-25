@@ -597,8 +597,7 @@ already narrowed."
 (use-package counsel)
 
 (use-package ivy
-  :diminish ivy-mode
-  :diminish ivy
+  :diminish
   :config
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
