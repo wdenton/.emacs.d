@@ -19,6 +19,9 @@
   (setq org-fontify-whole-heading-line t)
   (global-set-key "\C-cl" 'org-store-link)
 
+  ;; Show column headings even when off the top of the screen.
+  (setq org-table-header-line-p t)
+
   ;; org-entities displays \alpha etc. as Unicode characters.
   (setq org-pretty-entities t)
 
