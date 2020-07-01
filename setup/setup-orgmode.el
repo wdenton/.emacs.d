@@ -21,6 +21,7 @@
 
   ;; Show column headings even when off the top of the screen.
   (setq org-table-header-line-p t)
+  (diminish 'org-table-header-line-mode)
 
   ;; org-entities displays \alpha etc. as Unicode characters.
   (setq org-pretty-entities t)
