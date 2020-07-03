@@ -24,6 +24,8 @@
   :hook (ruby-mode . inf-ruby-minor-mode)
   :config
   (autoload 'inf-ruby "inf-ruby" "Run an inferior Ruby process" t)
+  (add-to-list 'inf-ruby-implementations' ("pry". "pry"))
+  (setq inf-ruby-default-implementation "pry")
   )
 
 ;; Avoid ridiculous Ruby indentation.
