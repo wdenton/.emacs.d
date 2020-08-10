@@ -243,7 +243,6 @@
 ;;;; org-bullets (https://github.com/sabof/org-bullets)
 ;;;;
 
-
 (use-package org-bullets
   ;; Possibilities:  ◉ ○ ✸ ✿ ♥ ● ◇ ✚ ✜ ☯ ◆ ♠ ♣ ♦ ☢ ❀ ◆ ◖ ▶ ► • ★ ▸ or any other Unicode character
   ;; Default is '("◉" "○" "✸" "✿")
