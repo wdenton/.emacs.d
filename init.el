@@ -15,34 +15,20 @@
 ;; https://leanpub.com/lit-config/read
 
 ;; Org inits to look at:
-;; https://github.com/zzamboni/dot-emacs/
-;; https://github.com/sachac/.emacs.d
 ;; https://github.com/dieggsy/dotfiles/tree/master/emacs/.emacs.d
-;; https://github.com/thblt/.emacs.d
-;; https://gitlab.com/marcowahl/mw.emacs.d
 ;; https://github.com/novoid/dot-emacs
+;; https://github.com/sachac/.emacs.d
+;; https://github.com/thblt/.emacs.d
+;; https://github.com/theophilusx/emacs-init-org/
+;; https://github.com/zzamboni/dot-emacs/
+;; https://gitlab.com/marcowahl/mw.emacs.d
 
 ;; To try
 ;; pdf-tools: https://github.com/politza/pdf-tools
 
 ;;; Code:
 
-;;;;
-;;;; Starting up
-;;;;
-
-;; Turn off mouse interface early in startup to avoid momentary display
-
-(if (fboundp 'menu-bar-mode) (menu-bar-mode 1))
-(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-
-;; No startup screen
-(setq inhibit-startup-message t)
-
-;; Full screen!
-(when (fboundp 'toggle-frame-maximized)
-  (toggle-frame-maximized))
+;; See also early-init.el
 
 ;;;;
 ;;;; Load paths and where to find things
@@ -94,13 +80,6 @@
 
 ;; Run the server; now I can load any file into Emacs with 'emacsclient file'
 (server-mode)
-
-;;;;
-;;;; System tweaks
-;;;;
-
-;; Don't garbage clean so often
-(setq gc-cons-threshold 100000000)
 
 ;;;;
 ;;;; Parentheses!
