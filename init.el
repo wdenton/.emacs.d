@@ -135,6 +135,9 @@
 ;; (set-face-attribute 'default nil :font "Fira Code" :height wtd-fira-code-height)
 ;; (set-face-attribute 'variable-pitch nil :family "Baskervald ADF Std" :height wtd-font-height)
 
+;; Could help improve performance with Unicode symbols.
+(setq inhibit-compacting-font-caches t)
+
 ;; This would be the best way to go with mixed variable and fixed pitches,
 ;; but every time I try it, I go back to fixed pitch everywhere.
 
