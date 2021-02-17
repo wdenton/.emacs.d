@@ -51,12 +51,12 @@
 ;; Robe for documentation lookup, etc.
 ;; https://github.com/dgutov/robe
 ;; Requires gems pry and pry-doc
-(use-package robe
-  :diminish robe-mode
-  :hook ruby-mode
-  :config
-  (eval-after-load 'company '(push 'company-robe company-backends))
-  )
+;; (use-package robe
+;;   :diminish robe-mode
+;;   :hook ruby-mode
+;;   :config
+;;   (eval-after-load 'company '(push 'company-robe company-backends))
+;;   )
 
 ;; indent-guide ... very nice
 (add-hook 'ruby-mode-hook 'indent-guide-mode)
