@@ -358,6 +358,12 @@ Use [[https://github.com/Fuco1/smartparens/][smartparens]] to handle parentheses
 
 ** Indenting
 
+Tabs have four spaces.  Eight is wrong.
+
+#+begin_src emacs-lisp
+(setq tab-width 4)
+#+end_src
+
 =electric-indent-mode= is built in, but I don't turn it on, because ...
 
 #+begin_src emacs-lisp :tangle no
@@ -486,6 +492,37 @@ already narrowed."
 
 (define-key ctl-x-map "w" #'narrow-or-widen-dwim)
 (eval-after-load 'latex '(define-key LaTeX-mode-map "\C-xw" nil))
+#+end_src
+
+wrap-region to wrap regions in * or / etc.  Extra lines taken from [[http://pragmaticemacs.com/emacs/wrap-text-in-custom-characters/][Wrap text in custom characters]].
+
+#+begin_src emacs-lisp
+(use-package wrap-region
+  :defer t
+  :diminish wrap-region-mode
+  :config
+  ;; (wrap-region-mode t)
+  (wrap-region-add-wrappers
+   '(("*" "*" nil org-mode)
+     ("~" "~" nil org-mode)
+     ("/" "/" nil org-mode)
+     ("=" "=" "+" org-mode)
+     ("_" "_" nil org-mode)
+     ("$" "$" nil (org-mode latex-mode))))
+  :init
+  (add-hook 'org-mode-hook 'wrap-region-mode)
+  (add-hook 'latex-mode-hook 'wrap-region-mode)
+  )
+#+end_src
+
+[[https://github.com/magnars/expand-region.el][Expand-region]] is kind of magical.  ~C-=~ successively expands the region with great intelligence.
+
+#+begin_src emacs-lisp
+(use-package expand-region
+  :defer t
+  :init
+  (global-set-key (kbd "C-=") 'er/expand-region)
+  )
 #+end_src
 
 ** Buffers
@@ -742,26 +779,47 @@ These key mappings make it easier to run common things.  I learned about this fr
 
 * Editing
 
+** Scrolling
+
+Scroll by one line at a time.
+
 #+begin_src emacs-lisp
-;; Scroll by one line at a time.
-;; https://www.gnu.org/software/emacs/manual/html_node/efaq/Scrolling-only-one-line.html
 (setq scroll-conservatively 10000)
+#+end_src
 
-;; https://emacs.stackexchange.com/questions/28736/emacs-pointcursor-movement-lag
+A tip [[https://emacs.stackexchange.com/a/28746/145][found on Stack Exchange]] to stop scrolling from slowing things down.
+
+#+begin_src emacs-lisp
 (setq auto-window-vscroll nil)
+#+end_src
 
-;; Remove trailing whitespace automatically
+** Whitespace
+
+Remove trailing whitespace (at the end of a file) automatically.
+
+#+begin_src emacs-lisp
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+#+end_src
 
-;; Down-arrow at the end of a file doesn't add in a new line.
-(setq next-line-add-newlines nil)
+But it should end with a newline, so if there isn't one there, add it.
 
-;; Silently ensure a file ends in a newline when it's saved.
+#+begin_src emacs-lisp
 (setq require-final-newline t)
+#+end_src
 
-;; Show me empty lines after buffer end
+But down-arrow at the end of a file shouldn't add in a new line.
+
+#+begin_src emacs-lisp
+(setq next-line-add-newlines nil)
+#+end_src
+
+If there are any empty lines at the end of a buffer, show them (but they will disappear on saving, because of the above).
+
+#+begin_src emacs-lisp
 (set-default 'indicate-empty-lines t)
 #+end_src
+
+** Colours
 
 [[https://elpa.gnu.org/packages/rainbow-mode.html][rainbow-mode]] is a handy little helper.  "All strings representing colors will be highlighted with the color they represent."
 
@@ -774,48 +832,13 @@ These key mappings make it easier to run common things.  I learned about this fr
   )
 #+end_src
 
-Tabs have four spaces.  Eight is wrong.
-
-#+begin_src emacs-lisp
-(setq tab-width 4)
-#+end_src
+** Other editing
 
 Let me upcase or downcase a region, which is disabled by default.
 
 #+begin_src emacs-lisp
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
-#+end_src
-
-wrap-region to wrap regions in * or / etc.  Extra lines taken from [[http://pragmaticemacs.com/emacs/wrap-text-in-custom-characters/][Wrap text in custom characters]].
-
-#+begin_src emacs-lisp
-(use-package wrap-region
-  :defer t
-  :diminish wrap-region-mode
-  :config
-  ;; (wrap-region-mode t)
-  (wrap-region-add-wrappers
-   '(("*" "*" nil org-mode)
-     ("~" "~" nil org-mode)
-     ("/" "/" nil org-mode)
-     ("=" "=" "+" org-mode)
-     ("_" "_" nil org-mode)
-     ("$" "$" nil (org-mode latex-mode))))
-  :init
-  (add-hook 'org-mode-hook 'wrap-region-mode)
-  (add-hook 'latex-mode-hook 'wrap-region-mode)
-  )
-#+end_src
-
-[[https://github.com/magnars/expand-region.el][Expand-region]] is kind of magical.  ~C-=~ successively expands the region with great intelligence.
-
-#+begin_src emacs-lisp
-(use-package expand-region
-  :defer t
-  :init
-  (global-set-key (kbd "C-=") 'er/expand-region)
-  )
 #+end_src
 
 I don't use multiple-cursors much ... but I should.
@@ -1036,19 +1059,16 @@ Keep a list of recently opened files
 (setq recentf-save-file "~/.recentf")
 #+end_src
 
-# C-x f show the list, and it's easy to pick from it (or q to quit it)
-# (global-set-key "\C-xf" 'recentf-open-files)
-
-~C-x f~ to open up a file under point
+Rebind FFAP's =find-file-at-point= so it goes with =C-x f= (usually =find-file=), so I don't have to use =C-x C-f= (its default binding).  Saves time.
 
 #+begin_src emacs-lisp
 (global-set-key (kbd "C-x f") 'find-file-at-point)
 #+end_src
 
-Refresh buffers when files change (don't worry, changes won't be lost)
+Refresh buffers when files change.  But don't worry:  "Auto Revert will not revert a buffer if it has unsaved changes, or if its file on disk is deleted or renamed."
 
 #+begin_src emacs-lisp
-;; (global-auto-revert-mode t)
+(global-auto-revert-mode t)
 #+end_src
 
 Don't show uninteresting files in Emacs completion window ([[https://stackoverflow.com/a/1732081/854346][from Stack Overflow]]).  When the buffer of possible files open, it shows all matches.  If I'm looking for ~foo.ext~ and hit ~C-x C-f fo TAB~ it will show ~foo.ext~ and ~foo.ext~~.  Because =~= is in completion-ignored-extensions it won't try to open ~foo.ext~~, but I'd rather not see it in the first place.
@@ -1066,14 +1086,13 @@ Don't show uninteresting files in Emacs completion window ([[https://stackoverfl
 
 ** dired
 
-;; Auto refresh dired, but be quiet about it
+Auto refresh dired, but be quiet about it.
 
 #+begin_src emacs-lisp
 (setq global-auto-revert-non-file-buffers t)
 #+end_src
-;; (setq auto-revert-verbose nil)
 
-Tell dired how to some file types.
+Tell dired how to handle some file types.
 
 #+begin_src emacs-lisp
 (setq dired-guess-shell-alist-user
@@ -1088,7 +1107,7 @@ Tell dired how to some file types.
 (require 'dired-x)
 #+end_src
 
-Emacs 24.4 defaults to an ls -1 (dash one) view, not ls -l ( dash ell), but I want the long format.
+Emacs 24.4 defaults to an =ls -1= (dash one) view, not =ls -l= ( dash ell), but I want the long format.
 
 #+begin_src emacs-lisp
 (setq diredp-hide-details-initially-flag nil)
@@ -1106,7 +1125,7 @@ Make it easier to move and copy files across windows.
 (setq dired-dwim-target t)
 #+end_src
 
-dired+ has got some crazy colours by default. This turns that off, but leaves the settings at maximum (the default) for everything else.
+=dired+= has got some wild colours by default. This turns that off, but leaves the settings at maximum (the default) for everything else.
 
 #+begin_src emacs-lisp
 (setq font-lock-maximum-decoration (quote ((dired-mode) (t . t))))
@@ -1114,7 +1133,7 @@ dired+ has got some crazy colours by default. This turns that off, but leaves th
 
 ** Rename or delete the current buffer and its file
 
-File management shortcuts from [[https://github.com/bodil/emacs.d][Bodil Stokke]]'s setup:
+File management shortcuts from [[https://github.com/bodil/emacs.d][Bodil Stokke]]'s setup.  These are both really handy.
 
 + ~C-x C-k~ to delete the file being edited and kill the buffer
 + ~C-x C-r~ to rename the file being edited end the current buffer

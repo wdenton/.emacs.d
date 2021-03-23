@@ -108,6 +108,8 @@
   `(sp-show-pair-mismatch-face :inverse-video t :bold t)
   )
 
+(setq tab-width 4)
+
 (use-package aggressive-indent
   :diminish aggressive-indent-mode ;; "→"
   :config
@@ -183,6 +185,29 @@ already narrowed."
 
 (define-key ctl-x-map "w" #'narrow-or-widen-dwim)
 (eval-after-load 'latex '(define-key LaTeX-mode-map "\C-xw" nil))
+
+(use-package wrap-region
+  :defer t
+  :diminish wrap-region-mode
+  :config
+  ;; (wrap-region-mode t)
+  (wrap-region-add-wrappers
+   '(("*" "*" nil org-mode)
+     ("~" "~" nil org-mode)
+     ("/" "/" nil org-mode)
+     ("=" "=" "+" org-mode)
+     ("_" "_" nil org-mode)
+     ("$" "$" nil (org-mode latex-mode))))
+  :init
+  (add-hook 'org-mode-hook 'wrap-region-mode)
+  (add-hook 'latex-mode-hook 'wrap-region-mode)
+  )
+
+(use-package expand-region
+  :defer t
+  :init
+  (global-set-key (kbd "C-=") 'er/expand-region)
+  )
 
 (desktop-save-mode 1)
 (setq history-length 50)
@@ -335,23 +360,16 @@ already narrowed."
 (define-key launcher-map "u" #'magit-pull-from-upstream)
 (define-key launcher-map "w" #'count-words-region)
 
-;; Scroll by one line at a time.
-;; https://www.gnu.org/software/emacs/manual/html_node/efaq/Scrolling-only-one-line.html
 (setq scroll-conservatively 10000)
 
-;; https://emacs.stackexchange.com/questions/28736/emacs-pointcursor-movement-lag
 (setq auto-window-vscroll nil)
 
-;; Remove trailing whitespace automatically
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-;; Down-arrow at the end of a file doesn't add in a new line.
-(setq next-line-add-newlines nil)
-
-;; Silently ensure a file ends in a newline when it's saved.
 (setq require-final-newline t)
 
-;; Show me empty lines after buffer end
+(setq next-line-add-newlines nil)
+
 (set-default 'indicate-empty-lines t)
 
 (use-package rainbow-mode
@@ -361,33 +379,8 @@ already narrowed."
   (rainbow-mode t) ;; #0af
   )
 
-(setq tab-width 4)
-
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
-
-(use-package wrap-region
-  :defer t
-  :diminish wrap-region-mode
-  :config
-  ;; (wrap-region-mode t)
-  (wrap-region-add-wrappers
-   '(("*" "*" nil org-mode)
-     ("~" "~" nil org-mode)
-     ("/" "/" nil org-mode)
-     ("=" "=" "+" org-mode)
-     ("_" "_" nil org-mode)
-     ("$" "$" nil (org-mode latex-mode))))
-  :init
-  (add-hook 'org-mode-hook 'wrap-region-mode)
-  (add-hook 'latex-mode-hook 'wrap-region-mode)
-  )
-
-(use-package expand-region
-  :defer t
-  :init
-  (global-set-key (kbd "C-=") 'er/expand-region)
-  )
 
 (use-package multiple-cursors)
 
@@ -521,7 +514,7 @@ already narrowed."
 
 (global-set-key (kbd "C-x f") 'find-file-at-point)
 
-;; (global-auto-revert-mode t)
+(global-auto-revert-mode t)
 
 (defadvice completion--file-name-table (after ignoring-backups-f-n-completion activate)
   "Filter out results when they match `completion-ignored-extensions'."
