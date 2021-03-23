@@ -425,10 +425,8 @@ already narrowed."
                   (interactive)
                   (join-line -1)))
 
-;; Make searches case insensitive.
 (setq case-fold-search nil)
 
-;; Turn on highlighting for search strings.
 (setq search-highlight t)
 
 (use-package anzu
@@ -478,7 +476,6 @@ already narrowed."
 (setq save-abbrevs nil)
 
 (use-package company
-  ;; https://company-mode.github.io/
   :diminish company-mode
   :init
   ;; (global-company-mode)
@@ -487,9 +484,9 @@ already narrowed."
   :config
   (setq company-minimum-prefix-length 1)
   (setq company-idle-delay 1)
-  (setq company-tooltip-align-annotations 't)          ; align annotations to the right tooltip border
-  (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
-  (setq company-tooltip-limit 20)                      ; bigger popup window
+  (setq company-tooltip-align-annotations 't)          ; Align annotations to the right tooltip border.
+  (setq company-begin-commands '(self-insert-command)) ; Start autocompletion only after typing.
+  (setq company-tooltip-limit 20)                      ; Bigger pop-up windows.
   )
 
 (use-package yasnippet

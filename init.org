@@ -902,15 +902,20 @@ Join the following line onto this one.  Good for reformatting.
 
 ** Searching
 
+Make searches case insensitive.
+
 #+begin_src emacs-lisp
-;; Make searches case insensitive.
 (setq case-fold-search nil)
 
-;; Turn on highlighting for search strings.
+#+end_src
+
+Turn on highlighting for search strings.
+
+#+begin_src emacs-lisp
 (setq search-highlight t)
 #+end_src
 
-[[https://github.com/syohex/emacs-anzu][anzu-mode]] provides a "minor mode which display current point and  total matched in various search mode."
+[[https://github.com/syohex/emacs-anzu][anzu-mode]] provides a "minor mode which display current point and total matched in various search mode."
 
 #+begin_src emacs-lisp
 (use-package anzu
@@ -1004,9 +1009,10 @@ Use flyspell for spell-checking in comments in programs.
 
 *** company
 
+[[https://company-mode.github.io/][Company]] "is a text completion framework for Emacs. The name stands for "complete anything". It uses pluggable back-ends and front-ends to retrieve and display completion candidates."
+
 #+begin_src emacs-lisp
 (use-package company
-  ;; https://company-mode.github.io/
   :diminish company-mode
   :init
   ;; (global-company-mode)
@@ -1015,15 +1021,15 @@ Use flyspell for spell-checking in comments in programs.
   :config
   (setq company-minimum-prefix-length 1)
   (setq company-idle-delay 1)
-  (setq company-tooltip-align-annotations 't)          ; align annotations to the right tooltip border
-  (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
-  (setq company-tooltip-limit 20)                      ; bigger popup window
+  (setq company-tooltip-align-annotations 't)          ; Align annotations to the right tooltip border.
+  (setq company-begin-commands '(self-insert-command)) ; Start autocompletion only after typing.
+  (setq company-tooltip-limit 20)                      ; Bigger pop-up windows.
   )
 #+end_src
 
-*** yasnippets
+*** yasnippet
 
-https://joaotavora.github.io/yasnippet/
+[[https://joaotavora.github.io/yasnippet/][Yet Another Snippet Extension]].
 
 #+begin_src emacs-lisp
 (use-package yasnippet
