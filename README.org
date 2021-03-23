@@ -4,10 +4,13 @@ In March 2021 I collected all my Emacs config files into one: [[https://github.c
 
 If, for some reason I cannot fathom, you want to try out my Emacs configuration, run these commands. First you'll move your existing Emacs configuration out of the way, then you'll clone mine.
 
-    $ mv .emacs .emacs.BAK
-	$ mv .emacs.d .emacs.d.BAK
-	$ git clone https://github.com/wdenton/.emacs.d.git
-	$ emacs
+#+begin_src shell :eval no
+cd ~
+mv .emacs .emacs.BAK
+mv .emacs.d .emacs.d.BAK
+git clone https://github.com/wdenton/.emacs.d.git
+emacs
+#+end_src
 
 When you run Emacs it will probably spend a while downloading and installing packages. It may complain some are missing.  That's all right. When it's done, close it (=Ctrl-x Ctrl-c=) and then restart.  You'll be left with an Emacs that runs just like mine.
 
