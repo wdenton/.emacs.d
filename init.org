@@ -36,7 +36,7 @@ In March 2021 I moved my Emacs config into an Org file, but did it in bulk, so m
 
 ** Using Org for Emacs management
 
-Diego Zamboni's [[https://leanpub.com/lit-config/read][Literature Configuration]] is relevant and I should read it.
+Diego Zamboni's [[https://leanpub.com/lit-config/read][Literate Configuration]] is relevant and I should read it.
 
 Org inits I looked at:
 
@@ -134,8 +134,6 @@ First, set up the MELPA archive.
 
 I use John Wiegley's great [[https://github.com/jwiegley/use-package][use-package]] everywhere I can to handle the packages I want.  If it's not installed, get it right off.
 
-I'm not sure why I have ~diminish~ and ~bind-key~ in here, but I had a note that says they go with ~use-package.~
-
 #+begin_src emacs-lisp
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -143,10 +141,17 @@ I'm not sure why I have ~diminish~ and ~bind-key~ in here, but I had a note that
 
 (eval-when-compile
   (require 'use-package))
+#+end_src
 
-;; If I want a package, install it automatically.
+If I want a package, install it automatically.
+
+#+begin_src emacs-lisp
 (setq use-package-always-ensure t)
+#+end_src
 
+I'm not sure why I have ~diminish~ and ~bind-key~ in here, but I had a note that says they go with ~use-package.~
+
+#+begin_src emacs-lisp
 (use-package diminish)
 (use-package bind-key)
 #+end_src
@@ -175,7 +180,7 @@ Run the server; now I can load any file into Emacs with ~emacsclient file~ (or, 
                                   ))
 #+end_src
 
-Keep custom settings in separate file.  If custom.el doesn't exist, create an empty file (for starting from scratch).
+Keep custom settings in separate file.  If =custom.el= doesn't exist, create an empty file (for starting from scratch).
 
 #+begin_src emacs-lisp
 (setq custom-file "~/.custom.el")
@@ -242,13 +247,13 @@ Never use an X dialog box; use the minibuffer instead.
 
 ** Little tweaks
 
-Proper line wrapping
+Proper line wrapping.
 
 #+begin_src emacs-lisp
 (global-visual-line-mode 1)
 #+end_src
 
-Highlight current line subtly.
+Subtly highlight the current line.
 
 #+begin_src emacs-lisp
 (global-hl-line-mode 1)
@@ -258,23 +263,20 @@ Highlight current line subtly.
 
 ** Pointer
 
-Make the cursor a thin horizontal bar, not a block (but I still like it blinking).
+Make the cursor a thin horizontal bar, not a block (but I still like it blinking).  It can be ='bar= or ='box= or ='(hbar . 3)= etc.
 
 #+begin_src emacs-lisp
-;; Can be 'bar or 'box or '(hbar . 3) etc.
 (set-default 'cursor-type '(bar . 2))
 #+end_src
 
 ** Faces and fonts
 
-My home and work machines have different screen resolutions, so the font height needs to be different.
+My home and work machines have different screen resolutions, so the font height needs to be different.  It's measured in 0.1 points, so 130 is 13 pt.  I need it a little bigger on my work machine.
 
 #+begin_src emacs-lisp
-;; Measured in 0.1 pts
 (setq wtd-ubuntu-mono-height 130)
 ;; (setq wtd/fira-code-height 120)
 (when (string= (system-name) "work")
-  ;; Need it a little bigger on my work machine
   (setq wtd-ubuntu-mono-height 160)
   ;; (setq wtd-fira-code-height 160)
   )
@@ -356,8 +358,21 @@ Use [[https://github.com/Fuco1/smartparens/][smartparens]] to handle parentheses
 
 ** Indenting
 
-#+begin_src emacs-lisp
+=electric-indent-mode= is built in, but I don't turn it on, because ...
+
+#+begin_src emacs-lisp :tangle no
 (electric-indent-mode 1)
+#+end_src
+
+... I use [[https://github.com/Malabarba/aggressive-indent-mode][aggressive-indent-mode]], which is indeed aggressive, but very handy.
+
+#+begin_src emacs-lisp
+(use-package aggressive-indent
+  :diminish aggressive-indent-mode ;; "→"
+  :config
+  (global-aggressive-indent-mode 1)
+  (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+  )
 #+end_src
 
 Use [[https://github.com/zk-phi/indent-guide][indent-guide]] to show vertical lines on indented blocks, which helps make it clear what is where.
@@ -367,17 +382,6 @@ Use [[https://github.com/zk-phi/indent-guide][indent-guide]] to show vertical li
   :diminish
   :config
   (indent-guide-global-mode)
-  )
-#+end_src
-
-[[https://github.com/Malabarba/aggressive-indent-mode][aggressive-indent-mode]] is indeed aggressive, but it's very handy.
-
-#+begin_src emacs-lisp
-(use-package aggressive-indent
-  :diminish aggressive-indent-mode ;; "→"
-  :config
-  (global-aggressive-indent-mode 1)
-  (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
   )
 #+end_src
 
@@ -404,7 +408,7 @@ Include the size of the file in the mode line.
 (size-indication-mode t)
 #+end_src
 
-Show which column I'm in in the mode line as well
+Also show which column I'm in.
 
 #+begin_src emacs-lisp
 (column-number-mode t)
@@ -557,9 +561,7 @@ When I want to kill a buffer, it's always the current one, so don't ask.  ([[htt
 (global-set-key (kbd "C-x k") 'wtd/kill-this-buffer)
 #+end_src
 
-~ibuffer~ is a nicer way of showing the buffer list (~C-x C-b~).  It's built in.
-
-Alias the usual buffer list command to ibuffer.
+~ibuffer~ is a nicer way of showing the buffer list (~C-x C-b~).  It's built in.  Alias the usual buffer list command to =ibuffer=.
 
 #+begin_src emacs-lisp
 (defalias 'list-buffers 'ibuffer)
@@ -593,7 +595,7 @@ For [[https://github.com/purcell/ibuffer-projectile][ibuffer-projectile]].
 
 ** Windows
 
-Split the window horizontally, not vertically (I prefer side-by-side with the newer wider screens).
+Split the window horizontally, not vertically (I prefer side-by-side with wider screens).
 
 #+begin_src emacs-lisp
 (setq split-height-threshold nil)
@@ -1695,13 +1697,13 @@ Flycheck and lintr.
 ;; (add-to-list 'auto-mode-alist '("\\.Rmd$" . R-mode))
 #+end_src
 
-Start R in the current directory.  May need to change dirs with setwd() after.
+Start R in the current directory.  May need to change dirs with =setwd()= after.
 
 #+begin_src emacs-lisp
 (setq ess-ask-for-ess-directory nil)
 #+end_src
 
-Display %>% as |, thanks to prettify-symbols-mode.  Really makes R code look nice.
+Display =%>%= as =|=, thanks to =prettify-symbols-mode=.  Really makes R code look nice.
 
 #+begin_src emacs-lisp
 (add-hook 'inferior-ess-mode-hook
@@ -1715,7 +1717,7 @@ I don't know what this does.
 (setq ess-local-process-name "R")
 #+end_src
 
-This stops comments from flying all the way over to the right, and makes %>% chains indent nicely (if the newline is after the pipe).
+This stops comments from flying all the way over to the right, and makes =%>%= chains indent nicely (if the newline is after the pipe).
 
 #+begin_src emacs-lisp
 (add-hook 'ess-mode-hook
@@ -1754,6 +1756,8 @@ Be more colourful!
 #+end_src
 
 * Ruby
+
+Make sure =ruby-mode= is used in the right places.
 
 #+begin_src emacs-lisp
 (autoload 'ruby-mode "ruby-mode" "Mode for editing Ruby")
@@ -1803,9 +1807,9 @@ Parentheses.
 (require 'smartparens-ruby)
 #+end_src
 
-"Finds all the URLs in the buffer, highlights them, and turns them into clickable buttons."  Use C-c RET to follow a link.
+"Finds all the URLs in the buffer, highlights them, and turns them into clickable buttons."  Use =C-c RET= to follow a link.
 
-TODO Make Org's C-c C-o more general and follow these links too.
+TODO Make Org's =C-c C-o= more general and follow these links too.
 
 #+begin_src emacs-lisp
 (add-hook 'ruby-mode-hook #'goto-address-mode)
@@ -1829,12 +1833,6 @@ TODO Make Org's C-c C-o more general and follow these links too.
    :config
    (eval-after-load 'company '(push 'company-robe company-backends))
    )
-#+end_src
-
-Use indent-guide on Ruby files.
-
-#+begin_src emacs-lisp
-(add-hook 'ruby-mode-hook 'indent-guide-mode)
 #+end_src
 
 * Jekyll
@@ -1921,21 +1919,16 @@ I got all this from a web site that no longer exists.  Such is the way of the in
 
 Except: auto-completion in Auctex is turned on elsewhere.
 
+Remember: when editing tables, use ~M-x align-current~.
+
 Good reading:
 
 + http://tex.stackexchange.com/questions/50827/a-simpletons-guide-to-tex-workflow-with-emacs/50919#50919
 + http://tex.stackexchange.com/questions/52179/what-is-your-favorite-emacs-and-or-auctex-command-trick
 
-;; Simplify everything below
-;; Try these to simplify highlighting
-;; (setq font-latex-fontify-script nil)
-;; (setq font-latex-fontify-sectioning 'color)
-
 #+begin_src emacs-lisp
 (add-hook 'LaTeX-mode-hook #'outline-minor-mode)
 #+end_src
-
-Remember: when editing tables, use ~M-x align-current~.
 
 [[https://www.gnu.org/software/auctex/][Auctex]] is amazingly powerful.
 
@@ -1946,19 +1939,19 @@ Remember: when editing tables, use ~M-x align-current~.
   )
 #+end_src
 
-Always use visual-line-mode
+Always use visual-line-mode.
 
 #+begin_src emacs-lisp
 (add-hook 'LaTeX-mode-hook 'turn-on-visual-line-mode)
 #+end_src
 
-Turn on spell-checking
+Turn on spell-checking.
 
 #+begin_src emacs-lisp
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 #+end_src
 
-Use pdflatex to make PDFs.
+Use =pdflatex= to make PDFs.
 
 #+begin_src emacs-lisp
 ;; (setq latex-run-command "pdflatex")
@@ -1980,7 +1973,7 @@ Automatically activate TeX-fold-mode.  ~C-c C-o C-b~ is necessary to hide everyt
 (add-hook 'TeX-mode-hook (lambda () (TeX-fold-mode 1)))
 #+end_src
 
-Use wrap-region.
+Use =wrap-region=.
 
 #+begin_src emacs-lisp
 (add-hook 'latex-mode-hook 'wrap-region-mode)
@@ -2027,7 +2020,7 @@ From [[http://tex.stackexchange.com/questions/50827/a-simpletons-guide-to-tex-wo
 
 [[https://github.com/vspinu/polymode/][Polymode]], for Markdown + R + Yaml etc.
 
-I don't use this right now---it would mess up headers in YAML files---but maybe I'll come back to it.
+I don't use this right now---it would mess up headers in YAML files---but maybe I'll come back to it.  For now, it's not tangled.
 
 #+begin_src emacs-mode :tangle no
 (use-package polymode)
@@ -2052,7 +2045,7 @@ I don't use this right now---it would mess up headers in YAML files---but maybe 
 (use-package poly-noweb)
 #+end_src
 
-* Esonify
+* Esonify (not in use)
 
 [[https://github.com/oflatt/esonify][Esonify]] is "an Emacs extension that sonifies your code."  ~M-x esonify-mode~ to toggle on/off.
 

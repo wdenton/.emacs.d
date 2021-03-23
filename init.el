@@ -19,7 +19,6 @@
 (eval-when-compile
   (require 'use-package))
 
-;; If I want a package, install it automatically.
 (setq use-package-always-ensure t)
 
 (use-package diminish)
@@ -70,14 +69,11 @@
 ;; And set its colour
 ;; (set-face-background hl-line-face "#efefef")
 
-;; Can be 'bar or 'box or '(hbar . 3) etc.
 (set-default 'cursor-type '(bar . 2))
 
-;; Measured in 0.1 pts
 (setq wtd-ubuntu-mono-height 130)
 ;; (setq wtd/fira-code-height 120)
 (when (string= (system-name) "work")
-  ;; Need it a little bigger on my work machine
   (setq wtd-ubuntu-mono-height 160)
   ;; (setq wtd-fira-code-height 160)
   )
@@ -112,19 +108,17 @@
   `(sp-show-pair-mismatch-face :inverse-video t :bold t)
   )
 
-(electric-indent-mode 1)
-
-(use-package indent-guide
-  :diminish
-  :config
-  (indent-guide-global-mode)
-  )
-
 (use-package aggressive-indent
   :diminish aggressive-indent-mode ;; "→"
   :config
   (global-aggressive-indent-mode 1)
   (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+  )
+
+(use-package indent-guide
+  :diminish
+  :config
+  (indent-guide-global-mode)
   )
 
 (use-package solarized-theme
@@ -1059,8 +1053,6 @@ already narrowed."
    :config
    (eval-after-load 'company '(push 'company-robe company-backends))
    )
-
-(add-hook 'ruby-mode-hook 'indent-guide-mode)
 
 (defun jekyll-timestamp ()
   "Update existing date: timestamp on a Jekyll page or post."
