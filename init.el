@@ -466,14 +466,7 @@ already narrowed."
 
 (setq-default abbrev-mode t)
 
-;; Where to store the abbrevs.
 (setq abbrev-file-name "~/.emacs.d/abbrev_defs")
-
-;; Save abbrevs when files are saved
-(setq save-abbrevs t)
-
-;; Don't ask whether to save abbrevs when quitting Emacs
-(setq save-abbrevs nil)
 
 (use-package company
   :diminish company-mode
@@ -571,6 +564,10 @@ already narrowed."
                    name (file-name-nondirectory new-name)))))))
 (global-set-key (kbd "C-x C-r") 'rename-current-buffer-file)
 
+(use-package csv-mode)
+
+(use-package json-mode)
+
 (use-package markdown-mode
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
@@ -591,7 +588,6 @@ already narrowed."
 (add-to-list 'auto-mode-alist
 	     (cons (concat "\\." (regexp-opt '("xml" "xsd" "sch" "rng" "xslt" "svg" "rss") t) "\\'")
 		   'nxml-mode))
-(fset 'html-mode 'nxml-mode)
 
 (add-to-list 'hs-special-modes-alist
 	     '(nxml-mode
@@ -600,21 +596,16 @@ already narrowed."
                "<!--"
                sgml-skip-tag-forward
                nil))
+
 (add-hook 'nxml-mode-hook 'hs-minor-mode)
-;; (define-key nxml-mode-map (kbd "C-c h") 'hs-toggle-hiding)
 
 (with-eval-after-load "nxml-mode"
-  ;; Need to define this only after nxml-mode has been loaded
   (define-key nxml-mode-map "\C-c h" 'hs-toggle-hiding))
 
 (use-package yaml-mode
   :init
   (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
   )
-
-(use-package csv-mode)
-
-(use-package json-mode)
 
 (use-package magit
   ;; :config

@@ -702,11 +702,9 @@ When I close a session, save exactly where I was in the files.
 
 * Minibuffer
 
-** amx
+** Amx
 
-[[https://github.com/DarwinAwardWinner/amx/][amx]] is a replace for ~M-x~.
-
-TODO:  What happens if I turn this off?
+[[https://github.com/DarwinAwardWinner/amx/][Amx]] is a replacement for ~M-x~.  It works with Ivy.
 
 #+begin_src emacs-lisp
 (use-package amx
@@ -717,14 +715,17 @@ TODO:  What happens if I turn this off?
   )
 #+end_src
 
-** ivy, swiper and counsel
+** Ivy, Swiper and Counsel
 
-;; https://github.com/abo-abo/swiper
-;; See also http://irreal.org/blog/?p=6419
+These [[https://github.com/abo-abo/swiper][three packages]] all work together:  "Ivy, a generic completion mechanism for Emacs.  Counsel [is] a collection of Ivy-enhanced versions of common Emacs commands.  Swiper is an Ivy-enhanced alternative to Isearch."
+
+First, call up Counsel.
 
 #+begin_src emacs-lisp
 (use-package counsel)
 #+end_src
+
+Then Ivy.
 
 #+begin_src emacs-lisp
 (use-package ivy
@@ -735,6 +736,8 @@ TODO:  What happens if I turn this off?
   (setq ivy-count-format "%d/%d ")
   )
 #+end_src
+
+And finally Swiper, and override some common keystrokes with Swiper commands.
 
 #+begin_src emacs-lisp
 (use-package swiper
@@ -754,7 +757,9 @@ TODO:  What happens if I turn this off?
   )
 #+end_src
 
-** imenu
+** Imenu
+
+"The Imenu facility offers a way to find the major definitions in a file by name. It is also useful in text formatter major modes, where it treats each chapter, section, etc., as a definition."  I rarely use this, because I tend to search for words with =C-s=, but it can be useful.
 
 #+begin_src emacs-lisp
 (global-set-key (kbd "M-i") 'imenu)
@@ -762,7 +767,7 @@ TODO:  What happens if I turn this off?
 
 * Command launchers
 
-These key mappings make it easier to run common things.  I learned about this from Arthur Malabarba's [[http://endlessparentheses.com/launcher-keymap-for-standalone-features.html][Launcher keymap for standalone features]].
+These key mappings (=C-x l something=) make it easier to run common things.  I learned about this from Arthur Malabarba's [[http://endlessparentheses.com/launcher-keymap-for-standalone-features.html][Launcher keymap for standalone features]].
 
 #+begin_src emacs-lisp
 (define-prefix-command 'launcher-map)
@@ -821,7 +826,7 @@ If there are any empty lines at the end of a buffer, show them (but they will di
 
 ** Colours
 
-[[https://elpa.gnu.org/packages/rainbow-mode.html][rainbow-mode]] is a handy little helper.  "All strings representing colors will be highlighted with the color they represent."
+[[https://elpa.gnu.org/packages/rainbow-mode.html][Rainbow-mode]] is a handy little helper.  "All strings representing colors will be highlighted with the color they represent."
 
 #+begin_src emacs-lisp
 (use-package rainbow-mode
@@ -841,7 +846,7 @@ Let me upcase or downcase a region, which is disabled by default.
 (put 'upcase-region 'disabled nil)
 #+end_src
 
-I don't use multiple-cursors much ... but I should.
+I don't use multiple cursors much ... but I should.
 
 #+begin_src emacs-lisp
 (use-package multiple-cursors)
@@ -915,7 +920,7 @@ Turn on highlighting for search strings.
 (setq search-highlight t)
 #+end_src
 
-[[https://github.com/syohex/emacs-anzu][anzu-mode]] provides a "minor mode which display current point and total matched in various search mode."
+[[https://github.com/syohex/emacs-anzu][Anzu-mode]] provides a "minor mode which display current point and total matched in various search mode."
 
 #+begin_src emacs-lisp
 (use-package anzu
@@ -948,7 +953,7 @@ Remove text in active region if inserting text.
 (delete-selection-mode 1)
 #+end_src
 
-[[https://github.com/k-talo/volatile-highlights.el][volatile-highlights]] temporarily highlights what you've just pasted in.  When you move the pointer, it disappears.
+The [[https://github.com/k-talo/volatile-highlights.el][volatile-highlights]] mode temporarily highlights what you've just pasted in.  When you move the pointer, it disappears.
 
 #+begin_src emacs-lisp
 (use-package volatile-highlights
@@ -968,7 +973,7 @@ Enable cutting/pasting and putting results into the X clipboard
 (global-set-key [(shift insert)] 'clipboard-yank)
 #+end_src
 
-Allow pasting selection outside of Emacs
+Allow pasting selection outside of Emacs.
 
 #+begin_src emacs-lisp
 (setq select-enable-clipboard t)
@@ -984,7 +989,7 @@ Allow pasting selection outside of Emacs
 
 ** Spelling
 
-Use flyspell for spell-checking in comments in programs.
+Use Flyspell for spell-checking in comments in programs.
 
 #+begin_src emacs-lisp
 (add-hook 'prog-mode-hook #'flyspell-prog-mode)
@@ -992,22 +997,20 @@ Use flyspell for spell-checking in comments in programs.
 
 ** Expansions and abbreviations
 
-*** abbrev
+*** Abbrevs
+
+[[https://www.gnu.org/software/emacs/manual/html_node/emacs/Abbrevs.html#Abbrevs][Abbrevs]] are words or letter combinations that when typed expand into longer words or phrases.  New ones can be added with =define-global-abbrev= or =define-mode-abbrev= for a particular mode.
 
 #+begin_src emacs-lisp
 (setq-default abbrev-mode t)
-
-;; Where to store the abbrevs.
-(setq abbrev-file-name "~/.emacs.d/abbrev_defs")
-
-;; Save abbrevs when files are saved
-(setq save-abbrevs t)
-
-;; Don't ask whether to save abbrevs when quitting Emacs
-(setq save-abbrevs nil)
 #+end_src
 
-*** company
+The [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Abbrev-Files.html][abbrevs are saved]] in this file.  "The abbrevs are saved in the form of a Lisp program to define the same abbrev tables with the same contents."
+
+#+begin_src emacs-lisp
+(setq abbrev-file-name "~/.emacs.d/abbrev_defs")
+#+end_src
+*** Company
 
 [[https://company-mode.github.io/][Company]] "is a text completion framework for Emacs. The name stands for "complete anything". It uses pluggable back-ends and front-ends to retrieve and display completion candidates."
 
@@ -1027,7 +1030,7 @@ Use flyspell for spell-checking in comments in programs.
   )
 #+end_src
 
-*** yasnippet
+*** Yasnippet
 
 [[https://joaotavora.github.io/yasnippet/][Yet Another Snippet Extension]].
 
@@ -1090,7 +1093,7 @@ Don't show uninteresting files in Emacs completion window ([[https://stackoverfl
               (completion-pcm--filename-try-filter res)))))
 #+end_src
 
-** dired
+** Dired
 
 Auto refresh dired, but be quiet about it.
 
@@ -1182,6 +1185,22 @@ File management shortcuts from [[https://github.com/bodil/emacs.d][Bodil Stokke]
 
 * File types
 
+** CSV
+
+I love CSV files, but I'd rather load them into Org or R then edit them directly.  Still ...
+
+#+begin_src emacs-lisp
+(use-package csv-mode)
+#+end_src
+
+** JSON
+
+[[https://github.com/joshwnj/json-mode][JSON-mode]].
+
+#+begin_src emacs-lisp
+(use-package json-mode)
+#+end_src
+
 ** Markdown
 
 #+begin_src emacs-lisp
@@ -1203,14 +1222,19 @@ File management shortcuts from [[https://github.com/bodil/emacs.d][Bodil Stokke]
   )
 #+end_src
 
-** nxml for HTML etc.
+** XML
+
+[[https://www.gnu.org/software/emacs/manual/html_mono/nxml-mode.html][nXML mode]] is for XML files.
 
 #+begin_src emacs-lisp
 (add-to-list 'auto-mode-alist
 	     (cons (concat "\\." (regexp-opt '("xml" "xsd" "sch" "rng" "xslt" "svg" "rss") t) "\\'")
 		   'nxml-mode))
-(fset 'html-mode 'nxml-mode)
+#+end_src
 
+Adding this [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Hideshow.html][Hideshow minor mode]] hook means I can fold or hide chunks of XML with =C-c SPC h= (while sitting on the opening tag).
+
+#+begin_src emacs-lisp
 (add-to-list 'hs-special-modes-alist
 	     '(nxml-mode
                "<!--\\|<[^/>]*[^/]>"
@@ -1218,34 +1242,26 @@ File management shortcuts from [[https://github.com/bodil/emacs.d][Bodil Stokke]
                "<!--"
                sgml-skip-tag-forward
                nil))
-(add-hook 'nxml-mode-hook 'hs-minor-mode)
-;; (define-key nxml-mode-map (kbd "C-c h") 'hs-toggle-hiding)
 
+(add-hook 'nxml-mode-hook 'hs-minor-mode)
+#+end_src
+
+Define the actual keystroke now that the rest has been set up.  The default is longer and confusing.
+
+#+begin_src emacs-lisp
 (with-eval-after-load "nxml-mode"
-  ;; Need to define this only after nxml-mode has been loaded
   (define-key nxml-mode-map "\C-c h" 'hs-toggle-hiding))
 #+end_src
 
 ** YAML
+
+[[https://github.com/yoshiki/yaml-mode][YAML-mode]] seems to be a small package, and not maintained much any more, but it works.
 
 #+begin_src emacs-lisp
 (use-package yaml-mode
   :init
   (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
   )
-#+end_src
-
-
-** CSV files
-
-#+begin_src emacs-lisp
-(use-package csv-mode)
-#+end_src
-
-** JSON
-
-#+begin_src emacs-lisp
-(use-package json-mode)
 #+end_src
 
 * Git
