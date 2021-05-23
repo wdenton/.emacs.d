@@ -72,6 +72,7 @@ The [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Early-Init-File.
 ;;
 ;; You should make any changes there and regenerate it with C-c C-v t
 #+end_src
+
 Turn off the mouse interface early in startup to avoid momentary display.
 
 #+begin_src emacs-lisp :tangle early-init.el
@@ -1436,6 +1437,7 @@ I should try [[https://github.com/jkitchin/org-ref][org-ref]].
  	    (lambda ()
  	      (push '("<=" . ?≤) prettify-symbols-alist)
  	      (push '(">=" . ?≥) prettify-symbols-alist)
+ 	      (push '("|>" . ?▷) prettify-symbols-alist)
  	      (push '("#+BEGIN_SRC" . ?⎡) prettify-symbols-alist) ;;  ⎡ ➤ 🖝 ➟ ➤ ✎
  	      (push '("#+END_SRC" . ?⎣) prettify-symbols-alist) ;; ⎣ ✐
  	      (push '("#+begin_src" . ?⎡) prettify-symbols-alist)
@@ -1749,7 +1751,9 @@ Display =%>%= as =|=, thanks to =prettify-symbols-mode=.  Really makes R code lo
 #+begin_src emacs-lisp
 (add-hook 'inferior-ess-mode-hook
 	  (lambda ()
-	    (push '("%>%" . ?|) prettify-symbols-alist)))
+	    (push '("%>%" . ?|) prettify-symbols-alist)
+ 	    (push '("|>" . ?▷) prettify-symbols-alist)
+	    ))
 #+end_src
 
 I don't know what this does.

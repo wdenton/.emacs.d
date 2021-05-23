@@ -762,6 +762,7 @@ already narrowed."
  	    (lambda ()
  	      (push '("<=" . ?≤) prettify-symbols-alist)
  	      (push '(">=" . ?≥) prettify-symbols-alist)
+ 	      (push '("|>" . ?▷) prettify-symbols-alist)
  	      (push '("#+BEGIN_SRC" . ?⎡) prettify-symbols-alist) ;;  ⎡ ➤ 🖝 ➟ ➤ ✎
  	      (push '("#+END_SRC" . ?⎣) prettify-symbols-alist) ;; ⎣ ✐
  	      (push '("#+begin_src" . ?⎡) prettify-symbols-alist)
@@ -961,7 +962,9 @@ already narrowed."
 
 (add-hook 'inferior-ess-mode-hook
 	  (lambda ()
-	    (push '("%>%" . ?|) prettify-symbols-alist)))
+	    (push '("%>%" . ?|) prettify-symbols-alist)
+ 	    (push '("|>" . ?▷) prettify-symbols-alist)
+	    ))
 
 (setq ess-local-process-name "R")
 
