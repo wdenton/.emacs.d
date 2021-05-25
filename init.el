@@ -157,6 +157,17 @@
 
 (setq prettify-symbols-unprettify-at-point 'right-edge)
 
+(setq-default prettify-symbols-alist '(("->" . ?→)
+ 				       ("<-" . ?←)
+                                       ("->>" . ?↠)
+                                       ("->>" . ?↞)
+                                       ("=>" . ?⇒)
+                                       ("!=" . ?≠)
+                                       ("==" . ?≡)
+                                       ("<=" . ?≤)
+                                       (">=" . ?≥)
+				       ))
+
 (put 'narrow-to-region 'disabled nil)
 
 (defun narrow-or-widen-dwim (p)
@@ -1005,16 +1016,7 @@ already narrowed."
         (ess-fl-keyword:=)
 	(ess-R-fl-keyword:F&T))))
 
-(autoload 'ruby-mode "ruby-mode" "Mode for editing Ruby")
-(add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
-(add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
-
-(add-hook 'ruby-mode-hook
-	  (lambda ()
-	    (push '("<=" . ?≤) prettify-symbols-alist)
-	    (push '(">=" . ?≥) prettify-symbols-alist)
-	    (push '("!=" . ?≠) prettify-symbols-alist)
-	    ))
+(add-hook 'ruby-mode-hook 'prettify-symbols-mode)
 
 (use-package rbenv
   :hook (ruby-mode . global-rbenv-mode)

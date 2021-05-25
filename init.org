@@ -460,12 +460,21 @@ The mode reveals what's really there when the pointer is on the symbol, and this
 (setq prettify-symbols-unprettify-at-point 'right-edge)
 #+end_src
 
-This doesn't work ... I'm a bit confused about global prettifying.
+I don't think I should be setting this variable like this, but there's no other way I can figure out to get prettification working in Ruby and other modes that don't have the right stuff built in (unlike the mode for Python).
 
-#+begin_src emacs-lisp :tangle no
-(push '("<=" . ?≤) prettify-symbols-alist)
-(push '(">=" . ?≥) prettify-symbols-alist)
-(push '("!=" . ?≠) prettify-symbols-alist)
+Nevertheless, this doesn't work.  Why don't more programming modes support this mode?
+
+#+begin_src emacs-lisp
+(setq-default prettify-symbols-alist '(("->" . ?→)
+ 				       ("<-" . ?←)
+                                       ("->>" . ?↠)
+                                       ("->>" . ?↞)
+                                       ("=>" . ?⇒)
+                                       ("!=" . ?≠)
+                                       ("==" . ?≡)
+                                       ("<=" . ?≤)
+                                       (">=" . ?≥)
+				       ))
 #+end_src
 
 Further customizations are set up by language.
@@ -1825,23 +1834,18 @@ Be more colourful!
 
 * Ruby
 
-Make sure =ruby-mode= is used in the right places.
+Make sure =ruby-mode= is used in the right places.  (Turned off, since it seems to be unnecessary.)
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (autoload 'ruby-mode "ruby-mode" "Mode for editing Ruby")
 (add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
 (add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
 #+end_src
 
-Prettify a few things.
+This doesn't work.
 
 #+begin_src emacs-lisp
-(add-hook 'ruby-mode-hook
-	  (lambda ()
-	    (push '("<=" . ?≤) prettify-symbols-alist)
-	    (push '(">=" . ?≥) prettify-symbols-alist)
-	    (push '("!=" . ?≠) prettify-symbols-alist)
-	    ))
+(add-hook 'ruby-mode-hook 'prettify-symbols-mode)
 #+end_src
 
 I use [[https://github.com/rbenv/rbenv][rbenv]], so Emacs needs to know about it.
