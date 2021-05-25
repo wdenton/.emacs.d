@@ -86,9 +86,6 @@
 
 (setq font-lock-maximum-decoration t)
 
-(global-prettify-symbols-mode +1)
-(setq prettify-symbols-unprettify-at-point 'right-edge)
-
 (use-package list-unicode-display)
 
 (set-language-environment "UTF-8")
@@ -155,6 +152,10 @@
 (eval-after-load "simple" '(diminish 'visual-line-mode))
 (eval-after-load "smerge-mode" '(diminish 'smerge-mode))
 (eval-after-load "subword" '(diminish 'subword-mode))
+
+(global-prettify-symbols-mode 1)
+
+(setq prettify-symbols-unprettify-at-point 'right-edge)
 
 (put 'narrow-to-region 'disabled nil)
 
@@ -533,14 +534,14 @@ already narrowed."
 (setq font-lock-maximum-decoration (quote ((dired-mode) (t . t))))
 
 (defun delete-current-buffer-file ()
-  "Remove file connected to current buffer and kills buffer."
+  "Delete file connected to current buffer and kill buffer."
   (interactive)
   (let ((filename (buffer-file-name))
         (buffer (current-buffer))
         (name (buffer-name)))
     (if (not (and filename (file-exists-p filename)))
         (ido-kill-buffer)
-      (when (yes-or-no-p "Are you sure you want to remove this file? ")
+      (when (yes-or-no-p "Are you sure you want to delete this file? ")
         (delete-file filename)
         (kill-buffer buffer)
         (message "File '%s' successfully removed" filename)))))
@@ -966,6 +967,12 @@ already narrowed."
  	    (push '("|>" . ?▷) prettify-symbols-alist)
 	    ))
 
+(add-hook 'ess-mode-hook
+	  (lambda ()
+	    (push '("%>%" . ?|) prettify-symbols-alist)
+ 	    (push '("|>" . ?▷) prettify-symbols-alist)
+	    ))
+
 (setq ess-local-process-name "R")
 
 (add-hook 'ess-mode-hook
@@ -1001,6 +1008,13 @@ already narrowed."
 (autoload 'ruby-mode "ruby-mode" "Mode for editing Ruby")
 (add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
 (add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
+
+(add-hook 'ruby-mode-hook
+	  (lambda ()
+	    (push '("<=" . ?≤) prettify-symbols-alist)
+	    (push '(">=" . ?≥) prettify-symbols-alist)
+	    (push '("!=" . ?≠) prettify-symbols-alist)
+	    ))
 
 (use-package rbenv
   :hook (ruby-mode . global-rbenv-mode)

@@ -315,13 +315,6 @@ Always do font-locking.
 (setq font-lock-maximum-decoration t)
 #+end_src
 
-Prettify symbols!  This is very nice.
-
-#+begin_src emacs-lisp
-(global-prettify-symbols-mode +1)
-(setq prettify-symbols-unprettify-at-point 'right-edge)
-#+end_src
-
 ** Unicode and UTF-8
 
 [[https://github.com/purcell/list-unicode-display][list-unicode-display]] "provides a command which searches for Unicode characters by name, and displays a list of matching characters with their names in a buffer."  Similar to ~C-c 8~ in Counsel, which gives an interactive search for Unicode characters.
@@ -452,6 +445,30 @@ And here's a list of various other modes I hide a different way.
 (eval-after-load "smerge-mode" '(diminish 'smerge-mode))
 (eval-after-load "subword" '(diminish 'subword-mode))
 #+end_src
+
+** Prettifying symbols
+
+Use =prettify-symbols-mode= everywhere.
+
+#+begin_src emacs-lisp
+(global-prettify-symbols-mode 1)
+#+end_src
+
+The mode reveals what's really there when the pointer is on the symbol, and this makes it also show the real text when the pointer is just to the right.
+
+#+begin_src emacs-lisp
+(setq prettify-symbols-unprettify-at-point 'right-edge)
+#+end_src
+
+This doesn't work ... I'm a bit confused about global prettifying.
+
+#+begin_src emacs-lisp :tangle no
+(push '("<=" . ?≤) prettify-symbols-alist)
+(push '(">=" . ?≥) prettify-symbols-alist)
+(push '("!=" . ?≠) prettify-symbols-alist)
+#+end_src
+
+Further customizations are set up by language.
 
 * Sessions, buffers and windows
 
@@ -1150,14 +1167,14 @@ File management shortcuts from [[https://github.com/bodil/emacs.d][Bodil Stokke]
 
 #+begin_src emacs-lisp
 (defun delete-current-buffer-file ()
-  "Remove file connected to current buffer and kills buffer."
+  "Delete file connected to current buffer and kill buffer."
   (interactive)
   (let ((filename (buffer-file-name))
         (buffer (current-buffer))
         (name (buffer-name)))
     (if (not (and filename (file-exists-p filename)))
         (ido-kill-buffer)
-      (when (yes-or-no-p "Are you sure you want to remove this file? ")
+      (when (yes-or-no-p "Are you sure you want to delete this file? ")
         (delete-file filename)
         (kill-buffer buffer)
         (message "File '%s' successfully removed" filename)))))
@@ -1746,10 +1763,16 @@ Start R in the current directory.  May need to change dirs with =setwd()= after.
 (setq ess-ask-for-ess-directory nil)
 #+end_src
 
-Display =%>%= as =|=, thanks to =prettify-symbols-mode=.  Really makes R code look nice.
+Use =prettify-symbols-mode= to make R code look nicer.  Display =%>%= (the [[https://magrittr.tidyverse.org/][magrittr]] pipe) as =|=, and =|>= (the built-in pipe that appeared in 4.1.0) as =▷=.
 
 #+begin_src emacs-lisp
 (add-hook 'inferior-ess-mode-hook
+	  (lambda ()
+	    (push '("%>%" . ?|) prettify-symbols-alist)
+ 	    (push '("|>" . ?▷) prettify-symbols-alist)
+	    ))
+
+(add-hook 'ess-mode-hook
 	  (lambda ()
 	    (push '("%>%" . ?|) prettify-symbols-alist)
  	    (push '("|>" . ?▷) prettify-symbols-alist)
@@ -1808,6 +1831,17 @@ Make sure =ruby-mode= is used in the right places.
 (autoload 'ruby-mode "ruby-mode" "Mode for editing Ruby")
 (add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
 (add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
+#+end_src
+
+Prettify a few things.
+
+#+begin_src emacs-lisp
+(add-hook 'ruby-mode-hook
+	  (lambda ()
+	    (push '("<=" . ?≤) prettify-symbols-alist)
+	    (push '(">=" . ?≥) prettify-symbols-alist)
+	    (push '("!=" . ?≠) prettify-symbols-alist)
+	    ))
 #+end_src
 
 I use [[https://github.com/rbenv/rbenv][rbenv]], so Emacs needs to know about it.
