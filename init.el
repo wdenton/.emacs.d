@@ -783,6 +783,8 @@ already narrowed."
  	      (push '("#+END_QUOTE" . ?❞) prettify-symbols-alist)
  	      (push '("#+begin_quote" . ?❝) prettify-symbols-alist)
  	      (push '("#+end_quote" . ?❞) prettify-symbols-alist)
+ 	      (push '("[ ]" . ?☐) prettify-symbols-alist)
+ 	      (push '("[X]" . ?☒) prettify-symbols-alist)
  	      ))
 
   ;; Capturing
