@@ -14,4 +14,4 @@
 
 (setq site-run-file nil)
 
-(setq gc-cons-threshold 100000000)
+(setq gc-cons-threshold 8000000) ;; 8 MB
