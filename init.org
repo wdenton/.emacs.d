@@ -103,7 +103,7 @@ I don't have a "file containing site-wide run-time initializations."
 And finally, don't garbage clean so often.
 
 #+begin_src emacs-lisp :tangle early-init.el
-(setq gc-cons-threshold 100000000)
+(setq gc-cons-threshold 8000000) ;; 8 MB
 #+end_src
 
 Everything from here on is in the regular init file.
