@@ -1018,7 +1018,12 @@ already narrowed."
         (ess-fl-keyword:=)
 	(ess-R-fl-keyword:F&T))))
 
-(add-hook 'ruby-mode-hook 'prettify-symbols-mode)
+(add-hook 'ruby-mode-hook
+	  (lambda ()
+	    (push '("!=" . ?≠) prettify-symbols-alist)
+	    ;; (push '("&&" . ?∧) prettify-symbols-alist)
+ 	    ;; (push '("||" . ?∨) prettify-symbols-alist)
+	    ))
 
 (use-package rbenv
   :hook (ruby-mode . global-rbenv-mode)
