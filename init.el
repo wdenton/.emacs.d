@@ -540,6 +540,8 @@ already narrowed."
 
 (put 'dired-find-alternate-file 'disabled nil)
 
+(setq dired-kill-when-opening-new-dired-buffer t)
+
 (setq dired-dwim-target t)
 
 (setq font-lock-maximum-decoration (quote ((dired-mode) (t . t))))
@@ -700,6 +702,10 @@ already narrowed."
 
   ;; Embed an image with [[file:foo.png]] and then C-c C-x C-v to view
   (setq org-display-inline-images t)
+
+  ;; "When set to nil, try to get the width from an #+ATTR.* keyword
+  ;; and fall back on the original width if none is found."
+  (setq org-image-actual-width nil)
 
   ;; Show on startup
   (setq org-startup-with-inline-images t)

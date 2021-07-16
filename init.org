@@ -1155,6 +1155,12 @@ Emacs 24.4 defaults to an =ls -1= (dash one) view, not =ls -l= ( dash ell), but 
 (put 'dired-find-alternate-file 'disabled nil)
 #+end_src
 
+Reuse the current buffer when moving into a new directory.
+
+#+begin_src emacs-lisp
+(setq dired-kill-when-opening-new-dired-buffer t)
+#+end_src
+
 Make it easier to move and copy files across windows.
 
 #+begin_src emacs-lisp
@@ -1389,6 +1395,10 @@ I should try [[https://github.com/jkitchin/org-ref][org-ref]].
 
   ;; Embed an image with [[file:foo.png]] and then C-c C-x C-v to view
   (setq org-display-inline-images t)
+
+  ;; "When set to nil, try to get the width from an #+ATTR.* keyword
+  ;; and fall back on the original width if none is found."
+  (setq org-image-actual-width nil)
 
   ;; Show on startup
   (setq org-startup-with-inline-images t)
