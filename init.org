@@ -1846,18 +1846,15 @@ Be more colourful!
 
 * Ruby
 
-Make sure =ruby-mode= is used in the right places.  (Turned off, since it seems to be unnecessary.)
-
-#+begin_src emacs-lisp :tangle no
-(autoload 'ruby-mode "ruby-mode" "Mode for editing Ruby")
-(add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
-(add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
-#+end_src
-
-This doesn't work.
+This doesn't work.  Why not?
 
 #+begin_src emacs-lisp
-(add-hook 'ruby-mode-hook 'prettify-symbols-mode)
+(add-hook 'ruby-mode-hook
+	  (lambda ()
+	    (push '("!=" . ?≠) prettify-symbols-alist)
+	    ;; (push '("&&" . ?∧) prettify-symbols-alist)
+ 	    ;; (push '("||" . ?∨) prettify-symbols-alist)
+	    ))
 #+end_src
 
 I use [[https://github.com/rbenv/rbenv][rbenv]], so Emacs needs to know about it.
