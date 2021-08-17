@@ -1559,7 +1559,7 @@ I should try [[https://github.com/jkitchin/org-ref][org-ref]].
   )
 #+end_src
 
-[[https://github.com/sabof/org-bullets][org-bullets]]
+Prettify the headings and such, with better bullets.  I use [[https://github.com/sabof/org-bullets][org-bullets]] but maybe one day I'll change to [[https://github.com/integral-dw/org-superstar-mode][org-superstar-mode]].
 
 #+begin_src emacs-lisp
 (use-package org-bullets
