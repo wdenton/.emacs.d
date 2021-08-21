@@ -274,14 +274,23 @@ Make the cursor a thin horizontal bar, not a block (but I still like it blinking
 
 My home and work machines have different screen resolutions, so the font height needs to be different.  It's measured in 0.1 points, so 130 is 13 pt.  I need it a little bigger on my work machine.
 
-#+begin_src emacs-lisp
-(setq wtd-ubuntu-mono-height 130)
+#+begin_src emacs-lisp :tangle no
+(setq wtd-ubuntu-mono-height 140)
 ;; (setq wtd/fira-code-height 120)
 (when (string= (system-name) "work")
   (setq wtd-ubuntu-mono-height 160)
   ;; (setq wtd-fira-code-height 160)
   )
 #+end_src
+
+#+begin_src emacs-lisp
+(setq wtd-ubuntu-mono-height
+      (cond ((string= (system-name) "marcus") 120)
+	    ((string= (system-name) "ochre") 140)
+	    ((string= (system-name) "work") 160))
+      )
+#+end_src
+
 
 I use [[https://en.wikipedia.org/wiki/Ubuntu_(typeface)][Ubuntu]] Mono in Emacs and in terminal windows, so it all looks the same.  I used [[https://en.wikipedia.org/wiki/Fira_(typeface)#Fira_Code][Fira]] Code for a little while, and it was very nice.  Elsewhere I use [[https://en.wikipedia.org/wiki/Baskerville][Baskerville]] as much as possible.
 

@@ -71,12 +71,11 @@
 
 (set-default 'cursor-type '(bar . 2))
 
-(setq wtd-ubuntu-mono-height 130)
-;; (setq wtd/fira-code-height 120)
-(when (string= (system-name) "work")
-  (setq wtd-ubuntu-mono-height 160)
-  ;; (setq wtd-fira-code-height 160)
-  )
+(setq wtd-ubuntu-mono-height
+      (cond ((string= (system-name) "marcus") 120)
+	    ((string= (system-name) "ochre") 140)
+	    ((string= (system-name) "work") 160))
+      )
 
 (set-face-attribute 'default nil :font "Ubuntu Mono" :height wtd-ubuntu-mono-height)
 ;; (set-face-attribute 'default nil :font "Fira Code" :height wtd-fira-code-height)
