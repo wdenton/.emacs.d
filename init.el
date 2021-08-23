@@ -835,6 +835,8 @@ already narrowed."
   (set-face-attribute 'org-block-begin-line nil :underline nil)
   (set-face-attribute 'org-block-end-line nil :overline nil)
 
+  (set-face-attribute 'org-verbatim nil :family "Ubuntu Mono" :height wtd-ubuntu-mono-height)
+
   ;; Evaluate Babel blocks without asking for confirmation
   (setq org-confirm-babel-evaluate nil)
 
