@@ -976,7 +976,9 @@ already narrowed."
   :init
   (add-hook 'ess-R-post-run-hook 'ess-execute-screen-options) ;; Use the full width of the Emacs frame
   (add-hook 'ess-post-run-hook 'ess-execute-screen-options)
+  (add-hook 'ess-mode-hook 'ess-execute-screen-options)
   (add-hook 'ess-mode-hook 'indent-guide-mode)   ;; indent-guide ... very nice
+  (add-hook 'ess-mode-hook (lambda () (flycheck-mode t)))
   )
 
 (setq ess-ask-for-ess-directory nil)
