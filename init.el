@@ -96,12 +96,16 @@
 
 (use-package smartparens
   :diminish smartparens-mode
-  :config
+  :init
   (require 'smartparens-config)
+  :config
   (smartparens-global-mode t)
   (show-smartparens-global-mode t)
-  `(sp-show-pair-match-face :inverse-video t :bold t)
-  `(sp-show-pair-mismatch-face :inverse-video t :bold t)
+  ;; (setq sp-show-pair-from-inside t)
+  (set-face-foreground 'sp-show-pair-match-face "Grey")
+  ;; (set-face-attribute 'sp-show-pair-match-face nil :inverse-video t :bold t :background "Black")
+  ;; (set-face-foreground 'sp-show-pair-mismatch-face "Red")
+  ;; (set-face-attribute 'sp-show-pair-mismatch-face nil :inverse-video t :bold t :foreground "Red")
   )
 
 (setq tab-width 4)
