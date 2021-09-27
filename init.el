@@ -101,11 +101,10 @@
   :config
   (smartparens-global-mode t)
   (show-smartparens-global-mode t)
-  ;; (setq sp-show-pair-from-inside t)
-  (set-face-foreground 'sp-show-pair-match-face "Grey")
-  ;; (set-face-attribute 'sp-show-pair-match-face nil :inverse-video t :bold t :background "Black")
-  ;; (set-face-foreground 'sp-show-pair-mismatch-face "Red")
-  ;; (set-face-attribute 'sp-show-pair-mismatch-face nil :inverse-video t :bold t :foreground "Red")
+  (setq sp-show-pair-from-inside t)
+  :custom-face
+  (sp-show-pair-match-face ((t (:foreground "White")))) ;; Could also have :background "Colour" in there.
+  (sp-show-pair-mismatch-face ((t (:foreground "Red"))))
   )
 
 (setq tab-width 4)
