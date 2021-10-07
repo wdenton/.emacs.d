@@ -601,6 +601,17 @@ already narrowed."
   (add-hook 'markdown-mode-hook 'turn-on-visual-line-mode)
   )
 
+(use-package pdf-tools
+  :pin manual ;; manually update
+  :config
+  (pdf-tools-install)
+  (setq-default pdf-view-display-size 'fit-page) ;; Use H, W or P to scale.
+  (setq pdf-annot-activate-created-annotations t) ;; Automatically annotate highlights.
+  (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward);; Use normal isearch because Swiper doesn't do PDFs.
+  :hook
+  (pdf-view-mode . (lambda() (linum-mode -1))) ;; linum-mode doesn't work well with PDF Tools, apparently.
+ )
+
 (add-to-list 'auto-mode-alist
 	     (cons (concat "\\." (regexp-opt '("xml" "xsd" "sch" "rng" "xslt" "svg" "rss") t) "\\'")
 		   'nxml-mode))
@@ -1148,11 +1159,13 @@ already narrowed."
 
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 
-;; (setq latex-run-command "pdflatex")
+(setq latex-run-command "pdflatex")
 ;; Use pdflatex to make PDFs
 ;; For some reason this value isn't respected and I had to set
 ;; it through Custom. Don't know why.
+;; TEMP
 (setq TeX-PDF-mode t)
+; (customize-set-variable 'org-latex-pdf-process '("latexmk -f -pdf -%latex -interaction=nonstopmode -output-directory=%o %f"))
 
 (setq biblatex-dialect "biblatex")
 

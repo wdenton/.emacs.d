@@ -49,10 +49,6 @@ Org inits I looked at:
 + [[https://github.com/zzamboni/dot-emacs/][Diego Zamboni]]
 + [[https://github.com/tecosaur/emacs-config][tecosaur]]
 
-** Things to try one day:
-
-+ [[https://github.com/politza/pdf-tools][pdf-tools]]
-
 * Warning!
 
 #+begin_src emacs-lisp
@@ -1267,6 +1263,23 @@ I love CSV files, but I'd rather load them into Org or R then edit them directly
   )
 #+end_src
 
+** PDF
+
+[[https://github.com/politza/pdf-tools][PDF Tools]] allows commenting on PDFs, not just viewing.  I took [[http://pragmaticemacs.com/emacs/view-and-annotate-pdfs-in-emacs-with-pdf-tools/][this snippet from Pragmatic Emacs]] and tweaked it.
+
+#+begin_src emacs-lisp
+(use-package pdf-tools
+  :pin manual ;; manually update
+  :config
+  (pdf-tools-install)
+  (setq-default pdf-view-display-size 'fit-page) ;; Use H, W or P to scale.
+  (setq pdf-annot-activate-created-annotations t) ;; Automatically annotate highlights.
+  (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward);; Use normal isearch because Swiper doesn't do PDFs.
+  :hook
+  (pdf-view-mode . (lambda() (linum-mode -1))) ;; linum-mode doesn't work well with PDF Tools, apparently.
+ )
+#+end_src
+
 ** XML
 
 [[https://www.gnu.org/software/emacs/manual/html_mono/nxml-mode.html][nXML mode]] is for XML files.
@@ -2062,11 +2075,13 @@ Turn on spell-checking.
 Use =pdflatex= to make PDFs.
 
 #+begin_src emacs-lisp
-;; (setq latex-run-command "pdflatex")
+(setq latex-run-command "pdflatex")
 ;; Use pdflatex to make PDFs
 ;; For some reason this value isn't respected and I had to set
 ;; it through Custom. Don't know why.
+;; TEMP
 (setq TeX-PDF-mode t)
+; (customize-set-variable 'org-latex-pdf-process '("latexmk -f -pdf -%latex -interaction=nonstopmode -output-directory=%o %f"))
 #+end_src
 
 Bibliographies.
