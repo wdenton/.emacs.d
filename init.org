@@ -1269,7 +1269,7 @@ I love CSV files, but I'd rather load them into Org or R then edit them directly
 
 #+begin_src emacs-lisp
 (use-package pdf-tools
-  :pin manual ;; manually update
+  :pin melpa ;; melpa to get it to install, maybe change to manual if need be?
   :config
   (pdf-tools-install)
   (setq-default pdf-view-display-size 'fit-page) ;; Use H, W or P to scale.
