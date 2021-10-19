@@ -1351,8 +1351,7 @@ I should try [[https://github.com/jkitchin/org-ref][org-ref]].
 
 #+begin_src emacs-lisp
 (use-package org
-  ;; Use Org's current development branch, pulled down with git
-  ;; (http://orgmode.org/org.html#Installation)
+  ;; Use Org's current development branch, pulled down with Git.  See http://orgmode.org/org.html#Installation.
   :load-path "/usr/local/src/org-mode/lisp"
 
   :config
@@ -1407,7 +1406,7 @@ I should try [[https://github.com/jkitchin/org-ref][org-ref]].
   ;; Preserve indentation when tangling source blocks (important for makefiles)
   (setq org-src-preserve-indentation t)
 
-  ;; Allow a) b) c) lists
+  ;; Allow a b c lists
   (setq org-list-allow-alphabetical t)
 
   ;; Right-align tags to an indent from the right margin
@@ -1499,7 +1498,7 @@ I should try [[https://github.com/jkitchin/org-ref][org-ref]].
  	      (push '("<=" . ?≤) prettify-symbols-alist)
  	      (push '(">=" . ?≥) prettify-symbols-alist)
  	      (push '("|>" . ?▷) prettify-symbols-alist)
- 	      (push '("#+BEGIN_SRC" . ?⎡) prettify-symbols-alist) ;;  ⎡ ➤ 🖝 ➟ ➤ ✎
+ 	      (push '("#+BEGIN_SRC" . ?⎡) prettify-symbols-alist) ;;  ⎡ ➤ ➟ ➤ ✎
  	      (push '("#+END_SRC" . ?⎣) prettify-symbols-alist) ;; ⎣ ✐
  	      (push '("#+begin_src" . ?⎡) prettify-symbols-alist)
  	      (push '("#+end_src" . ?⎣) prettify-symbols-alist)
@@ -1786,8 +1785,8 @@ Flycheck and lintr.
 #+begin_src emacs-lisp
 (use-package ess
   :config
-  (setq ess-smart-S-assign-key nil) ;; Don't let _ turn into <-
-  (setq ess-use-auto-complete t) ;; Auto-completion on.
+  ;; (setq ess-smart-S-assign-key nil) ;; Don't let _ turn into <-
+  ;; (setq ess-use-auto-complete t) ;; Auto-completion on.
   (setq ess-use-flymake nil) ;; Don't run flymake on ESS buffers
   (setq ess-help-own-frame 'nil) ;; Make all help buffers go into one frame
   (setq inferior-ess-primary-prompt "> ") ;; Fancier prompt (see also ~/.Rprofile) (used to be ℝ>)

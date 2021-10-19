@@ -602,7 +602,7 @@ already narrowed."
   )
 
 (use-package pdf-tools
-  :pin manual ;; manually update
+  :pin melpa ;; melpa to get it to install, maybe change to manual if need be?
   :config
   (pdf-tools-install)
   (setq-default pdf-view-display-size 'fit-page) ;; Use H, W or P to scale.
@@ -981,8 +981,8 @@ already narrowed."
 
 (use-package ess
   :config
-  (setq ess-smart-S-assign-key nil) ;; Don't let _ turn into <-
-  (setq ess-use-auto-complete t) ;; Auto-completion on.
+  ;; (setq ess-smart-S-assign-key nil) ;; Don't let _ turn into <-
+  ;; (setq ess-use-auto-complete t) ;; Auto-completion on.
   (setq ess-use-flymake nil) ;; Don't run flymake on ESS buffers
   (setq ess-help-own-frame 'nil) ;; Make all help buffers go into one frame
   (setq inferior-ess-primary-prompt "> ") ;; Fancier prompt (see also ~/.Rprofile) (used to be ℝ>)
