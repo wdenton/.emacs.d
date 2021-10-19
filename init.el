@@ -646,23 +646,37 @@ already narrowed."
   )
 
 (use-package org
-  ;; Use Org's current development branch, pulled down with git
-  ;; (http://orgmode.org/org.html#Installation)
+  ;; Use Org's current development branch, pulled down with Git.  See http://orgmode.org/org.html#Installation.
   :load-path "/usr/local/src/org-mode/lisp"
-
-  :config
-  (setq org-fontify-whole-heading-line t)
-  (global-set-key "\C-cl" 'org-store-link)
-
-  ;; Show column headings even when off the top of the screen.
-  ;; (setq org-table-header-line-p nil)
-  ;; (diminish 'org-table-header-line-mode)
-
-  ;; org-entities displays \alpha etc. as Unicode characters.
-  (setq org-pretty-entities t)
-
-  ;; Hide the /italics/ and *bold* markers
-  (setq org-hide-emphasis-markers t)
+  :init
+  (setq
+    org-fontify-whole-heading-line t
+    org-pretty-entities t ;; org-entities displays \alpha etc. as Unicode characters.
+    org-hide-emphasis-markers t ;; Hide the /italics/ and *bold* markers
+    org-return-follows-link t ;; Hit return on a link to open it in a browser
+    org-support-shift-select t ;; Shift and arrow keys to select text works a bit differently in Org.
+    org-special-ctrl-a/e t ;; Make C-a and C-e understand how headings and tags work
+    org-startup-indented t ;; Visually indent everything nicely, but leave the raw file left-aligned
+    org-cycle-separator-lines 0 ;; Never show blank lines in condensed view
+    org-src-fontify-natively t ;; Fontify Babel blocks nicely
+    org-src-preserve-indentation t ;; Preserve indentation when tangling source blocks (important for makefiles)
+    org-list-allow-alphabetical t ;; Allow a b c lists
+    org-use-speed-commands t ;; Allow speed commands
+    org-tags-column 120 ;; Right-align tags to an indent from the right margin, could use  (- 50 (window-width))
+    org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar" ;; External dependency: ditaa
+    org-display-inline-images t ;; Embed an image with [[file:foo.png]] and then C-c C-x C-v to view
+    org-startup-with-inline-images t ;; Show images on startup
+    org-image-actual-width nil ;; nil means "try to get the width from an #+ATTR.* keyword and fall back on the original width if none is found."
+    org-highlight-latex-and-related '(latex) ;; Highlight inline LaTeX
+    org-export-with-smart-quotes t ;; Turn plain quotes into posh (I can't include examples in here or it breaks paren matching!)
+    org-confirm-babel-evaluate nil ;; Evaluate Babel blocks without asking for confirmation
+    org-ellipsis " ⬎" ;; ⤵ ↴  Change the ellipsis that indicates hidden content
+    org-footnote-section nil ;; Define footnotes nearby when I use C-c C-x f
+    org-footnote-auto-adjust nil ;; Don't resort or adjust them without my saying so.
+    org-export-backends (quote (html latex md odt)) ;; Exporting: I will see these export options after C-c C-e ;; beamer reveal
+    org-src-window-setup 'current-window ;; How to rearrange things when I edit a source block.  Default is regorganize-frame.
+    ;; org-export-date-timestamp-format "%d %m %Y" ;; Date format on exports
+    )
 
   ;; Better colouring of TODO keywords
   (setq org-todo-keyword-faces
@@ -671,140 +685,12 @@ already narrowed."
 		("WAITING" :foreground "Purple" :weight normal)
 		)))
 
-  (set-face-attribute 'org-link nil :foreground "Steel Blue")
-
-  ;; Make completed items in a checkbox list less noticeable
-  ;; https://fuco1.github.io/2017-05-25-Fontify-done-checkbox-items-in-org-mode.html
-  (font-lock-add-keywords
-   'org-mode
-   `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 'org-headline-done prepend))
-   'append)
-
-  ;; Hit return on a link to open it in a browser
-  (setq org-return-follows-link t)
-
-  ;; Shift and arrow keys to select text works a bit differently in Org.
-  (setq org-support-shift-select t)
-
-  ;; Make C-a and C-e understand how headings and tags work
-  ;; Seen at http://schenizzle.wordpress.com/2014/03/26/org-mode-ctrl-a-ctrl-e/
-  (setq org-special-ctrl-a/e t)
-
-  ;; Visually indent everything nicely, but leave the raw file left-aligned
-  (setq org-startup-indented t)
-
-  ;; Never show blank lines in condensed view
-  (setq org-cycle-separator-lines 0)
-
-  ;; Fontify Babel blocks nicely
-  (setq org-src-fontify-natively t)
-
-  ;; Preserve indentation when tangling source blocks (important for makefiles)
-  (setq org-src-preserve-indentation t)
-
-  ;; Allow a) b) c) lists
-  (setq org-list-allow-alphabetical t)
-
-  ;; Right-align tags to an indent from the right margin
-  ;; (setq org-tags-column (- 50 (window-width)))
-  (setq org-tags-column 120)
-
-  ;; "Single keys can be made to execute commands when the cursor is at
-  ;; the beginning of a headline, i.e., before the first star."
-  (setq org-use-speed-commands t)
-
-  ;; Embed an image with [[file:foo.png]] and then C-c C-x C-v to view
-  (setq org-display-inline-images t)
-
-  ;; "When set to nil, try to get the width from an #+ATTR.* keyword
-  ;; and fall back on the original width if none is found."
-  (setq org-image-actual-width nil)
-
-  ;; Show on startup
-  (setq org-startup-with-inline-images t)
-
-  ;; How to rearrange things when I edit a source block
-  ;; default is regorganize-frame
-  (setq org-src-window-setup 'current-window)
-
-  ;; Automatically refresh inline images that are generated from Babel blocks
-  (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
-
-  ;; Display images when a file is loaded (I can always toggle them off if I don't want them)
-  (add-hook 'org-mode-hook (lambda () (org-toggle-inline-images)))
-
-  ;; Use LaTeX spell-check
-  (add-hook 'org-mode-hook (lambda () (setq ispell-parser 'tex)))
-
-  ;; Use flyspell to check spelling as I go
-  (add-hook 'org-mode-hook 'turn-on-flyspell)
-
-  ;; Use C-c d to close all the open drawers in a file
-  (defun add-org-close-all-drawers-key ()
-    (local-set-key (kbd "C-c d") (lambda () (interactive) (org-cycle-hide-drawers 'all))))
-  (add-hook 'org-mode-hook 'add-org-close-all-drawers-key)
-
-  ;; imenu integration
-  ;; (add-hook 'org-mode-hook
-  ;; (lambda () (imenu-add-to-menubar "Imenu")))
-
-  ;; Preview LaTeX equations in buffers by showing images (C-c C-x C-l)
-  ;; Details: http://orgmode.org/worg/org-tutorials/org-latex-preview.html
-  ;;  (setq org-preview-latex-default-process 'imagemagick)
-
-  ;; Highlight inline LaTeX
-  (setq org-highlight-latex-and-related '(latex))
-
-  ;; Exporting: I will see these export options after C-c C-e
-  (setq org-export-backends (quote (html latex md odt))) ;; beamer reveal
-
-  ;; I may need to customize org-html-doctype (default is "xhtml-strict")
-  ;; (setq org-html-doctype "html5")
-
-  ;; Turn ' and " into ‘posh’ “quotes”
-  (setq org-export-with-smart-quotes t)
-
-  ;; Date format on exports
-  ;; (setq org-export-date-timestamp-format "%d %m %Y")
-
-  ;; Use wrap-region
-  (add-hook 'org-mode-hook 'wrap-region-mode)
-
-  ;; Footnotes. I want them defined nearby, not at the bottom of the
-  ;; document, when I use C-c C-x f.  And I don't want them resorted
-  ;; or adjusted without my saying so.
-  (setq org-footnote-section nil)
-  (setq org-footnote-auto-adjust nil)
-
-  ;; Define my own link abbreviations
-  (setq org-link-abbrev-alist
-	'(
-	  ("DOI" . "http://dx.doi.org/%s")                        ;; Thus [[DOI:10.1108/07378831111138189]]
-	  ("WP"  . "https://en.wikipedia.org/wiki/%s")            ;; Thus [[WP:Toronto, Ontario]]
-	  ("YUL" . "https://www.library.yorku.ca/find/Record/%s") ;; Thus [[YUL:2935857]]
-	  )
+  ;; Refiling, which I never use.
+  (setq org-refile-targets '(
+			     ("~/york/shared/projects/projects.org" :maxlevel . 1)
+			     ;; ("~/york/shared/reports/annual/2017-annual-report/denton-2016-2017-annual-report.org" :maxlevel . 2)
+			     )
 	)
-
-  ;; Hooks for prettify-symbols-mode
-  ;; See also https://pank.eu/blog/pretty-babel-src-blocks.html for some cool stuff
-  ;; And https://github.com/zzamboni/dot-emacs/blob/master/init.org#source-code-blocks
-  ;; some stuff I tried out but decided was a bit too much for me.
-  (add-hook 'org-mode-hook
- 	    (lambda ()
- 	      (push '("<=" . ?≤) prettify-symbols-alist)
- 	      (push '(">=" . ?≥) prettify-symbols-alist)
- 	      (push '("|>" . ?▷) prettify-symbols-alist)
- 	      (push '("#+BEGIN_SRC" . ?⎡) prettify-symbols-alist) ;;  ⎡ ➤ 🖝 ➟ ➤ ✎
- 	      (push '("#+END_SRC" . ?⎣) prettify-symbols-alist) ;; ⎣ ✐
- 	      (push '("#+begin_src" . ?⎡) prettify-symbols-alist)
- 	      (push '("#+end_src" . ?⎣) prettify-symbols-alist)
- 	      (push '("#+BEGIN_QUOTE" . ?❝) prettify-symbols-alist)
- 	      (push '("#+END_QUOTE" . ?❞) prettify-symbols-alist)
- 	      (push '("#+begin_quote" . ?❝) prettify-symbols-alist)
- 	      (push '("#+end_quote" . ?❞) prettify-symbols-alist)
- 	      (push '("[ ]" . ?☐) prettify-symbols-alist)
- 	      (push '("[X]" . ?☒) prettify-symbols-alist)
- 	      ))
 
   ;; Capturing
   ;; (setq org-default-notes-file "~/org/capture.org") ; Change this when I use it for real
@@ -816,20 +702,27 @@ already narrowed."
 	  ("n" "Note"      entry (file+datetree "~/org/capture.org")                   "* %?\nEntered on %U\n  %i\n %a"))
 	)
 
-  ;; Refiling
-  (setq org-refile-targets '(
-			     ("~/york/shared/projects/projects.org" :maxlevel . 1)
-			     ;; ("~/york/shared/reports/annual/2017-annual-report/denton-2016-2017-annual-report.org" :maxlevel . 2)
-			     ))
+  ;; Define my own link abbreviations
+  (setq org-link-abbrev-alist
+	'(
+	  ("DOI" . "http://dx.doi.org/%s")                        ;; Thus [[DOI:10.1108/07378831111138189]]
+	  ("WP"  . "https://en.wikipedia.org/wiki/%s")            ;; Thus [[WP:Toronto, Ontario]]
+	  ("YUL" . "https://www.library.yorku.ca/find/Record/%s") ;; Thus [[YUL:2935857]]
+	  )
+	)
 
-  ;; org-protocol lets me send URLs from Firefox (and more, but that's all I'm doing)
-  ;; See https://stackoverflow.com/questions/7464951/how-to-make-org-protocol-work
-  ;; (require 'org-protocol)
-  ;; '(setq org-protocol-default-template-key "n")
+  ;; Clocking
+  (setq org-clock-persist 'history)
+  (org-clock-persistence-insinuate)
 
-  ;; Active Babel languages
-  ;; See http://orgmode.org/org.html#Languages
-  (org-babel-do-load-languages
+  :config
+  (global-set-key "\C-cl" 'org-store-link)
+
+  ;; In 25 Org started opening exported PDFs in docview, but I prefer seeing them externally.
+  (delete '("\\.pdf\\'" . default) org-file-apps)
+  (add-to-list 'org-file-apps '("\\.pdf\\'" . "evince %s"))
+
+  (org-babel-do-load-languages ;; Active Babel languages (http://orgmode.org/org.html#Languages)
    'org-babel-load-languages
    '(
      (ditaa . t)
@@ -844,41 +737,75 @@ already narrowed."
      (sqlite . t)
      )
    )
+  :hook
+  (
+   (org-mode . wrap-region-mode)
+   (org-mode . turn-on-flyspell) ;; Use flyspell to check spelling as I go
+   )
+)
 
-  ;; Source code block appearance
-  (set-face-attribute 'org-block-begin-line nil :underline nil)
-  (set-face-attribute 'org-block-end-line nil :overline nil)
+;; Automatically refresh inline images that are generated from Babel blocks
+(add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
 
-  (set-face-attribute 'org-verbatim nil :family "Ubuntu Mono" :height wtd-ubuntu-mono-height)
+;; Display images when a file is loaded (I can always toggle them off if I don't want them)
+(add-hook (org-mode-hook (lambda () (org-toggle-inline-images))))
 
-  ;; Evaluate Babel blocks without asking for confirmation
-  (setq org-confirm-babel-evaluate nil)
+;; Use LaTeX spell-check
+(add-hook 'org-mode-hook (lambda () (setq ispell-parser 'tex)))
 
-  ;; In 25 Org started opening exported PDFs in docview, but I prefer
-  ;; seeing them externally.
-  (delete '("\\.pdf\\'" . default) org-file-apps)
-  (add-to-list 'org-file-apps '("\\.pdf\\'" . "evince %s"))
+;; Use C-c d to close all the open drawers in a file
+(defun add-org-close-all-drawers-key ()
+  (local-set-key (kbd "C-c d") (lambda () (interactive) (org-cycle-hide-drawers 'all))))
+(add-hook 'org-mode-hook 'add-org-close-all-drawers-key)
 
-  ;; For this to work, ditaa must be installed
-  (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
+;; Preview LaTeX equations in buffers by showing images (C-c C-x C-l)
+;; Details: http://orgmode.org/worg/org-tutorials/org-latex-preview.html
+;; (setq org-preview-latex-default-process 'imagemagick)
 
-  ;; Change the ellipsis that indicates hidden content
-  ;; http://endlessparentheses.com/changing-the-org-mode-ellipsis.html
-  (setq org-ellipsis " ⬎") ;; ⤵ ↴ ⬎ ⤷
-  (set-face-attribute 'org-ellipsis nil :underline nil)
+;; Hooks for prettify-symbols-mode
+;; See also https://pank.eu/blog/pretty-babel-src-blocks.html for some cool stuff
+;; And https://github.com/zzamboni/dot-emacs/blob/master/init.org#source-code-blocks
+;; some stuff I tried out but decided was a bit too much for me.
+(add-hook 'org-mode-hook
+ 	  (lambda ()
+ 	    (push '("<=" . ?≤) prettify-symbols-alist)
+ 	    (push '(">=" . ?≥) prettify-symbols-alist)
+ 	    (push '("|>" . ?▷) prettify-symbols-alist)
+ 	    (push '("#+BEGIN_SRC" . ?⎡) prettify-symbols-alist) ;;  ⎡ ➤ ➟ ➤ ✎
+ 	    (push '("#+END_SRC" . ?⎣) prettify-symbols-alist) ;; ⎣ ✐
+ 	    (push '("#+begin_src" . ?⎡) prettify-symbols-alist)
+ 	    (push '("#+end_src" . ?⎣) prettify-symbols-alist)
+ 	    (push '("#+BEGIN_QUOTE" . ?❝) prettify-symbols-alist)
+ 	    (push '("#+END_QUOTE" . ?❞) prettify-symbols-alist)
+ 	    (push '("#+begin_quote" . ?❝) prettify-symbols-alist)
+ 	    (push '("#+end_quote" . ?❞) prettify-symbols-alist)
+ 	    (push '("[ ]" . ?☐) prettify-symbols-alist)
+ 	    (push '("[X]" . ?☒) prettify-symbols-alist)
+ 	    ))
 
-  ;; Make LOGBOOK and such fainter.  Default bold is too loud.
-  (face-spec-set 'org-drawer '((t (:foreground "dim gray" :weight normal))))
+(set-face-attribute 'org-link nil :foreground "Steel Blue")
 
-  ;; (face-spec-set 'org-level-1 '((t (:height 1.05))))
-  ;; (face-spec-set 'org-level-2 '((t (:height 1.05))))
-  ;; (face-spec-set 'org-level-3 '((t (:height 1.0))))
+;; Make completed items in a checkbox list less noticeable
+;; https://fuco1.github.io/2017-05-25-Fontify-done-checkbox-items-in-org-mode.html
+(font-lock-add-keywords
+ 'org-mode
+ `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 'org-headline-done prepend))
+ 'append)
 
-  ;; Clocking
-  (setq org-clock-persist 'history)
-  (org-clock-persistence-insinuate)
+;; Source code block appearance
+(set-face-attribute 'org-block-begin-line nil :underline nil)
+(set-face-attribute 'org-block-end-line nil :overline nil)
 
-  )
+(set-face-attribute 'org-verbatim nil :family "Ubuntu Mono" :height wtd-ubuntu-mono-height)
+
+(set-face-attribute 'org-ellipsis nil :underline nil)
+
+;; Make LOGBOOK and such fainter.  Default bold is too loud.
+(face-spec-set 'org-drawer '((t (:foreground "dim gray" :weight normal))))
+
+;; (face-spec-set 'org-level-1 '((t (:height 1.05))))
+;; (face-spec-set 'org-level-2 '((t (:height 1.05))))
+;; (face-spec-set 'org-level-3 '((t (:height 1.0))))
 
 (use-package org-bullets
   ;; Possibilities:  ◉ ○ ✸ ✿ ♥ ● ◇ ✚ ✜ ☯ ◆ ♠ ♣ ♦ ☢ ❀ ◆ ◖ ▶ ► • ★ ▸ or any other Unicode character
