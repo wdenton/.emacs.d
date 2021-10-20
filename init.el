@@ -715,6 +715,41 @@ already narrowed."
   (setq org-clock-persist 'history)
   (org-clock-persistence-insinuate)
 
+  ;; Automatically refresh inline images that are generated from Babel blocks
+  (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
+
+  ;; Display images when a file is loaded (I can always toggle them off if I don't want them)
+  (add-hook 'org-mode-hook (lambda () (org-toggle-inline-images)))
+
+  ;; Use LaTeX spell-check
+  (add-hook 'org-mode-hook (lambda () (setq ispell-parser 'tex)))
+
+  ;; Use C-c d to close all the open drawers in a file
+  (defun add-org-close-all-drawers-key ()
+    (local-set-key (kbd "C-c d") (lambda () (interactive) (org-cycle-hide-drawers 'all))))
+  (add-hook 'org-mode-hook 'add-org-close-all-drawers-key)
+
+  ;; Hooks for prettify-symbols-mode
+  ;; See also https://pank.eu/blog/pretty-babel-src-blocks.html for some cool stuff
+  ;; And https://github.com/zzamboni/dot-emacs/blob/master/init.org#source-code-blocks
+  ;; some stuff I tried out but decided was a bit too much for me.
+  (add-hook 'org-mode-hook
+ 	  (lambda ()
+ 	    (push '("<=" . ?≤) prettify-symbols-alist)
+ 	    (push '(">=" . ?≥) prettify-symbols-alist)
+ 	    (push '("|>" . ?▷) prettify-symbols-alist)
+ 	    (push '("#+BEGIN_SRC" . ?⎡) prettify-symbols-alist) ;;  ⎡ ➤ ➟ ➤ ✎
+ 	    (push '("#+END_SRC" . ?⎣) prettify-symbols-alist) ;; ⎣ ✐
+ 	    (push '("#+begin_src" . ?⎡) prettify-symbols-alist)
+ 	    (push '("#+end_src" . ?⎣) prettify-symbols-alist)
+ 	    (push '("#+BEGIN_QUOTE" . ?❝) prettify-symbols-alist)
+ 	    (push '("#+END_QUOTE" . ?❞) prettify-symbols-alist)
+ 	    (push '("#+begin_quote" . ?❝) prettify-symbols-alist)
+ 	    (push '("#+end_quote" . ?❞) prettify-symbols-alist)
+ 	    (push '("[ ]" . ?☐) prettify-symbols-alist)
+ 	    (push '("[X]" . ?☒) prettify-symbols-alist)
+ 	    ))
+
   :config
   (global-set-key "\C-cl" 'org-store-link)
 
@@ -737,75 +772,39 @@ already narrowed."
      (sqlite . t)
      )
    )
+
+  ;; Appearance.  This should probably go elsewhere.
+
+  (set-face-attribute 'org-link nil :foreground "Steel Blue")
+
+  ;; Make completed items in a checkbox list less noticeable
+  ;; https://fuco1.github.io/2017-05-25-Fontify-done-checkbox-items-in-org-mode.html
+  (font-lock-add-keywords
+   'org-mode
+ `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 'org-headline-done prepend))
+ 'append)
+
+  ;; Source code block appearance
+  (set-face-attribute 'org-block-begin-line nil :underline nil)
+  (set-face-attribute 'org-block-end-line nil :overline nil)
+
+  (set-face-attribute 'org-verbatim nil :family "Ubuntu Mono" :height wtd-ubuntu-mono-height)
+
+  (set-face-attribute 'org-ellipsis nil :underline nil)
+
+  ;; Make LOGBOOK and such fainter.  Default bold is too loud.
+  (face-spec-set 'org-drawer '((t (:foreground "dim gray" :weight normal))))
+
+  ;; (face-spec-set 'org-level-1 '((t (:height 1.05))))
+  ;; (face-spec-set 'org-level-2 '((t (:height 1.05))))
+  ;; (face-spec-set 'org-level-3 '((t (:height 1.0))))
+
   :hook
   (
    (org-mode . wrap-region-mode)
    (org-mode . turn-on-flyspell) ;; Use flyspell to check spelling as I go
    )
 )
-
-;; Automatically refresh inline images that are generated from Babel blocks
-(add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
-
-;; Display images when a file is loaded (I can always toggle them off if I don't want them)
-(add-hook (org-mode-hook (lambda () (org-toggle-inline-images))))
-
-;; Use LaTeX spell-check
-(add-hook 'org-mode-hook (lambda () (setq ispell-parser 'tex)))
-
-;; Use C-c d to close all the open drawers in a file
-(defun add-org-close-all-drawers-key ()
-  (local-set-key (kbd "C-c d") (lambda () (interactive) (org-cycle-hide-drawers 'all))))
-(add-hook 'org-mode-hook 'add-org-close-all-drawers-key)
-
-;; Preview LaTeX equations in buffers by showing images (C-c C-x C-l)
-;; Details: http://orgmode.org/worg/org-tutorials/org-latex-preview.html
-;; (setq org-preview-latex-default-process 'imagemagick)
-
-;; Hooks for prettify-symbols-mode
-;; See also https://pank.eu/blog/pretty-babel-src-blocks.html for some cool stuff
-;; And https://github.com/zzamboni/dot-emacs/blob/master/init.org#source-code-blocks
-;; some stuff I tried out but decided was a bit too much for me.
-(add-hook 'org-mode-hook
- 	  (lambda ()
- 	    (push '("<=" . ?≤) prettify-symbols-alist)
- 	    (push '(">=" . ?≥) prettify-symbols-alist)
- 	    (push '("|>" . ?▷) prettify-symbols-alist)
- 	    (push '("#+BEGIN_SRC" . ?⎡) prettify-symbols-alist) ;;  ⎡ ➤ ➟ ➤ ✎
- 	    (push '("#+END_SRC" . ?⎣) prettify-symbols-alist) ;; ⎣ ✐
- 	    (push '("#+begin_src" . ?⎡) prettify-symbols-alist)
- 	    (push '("#+end_src" . ?⎣) prettify-symbols-alist)
- 	    (push '("#+BEGIN_QUOTE" . ?❝) prettify-symbols-alist)
- 	    (push '("#+END_QUOTE" . ?❞) prettify-symbols-alist)
- 	    (push '("#+begin_quote" . ?❝) prettify-symbols-alist)
- 	    (push '("#+end_quote" . ?❞) prettify-symbols-alist)
- 	    (push '("[ ]" . ?☐) prettify-symbols-alist)
- 	    (push '("[X]" . ?☒) prettify-symbols-alist)
- 	    ))
-
-(set-face-attribute 'org-link nil :foreground "Steel Blue")
-
-;; Make completed items in a checkbox list less noticeable
-;; https://fuco1.github.io/2017-05-25-Fontify-done-checkbox-items-in-org-mode.html
-(font-lock-add-keywords
- 'org-mode
- `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 'org-headline-done prepend))
- 'append)
-
-;; Source code block appearance
-(set-face-attribute 'org-block-begin-line nil :underline nil)
-(set-face-attribute 'org-block-end-line nil :overline nil)
-
-(set-face-attribute 'org-verbatim nil :family "Ubuntu Mono" :height wtd-ubuntu-mono-height)
-
-(set-face-attribute 'org-ellipsis nil :underline nil)
-
-;; Make LOGBOOK and such fainter.  Default bold is too loud.
-(face-spec-set 'org-drawer '((t (:foreground "dim gray" :weight normal))))
-
-;; (face-spec-set 'org-level-1 '((t (:height 1.05))))
-;; (face-spec-set 'org-level-2 '((t (:height 1.05))))
-;; (face-spec-set 'org-level-3 '((t (:height 1.0))))
 
 (use-package org-bullets
   ;; Possibilities:  ◉ ○ ✸ ✿ ♥ ● ◇ ✚ ✜ ☯ ◆ ♠ ♣ ♦ ☢ ❀ ◆ ◖ ▶ ► • ★ ▸ or any other Unicode character
@@ -912,8 +911,8 @@ already narrowed."
   ;; (setq ess-use-auto-complete t) ;; Auto-completion on.
   (setq ess-use-flymake nil) ;; Don't run flymake on ESS buffers
   (setq ess-help-own-frame 'nil) ;; Make all help buffers go into one frame
-  (setq inferior-ess-primary-prompt "> ") ;; Fancier prompt (see also ~/.Rprofile) (used to be ℝ>)
-  (setq inferior-S-prompt "[]a-zA-Z0-9.[]*\\(?:[>+.] \\)*ℝ+> ")
+  (setq inferior-ess-primary-prompt "> ")
+  ;; (setq inferior-S-prompt "[]a-zA-Z0-9.[]*\\(?:[>+.] \\)*ℝ+> ")
   :init
   (add-hook 'ess-R-post-run-hook 'ess-execute-screen-options) ;; Use the full width of the Emacs frame
   (add-hook 'ess-post-run-hook 'ess-execute-screen-options)
