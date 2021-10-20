@@ -646,7 +646,7 @@ already narrowed."
   )
 
 (use-package org
-  ;; Use Org's current development branch, pulled down with Git.  See http://orgmode.org/org.html#Installation.
+  ;; Use Org's current development branch, pulled down with Git.  See https://orgmode.org/org.html#Installation.
   :load-path "/usr/local/src/org-mode/lisp"
   :init
   (setq

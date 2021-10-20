@@ -1347,11 +1347,9 @@ Define the actual keystroke now that the rest has been set up.  The default is l
 
 A note I made on 16 April 2013:  "Started using org-mode ... I could really get into this."
 
-I should try [[https://github.com/jkitchin/org-ref][org-ref]].
-
 #+begin_src emacs-lisp
 (use-package org
-  ;; Use Org's current development branch, pulled down with Git.  See http://orgmode.org/org.html#Installation.
+  ;; Use Org's current development branch, pulled down with Git.  See https://orgmode.org/org.html#Installation.
   :load-path "/usr/local/src/org-mode/lisp"
   :init
   (setq
