@@ -7,10 +7,7 @@
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-
-(setq package-archive-priorities
-      '(("melpa" . 20)
-	("gnu" . 10)))
+(setq package-archive-priorities '(("melpa" . 20) ("gnu" . 10)))
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -647,6 +644,7 @@ already narrowed."
 
 (use-package org
   ;; Use Org's current development branch, pulled down with Git.  See https://orgmode.org/org.html#Installation.
+  :pin manual
   :load-path "/usr/local/src/org-mode/lisp"
   :init
   (setq
@@ -678,30 +676,6 @@ already narrowed."
     ;; org-export-date-timestamp-format "%d %m %Y" ;; Date format on exports
     )
 
-  ;; Better colouring of TODO keywords
-  (setq org-todo-keyword-faces
-	(quote (
-		("TODO" :foreground "SeaGreen" :weight normal)
-		("WAITING" :foreground "Purple" :weight normal)
-		)))
-
-  ;; Refiling, which I never use.
-  (setq org-refile-targets '(
-			     ("~/york/shared/projects/projects.org" :maxlevel . 1)
-			     ;; ("~/york/shared/reports/annual/2017-annual-report/denton-2016-2017-annual-report.org" :maxlevel . 2)
-			     )
-	)
-
-  ;; Capturing
-  ;; (setq org-default-notes-file "~/org/capture.org") ; Change this when I use it for real
-  ;; (define-key global-map "\C-cc" 'org-capture)
-  (setq org-capture-templates
-	'(
-      	  ("w" "Work todo" entry (file+headline "~/york/shared/projects/projects.org" "Tasks") "* TODO %?\n %u\n %a")
-      	  ("d" "Work diary" entry (file+datetree "~/york/shared/work-diaries/work-diary.org" "Tasks") "** %?\n %u\n %a")
-	  ("n" "Note"      entry (file+datetree "~/org/capture.org")                   "* %?\nEntered on %U\n  %i\n %a"))
-	)
-
   ;; Define my own link abbreviations
   (setq org-link-abbrev-alist
 	'(
@@ -732,7 +706,7 @@ already narrowed."
   ;; Hooks for prettify-symbols-mode
   ;; See also https://pank.eu/blog/pretty-babel-src-blocks.html for some cool stuff
   ;; And https://github.com/zzamboni/dot-emacs/blob/master/init.org#source-code-blocks
-  ;; some stuff I tried out but decided was a bit too much for me.
+  ;; for some stuff I tried out but decided was a bit too much for me.
   (add-hook 'org-mode-hook
  	  (lambda ()
  	    (push '("<=" . ?≤) prettify-symbols-alist)
