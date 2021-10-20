@@ -2145,7 +2145,7 @@ From [[http://tex.stackexchange.com/questions/50827/a-simpletons-guide-to-tex-wo
 
 I don't use this right now---it would mess up headers in YAML files---but maybe I'll come back to it.  For now, it's not tangled.
 
-#+begin_src emacs-mode :tangle no
+#+begin_src emacs-lisp :tangle no
 (use-package polymode)
 
 ;; Polymode is nice everywhere, except I do not want it in Org.

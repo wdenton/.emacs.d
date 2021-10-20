@@ -602,7 +602,7 @@ already narrowed."
   )
 
 (use-package pdf-tools
-  :pin manual ;; manually update
+  :pin melpa ;; melpa to get it to install, maybe change to manual if need be?
   :config
   (pdf-tools-install)
   (setq-default pdf-view-display-size 'fit-page) ;; Use H, W or P to scale.
