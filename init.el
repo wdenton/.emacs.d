@@ -312,15 +312,6 @@ already narrowed."
 
 (global-set-key (kbd "M-o") 'other-window)
 
-(use-package eyebrowse
-  :diminish eyebrowse-mode
-  :init (eyebrowse-setup-opinionated-keys)
-  :config
-  (eyebrowse-mode t)
-  ;; (setq eyebrowse-new-workspace t)
-  (setq eyebrowse-wrap-around t)
-  )
-
 (require 'saveplace)
 (setq save-place-file (expand-file-name ".places" user-emacs-directory))
 (save-place-mode)
@@ -392,8 +383,6 @@ already narrowed."
 
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
-
-(use-package multiple-cursors)
 
 (defun open-line-below ()
   (interactive)

@@ -301,15 +301,15 @@ This could help improve performance with Unicode symbols.
 
 Sometimes I try [[https://gitlab.com/jabranham/mixed-pitch][mixed-pitch]], but I never stick with it, so this is turned off.  Fixed pitch is best for me.
 
- #+begin_src emacs-lisp :tangle no
- (use-package mixed-pitch
-   :diminish
-   :hook
-   (org-mode markdown-mode)
-   :config
-   (set-face-attribute 'variable-pitch nil :family "Baskervald ADF Std" :height 200)
-   )
- #+end_src
+#+begin_src emacs-lisp :tangle no
+(use-package mixed-pitch
+  :diminish
+  :hook
+  (org-mode markdown-mode)
+  :config
+  (set-face-attribute 'variable-pitch nil :family "Baskervald ADF Std" :height 200)
+  )
+#+end_src
 
 Always do font-locking.
 
@@ -705,13 +705,13 @@ Or use ~M-o~ as a shortcut for ~other-window~ instead of the default ~C-x o~, wh
 (global-set-key (kbd "M-o") 'other-window)
 #+end_src
 
-Use [[https://depp.brause.cc/eyebrowse/][eyebrowse]] to manage window configurations.  I keep forgetting about this but there are times when it would be really handy.
+I could use [[https://depp.brause.cc/eyebrowse/][eyebrowse]] to manage window configurations, but I never did, so I turned off tangling.  I keep forgetting about it, but if there are times when I need it and use it, I can bring it back.
 
 #+begin_quote
 You start with your current window config on slot 1. Once you hit ~C-c C-w 2~, you will see the modeline indicator appearing and showing slot 1 and 2 with slot 2 slightly emphasized. Slot 1 has been saved automatically for you and contains your last window config. Do something meaningful like a window split, then hit ~C-c C-w 1~. The window config on slot 2 is saved and the window config from slot 1 is loaded. Try switching back and forth between them with ~C-c C-w '~ to get a feeling for how subsequent window manipulations are handled.
 #+end_quote
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package eyebrowse
   :diminish eyebrowse-mode
   :init (eyebrowse-setup-opinionated-keys)
@@ -878,9 +878,9 @@ Let me upcase or downcase a region, which is disabled by default.
 (put 'upcase-region 'disabled nil)
 #+end_src
 
-I don't use multiple cursors much ... but I should.
+I don't use multiple cursors ... but I chould.
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package multiple-cursors)
 #+end_src
 
