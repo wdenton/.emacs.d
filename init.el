@@ -462,7 +462,7 @@ already narrowed."
 					(interactive)
 					(kill-line 0)))
 
-(add-hook 'prog-mode-hook #'flyspell-prog-mode)
+(add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
 (setq-default abbrev-mode t)
 
@@ -572,19 +572,18 @@ already narrowed."
 
 (use-package markdown-mode
   :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md\\'" . gfm-mode)
-	 ;; Defined elsewhere: use polymode
-         ;; ("\\.md\\'" . markdown-mode)
-         ;; ("\\.markdown\\'" . markdown-mode)
+  :mode (
+	 ("README\\.md\\'" . gfm-mode)
 	 )
   :init
   ;; (setq markdown-command "multimarkdown")
-  (setq markdown-hide-urls t)
-  (setq markdown-hide-markup t)
-  (setq markdown-url-compose-char "⋯")
-  (setq markdown-header-scaling t)
-  ;; (add-hook 'markdown-mode-hook 'turn-on-outline-minor-mode)
-  (add-hook 'markdown-mode-hook 'turn-on-visual-line-mode)
+  (setq markdown-hide-urls t
+	markdown-hide-markup t
+	markdown-url-compose-char "⋯"
+	markdown-header-scaling t
+	)
+  :hook
+  'turn-on-visual-line-mode
   )
 
 (use-package pdf-tools
@@ -717,12 +716,11 @@ already narrowed."
   (global-set-key "\C-cl" 'org-store-link)
 
   ;; In 25 Org started opening exported PDFs in docview, but I prefer seeing them externally.
-  (delete '("\\.pdf\\'" . default) org-file-apps)
-  (add-to-list 'org-file-apps '("\\.pdf\\'" . "evince %s"))
+  ;; (delete '("\\.pdf\\'" . default) org-file-apps)
+  ;; (add-to-list 'org-file-apps '("\\.pdf\\'" . "evince %s"))
 
-  (org-babel-do-load-languages ;; Active Babel languages (http://orgmode.org/org.html#Languages)
-   'org-babel-load-languages
-   '(
+  ;; Active Babel languages (http://orgmode.org/org.html#Languages)
+  (org-babel-do-load-languages 'org-babel-load-languages '(
      (ditaa . t)
      (dot . t)
      (latex . t)
@@ -733,8 +731,7 @@ already narrowed."
      (shell . t)
      (sql . t)
      (sqlite . t)
-     )
-   )
+     ))
 
   ;; Appearance.  This should probably go elsewhere.
 
@@ -767,27 +764,7 @@ already narrowed."
    (org-mode . wrap-region-mode)
    (org-mode . turn-on-flyspell) ;; Use flyspell to check spelling as I go
    )
-)
-
-(use-package org-bullets
-  ;; Possibilities:  ◉ ○ ✸ ✿ ♥ ● ◇ ✚ ✜ ☯ ◆ ♠ ♣ ♦ ☢ ❀ ◆ ◖ ▶ ► • ★ ▸ or any other Unicode character
-  ;; Default is '("◉" "○" "✸" "✿")
-  ;; I've used ("◉" "○ ""►" "•" "•"))
-  :after org
-  :config
-  (setq org-bullets-bullet-list '("⊢" "⋮" "⋱" "⋱" "⋱"))
-  :hook
-  (org-mode . (lambda () (org-bullets-mode 1)))
   )
-
-(defun endless/org-ispell ()
-  "Configure `ispell-skip-region-alist' for `org-mode'."
-  (make-local-variable 'ispell-skip-region-alist)
-  (add-to-list 'ispell-skip-region-alist '(org-property-drawer-re))
-  (add-to-list 'ispell-skip-region-alist '("~" "~"))
-  (add-to-list 'ispell-skip-region-alist '("=" "="))
-  (add-to-list 'ispell-skip-region-alist '("^#\\+BEGIN_SRC" . "^#\\+END_SRC")))
-(add-hook 'org-mode-hook #'endless/org-ispell)
 
 (eval-after-load 'org-src
   '(define-key org-src-mode-map
@@ -841,14 +818,22 @@ already narrowed."
   )
 (add-hook 'org-mode-hook #'wtd/org-ispell)
 
+(use-package org-superstar
+  :config
+  (setq org-superstar-headline-bullets-list '("⊢" "⋮" "⋱" "◉" "○"))
+  :hook
+  (org-mode . (lambda () (org-superstar-mode 1)))
+  )
+
 (add-hook 'prog-mode-hook 'subword-mode)
 
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
-(setq ansi-color-for-comint-mode 'filter)
-(setq comint-scroll-to-bottom-on-input t)
-(setq comint-scroll-to-bottom-on-output t)
-(setq comint-move-point-for-output t)
+(setq ansi-color-for-comint-mode 'filter
+      comint-scroll-to-bottom-on-input t
+      comint-scroll-to-bottom-on-output t
+      comint-move-point-for-output t
+ )
 ;;(setq comint-prompt-read-only t)
 
 (setq ansi-color-for-comint-mode 'filter)
@@ -940,8 +925,9 @@ already narrowed."
 (use-package rbenv
   :hook (ruby-mode . global-rbenv-mode)
   :config
-  (setq rbenv-show-active-ruby-in-modeline nil)
-  (setq rbenv-modeline-function 'rbenv--modeline-plain)
+  (setq rbenv-show-active-ruby-in-modeline nil
+	rbenv-modeline-function 'rbenv--modeline-plain
+   )
   (rbenv-use-global)
   )
 

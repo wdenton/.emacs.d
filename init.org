@@ -1024,7 +1024,7 @@ Allow pasting selection outside of Emacs.
 Use Flyspell for spell-checking in comments in programs.
 
 #+begin_src emacs-lisp
-(add-hook 'prog-mode-hook #'flyspell-prog-mode)
+(add-hook 'prog-mode-hook 'flyspell-prog-mode)
 #+end_src
 
 ** Expansions and abbreviations
@@ -1244,19 +1244,18 @@ I love CSV files, but I'd rather load them into Org or R then edit them directly
 #+begin_src emacs-lisp
 (use-package markdown-mode
   :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md\\'" . gfm-mode)
-	 ;; Defined elsewhere: use polymode
-         ;; ("\\.md\\'" . markdown-mode)
-         ;; ("\\.markdown\\'" . markdown-mode)
+  :mode (
+	 ("README\\.md\\'" . gfm-mode)
 	 )
   :init
   ;; (setq markdown-command "multimarkdown")
-  (setq markdown-hide-urls t)
-  (setq markdown-hide-markup t)
-  (setq markdown-url-compose-char "⋯")
-  (setq markdown-header-scaling t)
-  ;; (add-hook 'markdown-mode-hook 'turn-on-outline-minor-mode)
-  (add-hook 'markdown-mode-hook 'turn-on-visual-line-mode)
+  (setq markdown-hide-urls t
+	markdown-hide-markup t
+	markdown-url-compose-char "⋯"
+	markdown-header-scaling t
+	)
+  :hook
+  'turn-on-visual-line-mode
   )
 #+end_src
 
@@ -1343,6 +1342,8 @@ Define the actual keystroke now that the rest has been set up.  The default is l
 * Org
 
 A note I made on 16 April 2013:  "Started using org-mode ... I could really get into this."
+
+** Manage and configure with use-package
 
 The =use-package= syntax here is messy.  All of the hooks should go under =:hook= and the appearance teaks under =:custom-face=, but I don't know how to do that yet.
 
@@ -1433,12 +1434,11 @@ The =use-package= syntax here is messy.  All of the hooks should go under =:hook
   (global-set-key "\C-cl" 'org-store-link)
 
   ;; In 25 Org started opening exported PDFs in docview, but I prefer seeing them externally.
-  (delete '("\\.pdf\\'" . default) org-file-apps)
-  (add-to-list 'org-file-apps '("\\.pdf\\'" . "evince %s"))
+  ;; (delete '("\\.pdf\\'" . default) org-file-apps)
+  ;; (add-to-list 'org-file-apps '("\\.pdf\\'" . "evince %s"))
 
-  (org-babel-do-load-languages ;; Active Babel languages (http://orgmode.org/org.html#Languages)
-   'org-babel-load-languages
-   '(
+  ;; Active Babel languages (http://orgmode.org/org.html#Languages)
+  (org-babel-do-load-languages 'org-babel-load-languages '(
      (ditaa . t)
      (dot . t)
      (latex . t)
@@ -1449,8 +1449,7 @@ The =use-package= syntax here is messy.  All of the hooks should go under =:hook
      (shell . t)
      (sql . t)
      (sqlite . t)
-     )
-   )
+     ))
 
   ;; Appearance.  This should probably go elsewhere.
 
@@ -1483,73 +1482,10 @@ The =use-package= syntax here is messy.  All of the hooks should go under =:hook
    (org-mode . wrap-region-mode)
    (org-mode . turn-on-flyspell) ;; Use flyspell to check spelling as I go
    )
-)
-#+end_src
-
-# ;; Better colouring of TODO keywords
-# (setq org-todo-keyword-faces
-#       (quote (
-#       	("TODO" :foreground "SeaGreen" :weight normal)
-#       	("WAITING" :foreground "Purple" :weight normal)
-#       	)))
-
-# ;; Refiling, which I never use.
-# (setq org-refile-targets '(
-#       		     ("~/york/shared/projects/projects.org" :maxlevel . 1)
-#       		     ;; ("~/york/shared/reports/annual/2017-annual-report/denton-2016-2017-annual-report.org" :maxlevel . 2)
-#       		     )
-#       )
-
-# ;; Capturing
-# ;; (setq org-default-notes-file "~/org/capture.org") ; Change this when I use it for real
-# ;; (define-key global-map "\C-cc" 'org-capture)
-# (setq org-capture-templates
-#       '(
-#     	  ("w" "Work todo" entry (file+headline "~/york/shared/projects/projects.org" "Tasks") "* TODO %?\n %u\n %a")
-#     	  ("d" "Work diary" entry (file+datetree "~/york/shared/work-diaries/work-diary.org" "Tasks") "** %?\n %u\n %a")
-#         ("n" "Note"      entry (file+datetree "~/org/capture.org")                   "* %?\nEntered on %U\n  %i\n %a"))
-#       )
-
-Prettify the headings and such, with better bullets.  I use [[https://github.com/sabof/org-bullets][org-bullets]] but maybe one day I'll change to [[https://github.com/integral-dw/org-superstar-mode][org-superstar-mode]].
-
-#+begin_src emacs-lisp
-(use-package org-bullets
-  ;; Possibilities:  ◉ ○ ✸ ✿ ♥ ● ◇ ✚ ✜ ☯ ◆ ♠ ♣ ♦ ☢ ❀ ◆ ◖ ▶ ► • ★ ▸ or any other Unicode character
-  ;; Default is '("◉" "○" "✸" "✿")
-  ;; I've used ("◉" "○ ""►" "•" "•"))
-  :after org
-  :config
-  (setq org-bullets-bullet-list '("⊢" "⋮" "⋱" "⋱" "⋱"))
-  :hook
-  (org-mode . (lambda () (org-bullets-mode 1)))
   )
 #+end_src
 
-# I asked and someone answered on the beta Emacs SE.
-# https://emacs.stackexchange.com/questions/90/how-to-sometimes-but-not-always-add-a-note-to-an-org-todo-state-change
-# This lets me force a note for any state change in TODO workflow.
-# Use C-c C-T (capital T) to make Org ask me for a note, even if the normal workflow doesn't require it.
-# (defun org-todo-force-notes ()
-#   (interactive)
-#   (let ((org-todo-log-states
-#          (mapcar (lambda (state)
-#                    (list state 'note 'time))
-#                  (apply 'append org-todo-sets))))
-#     (call-interactively 'org-todo)))
-# (define-key org-mode-map (kbd "C-c C-S-t") 'org-todo-force-notes)
-
-Ispell should [[http://endlessparentheses.com/ispell-and-org-mode.html][ignore some things in Org files]].
-
-#+begin_src emacs-lisp
-(defun endless/org-ispell ()
-  "Configure `ispell-skip-region-alist' for `org-mode'."
-  (make-local-variable 'ispell-skip-region-alist)
-  (add-to-list 'ispell-skip-region-alist '(org-property-drawer-re))
-  (add-to-list 'ispell-skip-region-alist '("~" "~"))
-  (add-to-list 'ispell-skip-region-alist '("=" "="))
-  (add-to-list 'ispell-skip-region-alist '("^#\\+BEGIN_SRC" . "^#\\+END_SRC")))
-(add-hook 'org-mode-hook #'endless/org-ispell)
-#+end_src
+** Some helper functions
 
 Since I'm using ~C-x n~ to narrow and widen source blocks (see ~narrow-or-widen-dwim~) I don't need to use ~C-c `~ to enter and leave them, so I can use ~C-x C-s~ to save and exit them, which is nice.  [[http://endlessparentheses.com/emacs-narrow-or-widen-dwim.html][Source]].
 
@@ -1642,6 +1578,58 @@ So I can use Memoir as a document class in Org (but I don't).
   )
 #+end_src
 
+** Bullets
+
+Prettify the headings and such with better bullets thanks to [[https://github.com/integral-dw/org-superstar-mode][org-superstar-mode]].
+
+#+begin_src emacs-lisp
+(use-package org-superstar
+  :config
+  (setq org-superstar-headline-bullets-list '("⊢" "⋮" "⋱" "◉" "○"))
+  :hook
+  (org-mode . (lambda () (org-superstar-mode 1)))
+  )
+#+end_src
+
+** Org stuff I don't use right now
+
+# ;; Better colouring of TODO keywords
+# (setq org-todo-keyword-faces
+#       (quote (
+#       	("TODO" :foreground "SeaGreen" :weight normal)
+#       	("WAITING" :foreground "Purple" :weight normal)
+#       	)))
+
+# ;; Refiling, which I never use.
+# (setq org-refile-targets '(
+#       		     ("~/york/shared/projects/projects.org" :maxlevel . 1)
+#       		     ;; ("~/york/shared/reports/annual/2017-annual-report/denton-2016-2017-annual-report.org" :maxlevel . 2)
+#       		     )
+#       )
+
+# ;; Capturing
+# ;; (setq org-default-notes-file "~/org/capture.org") ; Change this when I use it for real
+# ;; (define-key global-map "\C-cc" 'org-capture)
+# (setq org-capture-templates
+#       '(
+#     	  ("w" "Work todo" entry (file+headline "~/york/shared/projects/projects.org" "Tasks") "* TODO %?\n %u\n %a")
+#     	  ("d" "Work diary" entry (file+datetree "~/york/shared/work-diaries/work-diary.org" "Tasks") "** %?\n %u\n %a")
+#         ("n" "Note"      entry (file+datetree "~/org/capture.org")                   "* %?\nEntered on %U\n  %i\n %a"))
+#       )
+
+# I asked and someone answered on the beta Emacs SE.
+# https://emacs.stackexchange.com/questions/90/how-to-sometimes-but-not-always-add-a-note-to-an-org-todo-state-change
+# This lets me force a note for any state change in TODO workflow.
+# Use C-c C-T (capital T) to make Org ask me for a note, even if the normal workflow doesn't require it.
+# (defun org-todo-force-notes ()
+#   (interactive)
+#   (let ((org-todo-log-states
+#          (mapcar (lambda (state)
+#                    (list state 'note 'time))
+#                  (apply 'append org-todo-sets))))
+#     (call-interactively 'org-todo)))
+# (define-key org-mode-map (kbd "C-c C-S-t") 'org-todo-force-notes)
+
 * Programming
 
 ** General stuff
@@ -1663,10 +1651,11 @@ Make script files executable automatically
 Settings for command interpreter modes, which I use mostly for R and Ruby.
 
 #+begin_src emacs-lisp
-(setq ansi-color-for-comint-mode 'filter)
-(setq comint-scroll-to-bottom-on-input t)
-(setq comint-scroll-to-bottom-on-output t)
-(setq comint-move-point-for-output t)
+(setq ansi-color-for-comint-mode 'filter
+      comint-scroll-to-bottom-on-input t
+      comint-scroll-to-bottom-on-output t
+      comint-move-point-for-output t
+ )
 ;;(setq comint-prompt-read-only t)
 #+end_src
 
@@ -1816,8 +1805,9 @@ I use [[https://github.com/rbenv/rbenv][rbenv]], so Emacs needs to know about it
 (use-package rbenv
   :hook (ruby-mode . global-rbenv-mode)
   :config
-  (setq rbenv-show-active-ruby-in-modeline nil)
-  (setq rbenv-modeline-function 'rbenv--modeline-plain)
+  (setq rbenv-show-active-ruby-in-modeline nil
+	rbenv-modeline-function 'rbenv--modeline-plain
+   )
   (rbenv-use-global)
   )
 #+end_src
