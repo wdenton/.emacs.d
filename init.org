@@ -1819,7 +1819,7 @@ TODO Make Org's =C-c C-o= more general and follow these links too.
 #+begin_src emacs-lisp
 (use-package rubocop
   :diminish rubocop-mode
-  :hook ruby-mode
+  :hook (ruby-mode . rubocop-mode)
   )
 #+end_src
 
