@@ -101,6 +101,7 @@
   (setq sp-show-pair-from-inside t)
   :custom-face
   (sp-show-pair-match-face ((t (:foreground "White")))) ;; Could also have :background "Colour" in there.
+  ;; (sp-show-pair-match-content-face ((t (:foreground "White")))) ;; Highlight all the enclosed content
   (sp-show-pair-mismatch-face ((t (:foreground "Red"))))
   )
 
@@ -863,14 +864,14 @@ already narrowed."
   ;; (setq ess-use-auto-complete t) ;; Auto-completion on.
   (setq ess-use-flymake nil ;; Don't run flymake on ESS buffers
 	ess-help-own-frame 'nil ;; Make all help buffers go into one frame
-	inferior-ess-primary-prompt "> "
+	;; inferior-ess-primary-prompt "> "
 	)
   ;; (setq inferior-S-prompt "[]a-zA-Z0-9.[]*\\(?:[>+.] \\)*ℝ+> ")
   :init
   (add-hook 'ess-R-post-run-hook 'ess-execute-screen-options) ;; Use the full width of the Emacs frame
   (add-hook 'ess-post-run-hook 'ess-execute-screen-options)
   (add-hook 'ess-mode-hook 'ess-execute-screen-options)
-  (add-hook 'ess-mode-hook 'indent-guide-mode)   ;; indent-guide ... very nice
+  (add-hook 'ess-mode-hook 'highlight-indent-guides-mode)   ;; indent-guide ... very nice
   (add-hook 'ess-mode-hook (lambda () (flycheck-mode t)))
   )
 
