@@ -267,15 +267,6 @@ Make the cursor a thin horizontal bar, not a block (but I still like it blinking
 
 My home and work machines have different screen resolutions, so the font height needs to be different.  It's measured in 0.1 points, so 130 is 13 pt.  I need it a little bigger on my work machine.
 
-#+begin_src emacs-lisp :tangle no
-(setq wtd-ubuntu-mono-height 140)
-;; (setq wtd/fira-code-height 120)
-(when (string= (system-name) "work")
-  (setq wtd-ubuntu-mono-height 160)
-  ;; (setq wtd-fira-code-height 160)
-  )
-#+end_src
-
 #+begin_src emacs-lisp
 (setq wtd-ubuntu-mono-height
       (cond ((string= (system-name) "marcus") 120)
@@ -297,18 +288,6 @@ This could help improve performance with Unicode symbols.
 
 #+begin_src emacs-lisp
 (setq inhibit-compacting-font-caches t)
-#+end_src
-
-Sometimes I try [[https://gitlab.com/jabranham/mixed-pitch][mixed-pitch]], but I never stick with it, so this is turned off.  Fixed pitch is best for me.
-
-#+begin_src emacs-lisp :tangle no
-(use-package mixed-pitch
-  :diminish
-  :hook
-  (org-mode markdown-mode)
-  :config
-  (set-face-attribute 'variable-pitch nil :family "Baskervald ADF Std" :height 200)
-  )
 #+end_src
 
 Always do font-locking.
@@ -363,13 +342,7 @@ Tabs have four spaces.  Eight is wrong.
 (setq tab-width 4)
 #+end_src
 
-=electric-indent-mode= is built in, but I don't turn it on, because ...
-
-#+begin_src emacs-lisp :tangle no
-(electric-indent-mode 1)
-#+end_src
-
-... I use [[https://github.com/Malabarba/aggressive-indent-mode][aggressive-indent-mode]], which is indeed aggressive, but very handy.
+I don't turn on the built-in =electric-indent-mode= because I use [[https://github.com/Malabarba/aggressive-indent-mode][aggressive-indent-mode]], which is indeed aggressive, but very handy.
 
 #+begin_src emacs-lisp
 (use-package aggressive-indent
@@ -380,19 +353,7 @@ Tabs have four spaces.  Eight is wrong.
   )
 #+end_src
 
-Use [[https://github.com/zk-phi/indent-guide][indent-guide]] to show vertical lines on indented blocks, which helps make it clear what is where.
-
-(Turned this off in October 2021.)
-
-#+begin_src emacs-lisp :tangle no
-(use-package indent-guide
-  :diminish
-  :config
-  (indent-guide-global-mode)
-  )
-#+end_src
-
-Trying out [[https://github.com/DarthFennec/highlight-indent-guides][highlight-indent-guides]] now.
+Trying out [[https://github.com/DarthFennec/highlight-indent-guides][highlight-indent-guides]] now.  (I was using =indent-guide= before.)
 
 #+begin_src emacs-lisp
 (use-package highlight-indent-guides
@@ -723,22 +684,7 @@ Or use ~M-o~ as a shortcut for ~other-window~ instead of the default ~C-x o~, wh
 (global-set-key (kbd "M-o") 'other-window)
 #+end_src
 
-I could use [[https://depp.brause.cc/eyebrowse/][eyebrowse]] to manage window configurations, but I never did, so I turned off tangling.  I keep forgetting about it, but if there are times when I need it and use it, I can bring it back.
-
-#+begin_quote
-You start with your current window config on slot 1. Once you hit ~C-c C-w 2~, you will see the modeline indicator appearing and showing slot 1 and 2 with slot 2 slightly emphasized. Slot 1 has been saved automatically for you and contains your last window config. Do something meaningful like a window split, then hit ~C-c C-w 1~. The window config on slot 2 is saved and the window config from slot 1 is loaded. Try switching back and forth between them with ~C-c C-w '~ to get a feeling for how subsequent window manipulations are handled.
-#+end_quote
-
-#+begin_src emacs-lisp :tangle no
-(use-package eyebrowse
-  :diminish eyebrowse-mode
-  :init (eyebrowse-setup-opinionated-keys)
-  :config
-  (eyebrowse-mode t)
-  ;; (setq eyebrowse-new-workspace t)
-  (setq eyebrowse-wrap-around t)
-  )
-#+end_src
+I could use [[https://depp.brause.cc/eyebrowse/][eyebrowse]] to manage window configurations, but I never did, so I took out the code.  I'll leave this note here in case I want to go back.
 
 ** Sessions
 
@@ -896,7 +842,7 @@ Let me upcase or downcase a region, which is disabled by default.
 (put 'upcase-region 'disabled nil)
 #+end_src
 
-I don't use multiple cursors ... but I chould.
+I don't use multiple cursors ... but I could.
 
 #+begin_src emacs-lisp :tangle no
 (use-package multiple-cursors)
@@ -1876,16 +1822,7 @@ TODO Make Org's =C-c C-o= more general and follow these links too.
   )
 #+end_src
 
-I tried using [[https://github.com/dgutov/robe][Robe]] for documentation lookup and such, but never used it.  (Requires the gems ~pry~ and ~pry-doc~.)
-
-#+begin_src emacs-lisp :tangle no
-(use-package robe
-   :diminish robe-mode
-   :hook ruby-mode
-   :config
-   (eval-after-load 'company '(push 'company-robe company-backends))
-   )
-#+end_src
+I tried using [[https://github.com/dgutov/robe][Robe]] for documentation lookup and such, but never used it.
 
 * Jekyll
 
