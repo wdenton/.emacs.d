@@ -113,10 +113,13 @@
   (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
   )
 
-(use-package indent-guide
+(use-package highlight-indent-guides
   :diminish
   :config
-  (indent-guide-global-mode)
+  (setq highlight-indent-guides-method 'character
+	highlight-indent-guides-character ?\|)
+  :hook
+  (prog-mode . highlight-indent-guides-mode)
   )
 
 (use-package solarized-theme
@@ -284,14 +287,15 @@ already narrowed."
 	    (lambda ()
 	      (ibuffer-projectile-set-filter-groups)
 	      (unless (eq ibuffer-sorting-mode 'alphabetic)
-		((insert) buffer-do-sort-by-alphabetic))))
+		(ibuffer-do-sort-by-alphabetic))))
   )
 
 (setq split-height-threshold nil)
 (setq split-width-threshold 0)
 
 (defun wtd/vsplit-last-buffer (PREFIX)
-  "Split the window vertically and display the previous buffer.  By default, switch to that new window; with PREFIX, stay where you are."
+  "Split the window vertically and display the previous buffer.
+   By default, switch to that new window; with PREFIX, stay where you are."
   (interactive "p")
   (split-window-vertically)
   (other-window 1 nil)
@@ -299,7 +303,8 @@ already narrowed."
     (switch-to-next-buffer)))
 
 (defun wtd/hsplit-last-buffer (PREFIX)
-  "Split the window horizontally and display the previous buffer.  By default, switch to that new window; with PREFIX, stay where you are."
+  "Split the window horizontally and display the previous buffer.
+   By default, switch to that new window; with PREFIX, stay where you are."
   (interactive "p")
   (split-window-horizontally)
   (other-window 1 nil)
@@ -842,8 +847,7 @@ already narrowed."
   :init (global-flycheck-mode)
   :diminish flycheck-mode
   :config
-  (setq flycheck-global-modes '(not org-mode))
-  ;; Could also set :modes to list where I want it.
+  (setq flycheck-global-modes '(not org-mode)) ;; Could also set :modes to list where I want it.
   )
 
 (setq-default flycheck-lintr-linters
@@ -857,9 +861,10 @@ already narrowed."
   :config
   ;; (setq ess-smart-S-assign-key nil) ;; Don't let _ turn into <-
   ;; (setq ess-use-auto-complete t) ;; Auto-completion on.
-  (setq ess-use-flymake nil) ;; Don't run flymake on ESS buffers
-  (setq ess-help-own-frame 'nil) ;; Make all help buffers go into one frame
-  (setq inferior-ess-primary-prompt "> ")
+  (setq ess-use-flymake nil ;; Don't run flymake on ESS buffers
+	ess-help-own-frame 'nil ;; Make all help buffers go into one frame
+	inferior-ess-primary-prompt "> "
+	)
   ;; (setq inferior-S-prompt "[]a-zA-Z0-9.[]*\\(?:[>+.] \\)*ℝ+> ")
   :init
   (add-hook 'ess-R-post-run-hook 'ess-execute-screen-options) ;; Use the full width of the Emacs frame
@@ -887,19 +892,18 @@ already narrowed."
 
 (add-hook 'ess-mode-hook
 	  (lambda ()
-	    (setq ess-indent-level 4)
-	    (setq ess-first-continued-statement-offset 2)
-	    (setq ess-continued-statement-offset 0)
-	    (setq ess-offset-continued 'straight)
-	    (setq ess-brace-offset -4)
-            (setq ess-expression-offset 4)
-            (setq ess-else-offset 0)
-            (setq ess-close-brace-offset 0)
-            (setq ess-brace-imaginary-offset 0)
-            (setq ess-continued-brace-offset 0)
-            (setq ess-arg-function-offset 4)
-	    (setq ess-arg-function-offset-new-line '(4))
-	    ))
+	    (setq ess-indent-offset 4
+		  ess-offset-continued 2
+		  ess-offset-continued 'straight
+		  ess-brace-offset -4
+		  ess-expression-offset 4
+		  ess-else-offset 0
+		  ess-close-brace-offset 0
+		  ess-brace-imaginary-offset 0
+		  ess-continued-brace-offset 0
+		  ess-indent-from-lhs 4
+		  ess-offset-arguments-newline '(4)
+	    )))
 
 (setq ess-R-font-lock-keywords
       (quote
@@ -951,13 +955,6 @@ already narrowed."
   :diminish rubocop-mode
   :hook ruby-mode
   )
-
-(use-package robe
-   :diminish robe-mode
-   :hook ruby-mode
-   :config
-   (eval-after-load 'company '(push 'company-robe company-backends))
-   )
 
 (defun jekyll-timestamp ()
   "Update existing date: timestamp on a Jekyll page or post."

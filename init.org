@@ -382,11 +382,26 @@ Tabs have four spaces.  Eight is wrong.
 
 Use [[https://github.com/zk-phi/indent-guide][indent-guide]] to show vertical lines on indented blocks, which helps make it clear what is where.
 
-#+begin_src emacs-lisp
+(Turned this off in October 2021.)
+
+#+begin_src emacs-lisp :tangle no
 (use-package indent-guide
   :diminish
   :config
   (indent-guide-global-mode)
+  )
+#+end_src
+
+Trying out [[https://github.com/DarthFennec/highlight-indent-guides][highlight-indent-guides]] now.
+
+#+begin_src emacs-lisp
+(use-package highlight-indent-guides
+  :diminish
+  :config
+  (setq highlight-indent-guides-method 'character
+	highlight-indent-guides-character ?\|)
+  :hook
+  (prog-mode . highlight-indent-guides-mode)
   )
 #+end_src
 
@@ -658,9 +673,10 @@ For [[https://github.com/purcell/ibuffer-projectile][ibuffer-projectile]].
 	    (lambda ()
 	      (ibuffer-projectile-set-filter-groups)
 	      (unless (eq ibuffer-sorting-mode 'alphabetic)
-		((insert) buffer-do-sort-by-alphabetic))))
+		(ibuffer-do-sort-by-alphabetic))))
   )
 #+end_src
+
 
 ** Windows
 
@@ -675,7 +691,8 @@ Make window splitting easier: ~C-x 2~ for vertical split, ~C-x 3~ for horizontal
 
 #+begin_src emacs-lisp
 (defun wtd/vsplit-last-buffer (PREFIX)
-  "Split the window vertically and display the previous buffer.  By default, switch to that new window; with PREFIX, stay where you are."
+  "Split the window vertically and display the previous buffer.
+   By default, switch to that new window; with PREFIX, stay where you are."
   (interactive "p")
   (split-window-vertically)
   (other-window 1 nil)
@@ -683,7 +700,8 @@ Make window splitting easier: ~C-x 2~ for vertical split, ~C-x 3~ for horizontal
     (switch-to-next-buffer)))
 
 (defun wtd/hsplit-last-buffer (PREFIX)
-  "Split the window horizontally and display the previous buffer.  By default, switch to that new window; with PREFIX, stay where you are."
+  "Split the window horizontally and display the previous buffer.
+   By default, switch to that new window; with PREFIX, stay where you are."
   (interactive "p")
   (split-window-horizontally)
   (other-window 1 nil)
@@ -1674,8 +1692,7 @@ Colourise the comint buffer.
   :init (global-flycheck-mode)
   :diminish flycheck-mode
   :config
-  (setq flycheck-global-modes '(not org-mode))
-  ;; Could also set :modes to list where I want it.
+  (setq flycheck-global-modes '(not org-mode)) ;; Could also set :modes to list where I want it.
   )
 #+end_src
 
@@ -1701,9 +1718,10 @@ Flycheck and lintr.
   :config
   ;; (setq ess-smart-S-assign-key nil) ;; Don't let _ turn into <-
   ;; (setq ess-use-auto-complete t) ;; Auto-completion on.
-  (setq ess-use-flymake nil) ;; Don't run flymake on ESS buffers
-  (setq ess-help-own-frame 'nil) ;; Make all help buffers go into one frame
-  (setq inferior-ess-primary-prompt "> ")
+  (setq ess-use-flymake nil ;; Don't run flymake on ESS buffers
+	ess-help-own-frame 'nil ;; Make all help buffers go into one frame
+	inferior-ess-primary-prompt "> "
+	)
   ;; (setq inferior-S-prompt "[]a-zA-Z0-9.[]*\\(?:[>+.] \\)*ℝ+> ")
   :init
   (add-hook 'ess-R-post-run-hook 'ess-execute-screen-options) ;; Use the full width of the Emacs frame
@@ -1753,19 +1771,18 @@ This stops comments from flying all the way over to the right, and makes =%>%= c
 #+begin_src emacs-lisp
 (add-hook 'ess-mode-hook
 	  (lambda ()
-	    (setq ess-indent-level 4)
-	    (setq ess-first-continued-statement-offset 2)
-	    (setq ess-continued-statement-offset 0)
-	    (setq ess-offset-continued 'straight)
-	    (setq ess-brace-offset -4)
-            (setq ess-expression-offset 4)
-            (setq ess-else-offset 0)
-            (setq ess-close-brace-offset 0)
-            (setq ess-brace-imaginary-offset 0)
-            (setq ess-continued-brace-offset 0)
-            (setq ess-arg-function-offset 4)
-	    (setq ess-arg-function-offset-new-line '(4))
-	    ))
+	    (setq ess-indent-offset 4
+		  ess-offset-continued 2
+		  ess-offset-continued 'straight
+		  ess-brace-offset -4
+		  ess-expression-offset 4
+		  ess-else-offset 0
+		  ess-close-brace-offset 0
+		  ess-brace-imaginary-offset 0
+		  ess-continued-brace-offset 0
+		  ess-indent-from-lhs 4
+		  ess-offset-arguments-newline '(4)
+	    )))
 #+end_src
 
 Be more colourful!
@@ -1859,9 +1876,9 @@ TODO Make Org's =C-c C-o= more general and follow these links too.
   )
 #+end_src
 
-[[https://github.com/dgutov/robe][Robe]] for documentation lookup, etc.  (Requires the gems ~pry~ and ~pry-doc~.)
+I tried using [[https://github.com/dgutov/robe][Robe]] for documentation lookup and such, but never used it.  (Requires the gems ~pry~ and ~pry-doc~.)
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package robe
    :diminish robe-mode
    :hook ruby-mode
