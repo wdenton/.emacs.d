@@ -954,7 +954,6 @@ already narrowed."
 
 (use-package rubocop
   :diminish rubocop-mode
-  ;; :hook ruby-mode
   :hook (ruby-mode . rubocop-mode)
   )
 
@@ -1040,6 +1039,8 @@ already narrowed."
 ;; TEMP
 (setq TeX-PDF-mode t)
 ; (customize-set-variable 'org-latex-pdf-process '("latexmk -f -pdf -%latex -interaction=nonstopmode -output-directory=%o %f"))
+
+(setq revert-without-query '(".pdf"))
 
 (setq biblatex-dialect "biblatex")
 
