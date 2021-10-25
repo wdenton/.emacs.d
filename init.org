@@ -354,9 +354,9 @@ I don't turn on the built-in =electric-indent-mode= because I use [[https://gith
   )
 #+end_src
 
-Trying out [[https://github.com/DarthFennec/highlight-indent-guides][highlight-indent-guides]] now.  (I was using =indent-guide= before.)
+I was trying out [[https://github.com/DarthFennec/highlight-indent-guides][highlight-indent-guides]] (after using =indent-guide= before) but I disabled it to see if I miss it.
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package highlight-indent-guides
   :diminish
   :config

@@ -114,15 +114,6 @@
   (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
   )
 
-(use-package highlight-indent-guides
-  :diminish
-  :config
-  (setq highlight-indent-guides-method 'character
-	highlight-indent-guides-character ?\|)
-  :hook
-  (prog-mode . highlight-indent-guides-mode)
-  )
-
 (use-package solarized-theme
   :config
   ;; Stop the theme from messing up Org headlines and using variable pitch everywhere.
@@ -954,7 +945,6 @@ already narrowed."
 
 (use-package rubocop
   :diminish rubocop-mode
-  ;; :hook ruby-mode
   :hook (ruby-mode . rubocop-mode)
   )
 
