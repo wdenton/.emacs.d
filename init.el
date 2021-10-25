@@ -1031,6 +1031,8 @@ already narrowed."
 (setq TeX-PDF-mode t)
 ; (customize-set-variable 'org-latex-pdf-process '("latexmk -f -pdf -%latex -interaction=nonstopmode -output-directory=%o %f"))
 
+(setq revert-without-query '(".pdf"))
+
 (setq biblatex-dialect "biblatex")
 
 (add-hook 'TeX-mode-hook (lambda () (TeX-fold-mode 1)))

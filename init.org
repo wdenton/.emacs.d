@@ -1953,6 +1953,12 @@ Use =pdflatex= to make PDFs.
 ; (customize-set-variable 'org-latex-pdf-process '("latexmk -f -pdf -%latex -interaction=nonstopmode -output-directory=%o %f"))
 #+end_src
 
+If a buffer is showing a PDF and the PDF is regenerated, I don't want to be asked if the buffer should revert.  (If I ever want to treat another file type this way, I'll need to append to the list, I guess.)
+
+#+begin_src emacs-lisp
+(setq revert-without-query '(".pdf"))
+#+end_src
+
 Bibliographies.
 
 #+begin_src emacs-lisp
