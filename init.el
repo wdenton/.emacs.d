@@ -3,7 +3,7 @@
 ;;
 ;; You should make any changes there and regenerate it with C-c C-v t
 
-;; (setq debug-on-error t)
+(setq debug-on-error t)
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -836,9 +836,9 @@ already narrowed."
 (setq ansi-color-for-comint-mode 'filter)
 
 (use-package flycheck
-  :init (global-flycheck-mode)
   :diminish flycheck-mode
   :config
+  (global-flycheck-mode)
   (setq flycheck-global-modes '(not org-mode)) ;; Could also set :modes to list where I want it.
   )
 
@@ -862,7 +862,7 @@ already narrowed."
   (add-hook 'ess-R-post-run-hook 'ess-execute-screen-options) ;; Use the full width of the Emacs frame
   (add-hook 'ess-post-run-hook 'ess-execute-screen-options)
   (add-hook 'ess-mode-hook 'ess-execute-screen-options)
-  (add-hook 'ess-mode-hook 'highlight-indent-guides-mode)   ;; indent-guide ... very nice
+  ;; (add-hook 'ess-mode-hook 'highlight-indent-guides-mode)   ;; indent-guide ... very nice
   (add-hook 'ess-mode-hook (lambda () (flycheck-mode t)))
   )
 

@@ -113,7 +113,7 @@ Everything from here on is in the regular init file.
 Turn this on when needed.
 
 #+begin_src emacs-lisp :tangle init.el
-;; (setq debug-on-error t)
+(setq debug-on-error t)
 #+end_src
 
 ** Packages
@@ -354,7 +354,7 @@ I don't turn on the built-in =electric-indent-mode= because I use [[https://gith
   )
 #+end_src
 
-I was trying out [[https://github.com/DarthFennec/highlight-indent-guides][highlight-indent-guides]] (after using =indent-guide= before) but I disabled it to see if I miss it.
+I was trying out [[https://github.com/DarthFennec/highlight-indent-guides][highlight-indent-guides]] (after using =indent-guide= before) but I disabled it to see if I miss it.  (Watch out for the ESS hook.)
 
 #+begin_src emacs-lisp :tangle no
 (use-package highlight-indent-guides
@@ -1636,9 +1636,9 @@ Colourise the comint buffer.
 
 #+begin_src emacs-lisp
 (use-package flycheck
-  :init (global-flycheck-mode)
   :diminish flycheck-mode
   :config
+  (global-flycheck-mode)
   (setq flycheck-global-modes '(not org-mode)) ;; Could also set :modes to list where I want it.
   )
 #+end_src
@@ -1674,7 +1674,7 @@ Flycheck and lintr.
   (add-hook 'ess-R-post-run-hook 'ess-execute-screen-options) ;; Use the full width of the Emacs frame
   (add-hook 'ess-post-run-hook 'ess-execute-screen-options)
   (add-hook 'ess-mode-hook 'ess-execute-screen-options)
-  (add-hook 'ess-mode-hook 'highlight-indent-guides-mode)   ;; indent-guide ... very nice
+  ;; (add-hook 'ess-mode-hook 'highlight-indent-guides-mode)   ;; indent-guide ... very nice
   (add-hook 'ess-mode-hook (lambda () (flycheck-mode t)))
   )
 #+end_src
