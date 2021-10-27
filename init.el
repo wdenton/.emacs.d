@@ -817,7 +817,7 @@ already narrowed."
 
 (use-package org-superstar
   :config
-  (setq org-superstar-headline-bullets-list '("⊢" "⋮" "⋱" "◉" "○"))
+  (setq org-superstar-headline-bullets-list '("⊢" "ǁ" "ǀ" "⋱" "◉" "○")) ;; ǂ ⋮
   :hook
   (org-mode . (lambda () (org-superstar-mode 1)))
   )
