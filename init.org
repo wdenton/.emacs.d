@@ -1559,7 +1559,7 @@ Prettify the headings and such with better bullets thanks to [[https://github.co
 #+begin_src emacs-lisp
 (use-package org-superstar
   :config
-  (setq org-superstar-headline-bullets-list '("⊢" "⋮" "⋱" "◉" "○"))
+  (setq org-superstar-headline-bullets-list '("⊢" "ǁ" "ǀ" "⋱" "◉" "○")) ;; ǂ ⋮
   :hook
   (org-mode . (lambda () (org-superstar-mode 1)))
   )
