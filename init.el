@@ -763,6 +763,11 @@ already narrowed."
    )
   )
 
+(use-package org-appear
+  :config
+  :hook (org-mode . org-appear-mode)
+  )
+
 (eval-after-load 'org-src
   '(define-key org-src-mode-map
      "\C-x\C-s" #'org-edit-src-exit))
