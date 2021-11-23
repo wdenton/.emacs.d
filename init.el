@@ -71,7 +71,8 @@
 (setq wtd-ubuntu-mono-height
       (cond ((string= (system-name) "marcus") 120)
 	    ((string= (system-name) "ochre") 140)
-	    ((string= (system-name) "work") 160))
+	    ((string= (system-name) "work") 160)
+	    (t 120))
       )
 
 (set-face-attribute 'default nil :font "Ubuntu Mono" :height wtd-ubuntu-mono-height)
