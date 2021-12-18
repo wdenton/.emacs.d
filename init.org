@@ -113,7 +113,7 @@ Everything from here on is in the regular init file.
 Turn this on when needed.
 
 #+begin_src emacs-lisp :tangle init.el
-(setq debug-on-error t)
+;; (setq debug-on-error t)
 #+end_src
 
 ** Packages
