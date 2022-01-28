@@ -1532,8 +1532,13 @@ Since I'm using ~C-x n~ to narrow and widen source blocks (see ~narrow-or-widen-
 
 So I can use Memoir as a document class in Org (but I don't).
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle yes
 (with-eval-after-load 'ox-latex
+  (add-to-list 'org-latex-classes
+               '("letter"
+                 "\\documentclass{letter}"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")))
   (add-to-list 'org-latex-classes
                '("memoir"
                  "\\documentclass{memoir}"

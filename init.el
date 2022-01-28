@@ -821,6 +821,30 @@ already narrowed."
   )
 (add-hook 'org-mode-hook #'wtd/org-ispell)
 
+(with-eval-after-load 'ox-latex
+  (add-to-list 'org-latex-classes
+               '("letter"
+                 "\\documentclass{letter}"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}"))
+  (add-to-list 'org-latex-classes
+               '("memoir"
+                 "\\documentclass{memoir}"
+                 ("\\book{%s}" . "\\book*{%s}")
+                 ("\\part{%s}" . "\\part*{%s}")
+                 ("\\chapter{%s}" . "\\chapter*{%s}")
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
+  (add-to-list 'org-latex-classes
+               '("memoir-chapter+"
+                 "\\documentclass{memoir}"
+                 ("\\chapter{%s}" . "\\chapter*{%s}")
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
+  )
+
 (use-package org-superstar
   :config
   (setq org-superstar-headline-bullets-list '("⊢" "ǁ" "ǀ" "⋱" "◉" "○")) ;; ǂ ⋮
