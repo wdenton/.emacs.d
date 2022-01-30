@@ -826,7 +826,7 @@ already narrowed."
                '("letter"
                  "\\documentclass{letter}"
                  ("\\section{%s}" . "\\section*{%s}")
-                 ("\\subsection{%s}" . "\\subsection*{%s}"))
+                 ("\\subsection{%s}" . "\\subsection*{%s}")))
   (add-to-list 'org-latex-classes
                '("memoir"
                  "\\documentclass{memoir}"
