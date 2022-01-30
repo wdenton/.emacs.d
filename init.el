@@ -823,10 +823,7 @@ already narrowed."
 
 (with-eval-after-load 'ox-latex
   (add-to-list 'org-latex-classes
-               '("letter"
-                 "\\documentclass{letter}"
-                 ("\\section{%s}" . "\\section*{%s}")
-                 ("\\subsection{%s}" . "\\subsection*{%s}"))
+               '("letter" "\\documentclass{letter}"))
   (add-to-list 'org-latex-classes
                '("memoir"
                  "\\documentclass{memoir}"
