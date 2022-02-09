@@ -823,14 +823,7 @@ already narrowed."
 
 (with-eval-after-load 'ox-latex
   (add-to-list 'org-latex-classes
-<<<<<<< HEAD
                '("letter" "\\documentclass{letter}"))
-=======
-               '("letter"
-                 "\\documentclass{letter}"
-                 ("\\section{%s}" . "\\section*{%s}")
-                 ("\\subsection{%s}" . "\\subsection*{%s}")))
->>>>>>> ae4fa682960d1c11e8db2b44e764645c083e8d6d
   (add-to-list 'org-latex-classes
                '("memoir"
                  "\\documentclass{memoir}"
