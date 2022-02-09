@@ -657,7 +657,7 @@ already narrowed."
     org-ellipsis " ⬎" ;; ⤵ ↴  Change the ellipsis that indicates hidden content
     org-footnote-section nil ;; Define footnotes nearby when I use C-c C-x f
     org-footnote-auto-adjust nil ;; Don't resort or adjust them without my saying so.
-    org-export-backends (quote (html latex md odt)) ;; Exporting: I will see these export options after C-c C-e ;; beamer reveal
+    org-export-backends (quote (html latex md odt beamer)) ;; Exporting: I will see these export options after C-c C-e ;; beamer reveal
     org-src-window-setup 'current-window ;; How to rearrange things when I edit a source block.  Default is regorganize-frame.
     ;; org-export-date-timestamp-format "%d %m %Y" ;; Date format on exports
     )
@@ -823,14 +823,7 @@ already narrowed."
 
 (with-eval-after-load 'ox-latex
   (add-to-list 'org-latex-classes
-<<<<<<< HEAD
                '("letter" "\\documentclass{letter}"))
-=======
-               '("letter"
-                 "\\documentclass{letter}"
-                 ("\\section{%s}" . "\\section*{%s}")
-                 ("\\subsection{%s}" . "\\subsection*{%s}")))
->>>>>>> ae4fa682960d1c11e8db2b44e764645c083e8d6d
   (add-to-list 'org-latex-classes
                '("memoir"
                  "\\documentclass{memoir}"
