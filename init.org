@@ -1568,6 +1568,16 @@ Prettify the headings and such with better bullets thanks to [[https://github.co
   )
 #+end_src
 
+** Possible: org-modern
+
+https://github.com/minad/org-modern
+
+#+begin_src emacs-lisp :tangle no
+(use-package org-modern
+  :hook org-mode
+  )
+#+end_src
+
 ** Org stuff I don't use right now
 
 # ;; Better colouring of TODO keywords
