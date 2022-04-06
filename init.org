@@ -30,6 +30,9 @@
 
 #+latex_header: \hypersetup{colorlinks=true,urlcolor=blue,linkcolor=blue,pdfborder={0 0 0}}
 
+# Should I stop using projectile, and use Emacs built-in project stuff,
+# like C-x p p?
+
 * Commentary
 
 In March 2021 I moved my Emacs config into an Org file, but did it in bulk, so many small comments are yet to be done.  I'll expand all this as I refine it.
@@ -222,7 +225,8 @@ Calendar weeks start on Monday.
 I don't want to type in "yes" or "no"---I want y/n.
 
 #+begin_src emacs-lisp
-(fset 'yes-or-no-p 'y-or-n-p)
+;; (fset 'yes-or-no-p 'y-or-n-p)
+(setq use-short-answers t)
 #+end_src
 
 Lower the time to echo keystrokes.
@@ -1680,6 +1684,7 @@ Flycheck and lintr.
   (setq ess-use-flymake nil ;; Don't run flymake on ESS buffers
 	ess-help-own-frame 'nil ;; Make all help buffers go into one frame
 	;; inferior-ess-primary-prompt "> "
+	 ess-can-eval-in-background nil ;; Added Feb 2022, wait for ESS to catch up with Emacs ()see https://stat.ethz.ch/pipermail/ess-help/2022-February/013031.html)
 	)
   ;; (setq inferior-S-prompt "[]a-zA-Z0-9.[]*\\(?:[>+.] \\)*ℝ+> ")
   :init
@@ -1687,7 +1692,7 @@ Flycheck and lintr.
   (add-hook 'ess-post-run-hook 'ess-execute-screen-options)
   (add-hook 'ess-mode-hook 'ess-execute-screen-options)
   ;; (add-hook 'ess-mode-hook 'highlight-indent-guides-mode)   ;; indent-guide ... very nice
-  (add-hook 'ess-mode-hook (lambda () (flycheck-mode t)))
+  ;; (add-hook 'ess-mode-hook (lambda () (flycheck-mode t)))
   )
 #+end_src
 
