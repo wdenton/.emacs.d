@@ -638,6 +638,7 @@ already narrowed."
     org-fontify-whole-heading-line t
     org-pretty-entities t ;; org-entities displays \alpha etc. as Unicode characters.
     org-hide-emphasis-markers t ;; Hide the /italics/ and *bold* markers
+    org-hide-macro-markers t ;; Hide {{{macro}}} curly brackets; see also wtd/toggle-org-macro-markers
     org-return-follows-link t ;; Hit return on a link to open it in a browser
     org-support-shift-select t ;; Shift and arrow keys to select text works a bit differently in Org.
     org-special-ctrl-a/e t ;; Make C-a and C-e understand how headings and tags work
@@ -769,6 +770,13 @@ already narrowed."
   :config
   :hook (org-mode . org-appear-mode)
   )
+
+(defun wtd/toggle-org-macro-markers ()
+  "Toggle visibility of {{{macro}}} markers"
+  (interactive)
+  (setq org-hide-macro-markers (not org-hide-macro-markers))
+  (font-lock-mode)
+  (font-lock-mode))
 
 (eval-after-load 'org-src
   '(define-key org-src-mode-map
