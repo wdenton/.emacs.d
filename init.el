@@ -736,6 +736,7 @@ already narrowed."
   ;; Appearance.  This should probably go elsewhere.
 
   (set-face-attribute 'org-link nil :foreground "Steel Blue")
+  (set-face-attribute 'org-footnote nil :height 0.9)
 
   ;; Make completed items in a checkbox list less noticeable
   ;; https://fuco1.github.io/2017-05-25-Fontify-done-checkbox-items-in-org-mode.html
