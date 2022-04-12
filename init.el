@@ -833,6 +833,16 @@ already narrowed."
 
 (with-eval-after-load 'ox-latex
   (add-to-list 'org-latex-classes
+	       '("memoir-blocked"
+		 "\\documentclass{memoir}
+	       [NO-DEFAULT-PACKAGES]
+	       [NO-PACKAGES]
+	       [NO-EXTRA]"
+               ("\\chapter{%s}" . "\\chapter*{%s}")
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
+  (add-to-list 'org-latex-classes
                '("letter" "\\documentclass{letter}"))
   (add-to-list 'org-latex-classes
                '("memoir"
