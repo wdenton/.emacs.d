@@ -336,7 +336,7 @@ already narrowed."
   :after ivy
   :bind (("C-s" . swiper)
          ("C-c C-r" . ivy-resume)
-	     ("M-i" counsel-imenu)
+	     ("M-i" . counsel-imenu)
          ("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
          ("C-M-i" . complete-symbol)
