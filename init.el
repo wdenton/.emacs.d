@@ -336,6 +336,7 @@ already narrowed."
   :after ivy
   :bind (("C-s" . swiper)
          ("C-c C-r" . ivy-resume)
+	     ("M-i" counsel-imenu)
          ("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
          ("C-M-i" . complete-symbol)
@@ -347,8 +348,6 @@ already narrowed."
          ("C-c V" . ivy-pop-view)
          ("M-y" . counsel-yank-pop))
   )
-
-(global-set-key (kbd "M-i") 'imenu)
 
 (define-prefix-command 'launcher-map)
 (define-key ctl-x-map "l" 'launcher-map)

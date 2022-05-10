@@ -746,6 +746,7 @@ And finally Swiper, and override some common keystrokes with Swiper commands.
   :after ivy
   :bind (("C-s" . swiper)
          ("C-c C-r" . ivy-resume)
+	     ("M-i" counsel-imenu)
          ("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
          ("C-M-i" . complete-symbol)
@@ -757,14 +758,6 @@ And finally Swiper, and override some common keystrokes with Swiper commands.
          ("C-c V" . ivy-pop-view)
          ("M-y" . counsel-yank-pop))
   )
-#+end_src
-
-** Imenu
-
-"The Imenu facility offers a way to find the major definitions in a file by name. It is also useful in text formatter major modes, where it treats each chapter, section, etc., as a definition."  I rarely use this, because I tend to search for words with =C-s=, but it can be useful.
-
-#+begin_src emacs-lisp
-(global-set-key (kbd "M-i") 'imenu)
 #+end_src
 
 * Command launchers
