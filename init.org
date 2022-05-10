@@ -1040,13 +1040,14 @@ The [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Abbrev-Files.htm
 
 ** Undoing
 
-[[https://gitlab.com/tsc25/undo-tree][undo-tree]]
+[[https://gitlab.com/tsc25/undo-tree][undo-tree]] gives a nice visualization of changes to the file.
 
 #+begin_src emacs-lisp
 (use-package undo-tree
   :diminish undo-tree-mode
   :config
   (global-undo-tree-mode)
+  (setq undo-tree-auto-save-history nil) ;; If t then big dot files start accumulating
   :custom
   (undo-tree-visualizer-timestamps t)
   (undo-tree-visualizer-diff t)

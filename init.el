@@ -491,6 +491,7 @@ already narrowed."
   :diminish undo-tree-mode
   :config
   (global-undo-tree-mode)
+  (setq undo-tree-auto-save-history nil) ;; If t then big dot files start accumulating
   :custom
   (undo-tree-visualizer-timestamps t)
   (undo-tree-visualizer-diff t)
