@@ -574,17 +574,6 @@ already narrowed."
   'turn-on-visual-line-mode
   )
 
-(use-package pdf-tools
-  :pin melpa ;; melpa to get it to install, maybe change to manual if need be?
-  :config
-  (pdf-tools-install)
-  (setq-default pdf-view-display-size 'fit-page) ;; Use H, W or P to scale.
-  (setq pdf-annot-activate-created-annotations t) ;; Automatically annotate highlights.
-  (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward);; Use normal isearch because Swiper doesn't do PDFs.
-  :hook
-  (pdf-view-mode . (lambda() (linum-mode -1))) ;; linum-mode doesn't work well with PDF Tools, apparently.
- )
-
 (add-to-list 'auto-mode-alist
 	     (cons (concat "\\." (regexp-opt '("xml" "xsd" "sch" "rng" "xslt" "svg" "rss") t) "\\'")
 		   'nxml-mode))
@@ -975,8 +964,6 @@ already narrowed."
 (setq ruby-deep-indent-paren nil)
 
 (setq ruby-insert-encoding-magic-comment nil)
-
-(require 'smartparens-ruby)
 
 (add-hook 'ruby-mode-hook #'goto-address-mode)
 

@@ -1232,9 +1232,11 @@ I love CSV files, but I'd rather load them into Org or R then edit them directly
 
 ** PDF
 
+(May 2022:  Turned this off because of a problem with the required =tablist= package, which wouldn't go in; and anyways I wasn't using it.)
+
 [[https://github.com/politza/pdf-tools][PDF Tools]] allows commenting on PDFs, not just viewing.  I took [[http://pragmaticemacs.com/emacs/view-and-annotate-pdfs-in-emacs-with-pdf-tools/][this snippet from Pragmatic Emacs]] and tweaked it.
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package pdf-tools
   :pin melpa ;; melpa to get it to install, maybe change to manual if need be?
   :config
@@ -1853,7 +1855,7 @@ Don't put the UTF-8 encoding comment at the top.
 
 Parentheses.
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (require 'smartparens-ruby)
 #+end_src
 
