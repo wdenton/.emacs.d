@@ -322,9 +322,9 @@ UTF-8 everywhere (surely this is overkill?).
 
 ** Parentheses
 
-Use [[https://github.com/Fuco1/smartparens/][smartparens]] to handle parentheses.
+Use [[https://github.com/Fuco1/smartparens/][smartparens]] to handle parentheses?  Right now, no.  I'm going to try not having any fancy parentheses (or quote, or whatever) handling, so I have to type it all in myself.
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package smartparens
   :diminish smartparens-mode
   :init
@@ -338,6 +338,13 @@ Use [[https://github.com/Fuco1/smartparens/][smartparens]] to handle parentheses
   ;; (sp-show-pair-match-content-face ((t (:foreground "White")))) ;; Highlight all the enclosed content
   (sp-show-pair-mismatch-face ((t (:foreground "Red"))))
   )
+#+end_src
+
+I do want a bit of basic help with these, however.  (I wish the blink highlight were more obvious---how can I make it flash reverse, or something like that?)
+
+#+begin_src emacs-lisp
+(show-paren-mode t)
+(setq blink-matching-paren t)
 #+end_src
 
 ** Indenting

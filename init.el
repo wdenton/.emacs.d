@@ -93,19 +93,8 @@
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
-(use-package smartparens
-  :diminish smartparens-mode
-  :init
-  (require 'smartparens-config)
-  :config
-  (smartparens-global-mode t)
-  (show-smartparens-global-mode t)
-  (setq sp-show-pair-from-inside t)
-  :custom-face
-  (sp-show-pair-match-face ((t (:foreground "White")))) ;; Could also have :background "Colour" in there.
-  ;; (sp-show-pair-match-content-face ((t (:foreground "White")))) ;; Highlight all the enclosed content
-  (sp-show-pair-mismatch-face ((t (:foreground "Red"))))
-  )
+(show-paren-mode t)
+(setq blink-matching-paren t)
 
 (setq tab-width 4)
 
