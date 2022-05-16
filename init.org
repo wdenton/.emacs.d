@@ -731,7 +731,10 @@ These [[https://github.com/abo-abo/swiper][three packages]] all work together:  
 First, call up Counsel.
 
 #+begin_src emacs-lisp
-(use-package counsel)
+(use-package counsel
+  :bind (("C-x b" . counsel-switch-buffer) ;; Show list of buffers to switch to, but also show the buffer at point while moving through list.
+	 )
+  )
 #+end_src
 
 Then Ivy.

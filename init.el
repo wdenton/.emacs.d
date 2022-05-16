@@ -311,7 +311,10 @@ already narrowed."
   (amx-backend 'ivy)
   )
 
-(use-package counsel)
+(use-package counsel
+  :bind (("C-x b" . counsel-switch-buffer) ;; Show list of buffers to switch to, but also show the buffer at point while moving through list.
+	 )
+  )
 
 (use-package ivy
   :diminish
