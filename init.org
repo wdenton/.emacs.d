@@ -1015,25 +1015,6 @@ The [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Abbrev-Files.htm
 #+begin_src emacs-lisp
 (setq abbrev-file-name "~/.emacs.d/abbrev_defs")
 #+end_src
-*** Company
-
-[[https://company-mode.github.io/][Company]] "is a text completion framework for Emacs. The name stands for "complete anything". It uses pluggable back-ends and front-ends to retrieve and display completion candidates."
-
-#+begin_src emacs-lisp
-(use-package company
-  :diminish company-mode
-  :init
-  ;; (global-company-mode)
-  (add-hook 'ruby-mode-hook 'company-mode)
-  :diminish company-mode
-  :config
-  (setq company-minimum-prefix-length 1)
-  (setq company-idle-delay 1)
-  (setq company-tooltip-align-annotations 't)          ; Align annotations to the right tooltip border.
-  (setq company-begin-commands '(self-insert-command)) ; Start autocompletion only after typing.
-  (setq company-tooltip-limit 20)                      ; Bigger pop-up windows.
-  )
-#+end_src
 
 *** Yasnippet
 
@@ -1045,6 +1026,42 @@ The [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Abbrev-Files.htm
   :config
   (use-package yasnippet-snippets)
   (yas-global-mode 1)
+  )
+#+end_src
+
+** Completions
+
+#+begin_src emacs-lisp
+(setq tab-always-indent 'complete) ;; Try to indent current line; if already indented, try to complete the thing at point.
+#+end_src
+
+*** Company
+
+[[https://company-mode.github.io/][Company]] "is a text completion framework for Emacs. The name stands for "complete anything". It uses pluggable back-ends and front-ends to retrieve and display completion candidates."
+
+#+begin_src emacs-lisp :tangle no
+(use-package company
+  :diminish company-mode
+  :init
+  ;; (global-company-mode)
+  (add-hook 'ruby-mode-hook 'company-mode)
+  :config
+  (setq company-minimum-prefix-length 1)
+  (setq company-idle-delay 1)
+  (setq company-tooltip-align-annotations 't)          ; Align annotations to the right tooltip border.
+  (setq company-begin-commands '(self-insert-command)) ; Start autocompletion only after typing.
+  (setq company-tooltip-limit 20)                      ; Bigger pop-up windows.
+  )
+#+end_src
+
+*** Corfu
+
+Trying out [[https://github.com/minad/corfu][Corfu]] (smaller than Company), "which relies on the Emacs completion facilities and concentrates on providing a polished completion UI."
+
+#+begin_src emacs-lisp
+(use-package corfu
+  :init
+  (global-corfu-mode)
   )
 #+end_src
 

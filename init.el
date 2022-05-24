@@ -458,25 +458,18 @@ already narrowed."
 
 (setq abbrev-file-name "~/.emacs.d/abbrev_defs")
 
-(use-package company
-  :diminish company-mode
-  :init
-  ;; (global-company-mode)
-  (add-hook 'ruby-mode-hook 'company-mode)
-  :diminish company-mode
-  :config
-  (setq company-minimum-prefix-length 1)
-  (setq company-idle-delay 1)
-  (setq company-tooltip-align-annotations 't)          ; Align annotations to the right tooltip border.
-  (setq company-begin-commands '(self-insert-command)) ; Start autocompletion only after typing.
-  (setq company-tooltip-limit 20)                      ; Bigger pop-up windows.
-  )
-
 (use-package yasnippet
   :diminish yas-minor-mode
   :config
   (use-package yasnippet-snippets)
   (yas-global-mode 1)
+  )
+
+(setq tab-always-indent 'complete) ;; Try to indent current line; if already indented, try to complete the thing at point.
+
+(use-package corfu
+  :init
+  (global-corfu-mode)
   )
 
 (use-package undo-tree
