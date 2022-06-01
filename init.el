@@ -312,7 +312,8 @@ already narrowed."
   )
 
 (use-package counsel
-  :bind (("C-x b" . counsel-switch-buffer) ;; Show list of buffers to switch to, but also show the buffer at point while moving through list.
+  ;; :bind (("C-x b" . counsel-switch-buffer) ;; Show list of buffers to switch to, but also show the buffer at point while moving through list.
+  ;; I stopped doing this because it slows down on large Org files, and I don't really need it.
 	 )
   )
 
