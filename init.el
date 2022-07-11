@@ -637,6 +637,7 @@ already narrowed."
     org-export-backends (quote (html latex md odt beamer)) ;; Exporting: I will see these export options after C-c C-e ;; beamer reveal
     org-src-window-setup 'current-window ;; How to rearrange things when I edit a source block.  Default is regorganize-frame.
     ;; org-export-date-timestamp-format "%d %m %Y" ;; Date format on exports
+    org-fold-core-style 'overlays ;; Default (and more error-prone) is 'text-properties
     )
 
   ;; Define my own link abbreviations
