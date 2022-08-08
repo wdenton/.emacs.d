@@ -73,6 +73,7 @@
       (cond ((string= (system-name) "marcus") 120)
 	    ((string= (system-name) "ochre") 140)
 	    ((string= (system-name) "work") 160)
+	    ((string= (system-name) "helium") 150)
 	    (t 120))
       )
 

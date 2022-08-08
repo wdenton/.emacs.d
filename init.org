@@ -276,6 +276,7 @@ My home and work machines have different screen resolutions, so the font height 
       (cond ((string= (system-name) "marcus") 120)
 	    ((string= (system-name) "ochre") 140)
 	    ((string= (system-name) "work") 160)
+	    ((string= (system-name) "helium") 150)
 	    (t 120))
       )
 #+end_src
