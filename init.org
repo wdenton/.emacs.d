@@ -123,10 +123,15 @@ For more investigation, this minimal customization (as [[https://orgmode.org/org
       debug-on-quit nil)
 #+end_src
 
-Then load up Org from where I have it.
+Then load up Org from where I have it, and tell Org about R and the shell.
 
 #+begin_src emacs-lisp :tangle minimal-init.el
 (add-to-list 'load-path (expand-file-name "/usr/local/src/org-mode/lisp"))
+
+(org-babel-do-load-languages 'org-babel-load-languages '(
+     (R . t)
+     (shell . t)
+     ))
 #+end_src
 
 Run =emacs -Q -l ~/.emacs.d/minimal-org.el= and take it from there.  See the documentation for how to generate useful btacktraces.
