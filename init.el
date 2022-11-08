@@ -3,7 +3,7 @@
 ;;
 ;; You should make any changes there and regenerate it with C-c C-v t
 
-;; (setq debug-on-error t)
+(setq debug-on-error t)
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)

@@ -107,17 +107,33 @@ And finally, don't garbage clean so often.
 
 Everything from here on is in the regular init file.
 
-* Starting up
-
-# user-emacs-directory is ~/.emacs.d/
-
-** Debug?
+* Debugging
 
 Turn this on when needed.
 
 #+begin_src emacs-lisp :tangle init.el
-;; (setq debug-on-error t)
+(setq debug-on-error t)
 #+end_src
+
+For more investigation, this minimal customization (as [[https://orgmode.org/org.html#Feedback][documented in the manual]]) might be necessary.  First, turn on debugging.
+
+#+begin_src emacs-lisp :tangle minimal-init.el
+(setq debug-on-error t
+      debug-on-signal nil
+      debug-on-quit nil)
+#+end_src
+
+Then load up Org from where I have it.
+
+#+begin_src emacs-lisp :tangle minimal-init.el
+(add-to-list 'load-path (expand-file-name "/usr/local/src/org-mode/lisp"))
+#+end_src
+
+Run =emacs -Q -l ~/.emacs.d/minimal-org.el= and take it from there.  See the documentation for how to generate useful btacktraces.
+
+* Starting up
+
+# user-emacs-directory is ~/.emacs.d/
 
 ** Packages
 
