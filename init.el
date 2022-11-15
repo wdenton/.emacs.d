@@ -874,9 +874,11 @@ already narrowed."
 
 (use-package ess
   :config
-  (setq ess-use-flymake nil ;; Don't run flymake on ESS buffers
-	ess-help-own-frame 'nil ;; Make all help buffers go into one frame
-	)
+  (setq
+   ess-use-flymake nil ;; Don't run flymake on ESS buffers
+   ess-help-own-frame 'nil ;; Make all help buffers go into one frame
+   ess-startup-directory 'default-directory ;; "Always start the process in the directory of the current file" (not in project home directory)
+   )
 
 (setq ess-ask-for-ess-directory nil)
 
