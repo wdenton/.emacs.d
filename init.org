@@ -1782,20 +1782,10 @@ Flycheck and lintr.
    ess-use-flymake nil ;; Don't run flymake on ESS buffers
    ess-help-own-frame 'nil ;; Make all help buffers go into one frame
    ess-startup-directory 'default-directory ;; "Always start the process in the directory of the current file" (not in project home directory)
+   ess-ask-for-ess-directory nil ;; Start R in the current directory
+   ;; ess-local-process-name "R" ;; What does this do?
    )
   )
-#+end_src
-
-(Don't) Use polymode (see elsewhere) for Rmd files.
-
-#+begin_src emacs-lisp :tangle no
-;; (add-to-list 'auto-mode-alist '("\\.Rmd$" . R-mode))
-#+end_src
-
-Start R in the current directory.  May need to change dirs with =setwd()= after.
-
-#+begin_src emacs-lisp
-(setq ess-ask-for-ess-directory nil)
 #+end_src
 
 Use =prettify-symbols-mode= to make R code look nicer.  Display =%>%= (the [[https://magrittr.tidyverse.org/][magrittr]] pipe) as =|=, and =|>= (the built-in pipe that appeared in 4.1.0) as =▷=.
@@ -1812,12 +1802,6 @@ Use =prettify-symbols-mode= to make R code look nicer.  Display =%>%= (the [[htt
 	    (push '("%>%" . ?|) prettify-symbols-alist)
  	    (push '("|>" . ?▷) prettify-symbols-alist)
 	    ))
-#+end_src
-
-I don't know what this does.
-
-#+begin_src emacs-lisp
-(setq ess-local-process-name "R")
 #+end_src
 
 This stops comments from flying all the way over to the right, and makes =%>%= chains indent nicely (if the newline is after the pipe).

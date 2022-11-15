@@ -878,10 +878,10 @@ already narrowed."
    ess-use-flymake nil ;; Don't run flymake on ESS buffers
    ess-help-own-frame 'nil ;; Make all help buffers go into one frame
    ess-startup-directory 'default-directory ;; "Always start the process in the directory of the current file" (not in project home directory)
+   ess-ask-for-ess-directory nil ;; Start R in the current directory
+   ;; ess-local-process-name "R" ;; What does this do?
    )
   )
-
-(setq ess-ask-for-ess-directory nil)
 
 (add-hook 'inferior-ess-mode-hook
 	  (lambda ()
@@ -894,8 +894,6 @@ already narrowed."
 	    (push '("%>%" . ?|) prettify-symbols-alist)
  	    (push '("|>" . ?▷) prettify-symbols-alist)
 	    ))
-
-(setq ess-local-process-name "R")
 
 (add-hook 'ess-mode-hook
 	  (lambda ()
