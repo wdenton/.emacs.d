@@ -134,7 +134,7 @@ Then load up Org from where I have it, and tell Org about R and the shell.
      ))
 #+end_src
 
-Run =emacs -Q -l ~/.emacs.d/minimal-org.el= and take it from there.  See the documentation for how to generate useful btacktraces.
+Run =emacs -Q -l ~/.emacs.d/minimal-org.el= and take it from there.  See the documentation for how to generate useful backtraces.
 
 * Starting up
 
