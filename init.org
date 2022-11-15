@@ -1755,7 +1755,7 @@ Flycheck and lintr.
 
 [[https://ess.r-project.org/][ESS]].
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package ess
   :config
   ;; (setq ess-smart-S-assign-key nil) ;; Don't let _ turn into <-
@@ -1774,6 +1774,15 @@ Flycheck and lintr.
   ;; (add-hook 'ess-mode-hook (lambda () (flycheck-mode t)))
   )
 #+end_src
+
+#+begin_src emacs-lisp
+(use-package ess
+  :config
+  (setq ess-use-flymake nil ;; Don't run flymake on ESS buffers
+	ess-help-own-frame 'nil ;; Make all help buffers go into one frame
+	)
+#+end_src
+
 
 (Don't) Use polymode (see elsewhere) for Rmd files.
 
