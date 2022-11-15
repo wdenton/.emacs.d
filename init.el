@@ -873,6 +873,7 @@ already narrowed."
 		      "commented_code_linter = NULL)"))
 
 (use-package ess
+  :commands R
   :config
   (setq
    ess-use-flymake nil ;; Don't run flymake on ESS buffers
@@ -880,49 +881,50 @@ already narrowed."
    ess-startup-directory 'default-directory ;; "Always start the process in the directory of the current file" (not in project home directory)
    ess-ask-for-ess-directory nil ;; Start R in the current directory
    ;; ess-local-process-name "R" ;; What does this do?
+   ess-R-font-lock-keywords (quote ;; Be more colourful!
+			     ((ess-R-fl-keyword:modifiers . t)
+			      (ess-R-fl-keyword:fun-defs . t)
+			      (ess-R-fl-keyword:keywords . t)
+			      (ess-R-fl-keyword:assign-ops . t)
+			      (ess-R-fl-keyword:constants . t)
+			      (ess-fl-keyword:fun-calls . t)
+			      (ess-fl-keyword:numbers . t)
+			      (ess-fl-keyword:operators . t)
+			      (ess-fl-keyword:delimiters . t)
+			      (ess-fl-keyword:=)
+			      (ess-R-fl-keyword:F&T)))
    )
-  )
-
-(add-hook 'inferior-ess-mode-hook
-	  (lambda ()
-	    (push '("%>%" . ?|) prettify-symbols-alist)
- 	    (push '("|>" . ?▷) prettify-symbols-alist)
-	    ))
-
-(add-hook 'ess-mode-hook
-	  (lambda ()
-	    (push '("%>%" . ?|) prettify-symbols-alist)
- 	    (push '("|>" . ?▷) prettify-symbols-alist)
-	    ))
-
-(add-hook 'ess-mode-hook
-	  (lambda ()
-	    (setq ess-indent-offset 4
-		  ess-offset-continued 2
-		  ess-offset-continued 'straight
-		  ess-brace-offset -4
-		  ess-expression-offset 4
-		  ess-else-offset 0
-		  ess-close-brace-offset 0
-		  ess-brace-imaginary-offset 0
-		  ess-continued-brace-offset 0
-		  ess-indent-from-lhs 4
-		  ess-offset-arguments-newline '(4)
-	    )))
-
-(setq ess-R-font-lock-keywords
-      (quote
-       ((ess-R-fl-keyword:modifiers . t)
-        (ess-R-fl-keyword:fun-defs . t)
-        (ess-R-fl-keyword:keywords . t)
-        (ess-R-fl-keyword:assign-ops . t)
-        (ess-R-fl-keyword:constants . t)
-        (ess-fl-keyword:fun-calls . t)
-        (ess-fl-keyword:numbers . t)
-        (ess-fl-keyword:operators . t)
-        (ess-fl-keyword:delimiters . t)
-        (ess-fl-keyword:=)
-	(ess-R-fl-keyword:F&T))))
+  :init
+  ;; (add-hook 'ess-mode-hook 'highlight-indent-guides-mode) ;; indent-guide ... very nice
+  ;; (add-hook 'ess-mode-hook (lambda () (flycheck-mode t)))
+  ;; (add-hook 'ess-R-post-run-hook 'ess-execute-screen-options) ;; MESSES THINGS UP.  Use the full width of the Emacs frame.  Messes up R in Org, I found.
+  ;; Display %>% as |, and |> as ▷.
+  (add-hook 'inferior-ess-mode-hook
+	    (lambda ()
+	      (push '("%>%" . ?|) prettify-symbols-alist)
+ 	      (push '("|>" . ?▷) prettify-symbols-alist)
+	      ))
+  (add-hook 'ess-mode-hook
+	    (lambda ()
+	      (push '("%>%" . ?|) prettify-symbols-alist)
+ 	      (push '("|>" . ?▷) prettify-symbols-alist)
+	      ))
+  (add-hook 'ess-mode-hook
+	    ;; This stops comments from flying all the way over to the right, and makes %>% chains indent nicely (if the newline is after the pipe).
+	    (lambda ()
+	      (setq ess-indent-offset 4
+		    ess-offset-continued 2
+		    ess-offset-continued 'straight
+		    ess-brace-offset -4
+		    ess-expression-offset 4
+		    ess-else-offset 0
+		    ess-close-brace-offset 0
+		    ess-brace-imaginary-offset 0
+		    ess-continued-brace-offset 0
+		    ess-indent-from-lhs 4
+		    ess-offset-arguments-newline '(4)
+		    )))
+)
 
 (add-hook 'ruby-mode-hook
 	  (lambda ()

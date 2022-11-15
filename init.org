@@ -1755,28 +1755,9 @@ Flycheck and lintr.
 
 [[https://ess.r-project.org/][ESS]].
 
-#+begin_src emacs-lisp :tangle no
-(use-package ess
-  :config
-  ;; (setq ess-smart-S-assign-key nil) ;; Don't let _ turn into <-
-  ;; (setq ess-use-auto-complete t) ;; Auto-completion on.
-  (setq ess-use-flymake nil ;; Don't run flymake on ESS buffers
-	ess-help-own-frame 'nil ;; Make all help buffers go into one frame
-	;; inferior-ess-primary-prompt "> "
-	 ess-can-eval-in-background nil ;; Added Feb 2022, wait for ESS to catch up with Emacs ()see https://stat.ethz.ch/pipermail/ess-help/2022-February/013031.html)
-	)
-  ;; (setq inferior-S-prompt "[]a-zA-Z0-9.[]*\\(?:[>+.] \\)*ℝ+> ")
-  :init
-  (add-hook 'ess-R-post-run-hook 'ess-execute-screen-options) ;; Use the full width of the Emacs frame
-  (add-hook 'ess-post-run-hook 'ess-execute-screen-options)
-  (add-hook 'ess-mode-hook 'ess-execute-screen-options)
-  ;; (add-hook 'ess-mode-hook 'highlight-indent-guides-mode)   ;; indent-guide ... very nice
-  ;; (add-hook 'ess-mode-hook (lambda () (flycheck-mode t)))
-  )
-#+end_src
-
 #+begin_src emacs-lisp
 (use-package ess
+  :commands R
   :config
   (setq
    ess-use-flymake nil ;; Don't run flymake on ESS buffers
@@ -1784,61 +1765,50 @@ Flycheck and lintr.
    ess-startup-directory 'default-directory ;; "Always start the process in the directory of the current file" (not in project home directory)
    ess-ask-for-ess-directory nil ;; Start R in the current directory
    ;; ess-local-process-name "R" ;; What does this do?
+   ess-R-font-lock-keywords (quote ;; Be more colourful!
+			     ((ess-R-fl-keyword:modifiers . t)
+			      (ess-R-fl-keyword:fun-defs . t)
+			      (ess-R-fl-keyword:keywords . t)
+			      (ess-R-fl-keyword:assign-ops . t)
+			      (ess-R-fl-keyword:constants . t)
+			      (ess-fl-keyword:fun-calls . t)
+			      (ess-fl-keyword:numbers . t)
+			      (ess-fl-keyword:operators . t)
+			      (ess-fl-keyword:delimiters . t)
+			      (ess-fl-keyword:=)
+			      (ess-R-fl-keyword:F&T)))
    )
-  )
-#+end_src
-
-Use =prettify-symbols-mode= to make R code look nicer.  Display =%>%= (the [[https://magrittr.tidyverse.org/][magrittr]] pipe) as =|=, and =|>= (the built-in pipe that appeared in 4.1.0) as =▷=.
-
-#+begin_src emacs-lisp
-(add-hook 'inferior-ess-mode-hook
-	  (lambda ()
-	    (push '("%>%" . ?|) prettify-symbols-alist)
- 	    (push '("|>" . ?▷) prettify-symbols-alist)
-	    ))
-
-(add-hook 'ess-mode-hook
-	  (lambda ()
-	    (push '("%>%" . ?|) prettify-symbols-alist)
- 	    (push '("|>" . ?▷) prettify-symbols-alist)
-	    ))
-#+end_src
-
-This stops comments from flying all the way over to the right, and makes =%>%= chains indent nicely (if the newline is after the pipe).
-
-#+begin_src emacs-lisp
-(add-hook 'ess-mode-hook
-	  (lambda ()
-	    (setq ess-indent-offset 4
-		  ess-offset-continued 2
-		  ess-offset-continued 'straight
-		  ess-brace-offset -4
-		  ess-expression-offset 4
-		  ess-else-offset 0
-		  ess-close-brace-offset 0
-		  ess-brace-imaginary-offset 0
-		  ess-continued-brace-offset 0
-		  ess-indent-from-lhs 4
-		  ess-offset-arguments-newline '(4)
-	    )))
-#+end_src
-
-Be more colourful!
-
-#+begin_src emacs-lisp
-(setq ess-R-font-lock-keywords
-      (quote
-       ((ess-R-fl-keyword:modifiers . t)
-        (ess-R-fl-keyword:fun-defs . t)
-        (ess-R-fl-keyword:keywords . t)
-        (ess-R-fl-keyword:assign-ops . t)
-        (ess-R-fl-keyword:constants . t)
-        (ess-fl-keyword:fun-calls . t)
-        (ess-fl-keyword:numbers . t)
-        (ess-fl-keyword:operators . t)
-        (ess-fl-keyword:delimiters . t)
-        (ess-fl-keyword:=)
-	(ess-R-fl-keyword:F&T))))
+  :init
+  ;; (add-hook 'ess-mode-hook 'highlight-indent-guides-mode) ;; indent-guide ... very nice
+  ;; (add-hook 'ess-mode-hook (lambda () (flycheck-mode t)))
+  ;; (add-hook 'ess-R-post-run-hook 'ess-execute-screen-options) ;; MESSES THINGS UP.  Use the full width of the Emacs frame.  Messes up R in Org, I found.
+  ;; Display %>% as |, and |> as ▷.
+  (add-hook 'inferior-ess-mode-hook
+	    (lambda ()
+	      (push '("%>%" . ?|) prettify-symbols-alist)
+ 	      (push '("|>" . ?▷) prettify-symbols-alist)
+	      ))
+  (add-hook 'ess-mode-hook
+	    (lambda ()
+	      (push '("%>%" . ?|) prettify-symbols-alist)
+ 	      (push '("|>" . ?▷) prettify-symbols-alist)
+	      ))
+  (add-hook 'ess-mode-hook
+	    ;; This stops comments from flying all the way over to the right, and makes %>% chains indent nicely (if the newline is after the pipe).
+	    (lambda ()
+	      (setq ess-indent-offset 4
+		    ess-offset-continued 2
+		    ess-offset-continued 'straight
+		    ess-brace-offset -4
+		    ess-expression-offset 4
+		    ess-else-offset 0
+		    ess-close-brace-offset 0
+		    ess-brace-imaginary-offset 0
+		    ess-continued-brace-offset 0
+		    ess-indent-from-lhs 4
+		    ess-offset-arguments-newline '(4)
+		    )))
+)
 #+end_src
 
 * Ruby
