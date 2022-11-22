@@ -9,5 +9,5 @@
      (shell . t)
      ))
 
-(add-to-list 'load-path "/usr/local/src/ESS/lisp")
+(add-to-list 'load-path "~/.emacs.d/elpa/ess-20221121.1627") ;;  "/usr/local/src/ESS/lisp"
 (require 'ess-r-mode)

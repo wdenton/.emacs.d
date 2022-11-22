@@ -876,11 +876,11 @@ already narrowed."
   :commands R
   :config
   (setq
-   ess-use-flymake nil ;; Don't run flymake on ESS buffers
+   ess-use-flymake nil ;; Don't run flymake on these buffers
    ess-help-own-frame 'nil ;; Make all help buffers go into one frame
    ess-plain-first-buffername 'nil ;; Call the first process R:1, not just R
    ess-startup-directory 'default-directory ;; "Always start the process in the directory of the current file" (not in project home directory)
-   ess-ask-for-ess-directory nil ;; Start R in the current directory
+   ess-ask-for-ess-directory nil ;; Start in the current directory
    ess-history-file nil ;; No history files
    ;; ess-local-process-name "R" ;; What does this do?
    ess-R-font-lock-keywords (quote ;; Be more colourful!

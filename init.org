@@ -137,7 +137,7 @@ Then load up Org from where I have it, and tell Org it can run R and shell scrip
 For R, define [[https://ess.r-project.org/Manual/ess.html#Activating-and-Loading-ESS][where ESS is]] (this configuration requires the source pulled down [[https://github.com/emacs-ess/ESS/][from GitHub]]).
 
 #+begin_src emacs-lisp :tangle minimal-init.el
-(add-to-list 'load-path "/usr/local/src/ESS/lisp")
+(add-to-list 'load-path "~/.emacs.d/elpa/ess-20221121.1627") ;;  "/usr/local/src/ESS/lisp"
 (require 'ess-r-mode)
 #+end_src
 
