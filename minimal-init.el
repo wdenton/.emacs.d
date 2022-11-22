@@ -8,3 +8,6 @@
      (R . t)
      (shell . t)
      ))
+
+(add-to-list 'load-path "/usr/local/src/ESS/lisp")
+(require 'ess-r-mode)

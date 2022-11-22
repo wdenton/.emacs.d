@@ -123,7 +123,7 @@ For more investigation, this minimal customization (as [[https://orgmode.org/org
       debug-on-quit nil)
 #+end_src
 
-Then load up Org from where I have it, and tell Org about R and the shell.
+Then load up Org from where I have it, and tell Org it can run R and shell scripts.
 
 #+begin_src emacs-lisp :tangle minimal-init.el
 (add-to-list 'load-path (expand-file-name "/usr/local/src/org-mode/lisp"))
@@ -132,6 +132,13 @@ Then load up Org from where I have it, and tell Org about R and the shell.
      (R . t)
      (shell . t)
      ))
+#+end_src
+
+For R, define [[https://ess.r-project.org/Manual/ess.html#Activating-and-Loading-ESS][where ESS is]] (this configuration requires the source pulled down [[https://github.com/emacs-ess/ESS/][from GitHub]]).
+
+#+begin_src emacs-lisp :tangle minimal-init.el
+(add-to-list 'load-path "/usr/local/src/ESS/lisp")
+(require 'ess-r-mode)
 #+end_src
 
 Run =emacs -Q -l ~/.emacs.d/minimal-org.el= and take it from there.  See the documentation for how to generate useful backtraces.
@@ -1760,10 +1767,12 @@ Flycheck and lintr.
   :commands R
   :config
   (setq
-   ess-use-flymake nil ;; Don't run flymake on ESS buffers
+   ess-use-flymake nil ;; Don't run flymake on these buffers
    ess-help-own-frame 'nil ;; Make all help buffers go into one frame
+   ess-plain-first-buffername 'nil ;; Call the first process R:1, not just R
    ess-startup-directory 'default-directory ;; "Always start the process in the directory of the current file" (not in project home directory)
-   ess-ask-for-ess-directory nil ;; Start R in the current directory
+   ess-ask-for-ess-directory nil ;; Start in the current directory
+   ess-history-file nil ;; No history files
    ;; ess-local-process-name "R" ;; What does this do?
    ess-R-font-lock-keywords (quote ;; Be more colourful!
 			     ((ess-R-fl-keyword:modifiers . t)
