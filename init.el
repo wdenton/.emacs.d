@@ -743,11 +743,6 @@ already narrowed."
    )
   )
 
-(use-package org-appear
-  :config
-  :hook (org-mode . org-appear-mode)
-  )
-
 (defun wtd/toggle-org-macro-markers ()
   "Toggle visibility of {{{macro}}} markers"
   (interactive)
