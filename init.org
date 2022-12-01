@@ -112,7 +112,7 @@ Everything from here on is in the regular init file.
 Turn this on when needed.
 
 #+begin_src emacs-lisp :tangle init.el
-(setq debug-on-error t)
+;; (setq debug-on-error t)
 #+end_src
 
 For more investigation, this minimal customization (as [[https://orgmode.org/org.html#Feedback][documented in the manual]]) might be necessary.  First, turn on debugging.
@@ -134,7 +134,7 @@ Then load up Org from where I have it, and tell Org it can run R and shell scrip
      ))
 #+end_src
 
-For R, define [[https://ess.r-project.org/Manual/ess.html#Activating-and-Loading-ESS][where ESS is]] (this configuration requires the source pulled down [[https://github.com/emacs-ess/ESS/][from GitHub]]).
+For R, define [[https://ess.r-project.org/Manual/ess.html#Activating-and-Loading-ESS][where ESS is]] (change path as appropriate).
 
 #+begin_src emacs-lisp :tangle minimal-init.el
 (add-to-list 'load-path "~/.emacs.d/elpa/ess-20221121.1627") ;;  "/usr/local/src/ESS/lisp"
