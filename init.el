@@ -4,6 +4,7 @@
 ;; You should make any changes there and regenerate it with C-c C-v t
 
 ;; (setq debug-on-error t)
+(setq warning-minimum-level :emergency) ;; :emergency, :error, :warning, :debug
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)

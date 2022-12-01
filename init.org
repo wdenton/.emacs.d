@@ -109,10 +109,11 @@ Everything from here on is in the regular init file.
 
 * Debugging
 
-Turn this on when needed.
+Turn on debugging, and change warning levels, as needed.
 
 #+begin_src emacs-lisp :tangle init.el
 ;; (setq debug-on-error t)
+(setq warning-minimum-level :emergency) ;; :emergency, :error, :warning, :debug
 #+end_src
 
 For more investigation, this minimal customization (as [[https://orgmode.org/org.html#Feedback][documented in the manual]]) might be necessary.  First, turn on debugging.
