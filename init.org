@@ -280,6 +280,12 @@ Proper line wrapping.
 (global-visual-line-mode 1)
 #+end_src
 
+When selecting a region that wraps from one to the other, don't highlight to the edge of the buffer.
+
+#+begin_src emacs-lisp
+(set-face-attribute 'region nil :extend nil)
+#+end_src
+
 Subtly highlight the current line.
 
 #+begin_src emacs-lisp

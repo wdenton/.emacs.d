@@ -64,6 +64,8 @@
 
 (global-visual-line-mode 1)
 
+(set-face-attribute 'region nil :extend nil)
+
 (global-hl-line-mode 1)
 ;; And set its colour
 ;; (set-face-background hl-line-face "#efefef")
