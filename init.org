@@ -158,28 +158,18 @@ First, set up the MELPA archive.
 (setq package-archive-priorities '(("melpa" . 20) ("gnu" . 10)))
 #+end_src
 
-I use John Wiegley's great [[https://github.com/jwiegley/use-package][use-package]] everywhere I can to handle the packages I want.  If it's not installed, get it right off.
+I use John Wiegley's great [[https://github.com/jwiegley/use-package][use-package]] everywhere I can to handle the packages I want.  It's now a part of core Emacs.  =diminish= and =bind-key= go with it, because I diminish mode line indicators and use =:bind= in places.
 
 #+begin_src emacs-lisp
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-
-(eval-when-compile
-  (require 'use-package))
+(require 'use-package)
+(use-package diminish)
+(use-package bind-key)
 #+end_src
 
 If I want a package, install it automatically.
 
 #+begin_src emacs-lisp
 (setq use-package-always-ensure t)
-#+end_src
-
-I'm not sure why I have ~diminish~ and ~bind-key~ in here, but I had a note that says they go with ~use-package.~
-
-#+begin_src emacs-lisp
-(use-package diminish)
-(use-package bind-key)
 #+end_src
 
 ** Emacs server

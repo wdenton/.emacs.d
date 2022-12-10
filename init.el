@@ -10,17 +10,11 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (setq package-archive-priorities '(("melpa" . 20) ("gnu" . 10)))
 
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-
-(eval-when-compile
-  (require 'use-package))
-
-(setq use-package-always-ensure t)
-
+(require 'use-package)
 (use-package diminish)
 (use-package bind-key)
+
+(setq use-package-always-ensure t)
 
 (server-mode)
 
