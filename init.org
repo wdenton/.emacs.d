@@ -77,6 +77,7 @@ Turn off these interface features early in startup to avoid momentary display.
 #+begin_src emacs-lisp :tangle early-init.el
 ;; (menu-bar-mode 1)
 (tool-bar-mode -1)
+(tab-line-mode -1)
 ;; (scroll-bar-mode 1)
 #+end_src
 
