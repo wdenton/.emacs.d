@@ -608,33 +608,33 @@ already narrowed."
   :load-path "/usr/local/src/org-mode/lisp"
   :init
   (setq
+    org-confirm-babel-evaluate nil ;; Evaluate Babel blocks without asking for confirmation
+    org-cycle-separator-lines 0 ;; Never show blank lines in condensed view
+    org-display-inline-images t ;; Embed an image with [[file:foo.png]] and then C-c C-x C-v to view
+    org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar" ;; External dependency: ditaa
+    org-ellipsis " ⬎" ;; ⤵ ↴  Change the ellipsis that indicates hidden content
+    org-export-backends (quote (html latex md odt)) ;; Exporting: I will see these export options after C-c C-e ;; beamer reveal
+    ;; org-export-date-timestamp-format "%d %m %Y" ;; Date format on exports
+    org-export-with-smart-quotes t ;; Turn plain quotes into posh (I can't include examples in here or it breaks paren matching!)
     org-fontify-whole-heading-line t
-    org-pretty-entities t ;; org-entities displays \alpha etc. as Unicode characters.
+    org-footnote-auto-adjust nil ;; Don't resort or adjust them without my saying so.
+    org-footnote-section nil ;; Define footnotes nearby when I use C-c C-x f
     org-hide-emphasis-markers t ;; Hide the /italics/ and *bold* markers
     org-hide-macro-markers t ;; Hide {{{macro}}} curly brackets; see also wtd/toggle-org-macro-markers
+    org-highlight-latex-and-related '(latex) ;; Highlight inline LaTeX
+    org-image-actual-width nil ;; nil means "try to get the width from an #+ATTR.* keyword and fall back on the original width if none is found."
+    org-list-allow-alphabetical t ;; Allow a b c lists
+    org-pretty-entities t ;; org-entities displays \alpha etc. as Unicode characters.
     org-return-follows-link t ;; Hit return on a link to open it in a browser
-    org-support-shift-select t ;; Shift and arrow keys to select text works a bit differently in Org.
     org-special-ctrl-a/e t ;; Make C-a and C-e understand how headings and tags work
-    org-startup-indented t ;; Visually indent everything nicely, but leave the raw file left-aligned
-    org-cycle-separator-lines 0 ;; Never show blank lines in condensed view
     org-src-fontify-natively t ;; Fontify Babel blocks nicely
     org-src-preserve-indentation t ;; Preserve indentation when tangling source blocks (important for makefiles)
-    org-list-allow-alphabetical t ;; Allow a b c lists
-    org-use-speed-commands t ;; Allow speed commands
-    org-tags-column 120 ;; Right-align tags to an indent from the right margin, could use  (- 50 (window-width))
-    org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar" ;; External dependency: ditaa
-    org-display-inline-images t ;; Embed an image with [[file:foo.png]] and then C-c C-x C-v to view
-    org-startup-with-inline-images t ;; Show images on startup
-    org-image-actual-width nil ;; nil means "try to get the width from an #+ATTR.* keyword and fall back on the original width if none is found."
-    org-highlight-latex-and-related '(latex) ;; Highlight inline LaTeX
-    org-export-with-smart-quotes t ;; Turn plain quotes into posh (I can't include examples in here or it breaks paren matching!)
-    org-confirm-babel-evaluate nil ;; Evaluate Babel blocks without asking for confirmation
-    org-ellipsis " ⬎" ;; ⤵ ↴  Change the ellipsis that indicates hidden content
-    org-footnote-section nil ;; Define footnotes nearby when I use C-c C-x f
-    org-footnote-auto-adjust nil ;; Don't resort or adjust them without my saying so.
-    org-export-backends (quote (html latex md odt beamer)) ;; Exporting: I will see these export options after C-c C-e ;; beamer reveal
     org-src-window-setup 'current-window ;; How to rearrange things when I edit a source block.  Default is regorganize-frame.
-    ;; org-export-date-timestamp-format "%d %m %Y" ;; Date format on exports
+    org-startup-indented t ;; Visually indent everything nicely, but leave the raw file left-aligned
+    org-startup-with-inline-images t ;; Show images on startup
+    org-support-shift-select t ;; Shift and arrow keys to select text works a bit differently in Org.
+    org-tags-column 120 ;; Right-align tags to an indent from the right margin, could use  (- 50 (window-width))
+    org-use-speed-commands t ;; Allow speed commands
     )
 
   ;; Define my own link abbreviations
@@ -642,7 +642,7 @@ already narrowed."
 	'(
 	  ("DOI" . "http://dx.doi.org/%s")                        ;; Thus [[DOI:10.1108/07378831111138189]]
 	  ("WP"  . "https://en.wikipedia.org/wiki/%s")            ;; Thus [[WP:Toronto, Ontario]]
-	  ("YUL" . "https://www.library.yorku.ca/find/Record/%s") ;; Thus [[YUL:2935857]]
+	  ("YUL" . "https://ocul-yor.primo.exlibrisgroup.com/permalink/01OCUL_YOR/1jocqcq/%s") ;; Thus [[YUL:alma991029590289705164]] for Omni
 	  )
 	)
 
@@ -660,9 +660,9 @@ already narrowed."
   (add-hook 'org-mode-hook (lambda () (setq ispell-parser 'tex)))
 
   ;; Use C-c d to close all the open drawers in a file
-  (defun add-org-close-all-drawers-key ()
+  (defun wtd/add-org-close-all-drawers-key ()
     (local-set-key (kbd "C-c d") (lambda () (interactive) (org-cycle-hide-drawers 'all))))
-  (add-hook 'org-mode-hook 'add-org-close-all-drawers-key)
+  (add-hook 'org-mode-hook 'wtd/add-org-close-all-drawers-key)
 
   ;; Hooks for prettify-symbols-mode
   ;; See also https://pank.eu/blog/pretty-babel-src-blocks.html for some cool stuff
@@ -706,17 +706,10 @@ already narrowed."
      (sqlite . t)
      ))
 
-  ;; Appearance.  This should probably go elsewhere.
+  ;; Appearance.
 
   (set-face-attribute 'org-link nil :foreground "Steel Blue")
   (set-face-attribute 'org-footnote nil :height 0.9)
-
-  ;; Make completed items in a checkbox list less noticeable
-  ;; https://fuco1.github.io/2017-05-25-Fontify-done-checkbox-items-in-org-mode.html
-  (font-lock-add-keywords
-   'org-mode
- `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 'org-headline-done prepend))
- 'append)
 
   ;; Source code block appearance
   (set-face-attribute 'org-block-begin-line nil :underline nil)
@@ -728,6 +721,13 @@ already narrowed."
 
   ;; Make LOGBOOK and such fainter.  Default bold is too loud.
   (face-spec-set 'org-drawer '((t (:foreground "dim gray" :weight normal))))
+
+  ;; Make completed items in a checkbox list less noticeable
+  ;; https://fuco1.github.io/2017-05-25-Fontify-done-checkbox-items-in-org-mode.html
+  (font-lock-add-keywords
+   'org-mode
+ `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 'org-headline-done prepend))
+ 'append)
 
   ;; (face-spec-set 'org-level-1 '((t (:height 1.05))))
   ;; (face-spec-set 'org-level-2 '((t (:height 1.05))))
