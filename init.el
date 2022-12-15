@@ -68,7 +68,7 @@
 
 (setq wtd-ubuntu-mono-height
       (cond ((string= (system-name) "marcus") 120)
-	    ((string= (system-name) "ochre") 140)
+	    ((string= (system-name) "ochre") 150)
 	    ((string= (system-name) "work") 160)
 	    ((string= (system-name) "helium") 150)
 	    (t 120))
@@ -453,7 +453,7 @@ already narrowed."
 
 (use-package flyspell-correct
   :after flyspell
-  :bind (:map flyspell-mode-map ("C-:" . flyspell-correct-wrapper)))
+  :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-wrapper)))
 
 (use-package flyspell-correct-ivy
   :after flyspell-correct)

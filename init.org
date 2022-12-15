@@ -300,7 +300,7 @@ My home and work machines have different screen resolutions, so the font height 
 #+begin_src emacs-lisp
 (setq wtd-ubuntu-mono-height
       (cond ((string= (system-name) "marcus") 120)
-	    ((string= (system-name) "ochre") 140)
+	    ((string= (system-name) "ochre") 150)
 	    ((string= (system-name) "work") 160)
 	    ((string= (system-name) "helium") 150)
 	    (t 120))
@@ -1024,10 +1024,12 @@ Allow pasting selection outside of Emacs.
 
 Usually I invoke =M-x ispell= to [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html][check spelling]], or =M-$= on a word to deal with it, but I'm going to try [[https://github.com/d12frosted/flyspell-correct][flyspell-correct]] and see how that helps.  =C-:= to jump back to the first misspelled word before the point, then jump back to where you were.  Good for very easily fixing a mistake a few words back.
 
+There is another thing
+
 #+begin_src emacs-lisp
 (use-package flyspell-correct
   :after flyspell
-  :bind (:map flyspell-mode-map ("C-:" . flyspell-correct-wrapper)))
+  :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-wrapper)))
 
 (use-package flyspell-correct-ivy
   :after flyspell-correct)
