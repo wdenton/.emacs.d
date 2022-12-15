@@ -451,6 +451,13 @@ already narrowed."
 					(interactive)
 					(kill-line 0)))
 
+(use-package flyspell-correct
+  :after flyspell
+  :bind (:map flyspell-mode-map ("C-:" . flyspell-correct-wrapper)))
+
+(use-package flyspell-correct-ivy
+  :after flyspell-correct)
+
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
 (setq-default abbrev-mode t)
