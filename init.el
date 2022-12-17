@@ -64,7 +64,16 @@
 ;; And set its colour
 ;; (set-face-background hl-line-face "#efefef")
 
+(setq x-underline-at-descent-line t)
+
+(setq window-divider-default-places 'right-only
+      window-divider-default-right-width 1)
+(set-face-attribute 'window-divider nil :foreground (face-foreground 'default))
+(window-divider-mode +1)
+
 (set-default 'cursor-type '(bar . 2))
+
+(set-cursor-color "DarkGoldenrod")
 
 (setq wtd-ubuntu-mono-height
       (cond ((string= (system-name) "marcus") 120)
@@ -108,7 +117,6 @@
   ;; Stop the theme from messing up Org headlines and using variable pitch everywhere.
   (setq solarized-use-variable-pitch nil
 	solarized-scale-org-headlines nil)
-  (setq x-underline-at-descent-line t) ;; Try this out.
   (load-theme 'solarized-dark t)
   )
 

@@ -285,12 +285,35 @@ Subtly highlight the current line.
 ;; (set-face-background hl-line-face "#efefef")
 #+end_src
 
+Small improvement to how underlines are displayed.
+
+#+begin_src emacs-lisp
+(setq x-underline-at-descent-line t)
+#+end_src
+
+** Window divider
+
+[[https://www.gnu.org/software/emacs/manual/html_node/emacs/Window-Dividers.html][Window dividers]] help distinguish windows when the frame is split.  This gives a nice visible line when there's a vertical split.
+
+#+begin_src emacs-lisp
+(setq window-divider-default-places 'right-only
+      window-divider-default-right-width 1)
+(set-face-attribute 'window-divider nil :foreground (face-foreground 'default))
+(window-divider-mode +1)
+#+end_src
+
 ** Pointer
 
-Make the cursor a thin horizontal bar, not a block (but I still like it blinking).  It can be ='bar= or ='box= or ='(hbar . 3)= etc.
+Make the cursor a thin horizontal bar, not a block.  It can be ='bar= or ='box= or ='(hbar . 3)= etc.  I like it blinking so I don't disable =blink-cursor-mode=.
 
 #+begin_src emacs-lisp
 (set-default 'cursor-type '(bar . 2))
+#+end_src
+
+Change the pointer colour.  Why boring old plain white?
+
+#+begin_src emacs-lisp
+(set-cursor-color "DarkGoldenrod")
 #+end_src
 
 ** Faces and fonts
@@ -416,7 +439,6 @@ Bozhidar Batsov's [[https://github.com/bbatsov/solarized-emacs][Solarized theme 
   ;; Stop the theme from messing up Org headlines and using variable pitch everywhere.
   (setq solarized-use-variable-pitch nil
 	solarized-scale-org-headlines nil)
-  (setq x-underline-at-descent-line t) ;; Try this out.
   (load-theme 'solarized-dark t)
   )
 #+end_src
