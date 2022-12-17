@@ -727,7 +727,7 @@ already narrowed."
   (set-face-attribute 'org-ellipsis nil :underline nil)
 
   ;; Make LOGBOOK and such fainter.  Default bold is too loud.
-  (face-spec-set 'org-drawer '((t (:foreground "dim gray" :weight normal))))
+  (face-spec-set 'org-drawer '((t (:foreground "dim gray" :weight normal :height 0.9))))
 
   ;; Make completed items in a checkbox list less noticeable
   ;; https://fuco1.github.io/2017-05-25-Fontify-done-checkbox-items-in-org-mode.html
