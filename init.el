@@ -58,6 +58,8 @@
 
 (global-visual-line-mode 1)
 
+(setq-default line-spacing 2)
+
 (set-face-attribute 'region nil :extend nil)
 
 (global-hl-line-mode 1)
