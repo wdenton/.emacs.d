@@ -1523,6 +1523,8 @@ The =use-package= syntax here is messy.  All of the hooks should go under =:hook
 
   ;; Make LOGBOOK and such fainter.  Default bold is too loud.
   (face-spec-set 'org-drawer '((t (:foreground "dim gray" :weight normal :height 0.9))))
+  (face-spec-set 'org-special-keyword '((t (:foreground "dim gray" :weight normal :height 0.9))))
+  (face-spec-set 'org-property-value '((t (:weight normal :height 0.9))))
 
   ;; Make completed items in a checkbox list less noticeable
   ;; https://fuco1.github.io/2017-05-25-Fontify-done-checkbox-items-in-org-mode.html
