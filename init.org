@@ -783,17 +783,7 @@ When I close a session, save exactly where I was in the files.
 
 These [[https://github.com/abo-abo/swiper][three packages]] all work together:  "Ivy, a generic completion mechanism for Emacs.  Counsel [is] a collection of Ivy-enhanced versions of common Emacs commands.  Swiper is an Ivy-enhanced alternative to Isearch."
 
-First, call up Counsel.
-
-#+begin_src emacs-lisp
-(use-package counsel
-  ;; :bind (("C-x b" . counsel-switch-buffer) ;; Show list of buffers to switch to, but also show the buffer at point while moving through list.
-  ;; I stopped doing this because it slows down on large Org files, and I don't really need it.
-  ;; )
-  )
-#+end_src
-
-Then Ivy.
+First, call up Ivy.  "~ivy-mode~ ensures that any Emacs command using ~completing-read-function~ uses ivy for completion."
 
 #+begin_src emacs-lisp
 (use-package ivy
@@ -801,11 +791,22 @@ Then Ivy.
   :config
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
   (setq ivy-count-format "%d/%d ")
   )
 #+end_src
 
-And finally Swiper, and override some common keystrokes with Swiper commands.
+Then Counsel.  "Counsel takes this further, providing versions of common Emacs commands that are customised to make the best use of Ivy."
+
+#+begin_src emacs-lisp
+(use-package counsel
+  ;; :bind (("C-x b" . counsel-switch-buffer) ;; Show list of buffers to switch to, but also show the buffer at point while moving through list.  Slow!
+  :config
+  (counsel-mode)
+  )
+#+end_src
+
+Then Swiper.  "Swiper is an alternative to isearch that uses Ivy to show an overview of all matches."  Override some keystrokes that aren't already handled by ~counsel-mode~ being on.
 
 #+begin_src emacs-lisp
 (use-package swiper
@@ -813,21 +814,26 @@ And finally Swiper, and override some common keystrokes with Swiper commands.
   :bind (("C-s" . swiper)
          ("C-c C-r" . ivy-resume)
 	     ("M-i" . counsel-imenu)
-         ("M-x" . counsel-M-x)
-         ("C-x C-f" . counsel-find-file)
          ("C-M-i" . complete-symbol)
          ("C-." . counsel-imenu)
          ("C-c 8" . counsel-unicode-char)
          ("C-c g" . counsel-git)
          ("C-c k" . counsel-ag)
-	     ("C-h v" . counsel-describe-variable)
          ("C-c v" . ivy-push-view)
          ("C-c V" . ivy-pop-view)
          ("M-y" . counsel-yank-pop))
   )
 #+end_src
 
-Enhance Ivy with [[https://github.com/Yevgnen/ivy-rich][ivy-rich]] to get more details about commands and files in minibuffer listings.
+From the FAQ:
+
+#+begin_quote
+Q: How do I enter an input that matches one of the candidates instead of this candidate? Example: create a file bar when a file barricade exists in the current directory.
+
+A: Press C-M-j. Alternatively, you can make the prompt line selectable with (setq ivy-use-selectable-prompt t).
+#+end_quote
+
+Finally, enhance Ivy with [[https://github.com/Yevgnen/ivy-rich][ivy-rich]] to get more details about commands and files in minibuffer listings.
 
 #+begin_src emacs-lisp
 (use-package ivy-rich
@@ -835,7 +841,6 @@ Enhance Ivy with [[https://github.com/Yevgnen/ivy-rich][ivy-rich]] to get more d
   (ivy-rich-mode 1)
   )
 #+end_src
-
 
 * Command launchers
 
@@ -1061,9 +1066,7 @@ Allow pasting selection outside of Emacs.
 
 ** Spelling
 
-Usually I invoke =M-x ispell= to [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html][check spelling]], or =M-$= on a word to deal with it, but I'm going to try [[https://github.com/d12frosted/flyspell-correct][flyspell-correct]] and see how that helps.  =C-:= to jump back to the first misspelled word before the point, then jump back to where you were.  Good for very easily fixing a mistake a few words back.
-
-There is another thing
+Usually I invoke =M-x ispell= to [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html][check spelling]], or =M-$= on a word to deal with it, but I'm going to try [[https://github.com/d12frosted/flyspell-correct][flyspell-correct]] and see how that helps.  =C-;= to jump back to the first misspelled word before the point, then jump back to where you were.  Good for very easily fixing a mistake a few words back.  (Use ~M-o~ to see the options for saving or ignoring a word.)
 
 #+begin_src emacs-lisp
 (use-package flyspell-correct

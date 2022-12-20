@@ -319,18 +319,19 @@ already narrowed."
   (amx-backend 'ivy)
   )
 
-(use-package counsel
-  ;; :bind (("C-x b" . counsel-switch-buffer) ;; Show list of buffers to switch to, but also show the buffer at point while moving through list.
-  ;; I stopped doing this because it slows down on large Org files, and I don't really need it.
-  ;; )
-  )
-
 (use-package ivy
   :diminish
   :config
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
   (setq ivy-count-format "%d/%d ")
+  )
+
+(use-package counsel
+  ;; :bind (("C-x b" . counsel-switch-buffer) ;; Show list of buffers to switch to, but also show the buffer at point while moving through list.  Slow!
+  :config
+  (counsel-mode)
   )
 
 (use-package swiper
@@ -338,14 +339,11 @@ already narrowed."
   :bind (("C-s" . swiper)
          ("C-c C-r" . ivy-resume)
 	     ("M-i" . counsel-imenu)
-         ("M-x" . counsel-M-x)
-         ("C-x C-f" . counsel-find-file)
          ("C-M-i" . complete-symbol)
          ("C-." . counsel-imenu)
          ("C-c 8" . counsel-unicode-char)
          ("C-c g" . counsel-git)
          ("C-c k" . counsel-ag)
-	     ("C-h v" . counsel-describe-variable)
          ("C-c v" . ivy-push-view)
          ("C-c V" . ivy-pop-view)
          ("M-y" . counsel-yank-pop))
