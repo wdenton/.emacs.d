@@ -345,9 +345,15 @@ already narrowed."
          ("C-c 8" . counsel-unicode-char)
          ("C-c g" . counsel-git)
          ("C-c k" . counsel-ag)
+	     ("C-h v" . counsel-describe-variable)
          ("C-c v" . ivy-push-view)
          ("C-c V" . ivy-pop-view)
          ("M-y" . counsel-yank-pop))
+  )
+
+(use-package ivy-rich
+  :config
+  (ivy-rich-mode 1)
   )
 
 (define-prefix-command 'launcher-map)

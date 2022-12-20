@@ -820,11 +820,22 @@ And finally Swiper, and override some common keystrokes with Swiper commands.
          ("C-c 8" . counsel-unicode-char)
          ("C-c g" . counsel-git)
          ("C-c k" . counsel-ag)
+	     ("C-h v" . counsel-describe-variable)
          ("C-c v" . ivy-push-view)
          ("C-c V" . ivy-pop-view)
          ("M-y" . counsel-yank-pop))
   )
 #+end_src
+
+Enhance Ivy with [[https://github.com/Yevgnen/ivy-rich][ivy-rich]] to get more details about commands and files in minibuffer listings.
+
+#+begin_src emacs-lisp
+(use-package ivy-rich
+  :config
+  (ivy-rich-mode 1)
+  )
+#+end_src
+
 
 * Command launchers
 
