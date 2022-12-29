@@ -528,7 +528,7 @@ Nevertheless, this doesn't work.  Why don't more programming modes support this 
 
 Further customizations are set up by language.
 
-* Sessions, buffers and windows
+* Sessions, buffers, windows and projects
 
 ** Regions
 
@@ -626,17 +626,6 @@ Add parts of each file's directory to the buffer name if not unique.
 (setq uniquify-buffer-name-style 'forward)
 #+end_src
 
-I don't use [[https://github.com/bbatsov/projectile][Projectile]] much, but I like to have it around.  I think it's perhaps better suited for bigger projects than I work on.
-
-#+begin_src emacs-lisp
-(use-package projectile
-  :config
-  (projectile-mode)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (setq projectile-mode-line-function '(lambda () (format " ᴨ[%s]" (projectile-project-name))))
-  )
-#+end_src
-
 A few things about the scratch buffer.  By default it's in lisp-interaction-mode by default, but I use Org more, so make it that.
 
 #+begin_src emacs-lisp
@@ -691,21 +680,6 @@ Set up some default groups so that files are grouped by type (or location).
  			 (name . "^\\*Messages\\*$")))
 	       ))))
 #+end_src
-
-For [[https://github.com/purcell/ibuffer-projectile][ibuffer-projectile]].
-
-#+begin_src emacs-lisp
-(use-package ibuffer-projectile
-  :defer t
-  :init
-  (add-hook 'ibuffer-hook
-	    (lambda ()
-	      (ibuffer-projectile-set-filter-groups)
-	      (unless (eq ibuffer-sorting-mode 'alphabetic)
-		(ibuffer-do-sort-by-alphabetic))))
-  )
-#+end_src
-
 
 ** Windows
 
@@ -762,6 +736,33 @@ When I close a session, save exactly where I was in the files.
 (require 'saveplace)
 (setq save-place-file (expand-file-name ".places" user-emacs-directory))
 (save-place-mode)
+#+end_src
+
+** Projects
+
+I don't use [[https://github.com/bbatsov/projectile][Projectile]] much, but I like to have it around.  I think it's perhaps better suited for bigger projects than I work on.
+
+#+begin_src emacs-lisp
+(use-package projectile
+  :config
+  (projectile-mode)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (setq projectile-mode-line-function '(lambda () (format " ᴨ[%s]" (projectile-project-name))))
+  )
+#+end_src
+
+For [[https://github.com/purcell/ibuffer-projectile][ibuffer-projectile]].
+
+#+begin_src emacs-lisp
+(use-package ibuffer-projectile
+  :defer t
+  :init
+  (add-hook 'ibuffer-hook
+	    (lambda ()
+	      (ibuffer-projectile-set-filter-groups)
+	      (unless (eq ibuffer-sorting-mode 'alphabetic)
+		(ibuffer-do-sort-by-alphabetic))))
+  )
 #+end_src
 
 * Minibuffer

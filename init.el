@@ -229,13 +229,6 @@ already narrowed."
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 
-(use-package projectile
-  :config
-  (projectile-mode)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (setq projectile-mode-line-function '(lambda () (format " ᴨ[%s]" (projectile-project-name))))
-  )
-
 (setq initial-major-mode 'org-mode)
 (setq initial-scratch-message "")
 
@@ -271,16 +264,6 @@ already narrowed."
  			 (name . "^\\*Messages\\*$")))
 	       ))))
 
-(use-package ibuffer-projectile
-  :defer t
-  :init
-  (add-hook 'ibuffer-hook
-	    (lambda ()
-	      (ibuffer-projectile-set-filter-groups)
-	      (unless (eq ibuffer-sorting-mode 'alphabetic)
-		(ibuffer-do-sort-by-alphabetic))))
-  )
-
 (setq split-height-threshold nil)
 (setq split-width-threshold 0)
 
@@ -311,6 +294,23 @@ already narrowed."
 (require 'saveplace)
 (setq save-place-file (expand-file-name ".places" user-emacs-directory))
 (save-place-mode)
+
+(use-package projectile
+  :config
+  (projectile-mode)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (setq projectile-mode-line-function '(lambda () (format " ᴨ[%s]" (projectile-project-name))))
+  )
+
+(use-package ibuffer-projectile
+  :defer t
+  :init
+  (add-hook 'ibuffer-hook
+	    (lambda ()
+	      (ibuffer-projectile-set-filter-groups)
+	      (unless (eq ibuffer-sorting-mode 'alphabetic)
+		(ibuffer-do-sort-by-alphabetic))))
+  )
 
 (use-package amx
   :requires helm
