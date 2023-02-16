@@ -924,6 +924,15 @@ Let me upcase or downcase a region, which is disabled by default.
 (put 'upcase-region 'disabled nil)
 #+end_src
 
+With [[https://github.com/victorhge/iedit][iedit]] I can edit multiple occurrences of the same text all at once (see [[https://www.masteringemacs.org/article/iedit-interactive-multi-occurrence-editing-in-your-buffer][Mickey Petersen's post about it]]).
+
+#+begin_src emacs-lisp
+(use-package iedit
+  :bind
+  (("C-:" . iedit-mode))
+  )
+#+end_src
+
 I don't use multiple cursors ... but I could.
 
 #+begin_src emacs-lisp :tangle no

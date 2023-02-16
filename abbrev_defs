@@ -1,7 +1,7 @@
 ;;-*-coding: utf-8;-*-
 (define-abbrev-table 'global-abbrev-table
   '(
-    ("SCML" "Scholarly Communications and Metrics Librarian" nil :count 1)
+    ("SCML" "Scholarly Communications and Metrics Literacy Librarian" nil :count 1)
     ("YFUA" "YUFA" nil :count 1)
     ("libarian" "librarian" nil :count 1)
     ("libary" "library" nil :count 1)

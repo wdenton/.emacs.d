@@ -387,6 +387,11 @@ already narrowed."
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
+(use-package iedit
+  :bind
+  (("C-:" . iedit-mode))
+  )
+
 (defun open-line-below ()
   (interactive)
   (end-of-line)
