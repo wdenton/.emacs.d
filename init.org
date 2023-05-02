@@ -917,6 +917,8 @@ If there are any empty lines at the end of a buffer, show them (but they will di
 
 ** Other editing
 
+Should I try [[https://github.com/victorhge/iedit][iedit]]?  See [[https://www.masteringemacs.org/article/iedit-interactive-multi-occurrence-editing-in-your-buffer][this post by Mickey Petersen]].
+
 Let me upcase or downcase a region, which is disabled by default.
 
 #+begin_src emacs-lisp
