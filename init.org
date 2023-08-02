@@ -996,6 +996,15 @@ Join the following line onto this one.  Good for reformatting.
                   (join-line -1)))
 #+end_src
 
+Steve Purcell's [[https://github.com/purcell/unfill][unfill]] gives ~unfill-region~ and ~unfill-paragraph~, which are opposites of the built-in fill functions.
+
+#+begin_src emacs-lisp
+(use-package unfill
+  :init
+  (global-set-key (kbd "<f9>") 'unfill-toggle)
+)
+#+end_src
+
 ** Searching
 
 Make searches case insensitive.

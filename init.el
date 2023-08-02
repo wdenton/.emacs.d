@@ -433,6 +433,11 @@ already narrowed."
                   (interactive)
                   (join-line -1)))
 
+(use-package unfill
+  :init
+  (global-set-key (kbd "<f9>") 'unfill-toggle)
+)
+
 (setq case-fold-search nil)
 
 (setq search-highlight t)
