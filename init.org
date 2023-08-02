@@ -52,6 +52,10 @@ Org inits I looked at:
 + [[https://github.com/zzamboni/dot-emacs/][Diego Zamboni]]
 + [[https://github.com/tecosaur/emacs-config][tecosaur]]
 
+** To try?
+
++ Sacha Chua's [[https://github.com/sachac/subed][subed]] for editing video subtitles
+
 * Warning!
 
 #+begin_src emacs-lisp
