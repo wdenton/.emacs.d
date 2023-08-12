@@ -301,6 +301,12 @@ Small improvement to how underlines are displayed.
 (setq x-underline-at-descent-line t)
 #+end_src
 
+Fringe indicators showing that the beginning and end (｢｣) of the buffer, if displayed, or that there is more above or below (↑↓).
+
+#+begin_src emacs-lisp
+(setq-default indicate-buffer-boundaries 'left)
+#+end_src
+
 ** Window divider
 
 [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Window-Dividers.html][Window dividers]] help distinguish windows when the frame is split.  This gives a nice visible line when there's a vertical split.

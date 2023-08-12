@@ -68,6 +68,8 @@
 
 (setq x-underline-at-descent-line t)
 
+(setq-default indicate-buffer-boundaries 'left)
+
 (setq window-divider-default-places 'right-only
       window-divider-default-right-width 1)
 (set-face-attribute 'window-divider nil :foreground (face-foreground 'default))
