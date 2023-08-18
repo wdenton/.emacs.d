@@ -66,8 +66,6 @@
 ;; And set its colour
 ;; (set-face-background hl-line-face "#efefef")
 
-(setq x-underline-at-descent-line t)
-
 (setq window-divider-default-places 'right-only
       window-divider-default-right-width 1)
 (set-face-attribute 'window-divider nil :foreground (face-foreground 'default))
@@ -88,6 +86,24 @@
 (set-face-attribute 'default nil :font "Ubuntu Mono" :height wtd-ubuntu-mono-height)
 ;; (set-face-attribute 'default nil :font "Fira Code" :height wtd-fira-code-height)
 ;; (set-face-attribute 'variable-pitch nil :family "Baskervald ADF Std" :height wtd-font-height)
+
+ (use-package mixed-pitch
+   :diminish
+   :hook
+   (text-mode . mixed-pitch-mode)
+   ;; (org-mode markdown-mode)
+   :config
+   (setq mixed-pitch-set-height t)
+   (set-face-attribute 'default nil :family "Ubuntu Mono" :height wtd-ubuntu-mono-height) ;; family or font?
+   (set-face-attribute 'fixed-pitch nil :family "Ubuntu Mono" :height 160) ;; family or font?
+   ;; (set-face-attribute 'variable-pitch nil :font "Noto Serif")
+   (set-face-attribute 'variable-pitch nil :family "Baskervald ADF Std" :height 1.2)
+   ;; (setq left-margin-width 10)
+   ;; (setq right-margin-width 10)
+   (set-face-attribute 'org-special-keyword nil :inherit 'fixed-pitch)
+   (set-face-attribute 'org-drawer nil :inherit 'fixed-pitch)
+   (set-face-attribute 'org-date nil :inherit 'fixed-pitch)
+   )
 
 (setq inhibit-compacting-font-caches t)
 
@@ -747,7 +763,7 @@ already narrowed."
   (set-face-attribute 'org-block-begin-line nil :underline nil)
   (set-face-attribute 'org-block-end-line nil :overline nil)
 
-  (set-face-attribute 'org-verbatim nil :family "Ubuntu Mono" :height wtd-ubuntu-mono-height)
+  (set-face-attribute 'org-verbatim nil :family "Ubuntu Mono" :height wtd-ubuntu-mono-height) ;; :inherit 'fixed-pitch
 
   (set-face-attribute 'org-ellipsis nil :underline nil)
 

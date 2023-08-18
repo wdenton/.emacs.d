@@ -295,9 +295,9 @@ Subtly highlight the current line.
 ;; (set-face-background hl-line-face "#efefef")
 #+end_src
 
-Small improvement to how underlines are displayed.
+Set whether the underline line is at the baseline (just below an x) or the descent line (just below a y).  I used want it at the descent line but now I don't, so I don't tangle this, meaning the default of the baseline is used.
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (setq x-underline-at-descent-line t)
 #+end_src
 
@@ -332,7 +332,7 @@ Change the pointer colour.  Why boring old plain white?
 (set-cursor-color "DarkGoldenrod")
 #+end_src
 
-** Faces and fonts
+** Faces, fonts and pitches
 
 My home and work machines have different screen resolutions, so the font height needs to be different.  It's measured in 0.1 points, so 130 is 13 pt.  I need it a little bigger on my work machine.
 
@@ -347,12 +347,34 @@ My home and work machines have different screen resolutions, so the font height 
 #+end_src
 
 
-I use [[https://en.wikipedia.org/wiki/Ubuntu_(typeface)][Ubuntu]] Mono in Emacs and in terminal windows, so it all looks the same.  I used [[https://en.wikipedia.org/wiki/Fira_(typeface)#Fira_Code][Fira]] Code for a little while, and it was very nice.  Elsewhere I use [[https://en.wikipedia.org/wiki/Baskerville][Baskerville]] as much as possible.
+I use [[https://en.wikipedia.org/wiki/Ubuntu_(typeface)][Ubuntu]] Mono in Emacs and in terminal windows, so it all looks the same.  I used [[https://en.wikipedia.org/wiki/Fira_(typeface)#Fira_Code][Fira]] Code for a little while, and it was very nice.  Elsewhere I use [[https://en.wikipedia.org/wiki/Baskerville][Baskerville]] as much as possible.   Where [[https://www.freedesktop.org/wiki/Software/fontconfig/][Fontconfig]] is used, running =fc-list : family | sort= will list all available fonts.
 
 #+begin_src emacs-lisp
 (set-face-attribute 'default nil :font "Ubuntu Mono" :height wtd-ubuntu-mono-height)
 ;; (set-face-attribute 'default nil :font "Fira Code" :height wtd-fira-code-height)
 ;; (set-face-attribute 'variable-pitch nil :family "Baskervald ADF Std" :height wtd-font-height)
+#+end_src
+
+I'm going to try, yet again, using variable pitch for regular text.  I try it every now and then and have always reverted back, but maybe it will be different this time.  Using [[https://gitlab.com/jabranham/mixed-pitch][mixed-pitch]] makes it easy to have both variable and fixed pitches.  To get the [[https://en.wikipedia.org/wiki/Baskerville_(font)][Baskerville typeface]] on Ubuntu I ran =sudo apt install fonts-adf-baskervald=.
+
+#+begin_src emacs-lisp
+ (use-package mixed-pitch
+   :diminish
+   :hook
+   (text-mode . mixed-pitch-mode)
+   ;; (org-mode markdown-mode)
+   :config
+   (setq mixed-pitch-set-height t)
+   (set-face-attribute 'default nil :family "Ubuntu Mono" :height wtd-ubuntu-mono-height) ;; family or font?
+   (set-face-attribute 'fixed-pitch nil :family "Ubuntu Mono" :height 160) ;; family or font?
+   ;; (set-face-attribute 'variable-pitch nil :font "Noto Serif")
+   (set-face-attribute 'variable-pitch nil :family "Baskervald ADF Std" :height 1.2)
+   ;; (setq left-margin-width 10)
+   ;; (setq right-margin-width 10)
+   (set-face-attribute 'org-special-keyword nil :inherit 'fixed-pitch)
+   (set-face-attribute 'org-drawer nil :inherit 'fixed-pitch)
+   (set-face-attribute 'org-date nil :inherit 'fixed-pitch)
+   )
 #+end_src
 
 This could help improve performance with Unicode symbols.
@@ -1567,7 +1589,7 @@ The =use-package= syntax here is messy.  All of the hooks should go under =:hook
   (set-face-attribute 'org-block-begin-line nil :underline nil)
   (set-face-attribute 'org-block-end-line nil :overline nil)
 
-  (set-face-attribute 'org-verbatim nil :family "Ubuntu Mono" :height wtd-ubuntu-mono-height)
+  (set-face-attribute 'org-verbatim nil :family "Ubuntu Mono" :height wtd-ubuntu-mono-height) ;; :inherit 'fixed-pitch
 
   (set-face-attribute 'org-ellipsis nil :underline nil)
 
