@@ -764,6 +764,7 @@ already narrowed."
   (set-face-attribute 'org-block-end-line nil :overline nil)
 
   (set-face-attribute 'org-verbatim nil :family "Ubuntu Mono" :height wtd-ubuntu-mono-height :inherit 'fixed-pitch)
+  (set-face-attribute 'org-code nil :family "Ubuntu Mono" :height wtd-ubuntu-mono-height :foreground 'unspecified)
 
   (set-face-attribute 'org-ellipsis nil :underline nil)
 

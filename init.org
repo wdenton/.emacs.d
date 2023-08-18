@@ -347,7 +347,7 @@ My home and work machines have different screen resolutions, so the font height 
 #+end_src
 
 
-I use [[https://en.wikipedia.org/wiki/Ubuntu_(typeface)][Ubuntu]] Mono in Emacs and in terminal windows, so it all looks the same.  I used [[https://en.wikipedia.org/wiki/Fira_(typeface)#Fira_Code][Fira]] Code for a little while, and it was very nice.  Elsewhere I use [[https://en.wikipedia.org/wiki/Baskerville][Baskerville]] as much as possible.   Where [[https://www.freedesktop.org/wiki/Software/fontconfig/][Fontconfig]] is used, running =fc-list : family | sort= will list all available fonts.
+I use [[https://en.wikipedia.org/wiki/Ubuntu_(typeface)][Ubuntu]] Mono in Emacs and in terminal windows, so it all looks the same.  I used [[https://en.wikipedia.org/wiki/Fira_(typeface)#Fira_Code][Fira]] Code for a little while, and it was very nice.  Elsewhere I use [[https://en.wikipedia.org/wiki/Baskerville][Baskerville]] as much as possible.   Where [[https://www.freedesktop.org/wiki/Software/fontconfig/][Fontconfig]] is used, running ~fc-list : family | sort~ will list all available fonts.
 
 #+begin_src emacs-lisp
 (set-face-attribute 'default nil :font "Ubuntu Mono" :height wtd-ubuntu-mono-height)
@@ -355,7 +355,7 @@ I use [[https://en.wikipedia.org/wiki/Ubuntu_(typeface)][Ubuntu]] Mono in Emacs 
 ;; (set-face-attribute 'variable-pitch nil :family "Baskervald ADF Std" :height wtd-font-height)
 #+end_src
 
-I'm going to try, yet again, using variable pitch for regular text.  I try it every now and then and have always reverted back, but maybe it will be different this time.  Using [[https://gitlab.com/jabranham/mixed-pitch][mixed-pitch]] makes it easy to have both variable and fixed pitches.  To get the [[https://en.wikipedia.org/wiki/Baskerville_(font)][Baskerville typeface]] on Ubuntu I ran =sudo apt install fonts-adf-baskervald=.
+I'm going to try, yet again, using variable pitch for regular text.  I try it every now and then and have always reverted back, but maybe it will be different this time.  Using [[https://gitlab.com/jabranham/mixed-pitch][mixed-pitch]] makes it easy to have both variable and fixed pitches.  To get the [[https://en.wikipedia.org/wiki/Baskerville_(font)][Baskerville typeface]] on Ubuntu I ran ~sudo apt install fonts-adf-baskervald~
 
 #+begin_src emacs-lisp
  (use-package mixed-pitch
@@ -1590,6 +1590,7 @@ The =use-package= syntax here is messy.  All of the hooks should go under =:hook
   (set-face-attribute 'org-block-end-line nil :overline nil)
 
   (set-face-attribute 'org-verbatim nil :family "Ubuntu Mono" :height wtd-ubuntu-mono-height :inherit 'fixed-pitch)
+  (set-face-attribute 'org-code nil :family "Ubuntu Mono" :height wtd-ubuntu-mono-height :foreground 'unspecified)
 
   (set-face-attribute 'org-ellipsis nil :underline nil)
 
