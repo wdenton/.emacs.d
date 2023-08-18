@@ -301,9 +301,9 @@ Small improvement to how underlines are displayed.
 (setq x-underline-at-descent-line t)
 #+end_src
 
-Fringe indicators showing that the beginning and end (｢｣) of the buffer, if displayed, or that there is more above or below (↑↓).
+Fringe indicators showing that the beginning and end (｢｣) of the buffer, if displayed, or that there is more above or below (↑↓).  (Not in use; I don't see a need for it.)
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (setq-default indicate-buffer-boundaries 'left)
 #+end_src
 
