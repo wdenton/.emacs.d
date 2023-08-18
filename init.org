@@ -1589,7 +1589,7 @@ The =use-package= syntax here is messy.  All of the hooks should go under =:hook
   (set-face-attribute 'org-block-begin-line nil :underline nil)
   (set-face-attribute 'org-block-end-line nil :overline nil)
 
-  (set-face-attribute 'org-verbatim nil :family "Ubuntu Mono" :height wtd-ubuntu-mono-height) ;; :inherit 'fixed-pitch
+  (set-face-attribute 'org-verbatim nil :family "Ubuntu Mono" :height wtd-ubuntu-mono-height :inherit 'fixed-pitch)
 
   (set-face-attribute 'org-ellipsis nil :underline nil)
 
