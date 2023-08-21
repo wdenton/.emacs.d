@@ -75,17 +75,13 @@
 
 (set-cursor-color "DarkGoldenrod")
 
-(setq wtd-ubuntu-mono-height
-      (cond ((string= (system-name) "marcus") 120)
-	    ((string= (system-name) "ochre") 150)
-	    ((string= (system-name) "work") 160)
+(setq wtd-fixed-pitch-height
+      (cond ((string= (system-name) "ochre") 130)
 	    ((string= (system-name) "helium") 150)
 	    (t 120))
       )
 
-(set-face-attribute 'default nil :font "Ubuntu Mono" :height wtd-ubuntu-mono-height)
-;; (set-face-attribute 'default nil :font "Fira Code" :height wtd-fira-code-height)
-;; (set-face-attribute 'variable-pitch nil :family "Baskervald ADF Std" :height wtd-font-height)
+(set-face-attribute 'default nil :font "DejaVu Sans Mono" :height wtd-fixed-pitch-height)
 
  (use-package mixed-pitch
    :diminish
@@ -94,15 +90,11 @@
    ;; (org-mode markdown-mode)
    :config
    (setq mixed-pitch-set-height t)
-   (set-face-attribute 'default nil :family "Ubuntu Mono" :height wtd-ubuntu-mono-height) ;; family or font?
-   (set-face-attribute 'fixed-pitch nil :family "Ubuntu Mono" :height 160) ;; family or font?
-   ;; (set-face-attribute 'variable-pitch nil :font "Noto Serif")
-   (set-face-attribute 'variable-pitch nil :family "Baskervald ADF Std" :height 1.2)
+   (set-face-attribute 'fixed-pitch nil :inherit 'default)
+   ;; (set-face-attribute 'variable-pitch nil :family "Baskervald ADF Std" :height 1.2)
+   (set-face-attribute 'variable-pitch nil :family "DejaVu Sans" :height 1.1)
    ;; (setq left-margin-width 10)
    ;; (setq right-margin-width 10)
-   (set-face-attribute 'org-special-keyword nil :inherit 'fixed-pitch)
-   (set-face-attribute 'org-drawer nil :inherit 'fixed-pitch)
-   (set-face-attribute 'org-date nil :inherit 'fixed-pitch)
    )
 
 (setq inhibit-compacting-font-caches t)
@@ -655,35 +647,35 @@ already narrowed."
   :load-path "/usr/local/src/org-mode/lisp"
   :init
   (setq
-    org-confirm-babel-evaluate nil ;; Evaluate Babel blocks without asking for confirmation
-    org-cycle-separator-lines 0 ;; Never show blank lines in condensed view
-    org-display-inline-images t ;; Embed an image with [[file:foo.png]] and then C-c C-x C-v to view
-    org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar" ;; External dependency: ditaa
-    org-ellipsis " ⬎" ;; ⤵ ↴  Change the ellipsis that indicates hidden content
-    org-export-backends (quote (html latex md odt)) ;; Exporting: I will see these export options after C-c C-e ;; beamer reveal
-    ;; org-export-date-timestamp-format "%d %m %Y" ;; Date format on exports
-    org-export-with-smart-quotes t ;; Turn plain quotes into posh (I can't include examples in here or it breaks paren matching!)
-    org-fontify-whole-heading-line t
-    org-footnote-auto-adjust nil ;; Don't resort or adjust them without my saying so.
-    org-footnote-section nil ;; Define footnotes nearby when I use C-c C-x f
-    org-hide-emphasis-markers t ;; Hide the /italics/ and *bold* markers
-    org-hide-macro-markers t ;; Hide {{{macro}}} curly brackets; see also wtd/toggle-org-macro-markers
-    org-highlight-latex-and-related '(latex) ;; Highlight inline LaTeX
-    org-image-max-width nil ;; nil means "do not limit image width"
-    org-image-actual-width nil ;; nil means "try to get the width from an #+ATTR.* keyword and fall back on the original width if none is found."
-    org-list-allow-alphabetical t ;; Allow a b c lists
-    org-pretty-entities t ;; org-entities displays \alpha etc. as Unicode characters.
-    org-return-follows-link t ;; Hit return on a link to open it in a browser
-    org-special-ctrl-a/e t ;; Make C-a and C-e understand how headings and tags work
-    org-src-fontify-natively t ;; Fontify Babel blocks nicely
-    org-src-preserve-indentation t ;; Preserve indentation when tangling source blocks (important for makefiles)
-    org-src-window-setup 'current-window ;; How to rearrange things when I edit a source block.  Default is regorganize-frame.
-    org-startup-indented t ;; Visually indent everything nicely, but leave the raw file left-aligned
-    org-startup-with-inline-images t ;; Show images on startup
-    org-support-shift-select t ;; Shift and arrow keys to select text works a bit differently in Org.
-    org-tags-column 120 ;; Right-align tags to an indent from the right margin, could use  (- 50 (window-width))
-    org-use-speed-commands t ;; Allow speed commands
-    )
+   org-confirm-babel-evaluate nil ;; Evaluate Babel blocks without asking for confirmation
+   org-cycle-separator-lines 0 ;; Never show blank lines in condensed view
+   org-display-inline-images t ;; Embed an image with [[file:foo.png]] and then C-c C-x C-v to view
+   org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar" ;; External dependency: ditaa
+   org-ellipsis " ⬎" ;; ⤵ ↴  Change the ellipsis that indicates hidden content
+   org-export-backends (quote (html latex md odt)) ;; Exporting: I will see these export options after C-c C-e ;; beamer reveal
+   ;; org-export-date-timestamp-format "%d %m %Y" ;; Date format on exports
+   org-export-with-smart-quotes t ;; Turn plain quotes into posh (I can't include examples in here or it breaks paren matching!)
+   org-fontify-whole-heading-line t
+   org-footnote-auto-adjust nil ;; Don't resort or adjust them without my saying so.
+   org-footnote-section nil ;; Define footnotes nearby when I use C-c C-x f
+   org-hide-emphasis-markers t ;; Hide the /italics/ and *bold* markers
+   org-hide-macro-markers t ;; Hide {{{macro}}} curly brackets; see also wtd/toggle-org-macro-markers
+   org-highlight-latex-and-related '(latex) ;; Highlight inline LaTeX
+   org-image-max-width nil ;; nil means "do not limit image width"
+   org-image-actual-width nil ;; nil means "try to get the width from an #+ATTR.* keyword and fall back on the original width if none is found."
+   org-list-allow-alphabetical t ;; Allow a b c lists
+   org-pretty-entities t ;; org-entities displays \alpha etc. as Unicode characters.
+   org-return-follows-link t ;; Hit return on a link to open it in a browser
+   org-special-ctrl-a/e t ;; Make C-a and C-e understand how headings and tags work
+   org-src-fontify-natively t ;; Fontify Babel blocks nicely
+   org-src-preserve-indentation t ;; Preserve indentation when tangling source blocks (important for makefiles)
+   org-src-window-setup 'current-window ;; How to rearrange things when I edit a source block.  Default is regorganize-frame.
+   org-startup-indented t ;; Visually indent everything nicely, but leave the raw file left-aligned
+   org-startup-with-inline-images t ;; Show images on startup
+   org-support-shift-select t ;; Shift and arrow keys to select text works a bit differently in Org.
+   org-tags-column 120 ;; Right-align tags to an indent from the right margin, could use  (- 50 (window-width))
+   org-use-speed-commands t ;; Allow speed commands
+   )
 
   ;; Define my own link abbreviations
   (setq org-link-abbrev-alist
@@ -707,31 +699,26 @@ already narrowed."
   ;; Use LaTeX spell-check
   (add-hook 'org-mode-hook (lambda () (setq ispell-parser 'tex)))
 
-  ;; Use C-c d to close all the open drawers in a file
-  (defun wtd/add-org-close-all-drawers-key ()
-    (local-set-key (kbd "C-c d") (lambda () (interactive) (org-cycle-hide-drawers 'all))))
-  (add-hook 'org-mode-hook 'wtd/add-org-close-all-drawers-key)
-
   ;; Hooks for prettify-symbols-mode
   ;; See also https://pank.eu/blog/pretty-babel-src-blocks.html for some cool stuff
   ;; And https://github.com/zzamboni/dot-emacs/blob/master/init.org#source-code-blocks
   ;; for some stuff I tried out but decided was a bit too much for me.
   (add-hook 'org-mode-hook
- 	  (lambda ()
- 	    (push '("<=" . ?≤) prettify-symbols-alist)
- 	    (push '(">=" . ?≥) prettify-symbols-alist)
- 	    (push '("|>" . ?▷) prettify-symbols-alist)
- 	    (push '("#+BEGIN_SRC" . ?⎡) prettify-symbols-alist) ;;  ⎡ ➤ ➟ ➤ ✎
- 	    (push '("#+END_SRC" . ?⎣) prettify-symbols-alist) ;; ⎣ ✐
- 	    (push '("#+begin_src" . ?⎡) prettify-symbols-alist)
- 	    (push '("#+end_src" . ?⎣) prettify-symbols-alist)
- 	    (push '("#+BEGIN_QUOTE" . ?❝) prettify-symbols-alist)
- 	    (push '("#+END_QUOTE" . ?❞) prettify-symbols-alist)
- 	    (push '("#+begin_quote" . ?❝) prettify-symbols-alist)
- 	    (push '("#+end_quote" . ?❞) prettify-symbols-alist)
- 	    ;; (push '("[ ]" . ?☐) prettify-symbols-alist)
- 	    ;; (push '("[X]" . ?☒) prettify-symbols-alist)
- 	    ))
+ 	    (lambda ()
+ 	      (push '("<=" . ?≤) prettify-symbols-alist)
+ 	      (push '(">=" . ?≥) prettify-symbols-alist)
+ 	      (push '("|>" . ?▷) prettify-symbols-alist)
+ 	      (push '("#+BEGIN_SRC" . ?⎡) prettify-symbols-alist) ;;  ⎡ ➤ ➟ ➤ ✎
+ 	      (push '("#+END_SRC" . ?⎣) prettify-symbols-alist) ;; ⎣ ✐
+ 	      (push '("#+begin_src" . ?⎡) prettify-symbols-alist)
+ 	      (push '("#+end_src" . ?⎣) prettify-symbols-alist)
+ 	      (push '("#+BEGIN_QUOTE" . ?❝) prettify-symbols-alist)
+ 	      (push '("#+END_QUOTE" . ?❞) prettify-symbols-alist)
+ 	      (push '("#+begin_quote" . ?❝) prettify-symbols-alist)
+ 	      (push '("#+end_quote" . ?❞) prettify-symbols-alist)
+ 	      ;; (push '("[ ]" . ?☐) prettify-symbols-alist)
+ 	      ;; (push '("[X]" . ?☒) prettify-symbols-alist)
+ 	      ))
 
   :config
   (global-set-key "\C-cl" 'org-store-link)
@@ -742,29 +729,33 @@ already narrowed."
 
   ;; Active Babel languages (http://orgmode.org/org.html#Languages)
   (org-babel-do-load-languages 'org-babel-load-languages '(
-     (ditaa . t)
-     (dot . t)
-     (latex . t)
-     (lilypond . t)
-     (python . t)
-     (R . t)
-     (ruby . t)
-     (shell . t)
-     (sql . t)
-     (sqlite . t)
-     ))
-
-  ;; Appearance.
+							   (ditaa . t)
+							   (dot . t)
+							   (latex . t)
+							   (lilypond . t)
+							   (python . t)
+							   (R . t)
+							   (ruby . t)
+							   (shell . t)
+							   (sql . t)
+							   (sqlite . t)
+							   ))
 
   (set-face-attribute 'org-link nil :foreground "Steel Blue")
   (set-face-attribute 'org-footnote nil :height 0.9)
 
+  ;; Necessary when using mixed-pitch, because I want these fixed.
+  (set-face-attribute 'org-special-keyword nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-drawer nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-date nil :inherit 'fixed-pitch)
+
+  ;; Code and verbatim text.
+  (set-face-attribute 'org-verbatim nil :family "Ubuntu Mono" :height wtd-fixed-pitch-height :inherit 'fixed-pitch :underline '(:color "dim gray" :style wave))
+  (set-face-attribute 'org-code nil :family "Ubuntu Mono" :height wtd-fixed-pitch-height :foreground 'unspecified :box '(:color "dim gray")) ;; was #586e75
+
   ;; Source code block appearance
   (set-face-attribute 'org-block-begin-line nil :underline nil)
   (set-face-attribute 'org-block-end-line nil :overline nil)
-
-  (set-face-attribute 'org-verbatim nil :family "Ubuntu Mono" :height wtd-ubuntu-mono-height :inherit 'fixed-pitch :underline '(:color "dim gray" :style wave))
-  (set-face-attribute 'org-code nil :family "Ubuntu Mono" :height wtd-ubuntu-mono-height :foreground 'unspecified :box '(:color "dim gray")) ;; was #586e75
 
   (set-face-attribute 'org-ellipsis nil :underline nil)
 
@@ -777,11 +768,12 @@ already narrowed."
   ;; https://fuco1.github.io/2017-05-25-Fontify-done-checkbox-items-in-org-mode.html
   (font-lock-add-keywords
    'org-mode
- `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 'org-headline-done prepend))
- 'append)
+   `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 'org-headline-done prepend))
+   'append)
 
-  ;; (face-spec-set 'org-level-1 '((t (:height 1.05))))
-  ;; (face-spec-set 'org-level-2 '((t (:height 1.05))))
+  ;; Headline sizes
+  (face-spec-set 'org-level-1 '((t (:height 1.3))))
+  (face-spec-set 'org-level-2 '((t (:height 1.1))))
   ;; (face-spec-set 'org-level-3 '((t (:height 1.0))))
 
   :hook
@@ -797,6 +789,10 @@ already narrowed."
   (setq org-hide-macro-markers (not org-hide-macro-markers))
   (font-lock-mode)
   (font-lock-mode))
+
+(defun wtd/add-org-close-all-drawers-key ()
+  (local-set-key (kbd "C-c d") (lambda () (interactive) (org-cycle-hide-drawers 'all))))
+(add-hook 'org-mode-hook 'wtd/add-org-close-all-drawers-key)
 
 (eval-after-load 'org-src
   '(define-key org-src-mode-map

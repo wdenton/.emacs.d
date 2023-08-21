@@ -337,25 +337,26 @@ Change the pointer colour.  Why boring old plain white?
 My home and work machines have different screen resolutions, so the font height needs to be different.  It's measured in 0.1 points, so 130 is 13 pt.  I need it a little bigger on my work machine.
 
 #+begin_src emacs-lisp
-(setq wtd-ubuntu-mono-height
-      (cond ((string= (system-name) "marcus") 120)
-	    ((string= (system-name) "ochre") 150)
-	    ((string= (system-name) "work") 160)
+(setq wtd-fixed-pitch-height
+      (cond ((string= (system-name) "ochre") 130)
 	    ((string= (system-name) "helium") 150)
 	    (t 120))
       )
 #+end_src
 
+I'm going to try, yet again, using variable pitch for regular text.  I try it every now and then and have always reverted back, but maybe it will be different this time.
 
-I use [[https://en.wikipedia.org/wiki/Ubuntu_(typeface)][Ubuntu]] Mono in Emacs and in terminal windows, so it all looks the same.  (I used [[https://en.wikipedia.org/wiki/Fira_(typeface)#Fira_Code][Fira]] Code for a little while, and it was very nice.)  Elsewhere I use [[https://en.wikipedia.org/wiki/Baskerville][Baskerville]] as much as possible.   Where [[https://www.freedesktop.org/wiki/Software/fontconfig/][Fontconfig]] is used, running ~fc-list : family | sort~ will list all available fonts.
+First, set the default, which is fixed pitch, or monospaced.  I now use the [[https://en.wikipedia.org/wiki/DejaVu_fonts][DejaVu fonts]], so for this it's DejaVu Sans Mono.   I also use this in terminal windows, so everything looks the same.   (Before, I used [[https://en.wikipedia.org/wiki/Ubuntu_(typeface)][Ubuntu]] Mono, and I tried [[https://en.wikipedia.org/wiki/Fira_(typeface)#Fira_Code][Fira]] Code for a little while.)
+
+Where [[https://www.freedesktop.org/wiki/Software/fontconfig/][Fontconfig]] is used, running ~fc-list : family | sort~ will list all available fonts.
 
 #+begin_src emacs-lisp
-(set-face-attribute 'default nil :font "Ubuntu Mono" :height wtd-ubuntu-mono-height)
-;; (set-face-attribute 'default nil :font "Fira Code" :height wtd-fira-code-height)
-;; (set-face-attribute 'variable-pitch nil :family "Baskervald ADF Std" :height wtd-font-height)
+(set-face-attribute 'default nil :font "DejaVu Sans Mono" :height wtd-fixed-pitch-height)
 #+end_src
 
-I'm going to try, yet again, using variable pitch for regular text.  I try it every now and then and have always reverted back, but maybe it will be different this time.  Using [[https://gitlab.com/jabranham/mixed-pitch][mixed-pitch]] makes it easy to have both variable and fixed pitches.  To get the [[https://en.wikipedia.org/wiki/Baskerville_(font)][Baskerville typeface]] on Ubuntu I ran ~sudo apt install fonts-adf-baskervald~.  The ~variable-pitch~ face should be bigger than the fixed one: if it's the same it will look small.
+Using [[https://gitlab.com/jabranham/mixed-pitch][mixed-pitch]] makes it easy to have both variable and fixed pitches.  For variable pitch I use DejaVu Sans, which goes very well with its Mono version, of course. I had tried [[https://en.wikipedia.org/wiki/Baskerville_(font)][Baskerville]] as the variable pitch, but while it's one of my favourites in print, having serifs it just doesn't look good on my screen.  (On Ubuntu I ran ~sudo apt install fonts-adf-baskervald~ to install it.)
+
+The ~variable-pitch~ face may need to be sized larger than the fixed one: if it's the same height it may look small in comparison.  Setting ~mixed-pitch-set-height~ to true is necessary to allow this.
 
 #+begin_src emacs-lisp
  (use-package mixed-pitch
@@ -365,15 +366,11 @@ I'm going to try, yet again, using variable pitch for regular text.  I try it ev
    ;; (org-mode markdown-mode)
    :config
    (setq mixed-pitch-set-height t)
-   (set-face-attribute 'default nil :family "Ubuntu Mono" :height wtd-ubuntu-mono-height) ;; family or font?
-   (set-face-attribute 'fixed-pitch nil :family "Ubuntu Mono" :height 160) ;; family or font?
-   ;; (set-face-attribute 'variable-pitch nil :font "Noto Serif")
-   (set-face-attribute 'variable-pitch nil :family "Baskervald ADF Std" :height 1.2)
+   (set-face-attribute 'fixed-pitch nil :inherit 'default)
+   ;; (set-face-attribute 'variable-pitch nil :family "Baskervald ADF Std" :height 1.2)
+   (set-face-attribute 'variable-pitch nil :family "DejaVu Sans" :height 1.1)
    ;; (setq left-margin-width 10)
    ;; (setq right-margin-width 10)
-   (set-face-attribute 'org-special-keyword nil :inherit 'fixed-pitch)
-   (set-face-attribute 'org-drawer nil :inherit 'fixed-pitch)
-   (set-face-attribute 'org-date nil :inherit 'fixed-pitch)
    )
 #+end_src
 
@@ -1483,35 +1480,35 @@ Deep in there I use  ~set-face-attribute~  on ~org-verbatim~ and ~org-code~ face
   :load-path "/usr/local/src/org-mode/lisp"
   :init
   (setq
-    org-confirm-babel-evaluate nil ;; Evaluate Babel blocks without asking for confirmation
-    org-cycle-separator-lines 0 ;; Never show blank lines in condensed view
-    org-display-inline-images t ;; Embed an image with [[file:foo.png]] and then C-c C-x C-v to view
-    org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar" ;; External dependency: ditaa
-    org-ellipsis " ⬎" ;; ⤵ ↴  Change the ellipsis that indicates hidden content
-    org-export-backends (quote (html latex md odt)) ;; Exporting: I will see these export options after C-c C-e ;; beamer reveal
-    ;; org-export-date-timestamp-format "%d %m %Y" ;; Date format on exports
-    org-export-with-smart-quotes t ;; Turn plain quotes into posh (I can't include examples in here or it breaks paren matching!)
-    org-fontify-whole-heading-line t
-    org-footnote-auto-adjust nil ;; Don't resort or adjust them without my saying so.
-    org-footnote-section nil ;; Define footnotes nearby when I use C-c C-x f
-    org-hide-emphasis-markers t ;; Hide the /italics/ and *bold* markers
-    org-hide-macro-markers t ;; Hide {{{macro}}} curly brackets; see also wtd/toggle-org-macro-markers
-    org-highlight-latex-and-related '(latex) ;; Highlight inline LaTeX
-    org-image-max-width nil ;; nil means "do not limit image width"
-    org-image-actual-width nil ;; nil means "try to get the width from an #+ATTR.* keyword and fall back on the original width if none is found."
-    org-list-allow-alphabetical t ;; Allow a b c lists
-    org-pretty-entities t ;; org-entities displays \alpha etc. as Unicode characters.
-    org-return-follows-link t ;; Hit return on a link to open it in a browser
-    org-special-ctrl-a/e t ;; Make C-a and C-e understand how headings and tags work
-    org-src-fontify-natively t ;; Fontify Babel blocks nicely
-    org-src-preserve-indentation t ;; Preserve indentation when tangling source blocks (important for makefiles)
-    org-src-window-setup 'current-window ;; How to rearrange things when I edit a source block.  Default is regorganize-frame.
-    org-startup-indented t ;; Visually indent everything nicely, but leave the raw file left-aligned
-    org-startup-with-inline-images t ;; Show images on startup
-    org-support-shift-select t ;; Shift and arrow keys to select text works a bit differently in Org.
-    org-tags-column 120 ;; Right-align tags to an indent from the right margin, could use  (- 50 (window-width))
-    org-use-speed-commands t ;; Allow speed commands
-    )
+   org-confirm-babel-evaluate nil ;; Evaluate Babel blocks without asking for confirmation
+   org-cycle-separator-lines 0 ;; Never show blank lines in condensed view
+   org-display-inline-images t ;; Embed an image with [[file:foo.png]] and then C-c C-x C-v to view
+   org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar" ;; External dependency: ditaa
+   org-ellipsis " ⬎" ;; ⤵ ↴  Change the ellipsis that indicates hidden content
+   org-export-backends (quote (html latex md odt)) ;; Exporting: I will see these export options after C-c C-e ;; beamer reveal
+   ;; org-export-date-timestamp-format "%d %m %Y" ;; Date format on exports
+   org-export-with-smart-quotes t ;; Turn plain quotes into posh (I can't include examples in here or it breaks paren matching!)
+   org-fontify-whole-heading-line t
+   org-footnote-auto-adjust nil ;; Don't resort or adjust them without my saying so.
+   org-footnote-section nil ;; Define footnotes nearby when I use C-c C-x f
+   org-hide-emphasis-markers t ;; Hide the /italics/ and *bold* markers
+   org-hide-macro-markers t ;; Hide {{{macro}}} curly brackets; see also wtd/toggle-org-macro-markers
+   org-highlight-latex-and-related '(latex) ;; Highlight inline LaTeX
+   org-image-max-width nil ;; nil means "do not limit image width"
+   org-image-actual-width nil ;; nil means "try to get the width from an #+ATTR.* keyword and fall back on the original width if none is found."
+   org-list-allow-alphabetical t ;; Allow a b c lists
+   org-pretty-entities t ;; org-entities displays \alpha etc. as Unicode characters.
+   org-return-follows-link t ;; Hit return on a link to open it in a browser
+   org-special-ctrl-a/e t ;; Make C-a and C-e understand how headings and tags work
+   org-src-fontify-natively t ;; Fontify Babel blocks nicely
+   org-src-preserve-indentation t ;; Preserve indentation when tangling source blocks (important for makefiles)
+   org-src-window-setup 'current-window ;; How to rearrange things when I edit a source block.  Default is regorganize-frame.
+   org-startup-indented t ;; Visually indent everything nicely, but leave the raw file left-aligned
+   org-startup-with-inline-images t ;; Show images on startup
+   org-support-shift-select t ;; Shift and arrow keys to select text works a bit differently in Org.
+   org-tags-column 120 ;; Right-align tags to an indent from the right margin, could use  (- 50 (window-width))
+   org-use-speed-commands t ;; Allow speed commands
+   )
 
   ;; Define my own link abbreviations
   (setq org-link-abbrev-alist
@@ -1535,31 +1532,26 @@ Deep in there I use  ~set-face-attribute~  on ~org-verbatim~ and ~org-code~ face
   ;; Use LaTeX spell-check
   (add-hook 'org-mode-hook (lambda () (setq ispell-parser 'tex)))
 
-  ;; Use C-c d to close all the open drawers in a file
-  (defun wtd/add-org-close-all-drawers-key ()
-    (local-set-key (kbd "C-c d") (lambda () (interactive) (org-cycle-hide-drawers 'all))))
-  (add-hook 'org-mode-hook 'wtd/add-org-close-all-drawers-key)
-
   ;; Hooks for prettify-symbols-mode
   ;; See also https://pank.eu/blog/pretty-babel-src-blocks.html for some cool stuff
   ;; And https://github.com/zzamboni/dot-emacs/blob/master/init.org#source-code-blocks
   ;; for some stuff I tried out but decided was a bit too much for me.
   (add-hook 'org-mode-hook
- 	  (lambda ()
- 	    (push '("<=" . ?≤) prettify-symbols-alist)
- 	    (push '(">=" . ?≥) prettify-symbols-alist)
- 	    (push '("|>" . ?▷) prettify-symbols-alist)
- 	    (push '("#+BEGIN_SRC" . ?⎡) prettify-symbols-alist) ;;  ⎡ ➤ ➟ ➤ ✎
- 	    (push '("#+END_SRC" . ?⎣) prettify-symbols-alist) ;; ⎣ ✐
- 	    (push '("#+begin_src" . ?⎡) prettify-symbols-alist)
- 	    (push '("#+end_src" . ?⎣) prettify-symbols-alist)
- 	    (push '("#+BEGIN_QUOTE" . ?❝) prettify-symbols-alist)
- 	    (push '("#+END_QUOTE" . ?❞) prettify-symbols-alist)
- 	    (push '("#+begin_quote" . ?❝) prettify-symbols-alist)
- 	    (push '("#+end_quote" . ?❞) prettify-symbols-alist)
- 	    ;; (push '("[ ]" . ?☐) prettify-symbols-alist)
- 	    ;; (push '("[X]" . ?☒) prettify-symbols-alist)
- 	    ))
+ 	    (lambda ()
+ 	      (push '("<=" . ?≤) prettify-symbols-alist)
+ 	      (push '(">=" . ?≥) prettify-symbols-alist)
+ 	      (push '("|>" . ?▷) prettify-symbols-alist)
+ 	      (push '("#+BEGIN_SRC" . ?⎡) prettify-symbols-alist) ;;  ⎡ ➤ ➟ ➤ ✎
+ 	      (push '("#+END_SRC" . ?⎣) prettify-symbols-alist) ;; ⎣ ✐
+ 	      (push '("#+begin_src" . ?⎡) prettify-symbols-alist)
+ 	      (push '("#+end_src" . ?⎣) prettify-symbols-alist)
+ 	      (push '("#+BEGIN_QUOTE" . ?❝) prettify-symbols-alist)
+ 	      (push '("#+END_QUOTE" . ?❞) prettify-symbols-alist)
+ 	      (push '("#+begin_quote" . ?❝) prettify-symbols-alist)
+ 	      (push '("#+end_quote" . ?❞) prettify-symbols-alist)
+ 	      ;; (push '("[ ]" . ?☐) prettify-symbols-alist)
+ 	      ;; (push '("[X]" . ?☒) prettify-symbols-alist)
+ 	      ))
 
   :config
   (global-set-key "\C-cl" 'org-store-link)
@@ -1570,29 +1562,33 @@ Deep in there I use  ~set-face-attribute~  on ~org-verbatim~ and ~org-code~ face
 
   ;; Active Babel languages (http://orgmode.org/org.html#Languages)
   (org-babel-do-load-languages 'org-babel-load-languages '(
-     (ditaa . t)
-     (dot . t)
-     (latex . t)
-     (lilypond . t)
-     (python . t)
-     (R . t)
-     (ruby . t)
-     (shell . t)
-     (sql . t)
-     (sqlite . t)
-     ))
-
-  ;; Appearance.
+							   (ditaa . t)
+							   (dot . t)
+							   (latex . t)
+							   (lilypond . t)
+							   (python . t)
+							   (R . t)
+							   (ruby . t)
+							   (shell . t)
+							   (sql . t)
+							   (sqlite . t)
+							   ))
 
   (set-face-attribute 'org-link nil :foreground "Steel Blue")
   (set-face-attribute 'org-footnote nil :height 0.9)
 
+  ;; Necessary when using mixed-pitch, because I want these fixed.
+  (set-face-attribute 'org-special-keyword nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-drawer nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-date nil :inherit 'fixed-pitch)
+
+  ;; Code and verbatim text.
+  (set-face-attribute 'org-verbatim nil :family "Ubuntu Mono" :height wtd-fixed-pitch-height :inherit 'fixed-pitch :underline '(:color "dim gray" :style wave))
+  (set-face-attribute 'org-code nil :family "Ubuntu Mono" :height wtd-fixed-pitch-height :foreground 'unspecified :box '(:color "dim gray")) ;; was #586e75
+
   ;; Source code block appearance
   (set-face-attribute 'org-block-begin-line nil :underline nil)
   (set-face-attribute 'org-block-end-line nil :overline nil)
-
-  (set-face-attribute 'org-verbatim nil :family "Ubuntu Mono" :height wtd-ubuntu-mono-height :inherit 'fixed-pitch :underline '(:color "dim gray" :style wave))
-  (set-face-attribute 'org-code nil :family "Ubuntu Mono" :height wtd-ubuntu-mono-height :foreground 'unspecified :box '(:color "dim gray")) ;; was #586e75
 
   (set-face-attribute 'org-ellipsis nil :underline nil)
 
@@ -1605,11 +1601,12 @@ Deep in there I use  ~set-face-attribute~  on ~org-verbatim~ and ~org-code~ face
   ;; https://fuco1.github.io/2017-05-25-Fontify-done-checkbox-items-in-org-mode.html
   (font-lock-add-keywords
    'org-mode
- `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 'org-headline-done prepend))
- 'append)
+   `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 'org-headline-done prepend))
+   'append)
 
-  ;; (face-spec-set 'org-level-1 '((t (:height 1.05))))
-  ;; (face-spec-set 'org-level-2 '((t (:height 1.05))))
+  ;; Headline sizes
+  (face-spec-set 'org-level-1 '((t (:height 1.3))))
+  (face-spec-set 'org-level-2 '((t (:height 1.1))))
   ;; (face-spec-set 'org-level-3 '((t (:height 1.0))))
 
   :hook
@@ -1620,7 +1617,7 @@ Deep in there I use  ~set-face-attribute~  on ~org-verbatim~ and ~org-code~ face
   )
 #+end_src
 
-To reveal markup there is =visibility-mode=, which can be toggled on or off for the whole file, but [[https://github.com/awth13/org-appear][org-appear]] "provides a way to toggle visibility of hidden elements such as emphasis markers, links, etc. by customising specific variables."  (November 2022: This seems to be making Org freeze on large tables, so I'm turning it off for now.)
+To reveal markup there is ~visibility-mode~, which can be toggled on or off for the whole file, but [[https://github.com/awth13/org-appear][org-appear]] "provides a way to toggle visibility of hidden elements such as emphasis markers, links, etc. by customising specific variables."  (November 2022: This seems to be making Org freeze on large tables, so I'm turning it off for now.)
 
 #+begin_src emacs-lisp :tangle no
 (use-package org-appear
@@ -1641,6 +1638,14 @@ That doesn't work on the {{{ curly brackets }}} that define macros, though, so i
 #+end_src
 
 ** Some helper functions
+
+Use ~C-c d~ to close all the open drawers in a file.
+
+#+begin_src emacs-lisp
+(defun wtd/add-org-close-all-drawers-key ()
+  (local-set-key (kbd "C-c d") (lambda () (interactive) (org-cycle-hide-drawers 'all))))
+(add-hook 'org-mode-hook 'wtd/add-org-close-all-drawers-key)
+#+end_src
 
 Since I'm using ~C-x n~ to narrow and widen source blocks (see ~narrow-or-widen-dwim~) I don't need to use ~C-c `~ to enter and leave them, so I can use ~C-x C-s~ to save and exit them, which is nice.  [[http://endlessparentheses.com/emacs-narrow-or-widen-dwim.html][Source]].
 
