@@ -1640,6 +1640,12 @@ That doesn't work on the {{{ curly brackets }}} that define macros, though, so i
   (font-lock-mode))
 #+end_src
 
+Some links about Org appearance and variable pitch:
+
++ [[https://zzamboni.org/post/beautifying-org-mode-in-emacs/][Beautifying Org Mode in Emacs]] (Diego Zamboni, 2018)
++ [[https://lucidmanager.org/productivity/ricing-org-mode/][A Beautiful Writing Environment]] (Peter Prevos, 2021)
++  I wish there was a way to use [[https://codeberg.org/joostkremers/visual-fill-column][visual-fill-column]] on everything except tables.
+
 ** Some helper functions
 
 Use ~C-c d~ to close all the open drawers in a file.
