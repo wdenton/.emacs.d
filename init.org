@@ -1506,7 +1506,7 @@ Deep in there I use  ~set-face-attribute~  on ~org-verbatim~ and ~org-code~ face
    org-startup-indented t ;; Visually indent everything nicely, but leave the raw file left-aligned
    org-startup-with-inline-images t ;; Show images on startup
    org-support-shift-select t ;; Shift and arrow keys to select text works a bit differently in Org.
-   org-tags-column 120 ;; Right-align tags to an indent from the right margin, could use  (- 50 (window-width))
+   org-tags-column -150 ;; Right-align tags to an indent from the right margin, could use 120 or (- 50 (window-width))
    org-use-speed-commands t ;; Allow speed commands
    )
 
@@ -1592,6 +1592,8 @@ Deep in there I use  ~set-face-attribute~  on ~org-verbatim~ and ~org-code~ face
 
   (set-face-attribute 'org-ellipsis nil :underline nil)
 
+  (set-face-attribute 'org-tag nil :height 0.9)
+
   ;; Make LOGBOOK and such fainter.  Default bold is too loud.
   (face-spec-set 'org-drawer '((t (:foreground "dim gray" :weight normal :height 0.9))))
   (face-spec-set 'org-special-keyword '((t (:foreground "dim gray" :weight normal :height 0.9))))
@@ -1599,6 +1601,7 @@ Deep in there I use  ~set-face-attribute~  on ~org-verbatim~ and ~org-code~ face
 
   ;; Make completed items in a checkbox list less noticeable
   ;; https://fuco1.github.io/2017-05-25-Fontify-done-checkbox-items-in-org-mode.html
+  (set-face-attribute 'org-headline-done nil :foreground "#586e75") ;; Aug 2023: Had to set this after some appearance changes.
   (font-lock-add-keywords
    'org-mode
    `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 'org-headline-done prepend))
