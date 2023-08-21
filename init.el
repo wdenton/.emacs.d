@@ -77,7 +77,7 @@
 
 (setq wtd-fixed-pitch-height
       (cond ((string= (system-name) "ochre") 130)
-	    ((string= (system-name) "helium") 150)
+	    ((string= (system-name) "helium") 130)
 	    (t 120))
       )
 
@@ -759,7 +759,7 @@ already narrowed."
 
   (set-face-attribute 'org-ellipsis nil :underline nil)
 
-  (set-face-attribute 'org-tag nil :height 0.9)
+  (set-face-attribute 'org-tag nil :height 0.8 :foreground "dim gray")
 
   ;; Make LOGBOOK and such fainter.  Default bold is too loud.
   (face-spec-set 'org-drawer '((t (:foreground "dim gray" :weight normal :height 0.9))))
