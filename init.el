@@ -673,7 +673,7 @@ already narrowed."
    org-startup-indented t ;; Visually indent everything nicely, but leave the raw file left-aligned
    org-startup-with-inline-images t ;; Show images on startup
    org-support-shift-select t ;; Shift and arrow keys to select text works a bit differently in Org.
-   org-tags-column -150 ;; Right-align tags to an indent from the right margin, could use 120 or (- 50 (window-width))
+   org-tags-column 0 ;; Right-align tags to an indent from the right margin, could use 120 or (- 50 (window-width))
    org-use-speed-commands t ;; Allow speed commands
    )
 
