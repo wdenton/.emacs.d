@@ -1520,6 +1520,7 @@ Deep in there I use  ~set-face-attribute~  on ~org-verbatim~ and ~org-code~ face
 	)
 
   ;; Clocking
+  (setq org-clock-out-remove-zero-time-clocks t) ;; Remove the clock line when the resulting time is zero.
   (setq org-clock-persist 'history)
   (org-clock-persistence-insinuate)
 

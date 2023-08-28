@@ -687,6 +687,7 @@ already narrowed."
 	)
 
   ;; Clocking
+  (setq org-clock-out-remove-zero-time-clocks t) ;; Remove the clock line when the resulting time is zero.
   (setq org-clock-persist 'history)
   (org-clock-persistence-insinuate)
 
