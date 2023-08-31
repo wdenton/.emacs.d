@@ -51,6 +51,7 @@ Org inits I looked at:
 + [[https://gitlab.com/marcowahl/mw.emacs.d][Marco Wahl]]
 + [[https://github.com/zzamboni/dot-emacs/][Diego Zamboni]]
 + [[https://github.com/tecosaur/emacs-config][tecosaur]]
++ [[https://github.com/SophieBosio/.emacs.d][Sophie Bosio]]
 
 ** To try?
 
