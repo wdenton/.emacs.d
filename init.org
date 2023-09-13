@@ -9,7 +9,12 @@
 #+options: num:nil toc:nil ^:nil
 #+startup: fold
 
-# Need to fancy up the LaTeX export so I can read it all like an article.
+* LaTeX export options
+:PROPERTIES:
+:VISIBILITY: folded
+:END:
+
+I may try to fancy up the LaTeX export so I can read it all like an article.
 
 #+latex_class_options: [10pt]
 
@@ -29,9 +34,6 @@
 #+latex_header: \setlist{noitemsep}
 
 #+latex_header: \hypersetup{colorlinks=true,urlcolor=blue,linkcolor=blue,pdfborder={0 0 0}}
-
-# Should I stop using projectile, and use Emacs built-in project stuff,
-# like C-x p p?
 
 * Commentary
 
@@ -56,6 +58,7 @@ Org inits I looked at:
 ** To try?
 
 + Sacha Chua's [[https://github.com/sachac/subed][subed]] for editing video subtitles
++ Should I stop using  [[https://github.com/bbatsov/projectile][Projectile]], and use Emacs built-in project stuff, such as ~C-x p p~?  How to make that divide projects nicely in ~C-x C-b~?
 
 * Warning!
 
