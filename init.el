@@ -661,6 +661,7 @@ already narrowed."
    org-hide-emphasis-markers t ;; Hide the /italics/ and *bold* markers
    org-hide-macro-markers t ;; Hide {{{macro}}} curly brackets; see also wtd/toggle-org-macro-markers
    org-highlight-latex-and-related '(latex) ;; Highlight inline LaTeX
+   org-id-link-to-org-use-id 'use-existing
    org-image-max-width nil ;; nil means "do not limit image width"
    org-image-actual-width nil ;; nil means "try to get the width from an #+ATTR.* keyword and fall back on the original width if none is found."
    org-list-allow-alphabetical t ;; Allow a b c lists

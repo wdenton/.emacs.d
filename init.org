@@ -1498,6 +1498,7 @@ Deep in there I use  ~set-face-attribute~  on ~org-verbatim~ and ~org-code~ face
    org-hide-emphasis-markers t ;; Hide the /italics/ and *bold* markers
    org-hide-macro-markers t ;; Hide {{{macro}}} curly brackets; see also wtd/toggle-org-macro-markers
    org-highlight-latex-and-related '(latex) ;; Highlight inline LaTeX
+   org-id-link-to-org-use-id 'use-existing
    org-image-max-width nil ;; nil means "do not limit image width"
    org-image-actual-width nil ;; nil means "try to get the width from an #+ATTR.* keyword and fall back on the original width if none is found."
    org-list-allow-alphabetical t ;; Allow a b c lists
@@ -1626,6 +1627,12 @@ Deep in there I use  ~set-face-attribute~  on ~org-verbatim~ and ~org-code~ face
    (org-mode . turn-on-flyspell) ;; Use flyspell to check spelling as I go
    )
   )
+#+end_src
+
+Set up a global key binding for ~org-agenda~.
+
+#+begin_src emacs-lisp :tangle no
+(global-set-key (kbd "C-c a") #'org-agenda)
 #+end_src
 
 To reveal markup there is ~visibility-mode~, which can be toggled on or off for the whole file, but [[https://github.com/awth13/org-appear][org-appear]] "provides a way to toggle visibility of hidden elements such as emphasis markers, links, etc. by customising specific variables."  (November 2022: This seems to be making Org freeze on large tables, so I'm turning it off for now.)
