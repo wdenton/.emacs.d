@@ -1632,7 +1632,7 @@ Deep in there I use  ~set-face-attribute~  on ~org-verbatim~ and ~org-code~ face
 
 Set up a global key binding for ~org-agenda~.
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 (global-set-key (kbd "C-c a") #'org-agenda)
 #+end_src
 
