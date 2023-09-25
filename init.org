@@ -9,7 +9,12 @@
 #+options: num:nil toc:nil ^:nil
 #+startup: fold
 
-# Need to fancy up the LaTeX export so I can read it all like an article.
+* LaTeX export options
+:PROPERTIES:
+:VISIBILITY: folded
+:END:
+
+I may try to fancy up the LaTeX export so I can read it all like an article.
 
 #+latex_class_options: [10pt]
 
@@ -29,9 +34,6 @@
 #+latex_header: \setlist{noitemsep}
 
 #+latex_header: \hypersetup{colorlinks=true,urlcolor=blue,linkcolor=blue,pdfborder={0 0 0}}
-
-# Should I stop using projectile, and use Emacs built-in project stuff,
-# like C-x p p?
 
 * Commentary
 
@@ -56,6 +58,7 @@ Org inits I looked at:
 ** To try?
 
 + Sacha Chua's [[https://github.com/sachac/subed][subed]] for editing video subtitles
++ Should I stop using  [[https://github.com/bbatsov/projectile][Projectile]], and use Emacs built-in project stuff, such as ~C-x p p~?  How to make that divide projects nicely in ~C-x C-b~?
 
 * Warning!
 
@@ -1496,6 +1499,7 @@ Deep in there I use  ~set-face-attribute~  on ~org-verbatim~ and ~org-code~ face
    org-hide-emphasis-markers t ;; Hide the /italics/ and *bold* markers
    org-hide-macro-markers t ;; Hide {{{macro}}} curly brackets; see also wtd/toggle-org-macro-markers
    org-highlight-latex-and-related '(latex) ;; Highlight inline LaTeX
+   org-id-link-to-org-use-id 'use-existing
    org-image-max-width nil ;; nil means "do not limit image width"
    org-image-actual-width nil ;; nil means "try to get the width from an #+ATTR.* keyword and fall back on the original width if none is found."
    org-list-allow-alphabetical t ;; Allow a b c lists
@@ -1525,6 +1529,9 @@ Deep in there I use  ~set-face-attribute~  on ~org-verbatim~ and ~org-code~ face
   (setq org-clock-out-remove-zero-time-clocks t) ;; Remove the clock line when the resulting time is zero.
   (setq org-clock-persist 'history)
   (org-clock-persistence-insinuate)
+
+  ;; Agendas
+  (setq org-agenda-files '("~/york/shared/projects/projects.org" "~/york/shared/work-diaries/work-diary.org"))
 
   ;; Automatically refresh inline images that are generated from Babel blocks
   (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
@@ -1621,6 +1628,12 @@ Deep in there I use  ~set-face-attribute~  on ~org-verbatim~ and ~org-code~ face
    (org-mode . turn-on-flyspell) ;; Use flyspell to check spelling as I go
    )
   )
+#+end_src
+
+Set up a global key binding for ~org-agenda~.
+
+#+begin_src emacs-lisp :tangle no
+(global-set-key (kbd "C-c a") #'org-agenda)
 #+end_src
 
 To reveal markup there is ~visibility-mode~, which can be toggled on or off for the whole file, but [[https://github.com/awth13/org-appear][org-appear]] "provides a way to toggle visibility of hidden elements such as emphasis markers, links, etc. by customising specific variables."  (November 2022: This seems to be making Org freeze on large tables, so I'm turning it off for now.)
