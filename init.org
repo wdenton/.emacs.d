@@ -358,7 +358,7 @@ Where [[https://www.freedesktop.org/wiki/Software/fontconfig/][Fontconfig]] is u
 (set-face-attribute 'default nil :font "DejaVu Sans Mono" :height wtd-fixed-pitch-height)
 #+end_src
 
-Using [[https://gitlab.com/jabranham/mixed-pitch][mixed-pitch]] makes it easy to have both variable and fixed pitches.  For variable pitch I use DejaVu Sans, which goes very well with its Mono version, of course. I had tried [[https://en.wikipedia.org/wiki/Baskerville_(font)][Baskerville]] as the variable pitch, but while it's one of my favourites in print, having serifs it just doesn't look good on my screen.  (On Ubuntu I ran ~sudo apt install fonts-adf-baskervald~ to install it.)
+Using [[https://gitlab.com/jabranham/mixed-pitch][mixed-pitch]] makes it easy to have both variable and fixed pitches.  For variable pitch I use DejaVu Serif, which goes well with its Mono version, of course.  I was using DejaVu Sans, but saw serif used in the [[https://github.com/kunalb/poet][Mono]] theme and wanted to try it again.  I had tried [[https://en.wikipedia.org/wiki/Baskerville_(font)][Baskerville]] as the variable pitch, but while it's one of my favourites in print, on screen it didn't suit me.  (On Ubuntu I ran ~sudo apt install fonts-adf-baskervald~ to install it.)
 
 The ~variable-pitch~ face may need to be sized larger than the fixed one: if it's the same height it may look small in comparison.  Setting ~mixed-pitch-set-height~ to true is necessary to allow this.
 
