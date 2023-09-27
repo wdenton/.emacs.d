@@ -1472,6 +1472,10 @@ Define the actual keystroke now that the rest has been set up.  The default is l
 
 A note I made on 16 April 2013:  "Started using org-mode ... I could really get into this."
 
+Some things I might try:
+
++ [[https://github.com/alphapapa/org-super-agenda][org-super-agenda]]
+
 ** Manage and configure with use-package
 
 The =use-package= syntax here is messy.  All of the hooks should go under =:hook= and the appearance teaks under =:custom-face=, but I don't know how to do that yet.
