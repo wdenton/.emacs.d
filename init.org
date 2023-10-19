@@ -2228,6 +2228,20 @@ From [[http://tex.stackexchange.com/questions/50827/a-simpletons-guide-to-tex-wo
              (?n . "\\nocite{%l}")))))
 #+end_src
 
+* Zotero
+
+To connect with [[https://www.zotero.org/][Zotero]], use [[https://gitlab.com/egh/zotxt-emacs][zotxt-emacs]] (which requires the [[https://github.com/egh/zotxt/][zotxt]] Zotero plugin).
+
+# xdg-mime default firefox_firefox.desktop x-scheme-handler/zotero
+# └─$ cat ~/.config/mimeapps.list
+
+#+begin_src emacs-lisp
+(use-package zotxt
+  :defer t
+  :diminish zotxt
+  )
+#+end_src
+
 * Polymode (not in use)
 
 [[https://github.com/vspinu/polymode/][Polymode]], for Markdown + R + Yaml etc.

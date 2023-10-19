@@ -1124,3 +1124,8 @@ already narrowed."
              (?p . "\\parencite[]{%l}")
              (?o . "\\citepr[]{%l}")
              (?n . "\\nocite{%l}")))))
+
+(use-package zotxt
+  :defer t
+  :diminish zotxt
+  )
