@@ -16,6 +16,14 @@
 
 (setq use-package-always-ensure t)
 
+(use-package gcmh
+  :diminish gcmh-mode
+  :config
+  (gcmh-mode 1)
+  :custom
+  (setq gcmh-verbose t) ;; t to see what it's doing
+  )
+
 (server-mode)
 
 (setq byte-compile-warnings '(not nresolved

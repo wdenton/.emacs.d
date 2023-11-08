@@ -181,6 +181,19 @@ If I want a package, install it automatically.
 (setq use-package-always-ensure t)
 #+end_src
 
+[[https://gitlab.com/koral/gcmh][Garbage Collection Magic Hack]].
+
+#+begin_src emacs-lisp
+(use-package gcmh
+  :diminish gcmh-mode
+  :config
+  (gcmh-mode 1)
+  :custom
+  (setq gcmh-verbose t) ;; t to see what it's doing
+  )
+#+end_src
+
+
 ** Emacs server
 
 Run the server; now I can load any file into Emacs with ~emacsclient file~ (or, as I have it aliased, ~e file~.)
