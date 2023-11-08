@@ -152,7 +152,6 @@ For R, define [[https://ess.r-project.org/Manual/ess.html#Activating-and-Loading
 #+end_src
 
 Run =emacs -Q -l ~/.emacs.d/minimal-org.el= and take it from there.  See the documentation for how to generate useful backtraces.
-
 * Starting up
 
 # user-emacs-directory is ~/.emacs.d/
@@ -184,15 +183,14 @@ If I want a package, install it automatically.
 [[https://gitlab.com/koral/gcmh][Garbage Collection Magic Hack]].
 
 #+begin_src emacs-lisp
-(use-package gcmh
   :diminish gcmh-mode
+(use-package gcmh
   :config
   (gcmh-mode 1)
   :custom
   (setq gcmh-verbose t) ;; t to see what it's doing
   )
 #+end_src
-
 
 ** Emacs server
 
