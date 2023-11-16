@@ -16,8 +16,8 @@
 
 (setq use-package-always-ensure t)
 
-  :diminish gcmh-mode
 (use-package gcmh
+  :diminish gcmh-mode
   :config
   (gcmh-mode 1)
   :custom
