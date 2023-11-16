@@ -183,8 +183,8 @@ If I want a package, install it automatically.
 [[https://gitlab.com/koral/gcmh][Garbage Collection Magic Hack]].
 
 #+begin_src emacs-lisp
-  :diminish gcmh-mode
 (use-package gcmh
+  :diminish gcmh-mode
   :config
   (gcmh-mode 1)
   :custom

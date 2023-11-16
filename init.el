@@ -16,8 +16,8 @@
 
 (setq use-package-always-ensure t)
 
-  :diminish gcmh-mode
 (use-package gcmh
+  :diminish gcmh-mode
   :config
   (gcmh-mode 1)
   :custom
@@ -901,7 +901,7 @@ already narrowed."
 (setq org-latex-src-block-backend 'minted) ;; 'verbatim is the default
 
 (setq org-latex-minted-options
-      '(("frame" "lines")
+      '(("frame" "leftline")
 	))
 
 (use-package org-superstar
