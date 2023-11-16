@@ -1790,6 +1790,30 @@ So I can use Memoir as a document class in Org (but I don't).
   )
 #+end_src
 
+** Exporting formatted source code blocks with minted
+
+This adds [[https://ctan.org/pkg/minted][minted]] to the default list of packages used in exported LaTeX documents, in a way that keeps LaTeX preview fragments working (see the bottom of [[https://orgmode.org/worg/org-tutorials/org-latex-preview.html][this explanation of LaTeX exports]] for more).
+
+Minted uses [[https://pygments.org/styles/][Pygments]], so make sure that's installed.  To compile PDFs I need to use ~pdflatex -shell-escape~ (actually, I would use ~pdflatex -shell-escape -interaction=nonstopmode~) because ~pdflatex~ needs to make an external call to Pygments to do the formatting, and it needs to be specially permitted to do so.  I could tweak ~org-latex-pdf-process~ to make Org know about this, but I'd rather do it by hand when needed.)
+
+#+begin_src emacs-lisp
+(add-to-list 'org-latex-packages-alist '("" "minted" nil))
+#+end_src
+
+With that in place we can say that source code listings should be formatted with minted.  (This has to be set this way, there is [[https://lists.gnu.org/archive/html/emacs-orgmode/2022-12/msg00579.html][no way to change it in-buffer]].)
+
+#+begin_src emacs-lisp
+(setq org-latex-src-block-backend 'minted) ;; 'verbatim is the default
+#+end_src
+
+Minted has all sorts of options.  They can be set here, in an association list, that will be passed to every source block.  However, this takes precedence over everything else in the file, so it's very strong.  I prefer to define options with ~\setminted{}~ added with ~latex_header~ at the top of the document.  I'll just leave it that every source block exported has lines to the left (the options are: =none=, =leftline=, =topline=, =bottomline=, =lines=, =single=).
+
+#+begin_src emacs-lisp
+(setq org-latex-minted-options
+      '(("frame" "leftline")
+	))
+#+end_src
+
 ** Bullets
 
 Prettify the headings and such with better bullets thanks to [[https://github.com/integral-dw/org-superstar-mode][org-superstar-mode]].
