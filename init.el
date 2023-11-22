@@ -911,10 +911,6 @@ already narrowed."
 
 (setq org-latex-src-block-backend 'minted) ;; 'verbatim is the default
 
-(setq org-latex-minted-options
-      '(("frame" "leftline")
-	))
-
 (use-package org-superstar
   :config
   (setq org-superstar-headline-bullets-list '("⊢" "ǁ" "ǀ" "⋱" "◉" "○")) ;; ǂ ⋮
