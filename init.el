@@ -907,9 +907,24 @@ already narrowed."
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
   )
 
-(add-to-list 'org-latex-packages-alist '("" "minted" nil))
-
-(setq org-latex-src-block-backend 'minted) ;; 'verbatim is the default
+(defun wtd/org-toggle-minted ()
+  "Toggle whether or not Org should use minted for LaTeX."
+  (interactive)
+  (if (get 'wtd-org-minted-on-or-off 'state)
+      (progn
+	(setq org-latex-packages-alist (delete '("" "minted" nil) org-latex-packages-alist))
+	(setq org-latex-src-block-backend 'verbatim)
+	(put 'wtd-org-minted-on-or-off 'state nil)
+	(message "Minted is off")
+	)
+    (progn
+      (add-to-list 'org-latex-packages-alist '("" "minted" nil))
+      (setq org-latex-src-block-backend 'minted)
+      (put 'wtd-org-minted-on-or-off 'state t)
+      (message "Minted is on; use pdflatex -shell-escape -interaction=nonstopmode")
+      )
+    )
+  )
 
 (use-package org-superstar
   :config

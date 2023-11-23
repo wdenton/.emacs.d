@@ -1792,18 +1792,38 @@ So I can use Memoir as a document class in Org (but I don't).
 
 ** Exporting formatted source code blocks with minted
 
-This adds [[https://ctan.org/pkg/minted][minted]] to the default list of packages used in exported LaTeX documents, in a way that keeps LaTeX preview fragments working (see the bottom of [[https://orgmode.org/worg/org-tutorials/org-latex-preview.html][this explanation of LaTeX exports]] for more).
+This sets up a function that makes it easy to use [[https://ctan.org/pkg/minted][minted]] when I want exported code blocks to look nice.
 
-Minted uses [[https://pygments.org/styles/][Pygments]], so make sure that's installed.  To compile PDFs I need to use ~pdflatex -shell-escape~ (actually, I would use ~pdflatex -shell-escape -interaction=nonstopmode~) because ~pdflatex~ needs to make an external call to Pygments to do the formatting, and it needs to be specially permitted to do so.  I could tweak ~org-latex-pdf-process~ to make Org know about this, but I'd rather do it by hand when needed.)
+=minted= uses [[https://pygments.org/styles/][Pygments]], so make sure that's installed.  To compile PDFs that use =minted= I need to use ~pdflatex -shell-escape~ (actually, I would use ~pdflatex -shell-escape -interaction=nonstopmode~) because ~pdflatex~ needs to make an external call to Pygments to do the formatting, and it needs to be specially permitted to do so.
 
-#+begin_src emacs-lisp
+Originally, I had the following, which first adds =minted= to the default list of packages in LaTeX exports (in a way that keeps LaTeX preview fragments working; see the bottom of [[https://orgmode.org/worg/org-tutorials/org-latex-preview.html][this explanation of LaTeX exports]] for more) and next says that source code listings should be formatted with =minted= (this has to be set this way, there is [[https://lists.gnu.org/archive/html/emacs-orgmode/2022-12/msg00579.html][no way to change it in-buffer]]).
+
+#+begin_src emacs-lisp :tangle no
 (add-to-list 'org-latex-packages-alist '("" "minted" nil))
+(setq org-latex-src-block-backend 'minted)
 #+end_src
 
-With that in place we can say that source code listings should be formatted with minted.  (This has to be set this way, there is [[https://lists.gnu.org/archive/html/emacs-orgmode/2022-12/msg00579.html][no way to change it in-buffer]].)
+But I don't want =minted= to be one of the included packages in /every/ LaTeX export, because then I always have to run ~pdflatex -shell-escape~, even if there are no source blocks. Instead, I use this function (based on a [[http://xahlee.info/emacs/emacs/elisp_toggle_command.html][tip from Xah Lee]]) to toggle those settings on or off.  When I'm working on a file that I want to export using =minted=, I run ~M-x wtd/org-toggle-minted~ to turn things on.  When I'm done, I run it again to turn things off.  (There would be a way to tweak ~org-latex-pdf-process~ also, to handle the shell escape option, but I'm happy to do it by hand.)
 
 #+begin_src emacs-lisp
-(setq org-latex-src-block-backend 'minted) ;; 'verbatim is the default
+(defun wtd/org-toggle-minted ()
+  "Toggle whether or not Org should use minted for LaTeX."
+  (interactive)
+  (if (get 'wtd-org-minted-on-or-off 'state)
+      (progn
+	(setq org-latex-packages-alist (delete '("" "minted" nil) org-latex-packages-alist))
+	(setq org-latex-src-block-backend 'verbatim)
+	(put 'wtd-org-minted-on-or-off 'state nil)
+	(message "Minted is off")
+	)
+    (progn
+      (add-to-list 'org-latex-packages-alist '("" "minted" nil))
+      (setq org-latex-src-block-backend 'minted)
+      (put 'wtd-org-minted-on-or-off 'state t)
+      (message "Minted is on; use pdflatex -shell-escape -interaction=nonstopmode")
+      )
+    )
+  )
 #+end_src
 
 Minted has all sorts of options.  They can be set here, in an association list, that will be passed to every source block.  However, this takes precedence over everything else in the file, so it's very strong.  I prefer to define options with ~\setminted{}~ added with ~latex_header~ at the top of the document.  I'll set it up it that every source block exported has lines to the left (the options are: =none=, =leftline=, =topline=, =bottomline=, =lines=, =single=), but then I won't export this, so it won't take effect.
