@@ -2277,6 +2277,17 @@ To connect with [[https://www.zotero.org/][Zotero]], use [[https://gitlab.com/eg
   )
 #+end_src
 
+* Citations
+
+Testing out some citation stuff.
+
+#+begin_src emacs-lisp
+(use-package citeproc
+  :defer t
+  :diminish citeproc
+  )
+#+end_src
+
 * Polymode (not in use)
 
 [[https://github.com/vspinu/polymode/][Polymode]], for Markdown + R + Yaml etc.

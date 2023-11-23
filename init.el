@@ -1152,3 +1152,8 @@ already narrowed."
   :defer t
   :diminish zotxt
   )
+
+(use-package citeproc
+  :defer t
+  :diminish citeproc
+  )
