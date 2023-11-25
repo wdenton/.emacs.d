@@ -74,10 +74,10 @@
 ;; And set its colour
 ;; (set-face-background hl-line-face "#efefef")
 
-(setq window-divider-default-places 'right-only
-      window-divider-default-right-width 1)
-(set-face-attribute 'window-divider nil :foreground (face-foreground 'default))
-(window-divider-mode +1)
+(use-package spacious-padding
+  :config
+  (spacious-padding-mode)
+  )
 
 (set-default 'cursor-type '(bar . 2))
 
@@ -347,6 +347,7 @@ already narrowed."
 
 (use-package counsel
   ;; :bind (("C-x b" . counsel-switch-buffer) ;; Show list of buffers to switch to, but also show the buffer at point while moving through list.  Slow!
+  :diminish counsel-mode
   :config
   (counsel-mode)
   )

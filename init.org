@@ -282,7 +282,7 @@ Never use an X dialog box; use the minibuffer instead.
 
 * Appearance
 
-** Little tweaks
+** General
 
 Proper line wrapping.
 
@@ -316,21 +316,13 @@ Set whether the underline line is at the baseline (just below an x) or the desce
 (setq x-underline-at-descent-line t)
 #+end_src
 
-Fringe indicators showing that the beginning and end (｢｣) of the buffer, if displayed, or that there is more above or below (↑↓).  (Not in use; I don't see a need for it.)
-
-#+begin_src emacs-lisp :tangle no
-(setq-default indicate-buffer-boundaries 'left)
-#+end_src
-
-** Window divider
-
-[[https://www.gnu.org/software/emacs/manual/html_node/emacs/Window-Dividers.html][Window dividers]] help distinguish windows when the frame is split.  This gives a nice visible line when there's a vertical split.
+Protesilaos Stavrou's [[https://git.sr.ht/~protesilaos/spacious-padding][spacious-padding]] mode makes things look comfortably nicer.
 
 #+begin_src emacs-lisp
-(setq window-divider-default-places 'right-only
-      window-divider-default-right-width 1)
-(set-face-attribute 'window-divider nil :foreground (face-foreground 'default))
-(window-divider-mode +1)
+(use-package spacious-padding
+  :config
+  (spacious-padding-mode)
+  )
 #+end_src
 
 ** Pointer
@@ -847,6 +839,7 @@ Then Counsel.  "Counsel takes this further, providing versions of common Emacs c
 #+begin_src emacs-lisp
 (use-package counsel
   ;; :bind (("C-x b" . counsel-switch-buffer) ;; Show list of buffers to switch to, but also show the buffer at point while moving through list.  Slow!
+  :diminish counsel-mode
   :config
   (counsel-mode)
   )
