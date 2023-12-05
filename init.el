@@ -143,11 +143,6 @@
 
 (column-number-mode t)
 
-(use-package powerline
-  :config
-  (powerline-default-theme)
-  )
-
 (diminish 'abbrev-mode)
 (diminish 'emacs-lisp-d-mode " Ⓛ")
 

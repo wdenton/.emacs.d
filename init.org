@@ -500,9 +500,9 @@ Also show which column I'm in.
 (column-number-mode t)
 #+end_src
 
-Fancy up the mode line with [[https://github.com/milkypostman/powerline/][powerline]].  Sticking with the default seems to be nice enough for me.
+I used to use [[https://github.com/milkypostman/powerline/][powerline]], but went back to just the default.  I'll leave the old invocation here for a while.
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package powerline
   :config
   (powerline-default-theme)
