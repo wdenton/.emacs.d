@@ -135,7 +135,9 @@
   :config
   ;; Stop the theme from messing up Org headlines and using variable pitch everywhere.
   (setq solarized-use-variable-pitch nil
-	solarized-scale-org-headlines nil)
+	solarized-scale-org-headlines nil
+	solarized-high-contrast-mode-line t
+	solarized-use-more-italic t)
   (load-theme 'solarized-dark t)
   )
 
