@@ -529,8 +529,6 @@ And here's a list of various other modes I hide a different way.
 (eval-after-load "org-indent" '(diminish 'org-indent-mode)) ;; →
 (eval-after-load "outline" '(diminish 'outline-minor-mode))
 (eval-after-load "rainbow-mode" '(diminish 'rainbow-mode))
-(eval-after-load "simple" '(diminish 'visual-line-mode))
-(eval-after-load "smerge-mode" '(diminish 'smerge-mode))
 (eval-after-load "subword" '(diminish 'subword-mode))
 #+end_src
 
@@ -1290,7 +1288,7 @@ Tell dired how to handle some file types.
 (require 'dired-x)
 #+end_src
 
-Emacs 24.4 defaults to an =ls -1= (dash one) view, not =ls -l= ( dash ell), but I want the long format.
+I want the long (like ~ls -l~ )format in file listings.
 
 #+begin_src emacs-lisp
 (setq diredp-hide-details-initially-flag nil)

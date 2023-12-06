@@ -156,8 +156,6 @@
 (eval-after-load "org-indent" '(diminish 'org-indent-mode)) ;; →
 (eval-after-load "outline" '(diminish 'outline-minor-mode))
 (eval-after-load "rainbow-mode" '(diminish 'rainbow-mode))
-(eval-after-load "simple" '(diminish 'visual-line-mode))
-(eval-after-load "smerge-mode" '(diminish 'smerge-mode))
 (eval-after-load "subword" '(diminish 'subword-mode))
 
 (global-prettify-symbols-mode 1)
