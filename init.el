@@ -490,6 +490,11 @@ already narrowed."
 					(interactive)
 					(kill-line 0)))
 
+(use-package browse-kill-ring
+  :config
+  (setq browse-kill-ring-highlight-current-entry t)
+  )
+
 (use-package flyspell-correct
   :after flyspell
   :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-wrapper)))
@@ -563,7 +568,7 @@ already narrowed."
 
 (setq font-lock-maximum-decoration (quote ((dired-mode) (t . t))))
 
-(defun delete-current-buffer-file ()
+(defun wtd/delete-current-buffer-file ()
   "Delete file connected to current buffer and kill buffer."
   (interactive)
   (let ((filename (buffer-file-name))
@@ -575,25 +580,9 @@ already narrowed."
         (delete-file filename)
         (kill-buffer buffer)
         (message "File '%s' successfully removed" filename)))))
-(global-set-key (kbd "C-x C-k") 'delete-current-buffer-file)
+(global-set-key (kbd "C-x C-k") 'wtd/delete-current-buffer-file)
 
-(defun rename-current-buffer-file ()
-  "Rename current buffer and file it is visiting."
-  (interactive)
-  (let ((name (buffer-name))
-        (filename (buffer-file-name)))
-    (if (not (and filename (file-exists-p filename)))
-        (error "Buffer '%s' is not visiting a file!" name)
-      (let ((new-name (read-file-name "New name: " filename)))
-        (if (get-buffer new-name)
-            (error "A buffer named '%s' already exists!" new-name)
-          (rename-file filename new-name 1)
-          (rename-buffer new-name)
-          (set-visited-file-name new-name)
-          (set-buffer-modified-p nil)
-          (message "File '%s' successfully renamed to '%s'"
-                   name (file-name-nondirectory new-name)))))))
-(global-set-key (kbd "C-x C-r") 'rename-current-buffer-file)
+(global-set-key (kbd "C-x C-r") 'rename-visited-file)
 
 (use-package csv-mode)
 
@@ -1144,22 +1133,6 @@ already narrowed."
 
 (put 'LaTeX-narrow-to-environment 'disabled nil)
 (put 'TeX-narrow-to-group 'disabled nil)
-
-(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-(setq reftex-plug-into-AUCTeX t)
-(eval-after-load "reftex" '(diminish 'reftex-mode))
-(setq reftex-bibliography-commands '("bibliography" "nobibliography" "addbibresource"))
-
-(eval-after-load 'reftex-vars
-  '(progn
-     ;; (also some other reftex-related customizations)
-     (setq reftex-cite-format
-           '((?\C-m . "\\cite[]{%l}")
-             (?f . "\\footcite[][]{%l}")
-             (?t . "\\textcite[]{%l}")
-             (?p . "\\parencite[]{%l}")
-             (?o . "\\citepr[]{%l}")
-             (?n . "\\nocite{%l}")))))
 
 (use-package zotxt
   :defer t

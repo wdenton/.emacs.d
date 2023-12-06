@@ -1123,6 +1123,15 @@ Allow pasting selection outside of Emacs.
 					(kill-line 0)))
 #+end_src
 
+Use [[https://github.com/browse-kill-ring/browse-kill-ring][browse-kill-ring]] when I want to see the whole kill ring and more easily choose what I want to pick out.
+
+#+begin_src emacs-lisp
+(use-package browse-kill-ring
+  :config
+  (setq browse-kill-ring-highlight-current-entry t)
+  )
+#+end_src
+
 ** Spelling
 
 Usually I invoke =M-x ispell= to [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html][check spelling]], or =M-$= on a word to deal with it, but I'm going to try [[https://github.com/d12frosted/flyspell-correct][flyspell-correct]] and see how that helps.  =C-;= to jump back to the first misspelled word before the point, then jump back to where you were.  Good for very easily fixing a mistake a few words back.  (Use ~M-o~ to see the options for saving or ignoring a word.)
@@ -1313,13 +1322,13 @@ Make it easier to move and copy files across windows.
 
 ** Rename or delete the current buffer and its file
 
-File management shortcuts from [[https://github.com/bodil/emacs.d][Bodil Stokke]]'s setup.  These are both really handy.
+A file management shortcut from [[https://github.com/bodil/emacs.d][Bodil Stokke]]'s setup, and something that she also had done but is now handled by a built-in function.
 
 + ~C-x C-k~ to delete the file being edited and kill the buffer
-+ ~C-x C-r~ to rename the file being edited end the current buffer
++ ~C-x C-r~ to rename the file being edited and the current buffer
 
 #+begin_src emacs-lisp
-(defun delete-current-buffer-file ()
+(defun wtd/delete-current-buffer-file ()
   "Delete file connected to current buffer and kill buffer."
   (interactive)
   (let ((filename (buffer-file-name))
@@ -1331,27 +1340,11 @@ File management shortcuts from [[https://github.com/bodil/emacs.d][Bodil Stokke]
         (delete-file filename)
         (kill-buffer buffer)
         (message "File '%s' successfully removed" filename)))))
-(global-set-key (kbd "C-x C-k") 'delete-current-buffer-file)
+(global-set-key (kbd "C-x C-k") 'wtd/delete-current-buffer-file)
 #+end_src
 
 #+begin_src emacs-lisp
-(defun rename-current-buffer-file ()
-  "Rename current buffer and file it is visiting."
-  (interactive)
-  (let ((name (buffer-name))
-        (filename (buffer-file-name)))
-    (if (not (and filename (file-exists-p filename)))
-        (error "Buffer '%s' is not visiting a file!" name)
-      (let ((new-name (read-file-name "New name: " filename)))
-        (if (get-buffer new-name)
-            (error "A buffer named '%s' already exists!" new-name)
-          (rename-file filename new-name 1)
-          (rename-buffer new-name)
-          (set-visited-file-name new-name)
-          (set-buffer-modified-p nil)
-          (message "File '%s' successfully renamed to '%s'"
-                   name (file-name-nondirectory new-name)))))))
-(global-set-key (kbd "C-x C-r") 'rename-current-buffer-file)
+(global-set-key (kbd "C-x C-r") 'rename-visited-file)
 #+end_src
 
 * File types
@@ -2254,9 +2247,9 @@ Let me do some narrowing in LaTeX documents ... but narrow-or-widen-dwim (~C-x w
 (put 'TeX-narrow-to-group 'disabled nil)
 #+end_src
 
-RefTeX.
+RefTeX. (December 2023: I don't think I ever use this, so I'm not tangling it.)
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
 (eval-after-load "reftex" '(diminish 'reftex-mode))
@@ -2265,7 +2258,7 @@ RefTeX.
 
 From [[http://tex.stackexchange.com/questions/50827/a-simpletons-guide-to-tex-workflow-with-emacs/50919#50919][Stack Overflow, as usual]].
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (eval-after-load 'reftex-vars
   '(progn
      ;; (also some other reftex-related customizations)
