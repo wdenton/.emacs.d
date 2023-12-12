@@ -657,7 +657,7 @@ already narrowed."
    org-display-inline-images t ;; Embed an image with [[file:foo.png]] and then C-c C-x C-v to view
    org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar" ;; External dependency: ditaa
    org-ellipsis " ⬎" ;; ⤵ ↴  Change the ellipsis that indicates hidden content
-   org-export-backends (quote (html latex md odt)) ;; Exporting: I will see these export options after C-c C-e ;; beamer reveal
+   org-export-backends (quote (ascii html latex md odt)) ;; Exporting: I will see these export options after C-c C-e ;; beamer reveal
    ;; org-export-date-timestamp-format "%d %m %Y" ;; Date format on exports
    org-export-with-smart-quotes t ;; Turn plain quotes into posh (I can't include examples in here or it breaks paren matching!)
    org-fontify-whole-heading-line t
