@@ -91,20 +91,20 @@
 
 (set-face-attribute 'default nil :font "DejaVu Sans Mono" :height wtd-fixed-pitch-height)
 
-(use-package mixed-pitch
-  :diminish
-  :hook
-  (text-mode . mixed-pitch-mode)
-  ;; (org-mode markdown-mode)
-  :config
-  (setq mixed-pitch-set-height t)
-  (set-face-attribute 'fixed-pitch nil :inherit 'default)
-  ;; (set-face-attribute 'variable-pitch nil :family "Baskervald ADF Std" :height 1.2)
-  ;; (set-face-attribute 'variable-pitch nil :family "DejaVu Sans" :height 1.1)
-  (set-face-attribute 'variable-pitch nil :family "DejaVu Serif" :height 1.2)
-  ;; (setq left-margin-width 10)
-  ;; (setq right-margin-width 10)
-  )
+ (use-package mixed-pitch
+   :diminish
+   :hook
+   (text-mode . mixed-pitch-mode)
+   ;; (org-mode markdown-mode)
+   :config
+   (setq mixed-pitch-set-height t)
+   (set-face-attribute 'fixed-pitch nil :inherit 'default)
+   ;; (set-face-attribute 'variable-pitch nil :family "Baskervald ADF Std" :height 1.2)
+   ;; (set-face-attribute 'variable-pitch nil :family "DejaVu Sans" :height 1.1)
+   (set-face-attribute 'variable-pitch nil :family "DejaVu Serif" :height 1.2)
+   ;; (setq left-margin-width 10)
+   ;; (setq right-margin-width 10)
+   )
 
 (setq inhibit-compacting-font-caches t)
 
@@ -485,6 +485,13 @@ already narrowed."
   ;; (setq consult-project-function nil)
 )
 
+(use-package corfu
+  :init
+  (global-corfu-mode)
+  )
+
+(setq tab-always-indent 'complete) ;; Try to indent current line; if already indented, try to complete the thing at point.
+
 (define-prefix-command 'launcher-map)
 (define-key ctl-x-map "l" 'launcher-map)
 (define-key launcher-map "c" #'calculator) ; calc is too much
@@ -626,13 +633,6 @@ already narrowed."
   :config
   (use-package yasnippet-snippets)
   (yas-global-mode 1)
-  )
-
-(setq tab-always-indent 'complete) ;; Try to indent current line; if already indented, try to complete the thing at point.
-
-(use-package corfu
-  :init
-  (global-corfu-mode)
   )
 
 (use-package undo-tree

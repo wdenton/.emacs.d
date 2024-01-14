@@ -802,11 +802,11 @@ For [[https://github.com/purcell/ibuffer-projectile][ibuffer-projectile]].
   )
 #+end_src
 
-* Minibuffer
-
-** Vertico and friends
+* Completion and the minibuffer
 
 In January 2023 I moved from the Ivy-[[https://github.com/abo-abo/swiper][Swiper]]-Counsel system (which served me well for many years) to [[https://github.com/minad/vertico/][Vertico]] and its friends.
+
+** Vertico
 
 First, set up Vertico (VErtical Interactive COmpletion), a "minimalistic vertical completion UI based on the default completion system."
 
@@ -832,6 +832,8 @@ This adds some extra features for navigating directories with ~find-file~.
   :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
 #+end_src
 
+** Orderless
+
 [[https://github.com/oantolin/orderless][Orderless]] "provides an orderless completion style that divides the pattern into space-separated components, and matches candidates that match all of the components in any order."  It relies on ~savehist~ for suggestions based on history.
 
 #+begin_src emacs-lisp
@@ -850,6 +852,8 @@ This adds some extra features for navigating directories with ~find-file~.
   )
 #+end_src
 
+** Marginalia
+
 [[https://github.com/minad/marginalia][Marginalia]] "adds marginalia to the minibuffer completions" such as file details, command definitions and so on.  This is really handy.
 
 #+begin_src emacs-lisp
@@ -864,6 +868,8 @@ This adds some extra features for navigating directories with ~find-file~.
   (marginalia-mode)
   )
 #+end_src
+
+** Consult
 
 And [[https://github.com/minad/consult][Consult]] is a big one, it "provides search and navigation commands based on the Emacs completion function =completing-read=. Completion allows you to quickly select an item from a list of candidates."  I've overwritten some key bindings so the Consult version replaces the built-in version.  I've also left a lot of suggested bindings in place here that I don't use right now, but might.
 
@@ -1010,6 +1016,23 @@ I don't want to see previews of any remote files (perhaps bookmarked with Tramp)
 
 (setq consult--source-buffer
       (plist-put consult--source-buffer :state #'consult-buffer-state-no-tramp))
+#+end_src
+
+** Corfu
+
+Connected to all the above is [[https://github.com/minad/corfu][Corfu]], which is "the minimalistic in-buffer completion counterpart" of Vertico.
+
+#+begin_src emacs-lisp
+(use-package corfu
+  :init
+  (global-corfu-mode)
+  )
+#+end_src
+
+** Small tweaks
+
+#+begin_src emacs-lisp
+(setq tab-always-indent 'complete) ;; Try to indent current line; if already indented, try to complete the thing at point.
 #+end_src
 
 * Command launchers
@@ -1303,42 +1326,6 @@ The [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Abbrev-Files.htm
   :config
   (use-package yasnippet-snippets)
   (yas-global-mode 1)
-  )
-#+end_src
-
-** Completions
-
-#+begin_src emacs-lisp
-(setq tab-always-indent 'complete) ;; Try to indent current line; if already indented, try to complete the thing at point.
-#+end_src
-
-*** Company
-
-[[https://company-mode.github.io/][Company]] "is a text completion framework for Emacs. The name stands for "complete anything". It uses pluggable back-ends and front-ends to retrieve and display completion candidates."
-
-#+begin_src emacs-lisp :tangle no
-(use-package company
-  :diminish company-mode
-  :init
-  ;; (global-company-mode)
-  (add-hook 'ruby-mode-hook 'company-mode)
-  :config
-  (setq company-minimum-prefix-length 1)
-  (setq company-idle-delay 1)
-  (setq company-tooltip-align-annotations 't)          ; Align annotations to the right tooltip border.
-  (setq company-begin-commands '(self-insert-command)) ; Start autocompletion only after typing.
-  (setq company-tooltip-limit 20)                      ; Bigger pop-up windows.
-  )
-#+end_src
-
-*** Corfu
-
-Trying out [[https://github.com/minad/corfu][Corfu]] (smaller than Company), "which relies on the Emacs completion facilities and concentrates on providing a polished completion UI."
-
-#+begin_src emacs-lisp
-(use-package corfu
-  :init
-  (global-corfu-mode)
   )
 #+end_src
 
