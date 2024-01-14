@@ -1018,6 +1018,50 @@ I don't want to see previews of any remote files (perhaps bookmarked with Tramp)
       (plist-put consult--source-buffer :state #'consult-buffer-state-no-tramp))
 #+end_src
 
+** Embark
+
+I didn't get what [[https://github.com/oantolin/embark][Embark]] does until I tried it, and I'm not sure yet how best to use it.  If the point is on something interesting, ~embark-act~ (bound to ~C-.~) will pop up a list of actions that can be taken on what's at the point: "You can think of embark-act as a keyboard-based version of a right-click contextual menu."  It's context-dependent, so it acts differently for Org source blocks, URLs, and so on.  ~M-.~ runs ~embark-dwim~ and performs the default action, which might not be what I want, so I should always check first.
+
+#+begin_src emacs-lisp
+(use-package embark
+  :ensure t
+  :bind
+  (("C-." . embark-act)
+   ("M-." . embark-dwim)
+   ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
+  :init
+  ;; Optionally replace the key help with a completing-read interface
+  (setq prefix-help-command #'embark-prefix-help-command)
+
+  ;; Show the Embark target at point via Eldoc. You may adjust the
+  ;; Eldoc strategy, if you want to see the documentation from
+  ;; multiple providers. Beware that using this can be a little
+  ;; jarring since the message shown in the minibuffer can be more
+  ;; than one line, causing the modeline to move up and down:
+
+  ;; (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target)
+  ;; (setq eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
+
+  :config
+  ;; Hide the mode line of the Embark live/completions buffers
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 nil
+                 (window-parameters (mode-line-format . none))))
+  )
+#+end_src
+
+This connects Embark and Consult.
+
+#+begin_src emacs-lisp
+;; Consult users will also want the embark-consult package.
+(use-package embark-consult
+  :ensure t ; only need to install it, embark loads it after consult if found
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode)
+  )
+#+end_src
+
 ** Corfu
 
 Connected to all the above is [[https://github.com/minad/corfu][Corfu]], which is "the minimalistic in-buffer completion counterpart" of Vertico.
