@@ -396,7 +396,7 @@ Always do font-locking.
 
 ** Unicode and UTF-8
 
-[[https://github.com/purcell/list-unicode-display][list-unicode-display]] "provides a command which searches for Unicode characters by name, and displays a list of matching characters with their names in a buffer."  Similar to ~C-c 8~ in Counsel, which gives an interactive search for Unicode characters.
+[[https://github.com/purcell/list-unicode-display][list-unicode-display]] "provides a command which searches for Unicode characters by name, and displays a list of matching characters with their names in a buffer."
 
 #+begin_src emacs-lisp
 (use-package list-unicode-display)
@@ -804,81 +804,212 @@ For [[https://github.com/purcell/ibuffer-projectile][ibuffer-projectile]].
 
 * Minibuffer
 
-** Amx
+** Vertico and friends
 
-[[https://github.com/DarwinAwardWinner/amx/][Amx]] is a replacement for ~M-x~.  It works with Ivy.
+In January 2023 I moved from the Ivy-[[https://github.com/abo-abo/swiper][Swiper]]-Counsel system (which served me well for many years) to [[https://github.com/minad/vertico/][Vertico]] and its friends.
+
+First, set up Vertico (VErtical Interactive COmpletion), a "minimalistic vertical completion UI based on the default completion system."
 
 #+begin_src emacs-lisp
-(use-package amx
-  :requires helm
-  :after ivy
-  :custom
-  (amx-backend 'ivy)
+(use-package vertico
+  :init
+  (vertico-mode)
+)
+#+end_src
+
+This adds some extra features for navigating directories with ~find-file~.
+
+#+begin_src emacs-lisp
+(use-package vertico-directory
+  :after vertico
+  :ensure nil
+  ;; More convenient directory navigation commands
+  :bind (:map vertico-map
+              ("RET" . vertico-directory-enter)
+              ("DEL" . vertico-directory-delete-char)
+              ("M-DEL" . vertico-directory-delete-word))
+  ;; Tidy shadowed file names
+  :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
+#+end_src
+
+[[https://github.com/oantolin/orderless][Orderless]] "provides an orderless completion style that divides the pattern into space-separated components, and matches candidates that match all of the components in any order."  It relies on ~savehist~ for suggestions based on history.
+
+#+begin_src emacs-lisp
+(use-package savehist
+  :init
+  (savehist-mode)
   )
 #+end_src
 
-** Ivy, Swiper and Counsel
+#+begin_src emacs-lisp
+(use-package orderless
+  :init
+  (setq completion-styles '(orderless basic)
+	completion-category-defaults nil
+	completion-category-overrides '((file (styles partial-completion))))
+  )
+#+end_src
 
-These [[https://github.com/abo-abo/swiper][three packages]] all work together:  "Ivy, a generic completion mechanism for Emacs.  Counsel [is] a collection of Ivy-enhanced versions of common Emacs commands.  Swiper is an Ivy-enhanced alternative to Isearch."
-
-First, call up Ivy.  "~ivy-mode~ ensures that any Emacs command using ~completing-read-function~ uses ivy for completion."
+[[https://github.com/minad/marginalia][Marginalia]] "adds marginalia to the minibuffer completions" such as file details, command definitions and so on.  This is really handy.
 
 #+begin_src emacs-lisp
-(use-package ivy
-  :diminish
+(use-package marginalia
+  ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
+  ;; available in the *Completions* buffer, add it to the
+  ;; `completion-list-mode-map'.
+  :bind (:map minibuffer-local-map
+	      ("M-A" . marginalia-cycle))
+
+  :init
+  (marginalia-mode)
+  )
+#+end_src
+
+And [[https://github.com/minad/consult][Consult]] is a big one, it "provides search and navigation commands based on the Emacs completion function =completing-read=. Completion allows you to quickly select an item from a list of candidates."  I've overwritten some key bindings so the Consult version replaces the built-in version.  I've also left a lot of suggested bindings in place here that I don't use right now, but might.
+
+#+begin_src emacs-lisp
+(use-package consult
+  ;; Replace bindings. Lazily loaded due by `use-package'.
+  :bind (;; C-c bindings in `mode-specific-map'
+         ("C-c M-x" . consult-mode-command)
+         ("C-c h" . consult-history)
+         ("C-c k" . consult-kmacro)
+         ("C-c m" . consult-man)
+         ("C-c i" . consult-info)
+         ([remap Info-search] . consult-info)
+         ;; C-x bindings in `ctl-x-map'
+         ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
+         ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
+         ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
+         ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
+         ("C-x t b" . consult-buffer-other-tab)    ;; orig. switch-to-buffer-other-tab
+         ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
+         ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
+         ;; Custom M-# bindings for fast register access
+         ("M-#" . consult-register-load)
+         ("M-'" . consult-register-store)          ;; orig. abbrev-prefix-mark (unrelated)
+         ("C-M-#" . consult-register)
+         ;; Other custom bindings
+         ("M-y" . consult-yank-pop)                ;; orig. yank-pop
+         ;; M-g bindings in `goto-map'
+         ("M-g e" . consult-compile-error)
+         ("M-g f" . consult-flymake)               ;; Alternative: consult-flycheck
+         ([remap goto-line] . consult-goto-line) ;; Mine
+         ;; ("M-g g" . consult-goto-line)             ;; orig. goto-line
+         ;; ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
+         ("M-g o" . consult-outline)               ;; Alternative: consult-org-heading
+         ("M-g m" . consult-mark)
+         ("M-g k" . consult-global-mark)
+         ([remap imenu] . consult-imenu) ;; Mine
+         ("M-i" . consult-imenu) ;; Mine
+         ;;("M-g i" . consult-imenu)
+         ("M-g I" . consult-imenu-multi)
+         ;; M-s bindings in `search-map'
+         ("M-s d" . consult-find)                  ;; Alternative: consult-fd
+         ("M-s c" . consult-locate)
+         ("M-s g" . consult-grep)
+         ("M-s G" . consult-git-grep)
+         ("M-s r" . consult-ripgrep)
+         ("C-s" . consult-line) ;; Mine, was M-s -l
+         ("M-s L" . consult-line-multi)
+         ("M-s k" . consult-keep-lines)
+         ("M-s u" . consult-focus-lines)
+         ;; Isearch integration
+         ("M-s e" . consult-isearch-history)
+         :map isearch-mode-map
+         ("M-e" . consult-isearch-history)         ;; orig. isearch-edit-string
+         ("M-s e" . consult-isearch-history)       ;; orig. isearch-edit-string
+         ("M-s l" . consult-line)                  ;; needed by consult-line to detect isearch
+         ("M-s L" . consult-line-multi)            ;; needed by consult-line to detect isearch
+         ;; Minibuffer history
+         :map minibuffer-local-map
+         ("M-s" . consult-history)                 ;; orig. next-matching-history-element
+         ("M-r" . consult-history))                ;; orig. previous-matching-history-element
+
+  ;; Enable automatic preview at point in the *Completions* buffer. This is
+  ;; relevant when you use the default completion UI.
+  :hook (completion-list-mode . consult-preview-at-point-mode)
+
+  ;; The :init configuration is always executed (Not lazy)
+  :init
+
+  ;; Optionally configure the register formatting. This improves the register
+  ;; preview for `consult-register', `consult-register-load',
+  ;; `consult-register-store' and the Emacs built-ins.
+  (setq register-preview-delay 0.5
+        register-preview-function #'consult-register-format)
+
+  ;; Optionally tweak the register preview window.
+  ;; This adds thin lines, sorting and hides the mode line of the window.
+  (advice-add #'register-preview :override #'consult-register-window)
+
+  ;; Use Consult to select xref locations with preview
+  (setq xref-show-xrefs-function #'consult-xref
+        xref-show-definitions-function #'consult-xref)
+
+  ;; Configure other variables and modes in the :config section,
+  ;; after lazily loading the package.
   :config
-  (ivy-mode 1)
-  (setq ivy-use-virtual-buffers t)
-  (setq enable-recursive-minibuffers t)
-  (setq ivy-count-format "%d/%d ")
-  )
+
+  ;; Optionally configure preview. The default value
+  ;; is 'any, such that any key triggers the preview.
+  ;; (setq consult-preview-key 'any)
+  ;; (setq consult-preview-key "M-.")
+  ;; (setq consult-preview-key '("S-<down>" "S-<up>"))
+  ;; For some commands and buffer sources it is useful to configure the
+  ;; :preview-key on a per-command basis using the `consult-customize' macro.
+  (consult-customize
+   consult-theme :preview-key '(:debounce 0.2 any)
+   consult-ripgrep consult-git-grep consult-grep
+   consult-bookmark consult-recent-file consult-xref
+   consult--source-bookmark consult--source-file-register
+   consult--source-recent-file consult--source-project-recent-file
+   ;; :preview-key "M-."
+   :preview-key '(:debounce 0.4 any))
+
+  ;; Optionally configure the narrowing key.
+  ;; Both < and C-+ work reasonably well.
+  (setq consult-narrow-key "<") ;; "C-+"
+
+  ;; Optionally make narrowing help available in the minibuffer.
+  ;; You may want to use `embark-prefix-help-command' or which-key instead.
+  ;; (define-key consult-narrow-map (vconcat consult-narrow-key "?") #'consult-narrow-help)
+
+  ;; By default `consult-project-function' uses `project-root' from project.el.
+  ;; Optionally configure a different project root function.
+  ;;;; 1. project.el (the default)
+  ;; (setq consult-project-function #'consult--default-project--function)
+  ;;;; 2. vc.el (vc-root-dir)
+  ;; (setq consult-project-function (lambda (_) (vc-root-dir)))
+  ;;;; 3. locate-dominating-file
+  ;; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
+  ;;;; 4. projectile.el (projectile-project-root)
+  ;; (autoload 'projectile-project-root "projectile")
+  ;; (setq consult-project-function (lambda (_) (projectile-project-root)))
+  ;;;; 5. No project support
+  ;; (setq consult-project-function nil)
+)
 #+end_src
 
-Then Counsel.  "Counsel takes this further, providing versions of common Emacs commands that are customised to make the best use of Ivy."
+I don't want to see previews of any remote files (perhaps bookmarked with Tramp), so I'm using [[https://github.com/minad/consult/wiki#do-not-preview-exwm-windows-or-tramp-buffers][this snippet from the Consult wiki]].  Unfortunately it doesn't work, and something about it messes up the rest of the configuration, so I'm not tangling it until this is sorted out.
 
-#+begin_src emacs-lisp
-(use-package counsel
-  ;; :bind (("C-x b" . counsel-switch-buffer) ;; Show list of buffers to switch to, but also show the buffer at point while moving through list.  Slow!
-  :diminish counsel-mode
-  :config
-  (counsel-mode)
-  )
-#+end_src
+#+begin_src emacs-lisp :tangle no
+(defun consult-buffer-state-no-tramp ()
+  "Buffer state function that doesn't preview Tramp buffers."
+  (let ((orig-state (consult--buffer-state))
+        (filter (lambda (action cand)
+                  (if (and cand
+                           (or (eq action 'return)
+                               (let ((buffer (get-buffer cand)))
+                                 (and buffer
+                                      (not (file-remote-p (buffer-local-value 'default-directory buffer)))))))
+                      cand
+                    nil))))
+    (lambda (action cand)
+      (funcall orig-state action (funcall filter action cand)))))
 
-Then Swiper.  "Swiper is an alternative to isearch that uses Ivy to show an overview of all matches."  Override some keystrokes that aren't already handled by ~counsel-mode~ being on.
-
-#+begin_src emacs-lisp
-(use-package swiper
-  :after ivy
-  :bind (("C-s" . swiper)
-         ("C-c C-r" . ivy-resume)
-	     ("M-i" . counsel-imenu)
-         ("C-M-i" . complete-symbol)
-         ("C-." . counsel-imenu)
-         ("C-c 8" . counsel-unicode-char)
-         ("C-c g" . counsel-git)
-         ("C-c k" . counsel-ag)
-         ("C-c v" . ivy-push-view)
-         ("C-c V" . ivy-pop-view)
-         ("M-y" . counsel-yank-pop))
-  )
-#+end_src
-
-From the FAQ:
-
-#+begin_quote
-Q: How do I enter an input that matches one of the candidates instead of this candidate? Example: create a file bar when a file barricade exists in the current directory.
-
-A: Press C-M-j. Alternatively, you can make the prompt line selectable with (setq ivy-use-selectable-prompt t).
-#+end_quote
-
-Finally, enhance Ivy with [[https://github.com/Yevgnen/ivy-rich][ivy-rich]] to get more details about commands and files in minibuffer listings.
-
-#+begin_src emacs-lisp
-(use-package ivy-rich
-  :config
-  (ivy-rich-mode 1)
-  )
+(setq consult--source-buffer
+      (plist-put consult--source-buffer :state #'consult-buffer-state-no-tramp))
 #+end_src
 
 * Command launchers
@@ -1138,9 +1269,6 @@ Usually I invoke =M-x ispell= to [[https://www.gnu.org/software/emacs/manual/htm
 (use-package flyspell-correct
   :after flyspell
   :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-wrapper)))
-
-(use-package flyspell-correct-ivy
-  :after flyspell-correct)
 #+end_src
 
 Use Flyspell for spell-checking in comments in programs.
@@ -1250,19 +1378,6 @@ Refresh buffers when files change.  But don't worry:  "Auto Revert will not reve
 
 #+begin_src emacs-lisp
 (global-auto-revert-mode t)
-#+end_src
-
-Don't show uninteresting files in Emacs completion window ([[https://stackoverflow.com/a/1732081/854346][from Stack Overflow]]).  When the buffer of possible files open, it shows all matches.  If I'm looking for ~foo.ext~ and hit ~C-x C-f fo TAB~ it will show ~foo.ext~ and ~foo.ext~~.  Because =~= is in completion-ignored-extensions it won't try to open ~foo.ext~~, but I'd rather not see it in the first place.
-
-#+begin_src emacs-lisp
-(defadvice completion--file-name-table (after ignoring-backups-f-n-completion activate)
-  "Filter out results when they match `completion-ignored-extensions'."
-  (let ((res ad-return-value))
-    (if (and (listp res)
-	     (stringp (car res))
-	     (cdr res))                 ; length > 1, don't ignore sole match
-	(setq ad-return-value
-              (completion-pcm--filename-try-filter res)))))
 #+end_src
 
 ** Dired

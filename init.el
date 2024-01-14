@@ -91,20 +91,20 @@
 
 (set-face-attribute 'default nil :font "DejaVu Sans Mono" :height wtd-fixed-pitch-height)
 
- (use-package mixed-pitch
-   :diminish
-   :hook
-   (text-mode . mixed-pitch-mode)
-   ;; (org-mode markdown-mode)
-   :config
-   (setq mixed-pitch-set-height t)
-   (set-face-attribute 'fixed-pitch nil :inherit 'default)
-   ;; (set-face-attribute 'variable-pitch nil :family "Baskervald ADF Std" :height 1.2)
-   ;; (set-face-attribute 'variable-pitch nil :family "DejaVu Sans" :height 1.1)
-   (set-face-attribute 'variable-pitch nil :family "DejaVu Serif" :height 1.2)
-   ;; (setq left-margin-width 10)
-   ;; (setq right-margin-width 10)
-   )
+(use-package mixed-pitch
+  :diminish
+  :hook
+  (text-mode . mixed-pitch-mode)
+  ;; (org-mode markdown-mode)
+  :config
+  (setq mixed-pitch-set-height t)
+  (set-face-attribute 'fixed-pitch nil :inherit 'default)
+  ;; (set-face-attribute 'variable-pitch nil :family "Baskervald ADF Std" :height 1.2)
+  ;; (set-face-attribute 'variable-pitch nil :family "DejaVu Sans" :height 1.1)
+  (set-face-attribute 'variable-pitch nil :family "DejaVu Serif" :height 1.2)
+  ;; (setq left-margin-width 10)
+  ;; (setq right-margin-width 10)
+  )
 
 (setq inhibit-compacting-font-caches t)
 
@@ -324,48 +324,166 @@ already narrowed."
 		(ibuffer-do-sort-by-alphabetic))))
   )
 
-(use-package amx
-  :requires helm
-  :after ivy
-  :custom
-  (amx-backend 'ivy)
+(use-package vertico
+  :init
+  (vertico-mode)
+)
+
+(use-package vertico-directory
+  :after vertico
+  :ensure nil
+  ;; More convenient directory navigation commands
+  :bind (:map vertico-map
+              ("RET" . vertico-directory-enter)
+              ("DEL" . vertico-directory-delete-char)
+              ("M-DEL" . vertico-directory-delete-word))
+  ;; Tidy shadowed file names
+  :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
+
+(use-package savehist
+  :init
+  (savehist-mode)
   )
 
-(use-package ivy
-  :diminish
+(use-package orderless
+  :init
+  (setq completion-styles '(orderless basic)
+	completion-category-defaults nil
+	completion-category-overrides '((file (styles partial-completion))))
+  )
+
+(use-package marginalia
+  ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
+  ;; available in the *Completions* buffer, add it to the
+  ;; `completion-list-mode-map'.
+  :bind (:map minibuffer-local-map
+	      ("M-A" . marginalia-cycle))
+
+  :init
+  (marginalia-mode)
+  )
+
+(use-package consult
+  ;; Replace bindings. Lazily loaded due by `use-package'.
+  :bind (;; C-c bindings in `mode-specific-map'
+         ("C-c M-x" . consult-mode-command)
+         ("C-c h" . consult-history)
+         ("C-c k" . consult-kmacro)
+         ("C-c m" . consult-man)
+         ("C-c i" . consult-info)
+         ([remap Info-search] . consult-info)
+         ;; C-x bindings in `ctl-x-map'
+         ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
+         ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
+         ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
+         ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
+         ("C-x t b" . consult-buffer-other-tab)    ;; orig. switch-to-buffer-other-tab
+         ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
+         ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
+         ;; Custom M-# bindings for fast register access
+         ("M-#" . consult-register-load)
+         ("M-'" . consult-register-store)          ;; orig. abbrev-prefix-mark (unrelated)
+         ("C-M-#" . consult-register)
+         ;; Other custom bindings
+         ("M-y" . consult-yank-pop)                ;; orig. yank-pop
+         ;; M-g bindings in `goto-map'
+         ("M-g e" . consult-compile-error)
+         ("M-g f" . consult-flymake)               ;; Alternative: consult-flycheck
+         ([remap goto-line] . consult-goto-line) ;; Mine
+         ;; ("M-g g" . consult-goto-line)             ;; orig. goto-line
+         ;; ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
+         ("M-g o" . consult-outline)               ;; Alternative: consult-org-heading
+         ("M-g m" . consult-mark)
+         ("M-g k" . consult-global-mark)
+         ([remap imenu] . consult-imenu) ;; Mine
+         ("M-i" . consult-imenu) ;; Mine
+         ;;("M-g i" . consult-imenu)
+         ("M-g I" . consult-imenu-multi)
+         ;; M-s bindings in `search-map'
+         ("M-s d" . consult-find)                  ;; Alternative: consult-fd
+         ("M-s c" . consult-locate)
+         ("M-s g" . consult-grep)
+         ("M-s G" . consult-git-grep)
+         ("M-s r" . consult-ripgrep)
+         ("C-s" . consult-line) ;; Mine, was M-s -l
+         ("M-s L" . consult-line-multi)
+         ("M-s k" . consult-keep-lines)
+         ("M-s u" . consult-focus-lines)
+         ;; Isearch integration
+         ("M-s e" . consult-isearch-history)
+         :map isearch-mode-map
+         ("M-e" . consult-isearch-history)         ;; orig. isearch-edit-string
+         ("M-s e" . consult-isearch-history)       ;; orig. isearch-edit-string
+         ("M-s l" . consult-line)                  ;; needed by consult-line to detect isearch
+         ("M-s L" . consult-line-multi)            ;; needed by consult-line to detect isearch
+         ;; Minibuffer history
+         :map minibuffer-local-map
+         ("M-s" . consult-history)                 ;; orig. next-matching-history-element
+         ("M-r" . consult-history))                ;; orig. previous-matching-history-element
+
+  ;; Enable automatic preview at point in the *Completions* buffer. This is
+  ;; relevant when you use the default completion UI.
+  :hook (completion-list-mode . consult-preview-at-point-mode)
+
+  ;; The :init configuration is always executed (Not lazy)
+  :init
+
+  ;; Optionally configure the register formatting. This improves the register
+  ;; preview for `consult-register', `consult-register-load',
+  ;; `consult-register-store' and the Emacs built-ins.
+  (setq register-preview-delay 0.5
+        register-preview-function #'consult-register-format)
+
+  ;; Optionally tweak the register preview window.
+  ;; This adds thin lines, sorting and hides the mode line of the window.
+  (advice-add #'register-preview :override #'consult-register-window)
+
+  ;; Use Consult to select xref locations with preview
+  (setq xref-show-xrefs-function #'consult-xref
+        xref-show-definitions-function #'consult-xref)
+
+  ;; Configure other variables and modes in the :config section,
+  ;; after lazily loading the package.
   :config
-  (ivy-mode 1)
-  (setq ivy-use-virtual-buffers t)
-  (setq enable-recursive-minibuffers t)
-  (setq ivy-count-format "%d/%d ")
-  )
 
-(use-package counsel
-  ;; :bind (("C-x b" . counsel-switch-buffer) ;; Show list of buffers to switch to, but also show the buffer at point while moving through list.  Slow!
-  :diminish counsel-mode
-  :config
-  (counsel-mode)
-  )
+  ;; Optionally configure preview. The default value
+  ;; is 'any, such that any key triggers the preview.
+  ;; (setq consult-preview-key 'any)
+  ;; (setq consult-preview-key "M-.")
+  ;; (setq consult-preview-key '("S-<down>" "S-<up>"))
+  ;; For some commands and buffer sources it is useful to configure the
+  ;; :preview-key on a per-command basis using the `consult-customize' macro.
+  (consult-customize
+   consult-theme :preview-key '(:debounce 0.2 any)
+   consult-ripgrep consult-git-grep consult-grep
+   consult-bookmark consult-recent-file consult-xref
+   consult--source-bookmark consult--source-file-register
+   consult--source-recent-file consult--source-project-recent-file
+   ;; :preview-key "M-."
+   :preview-key '(:debounce 0.4 any))
 
-(use-package swiper
-  :after ivy
-  :bind (("C-s" . swiper)
-         ("C-c C-r" . ivy-resume)
-	     ("M-i" . counsel-imenu)
-         ("C-M-i" . complete-symbol)
-         ("C-." . counsel-imenu)
-         ("C-c 8" . counsel-unicode-char)
-         ("C-c g" . counsel-git)
-         ("C-c k" . counsel-ag)
-         ("C-c v" . ivy-push-view)
-         ("C-c V" . ivy-pop-view)
-         ("M-y" . counsel-yank-pop))
-  )
+  ;; Optionally configure the narrowing key.
+  ;; Both < and C-+ work reasonably well.
+  (setq consult-narrow-key "<") ;; "C-+"
 
-(use-package ivy-rich
-  :config
-  (ivy-rich-mode 1)
-  )
+  ;; Optionally make narrowing help available in the minibuffer.
+  ;; You may want to use `embark-prefix-help-command' or which-key instead.
+  ;; (define-key consult-narrow-map (vconcat consult-narrow-key "?") #'consult-narrow-help)
+
+  ;; By default `consult-project-function' uses `project-root' from project.el.
+  ;; Optionally configure a different project root function.
+  ;;;; 1. project.el (the default)
+  ;; (setq consult-project-function #'consult--default-project--function)
+  ;;;; 2. vc.el (vc-root-dir)
+  ;; (setq consult-project-function (lambda (_) (vc-root-dir)))
+  ;;;; 3. locate-dominating-file
+  ;; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
+  ;;;; 4. projectile.el (projectile-project-root)
+  ;; (autoload 'projectile-project-root "projectile")
+  ;; (setq consult-project-function (lambda (_) (projectile-project-root)))
+  ;;;; 5. No project support
+  ;; (setq consult-project-function nil)
+)
 
 (define-prefix-command 'launcher-map)
 (define-key ctl-x-map "l" 'launcher-map)
@@ -497,9 +615,6 @@ already narrowed."
   :after flyspell
   :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-wrapper)))
 
-(use-package flyspell-correct-ivy
-  :after flyspell-correct)
-
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
 (setq-default abbrev-mode t)
@@ -537,15 +652,6 @@ already narrowed."
 (global-set-key (kbd "C-x f") 'find-file-at-point)
 
 (global-auto-revert-mode t)
-
-(defadvice completion--file-name-table (after ignoring-backups-f-n-completion activate)
-  "Filter out results when they match `completion-ignored-extensions'."
-  (let ((res ad-return-value))
-    (if (and (listp res)
-	     (stringp (car res))
-	     (cdr res))                 ; length > 1, don't ignore sole match
-	(setq ad-return-value
-              (completion-pcm--filename-try-filter res)))))
 
 (setq global-auto-revert-non-file-buffers t)
 
