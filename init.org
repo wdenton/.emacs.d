@@ -1018,6 +1018,18 @@ I don't want to see previews of any remote files (perhaps bookmarked with Tramp)
       (plist-put consult--source-buffer :state #'consult-buffer-state-no-tramp))
 #+end_src
 
+** Prescient
+
+[[https://github.com/radian-software/prescient.el][Prescient]] makes ~M-x~ listings and suggestions better by remembering what you've run before.
+
+#+begin_src emacs-lisp
+(use-package vertico-prescient
+  :after vertico
+  :init
+  (vertico-prescient-mode)
+  )
+#+end_src
+
 ** Embark
 
 I didn't get what [[https://github.com/oantolin/embark][Embark]] does until I tried it, and I'm not sure yet how best to use it.  If the point is on something interesting, ~embark-act~ (bound to ~C-.~) will pop up a list of actions that can be taken on what's at the point: "You can think of embark-act as a keyboard-based version of a right-click contextual menu."  It's context-dependent, so it acts differently for Org source blocks, URLs, and so on.  ~M-.~ runs ~embark-dwim~ and performs the default action, which might not be what I want, so I should always check first.

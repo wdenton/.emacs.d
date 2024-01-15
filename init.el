@@ -485,6 +485,12 @@ already narrowed."
   ;; (setq consult-project-function nil)
 )
 
+(use-package vertico-prescient
+  :after vertico
+  :init
+  (vertico-prescient-mode)
+  )
+
 (use-package embark
   :ensure t
   :bind
