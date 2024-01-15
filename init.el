@@ -489,6 +489,7 @@ already narrowed."
   :after vertico
   :init
   (vertico-prescient-mode)
+  (prescient-persist-mode)
   )
 
 (use-package embark

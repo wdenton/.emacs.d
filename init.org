@@ -1027,6 +1027,7 @@ I don't want to see previews of any remote files (perhaps bookmarked with Tramp)
   :after vertico
   :init
   (vertico-prescient-mode)
+  (prescient-persist-mode)
   )
 #+end_src
 
