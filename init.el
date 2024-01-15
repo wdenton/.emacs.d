@@ -366,6 +366,12 @@ already narrowed."
 (use-package consult
   ;; Replace bindings. Lazily loaded due by `use-package'.
   :bind (;; C-c bindings in `mode-specific-map'
+	 ;; First, settings I customized.
+         ("C-s" . consult-line) ;; The most important.
+         ([remap goto-line] . consult-goto-line)
+         ([remap imenu] . consult-imenu)
+         ("M-i" . consult-imenu)
+	 ;; The rest are copied from the suggested config.
          ("C-c M-x" . consult-mode-command)
          ("C-c h" . consult-history)
          ("C-c k" . consult-kmacro)
@@ -389,15 +395,9 @@ already narrowed."
          ;; M-g bindings in `goto-map'
          ("M-g e" . consult-compile-error)
          ("M-g f" . consult-flymake)               ;; Alternative: consult-flycheck
-         ([remap goto-line] . consult-goto-line) ;; Mine
-         ;; ("M-g g" . consult-goto-line)             ;; orig. goto-line
-         ;; ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
          ("M-g o" . consult-outline)               ;; Alternative: consult-org-heading
          ("M-g m" . consult-mark)
          ("M-g k" . consult-global-mark)
-         ([remap imenu] . consult-imenu) ;; Mine
-         ("M-i" . consult-imenu) ;; Mine
-         ;;("M-g i" . consult-imenu)
          ("M-g I" . consult-imenu-multi)
          ;; M-s bindings in `search-map'
          ("M-s d" . consult-find)                  ;; Alternative: consult-fd
@@ -405,7 +405,6 @@ already narrowed."
          ("M-s g" . consult-grep)
          ("M-s G" . consult-git-grep)
          ("M-s r" . consult-ripgrep)
-         ("C-s" . consult-line) ;; Mine, was M-s -l
          ("M-s L" . consult-line-multi)
          ("M-s k" . consult-keep-lines)
          ("M-s u" . consult-focus-lines)
@@ -442,8 +441,6 @@ already narrowed."
   (setq xref-show-xrefs-function #'consult-xref
         xref-show-definitions-function #'consult-xref)
 
-  ;; Configure other variables and modes in the :config section,
-  ;; after lazily loading the package.
   :config
 
   ;; Optionally configure preview. The default value
@@ -454,7 +451,7 @@ already narrowed."
   ;; For some commands and buffer sources it is useful to configure the
   ;; :preview-key on a per-command basis using the `consult-customize' macro.
   (consult-customize
-   consult-theme :preview-key '(:debounce 0.2 any)
+   consult-theme :preview-key '(:debounce 0.5 any)
    consult-ripgrep consult-git-grep consult-grep
    consult-bookmark consult-recent-file consult-xref
    consult--source-bookmark consult--source-file-register
@@ -653,11 +650,6 @@ already narrowed."
 (global-set-key (kbd "C-<backspace>") (lambda ()
 					(interactive)
 					(kill-line 0)))
-
-(use-package browse-kill-ring
-  :config
-  (setq browse-kill-ring-highlight-current-entry t)
-  )
 
 (use-package flyspell-correct
   :after flyspell
