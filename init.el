@@ -524,8 +524,17 @@ already narrowed."
   )
 
 (use-package corfu
+  :custom
+  ;; (corfu-cycle t)
+  (corfu-quit-at-boundary 'separator)
+  (corfu-echo-documentation 0.25)
+  :hook ((prog-mode . corfu-mode)
   :init
-  (global-corfu-mode)
+  ;; (global-corfu-mode)
+  :bind
+  (:map corfu-map
+	("<escape>" . corfu-quit)
+	)
   )
 
 (setq tab-always-indent 'complete) ;; Try to indent current line; if already indented, try to complete the thing at point.

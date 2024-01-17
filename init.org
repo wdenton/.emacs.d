@@ -1078,8 +1078,17 @@ Connected to all the above is [[https://github.com/minad/corfu][Corfu]], which i
 
 #+begin_src emacs-lisp
 (use-package corfu
+  :custom
+  ;; (corfu-cycle t)
+  (corfu-quit-at-boundary 'separator)
+  (corfu-echo-documentation 0.25)
+  :hook ((prog-mode . corfu-mode)
   :init
-  (global-corfu-mode)
+  ;; (global-corfu-mode)
+  :bind
+  (:map corfu-map
+	("<escape>" . corfu-quit)
+	)
   )
 #+end_src
 
