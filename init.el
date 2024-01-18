@@ -519,18 +519,19 @@ already narrowed."
 ;; Consult users will also want the embark-consult package.
 (use-package embark-consult
   :ensure t ; only need to install it, embark loads it after consult if found
+  :after embark consult
   :hook
   (embark-collect-mode . consult-preview-at-point-mode)
   )
 
 (use-package corfu
   :custom
-  ;; (corfu-cycle t)
+  (corfu-cycle t)
   (corfu-quit-at-boundary 'separator)
   (corfu-echo-documentation 0.25)
-  :hook ((prog-mode . corfu-mode)
+  ;; :hook ((prog-mode . corfu-mode))
   :init
-  ;; (global-corfu-mode)
+  (global-corfu-mode)
   :bind
   (:map corfu-map
 	("<escape>" . corfu-quit)

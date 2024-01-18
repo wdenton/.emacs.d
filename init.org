@@ -1067,6 +1067,7 @@ This connects Embark and Consult.
 ;; Consult users will also want the embark-consult package.
 (use-package embark-consult
   :ensure t ; only need to install it, embark loads it after consult if found
+  :after embark consult
   :hook
   (embark-collect-mode . consult-preview-at-point-mode)
   )
@@ -1079,12 +1080,12 @@ Connected to all the above is [[https://github.com/minad/corfu][Corfu]], which i
 #+begin_src emacs-lisp
 (use-package corfu
   :custom
-  ;; (corfu-cycle t)
+  (corfu-cycle t)
   (corfu-quit-at-boundary 'separator)
   (corfu-echo-documentation 0.25)
-  :hook ((prog-mode . corfu-mode)
+  ;; :hook ((prog-mode . corfu-mode))
   :init
-  ;; (global-corfu-mode)
+  (global-corfu-mode)
   :bind
   (:map corfu-map
 	("<escape>" . corfu-quit)
@@ -1991,7 +1992,7 @@ Prettify the headings and such with better bullets thanks to [[https://github.co
 
 ** Possible: org-modern
 
-https://github.com/minad/org-modern
+Perhaps try [[https://github.com/minad/org-modern][org-modern]] one day.
 
 #+begin_src emacs-lisp :tangle no
 (use-package org-modern
