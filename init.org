@@ -1195,9 +1195,9 @@ I don't use multiple cursors ... but I could.
 (use-package multiple-cursors)
 #+end_src
 
-Open a new line above or below the current one, even if the cursor is mid-sentence.
+Open a new line above or below the current one, even if the cursor is mid-sentence. (January 2024: don't tangle; I don't use this.)
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (defun open-line-below ()
   (interactive)
   (end-of-line)
@@ -1215,9 +1215,9 @@ Open a new line above or below the current one, even if the cursor is mid-senten
 (global-set-key (kbd "<C-S-return>") 'open-line-above)
 #+end_src
 
-Move an entire line up or down with C-S-up or C-S-down.
+Move an entire line up or down with C-S-up or C-S-down. (January 2024: don't tangle; I was hitting this by accident, and never used it intentionally.)
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (defun move-line-down ()
   (interactive)
   (let ((col (current-column)))
@@ -1239,9 +1239,9 @@ Move an entire line up or down with C-S-up or C-S-down.
 (global-set-key (kbd "<C-S-up>") 'move-line-up)
 #+end_src
 
-Join the following line onto this one.  Good for reformatting.
+Join the following line onto this one.  Good for reformatting.  (January 2024: Use ~unfill-region~ instead.)
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (global-set-key (kbd "M-j")
             (lambda ()
                   (interactive)
@@ -1317,9 +1317,9 @@ The [[https://github.com/k-talo/volatile-highlights.el][volatile-highlights]] mo
   )
 #+end_src
 
-Enable cutting/pasting and putting results into the X clipboard
+Enable cutting/pasting and putting results into the X clipboard. (January 2024: don't tangle; I don't think I ever use this.)
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (global-set-key [(shift delete)] 'clipboard-kill-region)
 (global-set-key [(control insert)] 'clipboard-kill-ring-save)
 (global-set-key [(shift insert)] 'clipboard-yank)

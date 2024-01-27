@@ -578,47 +578,6 @@ already narrowed."
   (("C-:" . iedit-mode))
   )
 
-(defun open-line-below ()
-  (interactive)
-  (end-of-line)
-  (newline)
-  (indent-for-tab-command))
-
-(defun open-line-above ()
-  (interactive)
-  (beginning-of-line)
-  (newline)
-  (forward-line -1)
-  (indent-for-tab-command))
-
-(global-set-key (kbd "<C-return>") 'open-line-below)
-(global-set-key (kbd "<C-S-return>") 'open-line-above)
-
-(defun move-line-down ()
-  (interactive)
-  (let ((col (current-column)))
-    (save-excursion
-      (forward-line)
-      (transpose-lines 1))
-    (forward-line)
-    (move-to-column col)))
-
-(defun move-line-up ()
-  (interactive)
-  (let ((col (current-column)))
-    (save-excursion
-      (forward-line)
-      (transpose-lines -1))
-    (move-to-column col)))
-
-(global-set-key (kbd "<C-S-down>") 'move-line-down)
-(global-set-key (kbd "<C-S-up>") 'move-line-up)
-
-(global-set-key (kbd "M-j")
-            (lambda ()
-                  (interactive)
-                  (join-line -1)))
-
 (use-package unfill
   :init
   (global-set-key (kbd "<f9>") 'unfill-toggle)
@@ -650,10 +609,6 @@ already narrowed."
   (vhl/define-extension 'undo-tree 'undo-tree-yank 'undo-tree-move)
   (vhl/install-extension 'undo-tree)
   )
-
-(global-set-key [(shift delete)] 'clipboard-kill-region)
-(global-set-key [(control insert)] 'clipboard-kill-ring-save)
-(global-set-key [(shift insert)] 'clipboard-yank)
 
 (setq select-enable-clipboard t)
 
