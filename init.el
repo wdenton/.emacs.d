@@ -902,6 +902,11 @@ already narrowed."
 
 (global-set-key (kbd "C-c a") #'org-agenda)
 
+(use-package org-appear
+  :config
+  :hook (org-mode . org-appear-mode)
+  )
+
 (defun wtd/toggle-org-macro-markers ()
   "Toggle visibility of {{{macro}}} markers"
   (interactive)
