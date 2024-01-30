@@ -756,6 +756,7 @@ already narrowed."
   :load-path "/usr/local/src/org-mode/lisp"
   :init
   (setq
+   org-blank-before-new-entry '((heading . never) (plain-list-item . auto))
    org-confirm-babel-evaluate nil ;; Evaluate Babel blocks without asking for confirmation
    org-cycle-separator-lines 0 ;; Never show blank lines in condensed view
    org-display-inline-images t ;; Embed an image with [[file:foo.png]] and then C-c C-x C-v to view
