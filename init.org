@@ -686,7 +686,8 @@ Use ~C-c b~ to create a new scratch buffer.
 	     (get-buffer bufname)))
     (switch-to-buffer (get-buffer-create bufname))
     (org-mode)))
-(global-set-key (kbd "C-c b") 'create-scratch-buffer)
+;; (global-set-key (kbd "C-c b") 'create-scratch-buffer)
+(keymap-global-set "C-c b" 'create-scratch-buffer)
 #+end_src
 
 When I want to kill a buffer, it's always the current one, so don't ask.  ([[http://pragmaticemacs.com/emacs/dont-kill-buffer-kill-this-buffer-instead/][Source]].)
@@ -697,7 +698,8 @@ When I want to kill a buffer, it's always the current one, so don't ask.  ([[htt
   (interactive)
   (kill-buffer (current-buffer)))
 
-(global-set-key (kbd "C-x k") 'wtd/kill-this-buffer)
+;; (global-set-key (kbd "C-x k") 'wtd/kill-this-buffer)
+(keymap-global-set "C-x k" 'wtd/kill-this-buffer)
 #+end_src
 
 ~ibuffer~ is a nicer way of showing the buffer list (~C-x C-b~).  It's built in.  Alias the usual buffer list command to =ibuffer=.
@@ -747,8 +749,10 @@ Make window splitting easier: ~C-x 2~ for vertical split, ~C-x 3~ for horizontal
   (other-window 1 nil)
   (unless prefix (switch-to-next-buffer)))
 
-(global-set-key (kbd "C-x 2") 'wtd/vsplit-last-buffer)
-(global-set-key (kbd "C-x 3") 'wtd/hsplit-last-buffer)
+;; (global-set-key (kbd "C-x 2") 'wtd/vsplit-last-buffer)
+;; (global-set-key (kbd "C-x 3") 'wtd/hsplit-last-buffer)
+(keymap-global-set "C-x 2" 'wtd/vsplit-last-buffer)
+(keymap-global-set "C-x 3" 'wtd/hsplit-last-buffer)
 #+end_src
 
 Use ~C-c left~ or ~C-c right~ to go back and forth in window configurations.
@@ -760,7 +764,8 @@ Use ~C-c left~ or ~C-c right~ to go back and forth in window configurations.
 Or use ~M-o~ as a shortcut for ~other-window~ instead of the default ~C-x o~, which is too long.  This makes it much easier to toggle between windows.
 
 #+begin_src emacs-lisp
-(global-set-key (kbd "M-o") 'other-window)
+;; (global-set-key (kbd "M-o") 'other-window)
+(keymap-global-set "M-o" 'other-window)
 #+end_src
 
 I could use [[https://depp.brause.cc/eyebrowse/][eyebrowse]] to manage window configurations, but I never did, so I took out the code.  I'll leave this note here in case I want to go back.
@@ -1495,11 +1500,13 @@ A file management shortcut from [[https://github.com/bodil/emacs.d][Bodil Stokke
         (delete-file filename)
         (kill-buffer buffer)
         (message "File '%s' successfully removed" filename)))))
-(global-set-key (kbd "C-x C-k") 'wtd/delete-current-buffer-file)
+;;(global-set-key (kbd "C-x C-k") 'wtd/delete-current-buffer-file)
+(keymap-global-set "C-x C-k" 'wtd/delete-current-buffer-file)
 #+end_src
 
 #+begin_src emacs-lisp
-(global-set-key (kbd "C-x C-r") 'rename-visited-file)
+;; (global-set-key (kbd "C-x C-r") 'rename-visited-file)
+(keymap-global-set "C-x C-r" 'rename-visited-file)
 #+end_src
 
 * File types

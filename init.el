@@ -257,14 +257,16 @@ already narrowed."
 	     (get-buffer bufname)))
     (switch-to-buffer (get-buffer-create bufname))
     (org-mode)))
-(global-set-key (kbd "C-c b") 'create-scratch-buffer)
+;; (global-set-key (kbd "C-c b") 'create-scratch-buffer)
+(keymap-global-set "C-c b" 'create-scratch-buffer)
 
 (defun wtd/kill-this-buffer ()
   "Kill the current buffer."
   (interactive)
   (kill-buffer (current-buffer)))
 
-(global-set-key (kbd "C-x k") 'wtd/kill-this-buffer)
+;; (global-set-key (kbd "C-x k") 'wtd/kill-this-buffer)
+(keymap-global-set "C-x k" 'wtd/kill-this-buffer)
 
 (defalias 'list-buffers 'ibuffer)
 
@@ -296,12 +298,15 @@ already narrowed."
   (other-window 1 nil)
   (unless prefix (switch-to-next-buffer)))
 
-(global-set-key (kbd "C-x 2") 'wtd/vsplit-last-buffer)
-(global-set-key (kbd "C-x 3") 'wtd/hsplit-last-buffer)
+;; (global-set-key (kbd "C-x 2") 'wtd/vsplit-last-buffer)
+;; (global-set-key (kbd "C-x 3") 'wtd/hsplit-last-buffer)
+(keymap-global-set "C-x 2" 'wtd/vsplit-last-buffer)
+(keymap-global-set "C-x 3" 'wtd/hsplit-last-buffer)
 
 (winner-mode t)
 
-(global-set-key (kbd "M-o") 'other-window)
+;; (global-set-key (kbd "M-o") 'other-window)
+(keymap-global-set "M-o" 'other-window)
 
 (require 'saveplace)
 (setq save-place-file (expand-file-name ".places" user-emacs-directory))
@@ -682,9 +687,11 @@ already narrowed."
         (delete-file filename)
         (kill-buffer buffer)
         (message "File '%s' successfully removed" filename)))))
-(global-set-key (kbd "C-x C-k") 'wtd/delete-current-buffer-file)
+;;(global-set-key (kbd "C-x C-k") 'wtd/delete-current-buffer-file)
+(keymap-global-set "C-x C-k" 'wtd/delete-current-buffer-file)
 
-(global-set-key (kbd "C-x C-r") 'rename-visited-file)
+;; (global-set-key (kbd "C-x C-r") 'rename-visited-file)
+(keymap-global-set "C-x C-r" 'rename-visited-file)
 
 (use-package csv-mode)
 
