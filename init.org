@@ -2495,3 +2495,19 @@ I don't use this right now---it would mess up headers in YAML files---but maybe 
 #+begin_src emacs-lisp :tangle no
 (use-package esonify)
 #+end_src
+
+* Noted for later
+
+#+begin_src emacs-lisp :tangle no
+(defun wtd/add-cite (beg end)
+  "Wrap selected text in HTML cite tags."
+  (interactive "r")
+  (save-excursion
+    (narrow-to-region beg end)
+    (set-mark nil)
+    (goto-char (point-min))
+    (insert "<cite>")
+    (goto-char (point-max))
+    (insert "</cite>")
+    (widen)))
+#+end_src
