@@ -764,8 +764,8 @@ already narrowed."
 
 (use-package org
   ;; Use Org's current development branch, pulled down with Git.  See https://orgmode.org/org.html#Installation.
-  :pin manual
-  :load-path "/usr/local/src/org-mode/lisp"
+  ;; :pin manual
+  ;; :load-path "/usr/local/src/org-mode/lisp"
   :init
   (setq
    org-agenda-skip-scheduled-if-done t;; Don't show DONE tasks in agenda view
