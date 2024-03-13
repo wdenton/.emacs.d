@@ -768,6 +768,7 @@ already narrowed."
   :load-path "/usr/local/src/org-mode/lisp"
   :init
   (setq
+   org-agenda-skip-scheduled-if-done t;; Don't show DONE tasks in agenda view
    org-blank-before-new-entry '((heading . never) (plain-list-item . auto))
    org-confirm-babel-evaluate nil ;; Evaluate Babel blocks without asking for confirmation
    org-cycle-separator-lines 0 ;; Never show blank lines in condensed view
