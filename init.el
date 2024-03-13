@@ -878,7 +878,7 @@ already narrowed."
   (set-face-attribute 'org-date nil :inherit 'fixed-pitch)
 
   ;; Code and verbatim text.
-  (set-face-attribute 'org-verbatim nil :family "Ubuntu Mono" :height wtd-fixed-pitch-height :inherit 'fixed-pitch :underline '(:color "dim gray" :style wave))
+  (set-face-attribute 'org-verbatim nil :family "Ubuntu Mono" :height wtd-fixed-pitch-height :inherit 'fixed-pitch) ;; :underline '(:color "dim gray") :style wave))
   (set-face-attribute 'org-code nil :family "Ubuntu Mono" :height wtd-fixed-pitch-height :foreground 'unspecified :box '(:color "dim gray")) ;; was #586e75
 
   ;; Source code block appearance
