@@ -477,6 +477,10 @@ I was trying out [[https://github.com/DarthFennec/highlight-indent-guides][highl
 Bozhidar Batsov's [[https://github.com/bbatsov/solarized-emacs][Solarized theme for Emacs]] is smooth and easy on the eye.
 
 #+begin_src emacs-lisp
+(setq my-solarized-theme
+      (cond ((string= (system-name) "helium") 'solarized-light)
+	    (t 'solarized-dark)))
+
 (use-package solarized-theme
   :config
   ;; Stop the theme from messing up Org headlines and using variable pitch everywhere.
@@ -484,7 +488,8 @@ Bozhidar Batsov's [[https://github.com/bbatsov/solarized-emacs][Solarized theme 
 	solarized-scale-org-headlines nil
 	solarized-high-contrast-mode-line t
 	solarized-use-more-italic t)
-  (load-theme 'solarized-dark t)
+  ;; (load-theme 'solarized-light t)
+  (load-theme my-solarized-theme t)
   )
 #+end_src
 

@@ -131,6 +131,10 @@
   (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
   )
 
+(setq my-solarized-theme
+      (cond ((string= (system-name) "helium") 'solarized-light)
+	    (t 'solarized-dark)))
+
 (use-package solarized-theme
   :config
   ;; Stop the theme from messing up Org headlines and using variable pitch everywhere.
@@ -138,7 +142,8 @@
 	solarized-scale-org-headlines nil
 	solarized-high-contrast-mode-line t
 	solarized-use-more-italic t)
-  (load-theme 'solarized-dark t)
+  ;; (load-theme 'solarized-light t)
+  (load-theme my-solarized-theme t)
   )
 
 (size-indication-mode t)
