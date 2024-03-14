@@ -778,7 +778,7 @@ already narrowed."
    org-export-backends (quote (ascii html latex md odt)) ;; Exporting: I will see these export options after C-c C-e ;; beamer reveal
    ;; org-export-date-timestamp-format "%d %m %Y" ;; Date format on exports
    org-export-with-smart-quotes t ;; Turn plain quotes into posh (I can't include examples in here or it breaks paren matching!)
-   org-fontify-quote-and-blocks t ;; Add a special face to #+begin_quote and #+begin_verse block.
+   org-fontify-quote-and-verse-blocks t ;; Add a special face to #+begin_quote and #+begin_verse block.
    org-fontify-whole-heading-line t
    org-footnote-auto-adjust nil ;; Don't resort or adjust them without my saying so.
    org-footnote-section nil ;; Define footnotes nearby when I use C-c C-x f
