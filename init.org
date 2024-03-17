@@ -1652,8 +1652,8 @@ Deep in there I use  ~set-face-attribute~  on ~org-verbatim~ and ~org-code~ face
 #+begin_src emacs-lisp
 (use-package org
   ;; Use Org's current development branch, pulled down with Git.  See https://orgmode.org/org.html#Installation.
-  ;; :pin manual
-  ;; :load-path "/usr/local/src/org-mode/lisp"
+  :pin manual
+  :load-path "/usr/local/src/org-mode/lisp"
   :init
   (setq
    org-agenda-skip-scheduled-if-done t;; Don't show DONE tasks in agenda view
@@ -1666,13 +1666,14 @@ Deep in there I use  ~set-face-attribute~  on ~org-verbatim~ and ~org-code~ face
    org-export-backends (quote (ascii html latex md odt)) ;; Exporting: I will see these export options after C-c C-e ;; beamer reveal
    ;; org-export-date-timestamp-format "%d %m %Y" ;; Date format on exports
    org-export-with-smart-quotes t ;; Turn plain quotes into posh (I can't include examples in here or it breaks paren matching!)
+   org-fold-catch-invisible-edits 'smart
    org-fontify-quote-and-blocks t ;; Add a special face to #+begin_quote and #+begin_verse block.
    org-fontify-whole-heading-line t
    org-footnote-auto-adjust nil ;; Don't resort or adjust them without my saying so.
    org-footnote-section nil ;; Define footnotes nearby when I use C-c C-x f
    org-hide-emphasis-markers t ;; Hide the /italics/ and *bold* markers
    org-hide-macro-markers t ;; Hide {{{macro}}} curly brackets; see also wtd/toggle-org-macro-markers
-   org-highlight-latex-and-related '(latex) ;; Highlight inline LaTeX
+   org-highlight-latex-and-related '(script entities) ;; Highlight inline LaTeX. Was '(latex) but in Feb 2024 that started breaking large files.  Could also be nil.
    org-id-link-to-org-use-id 'use-existing
    org-image-max-width nil ;; nil means "do not limit image width"
    org-image-actual-width nil ;; nil means "try to get the width from an #+ATTR.* keyword and fall back on the original width if none is found."
