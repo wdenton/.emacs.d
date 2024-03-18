@@ -871,7 +871,7 @@ already narrowed."
 							   (sqlite . t)
 							   ))
 
-  (set-face-attribute 'org-link nil :foreground "Steel Blue")
+  (set-face-attribute 'org-link nil :foreground "Steel Blue" :weight 'normal)
   (set-face-attribute 'org-footnote nil :height 0.9)
 
   ;; Necessary when using mixed-pitch, because I want these fixed.
