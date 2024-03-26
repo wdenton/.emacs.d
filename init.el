@@ -337,6 +337,7 @@ already narrowed."
 (use-package vertico
   :init
   (vertico-mode)
+  (vertico-multiform-mode)
 )
 
 (use-package vertico-directory
@@ -519,6 +520,12 @@ already narrowed."
   ;; (setq eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
 
   :config
+ (setq prefix-help-command #'embark-prefix-help-command)
+ (add-to-list 'vertico-multiform-categories '(embark-keybinding grid))
+ (setq embark-indicators
+       '(embark-minimal-indicator  ; default is embark-mixed-indicator
+         embark-highlight-indicator
+         embark-isearch-highlight-indicator))
   ;; Hide the mode line of the Embark live/completions buffers
   (add-to-list 'display-buffer-alist
                '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
