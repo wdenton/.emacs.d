@@ -792,7 +792,7 @@ already narrowed."
    org-footnote-section nil ;; Define footnotes nearby when I use C-c C-x f
    org-hide-emphasis-markers t ;; Hide the /italics/ and *bold* markers
    org-hide-macro-markers t ;; Hide {{{macro}}} curly brackets; see also wtd/toggle-org-macro-markers
-   org-highlight-latex-and-related '(script entities) ;; Highlight inline LaTeX. Was '(latex) but in Feb 2024 that started breaking large files.  Could also be nil.
+   org-highlight-latex-and-related nil ;; '(script entities) ;; Highlight inline LaTeX. Was '(latex) but in Feb 2024 that started breaking large files.  Could also be nil.
    org-id-link-to-org-use-id 'use-existing
    org-image-max-width nil ;; nil means "do not limit image width"
    org-image-actual-width nil ;; nil means "try to get the width from an #+ATTR.* keyword and fall back on the original width if none is found."
