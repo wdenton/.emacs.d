@@ -64,6 +64,8 @@
 
 (setq use-dialog-box nil)
 
+(setq read-extended-command-predicate #'command-completion-default-include-p)
+
 (global-visual-line-mode 1)
 
 (setq-default line-spacing 2)
@@ -338,6 +340,8 @@ already narrowed."
   :init
   (vertico-mode)
   (vertico-multiform-mode)
+  :config
+  (add-to-list 'vertico-multiform-categories '(embark-keybinding grid))
 )
 
 (use-package vertico-directory
@@ -523,7 +527,7 @@ already narrowed."
  (setq prefix-help-command #'embark-prefix-help-command)
  (add-to-list 'vertico-multiform-categories '(embark-keybinding grid))
  (setq embark-indicators
-       '(embark-minimal-indicator  ; default is embark-mixed-indicator
+       '(embark-mixed-indicator
          embark-highlight-indicator
          embark-isearch-highlight-indicator))
   ;; Hide the mode line of the Embark live/completions buffers
@@ -632,6 +636,8 @@ already narrowed."
 (global-set-key (kbd "C-<backspace>") (lambda ()
 					(interactive)
 					(kill-line 0)))
+
+(eval-after-load "flyspell" '(define-key flyspell-mode-map (kbd "C-.") nil))
 
 (use-package flyspell-correct
   :after flyspell

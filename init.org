@@ -281,6 +281,12 @@ Never use an X dialog box; use the minibuffer instead.
 (setq use-dialog-box nil)
 #+end_src
 
+Hide commands in ~M-x~ which do not work in the current mode.
+
+#+begin_src emacs-lisp
+(setq read-extended-command-predicate #'command-completion-default-include-p)
+#+end_src
+
 * Appearance
 
 ** General
@@ -826,6 +832,8 @@ First, set up Vertico (VErtical Interactive COmpletion), a "minimalistic vertica
   :init
   (vertico-mode)
   (vertico-multiform-mode)
+  :config
+  (add-to-list 'vertico-multiform-categories '(embark-keybinding grid))
 )
 #+end_src
 
@@ -1068,7 +1076,7 @@ I didn't get what [[https://github.com/oantolin/embark][Embark]] does until I tr
  (setq prefix-help-command #'embark-prefix-help-command)
  (add-to-list 'vertico-multiform-categories '(embark-keybinding grid))
  (setq embark-indicators
-       '(embark-minimal-indicator  ; default is embark-mixed-indicator
+       '(embark-mixed-indicator
          embark-highlight-indicator
          embark-isearch-highlight-indicator))
   ;; Hide the mode line of the Embark live/completions buffers
@@ -1359,7 +1367,13 @@ Allow pasting selection outside of Emacs.
 
 ** Spelling
 
-Usually I invoke =M-x ispell= to [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html][check spelling]], or =M-$= on a word to deal with it, but I'm going to try [[https://github.com/d12frosted/flyspell-correct][flyspell-correct]] and see how that helps.  =C-;= to jump back to the first misspelled word before the point, then jump back to where you were.  Good for very easily fixing a mistake a few words back.  (Use ~M-o~ to see the options for saving or ignoring a word.)
+Usually I invoke ~M-x ispell~ to [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html][check spelling]], or ~M-$~ on a word to deal with it, but I'm going to try [[https://github.com/d12frosted/flyspell-correct][flyspell-correct]] and see how that helps.   ~C-;~ to jump back to the first misspelled word before the point, then jump back to where you were.  Good for very easily fixing a mistake a few words back.  (Use ~M-o~ to see the options for saving or ignoring a word.)
+
+By default flyspell binds ~C-.~ but I want Embark to be able to use that.  A [[https://stackoverflow.com/a/16085470/854346][helpful Stack Overflow answer]] showed me how to arrange this.
+
+#+begin_src emacs-lisp
+(eval-after-load "flyspell" '(define-key flyspell-mode-map (kbd "C-.") nil))
+#+end_src
 
 #+begin_src emacs-lisp
 (use-package flyspell-correct
