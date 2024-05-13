@@ -319,21 +319,15 @@ already narrowed."
 (setq save-place-file (expand-file-name ".places" user-emacs-directory))
 (save-place-mode)
 
-(use-package projectile
-  :config
-  (projectile-mode)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (setq projectile-mode-line-function '(lambda () (format " ᴨ[%s]" (projectile-project-name))))
-  )
+(setq project-vc-extra-root-markers '(".project.el" ".projectile" ))
 
-(use-package ibuffer-projectile
-  :defer t
-  :init
-  (add-hook 'ibuffer-hook
-	    (lambda ()
-	      (ibuffer-projectile-set-filter-groups)
-	      (unless (eq ibuffer-sorting-mode 'alphabetic)
-		(ibuffer-do-sort-by-alphabetic))))
+(use-package ibuffer-project
+  :hook (ibuffer . (lambda ()
+                     "Group ibuffer's list by project."
+                     (setq ibuffer-filter-groups (ibuffer-project-generate-filter-groups))
+                     (unless (eq ibuffer-sorting-mode 'project-file-relative)
+                       (ibuffer-do-sort-by-project-file-relative))))
+  :init (setq ibuffer-project-use-cache t)
   )
 
 (use-package vertico

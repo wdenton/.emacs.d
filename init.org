@@ -794,9 +794,26 @@ When I close a session, save exactly where I was in the files.
 
 ** Projects
 
-I don't use [[https://github.com/bbatsov/projectile][Projectile]] much, but I like to have it around.  I think it's perhaps better suited for bigger projects than I work on.
+Trying the built-in [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Projects.html][projects]] features.
 
 #+begin_src emacs-lisp
+(setq project-vc-extra-root-markers '(".project.el" ".projectile" ))
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package ibuffer-project
+  :hook (ibuffer . (lambda ()
+                     "Group ibuffer's list by project."
+                     (setq ibuffer-filter-groups (ibuffer-project-generate-filter-groups))
+                     (unless (eq ibuffer-sorting-mode 'project-file-relative)
+                       (ibuffer-do-sort-by-project-file-relative))))
+  :init (setq ibuffer-project-use-cache t)
+  )
+#+end_src
+
+# I don't use [[https://github.com/bbatsov/projectile][Projectile]] much, but I like to have it around.  I think it's perhaps better suited for bigger projects than I work on.
+
+#+begin_src emacs-lisp :tangle no
 (use-package projectile
   :config
   (projectile-mode)
@@ -805,9 +822,9 @@ I don't use [[https://github.com/bbatsov/projectile][Projectile]] much, but I li
   )
 #+end_src
 
-For [[https://github.com/purcell/ibuffer-projectile][ibuffer-projectile]].
+# For [[https://github.com/purcell/ibuffer-projectile][ibuffer-projectile]].
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package ibuffer-projectile
   :defer t
   :init
