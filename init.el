@@ -824,8 +824,9 @@ already narrowed."
   (setq org-clock-persist 'history)
   (org-clock-persistence-insinuate)
 
-  ;; Agendas
-  (setq org-agenda-files '("~/york/shared/projects/projects.org" "~/york/shared/work-diaries/work-diary.org"))
+  ;; Agendas and tag inheritance
+  (setq org-agenda-files '("~/york/shared/projects/projects.org" "~/york/shared/work-diaries/work-diary.org" "~/york/shared/work-diaries/work-diary-2023-2024.org"))
+  (setq org-complete-tags-always-offer-all-agenda-tags t)
 
   ;; Automatically refresh inline images that are generated from Babel blocks
   (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
