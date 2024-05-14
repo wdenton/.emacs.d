@@ -9,6 +9,11 @@
 #+options: num:nil toc:nil ^:nil
 #+startup: fold
 
+* To try
+
++ Tree-sitter modes.
++ LSP, with lsp-mode or eglot.  Would be nice to try [[https://github.com/latex-lsp/texlab?tab=readme-ov-file][texlab]] for LaTeX.
+
 * LaTeX export options
 :PROPERTIES:
 :VISIBILITY: folded
