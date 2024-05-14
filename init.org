@@ -365,7 +365,7 @@ My home and work machines have different screen resolutions, so the font height 
 
 I'm going to try, yet again, using variable pitch for regular text.  I try it every now and then and have always reverted back, but maybe it will be different this time.
 
-First, set the default, which is fixed pitch, or monospaced.  I now use the [[https://en.wikipedia.org/wiki/DejaVu_fonts][DejaVu fonts]], so for this it's DejaVu Sans Mono.   I also use this in terminal windows, so everything looks the same.   (Before, I used [[https://en.wikipedia.org/wiki/Ubuntu_(typeface)][Ubuntu]] Mono, and I tried [[https://en.wikipedia.org/wiki/Fira_(typeface)#Fira_Code][Fira]] Code for a little while.)
+First, set the default, which is fixed pitch, or monospaced.  I now use the [[https://en.wikipedia.org/wiki/DejaVu_fonts][DejaVu fonts]], so for this it's DejaVu Sans Mono.   I also use this in terminal windows, so everything looks the same.   (Before, I used [[https://en.wikipedia.org/wiki/Ubuntu_(typeface)][Ubuntu]] Mono, and I tried [[https://en.wikipedia.org/wiki/Fira_(typeface)#Fira_Code][Fira]] Code for a little while.  I might try [[https://rubjo.github.io/victor-mono/][Victor Mono]] one day.)
 
 Where [[https://www.freedesktop.org/wiki/Software/fontconfig/][Fontconfig]] is used, running ~fc-list : family | sort~ will list all available fonts.
 
