@@ -319,21 +319,15 @@ already narrowed."
 (setq save-place-file (expand-file-name ".places" user-emacs-directory))
 (save-place-mode)
 
-(use-package projectile
-  :config
-  (projectile-mode)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (setq projectile-mode-line-function '(lambda () (format " ᴨ[%s]" (projectile-project-name))))
-  )
+(setq project-vc-extra-root-markers '(".project.el" ".projectile" ))
 
-(use-package ibuffer-projectile
-  :defer t
-  :init
-  (add-hook 'ibuffer-hook
-	    (lambda ()
-	      (ibuffer-projectile-set-filter-groups)
-	      (unless (eq ibuffer-sorting-mode 'alphabetic)
-		(ibuffer-do-sort-by-alphabetic))))
+(use-package ibuffer-project
+  :hook (ibuffer . (lambda ()
+                     "Group ibuffer's list by project."
+                     (setq ibuffer-filter-groups (ibuffer-project-generate-filter-groups))
+                     (unless (eq ibuffer-sorting-mode 'project-file-relative)
+                       (ibuffer-do-sort-by-project-file-relative))))
+  :init (setq ibuffer-project-use-cache t)
   )
 
 (use-package vertico
@@ -830,8 +824,9 @@ already narrowed."
   (setq org-clock-persist 'history)
   (org-clock-persistence-insinuate)
 
-  ;; Agendas
-  (setq org-agenda-files '("~/york/shared/projects/projects.org" "~/york/shared/work-diaries/work-diary.org"))
+  ;; Agendas and tag inheritance
+  (setq org-agenda-files '("~/york/shared/projects/projects.org" "~/york/shared/work-diaries/work-diary.org" "~/york/shared/work-diaries/work-diary-2023-2024.org"))
+  (setq org-complete-tags-always-offer-all-agenda-tags t)
 
   ;; Automatically refresh inline images that are generated from Babel blocks
   (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
