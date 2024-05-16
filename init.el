@@ -900,8 +900,10 @@ already narrowed."
   (set-face-attribute 'org-tag nil :height 0.8 :foreground "dim gray")
 
   ;; Make LOGBOOK and such fainter.  Default bold is too loud.
-  (face-spec-set 'org-drawer '((t (:foreground "dim gray" :weight normal :height 0.9))))
-  (face-spec-set 'org-special-keyword '((t (:foreground "dim gray" :weight normal :height 0.9))))
+  ;; (face-spec-set 'org-drawer '((t (:foreground "dim gray" :weight normal :height 0.9)))) ;; Worked in dark look
+  ;; (face-spec-set 'org-special-keyword '((t (:foreground "dim gray" :weight normal :height 0.9)))) ;; Worked in dark look
+  (face-spec-set 'org-drawer '((t (:weight extra-light :height 0.9))))
+  (face-spec-set 'org-special-keyword '((t (:weight extra-light :height 0.9))))
   (face-spec-set 'org-property-value '((t (:weight normal :height 0.9))))
 
   ;; Make completed items in a checkbox list less noticeable
