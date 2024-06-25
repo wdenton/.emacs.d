@@ -734,6 +734,7 @@ already narrowed."
   (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward);; Use normal isearch because Swiper doesn't do PDFs.
   :hook
   (pdf-view-mode . (lambda() (linum-mode -1))) ;; linum-mode doesn't work well with PDF Tools, apparently.
+  (pdf-view-mode . pdf-view-themed-minor-mode)
  )
 
 (add-to-list 'auto-mode-alist

@@ -1612,6 +1612,7 @@ I love CSV files, but I'd rather load them into Org or R then edit them directly
   (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward);; Use normal isearch because Swiper doesn't do PDFs.
   :hook
   (pdf-view-mode . (lambda() (linum-mode -1))) ;; linum-mode doesn't work well with PDF Tools, apparently.
+  (pdf-view-mode . pdf-view-themed-minor-mode)
  )
 #+end_src
 
