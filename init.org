@@ -64,6 +64,7 @@ Org inits I looked at:
 
 + Sacha Chua's [[https://github.com/sachac/subed][subed]] for editing video subtitles
 + Should I stop using  [[https://github.com/bbatsov/projectile][Projectile]], and use Emacs built-in project stuff, such as ~C-x p p~?  How to make that divide projects nicely in ~C-x C-b~?
++ [[https://github.com/james-stoup/emacs-org-mode-tutorial][Tutorial by James Stoup]]
 
 * Warning!
 
@@ -1204,6 +1205,12 @@ If there are any empty lines at the end of a buffer, show them (but they will di
 
 #+begin_src emacs-lisp
 (set-default 'indicate-empty-lines t)
+#+end_src
+
+This [[https://list.orgmode.org/orgmode/Zqjm0hyy5DjFNrgm@swain.home.arpa/][reportedly]] will really speed up performance on large Org files.
+
+#+begin_src emacs-lisp
+(setq whitespace-style '(space-mark tab-mark))
 #+end_src
 
 ** Colours
