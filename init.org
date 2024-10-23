@@ -164,6 +164,12 @@ Note that =user-emacs-directory= is =~/.emacs.d/=.
 
 ** Packages
 
+Adjust =load-path= right off the bat so I can run Org from source, not the built-in Emacs version.
+
+#+begin_src emacs-lisp :tangle init.el
+(add-to-list 'load-path (expand-file-name "/usr/local/src/org-mode/lisp"))
+#+end_src
+
 First, set up the MELPA archive.
 
 #+begin_src emacs-lisp :tangle init.el

@@ -6,6 +6,8 @@
 ;; (setq debug-on-error t)
 (setq warning-minimum-level :emergency) ;; :emergency, :error, :warning, :debug
 
+(add-to-list 'load-path (expand-file-name "/usr/local/src/org-mode/lisp"))
+
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (setq package-archive-priorities '(("melpa" . 20) ("gnu" . 10)))
