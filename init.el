@@ -6,6 +6,8 @@
 ;; (setq debug-on-error t)
 (setq warning-minimum-level :emergency) ;; :emergency, :error, :warning, :debug
 
+(add-to-list 'load-path (expand-file-name "/usr/local/src/org-mode/lisp"))
+
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (setq package-archive-priorities '(("melpa" . 20) ("gnu" . 10)))
@@ -734,6 +736,7 @@ already narrowed."
   (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward);; Use normal isearch because Swiper doesn't do PDFs.
   :hook
   (pdf-view-mode . (lambda() (linum-mode -1))) ;; linum-mode doesn't work well with PDF Tools, apparently.
+  (pdf-view-mode . pdf-view-themed-minor-mode)
  )
 
 (add-to-list 'auto-mode-alist
@@ -776,6 +779,7 @@ already narrowed."
   :init
   (setq
    org-agenda-skip-scheduled-if-done t;; Don't show DONE tasks in agenda view
+   org-agenda-window-setup 'only-window
    org-blank-before-new-entry '((heading . never) (plain-list-item . auto))
    org-confirm-babel-evaluate nil ;; Evaluate Babel blocks without asking for confirmation
    org-cycle-separator-lines 0 ;; Never show blank lines in condensed view
@@ -900,8 +904,10 @@ already narrowed."
   (set-face-attribute 'org-tag nil :height 0.8 :foreground "dim gray")
 
   ;; Make LOGBOOK and such fainter.  Default bold is too loud.
-  (face-spec-set 'org-drawer '((t (:foreground "dim gray" :weight normal :height 0.9))))
-  (face-spec-set 'org-special-keyword '((t (:foreground "dim gray" :weight normal :height 0.9))))
+  ;; (face-spec-set 'org-drawer '((t (:foreground "dim gray" :weight normal :height 0.9)))) ;; Worked in dark look
+  ;; (face-spec-set 'org-special-keyword '((t (:foreground "dim gray" :weight normal :height 0.9)))) ;; Worked in dark look
+  (face-spec-set 'org-drawer '((t (:weight extra-light :height 0.9))))
+  (face-spec-set 'org-special-keyword '((t (:weight extra-light :height 0.9))))
   (face-spec-set 'org-property-value '((t (:weight normal :height 0.9))))
 
   ;; Make completed items in a checkbox list less noticeable

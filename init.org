@@ -165,6 +165,12 @@ Note that =user-emacs-directory= is =~/.emacs.d/=.
 
 ** Packages
 
+Adjust =load-path= right off the bat so I can run Org from source, not the built-in Emacs version.
+
+#+begin_src emacs-lisp :tangle init.el
+(add-to-list 'load-path (expand-file-name "/usr/local/src/org-mode/lisp"))
+#+end_src
+
 First, set up the MELPA archive.
 
 #+begin_src emacs-lisp :tangle init.el
@@ -366,7 +372,7 @@ My home and work machines have different screen resolutions, so the font height 
 
 I'm going to try, yet again, using variable pitch for regular text.  I try it every now and then and have always reverted back, but maybe it will be different this time.
 
-First, set the default, which is fixed pitch, or monospaced.  I now use the [[https://en.wikipedia.org/wiki/DejaVu_fonts][DejaVu fonts]], so for this it's DejaVu Sans Mono.   I also use this in terminal windows, so everything looks the same.   (Before, I used [[https://en.wikipedia.org/wiki/Ubuntu_(typeface)][Ubuntu]] Mono, and I tried [[https://en.wikipedia.org/wiki/Fira_(typeface)#Fira_Code][Fira]] Code for a little while.)
+First, set the default, which is fixed pitch, or monospaced.  I now use the [[https://en.wikipedia.org/wiki/DejaVu_fonts][DejaVu fonts]], so for this it's DejaVu Sans Mono.   I also use this in terminal windows, so everything looks the same.   (Before, I used [[https://en.wikipedia.org/wiki/Ubuntu_(typeface)][Ubuntu]] Mono, and I tried [[https://en.wikipedia.org/wiki/Fira_(typeface)#Fira_Code][Fira]] Code for a little while.  I might try [[https://rubjo.github.io/victor-mono/][Victor Mono]] one day.)
 
 Where [[https://www.freedesktop.org/wiki/Software/fontconfig/][Fontconfig]] is used, running ~fc-list : family | sort~ will list all available fonts.
 
@@ -1619,6 +1625,7 @@ I love CSV files, but I'd rather load them into Org or R then edit them directly
   (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward);; Use normal isearch because Swiper doesn't do PDFs.
   :hook
   (pdf-view-mode . (lambda() (linum-mode -1))) ;; linum-mode doesn't work well with PDF Tools, apparently.
+  (pdf-view-mode . pdf-view-themed-minor-mode)
  )
 #+end_src
 
@@ -1707,6 +1714,7 @@ Deep in there I use  ~set-face-attribute~  on ~org-verbatim~ and ~org-code~ face
   :init
   (setq
    org-agenda-skip-scheduled-if-done t;; Don't show DONE tasks in agenda view
+   org-agenda-window-setup 'only-window
    org-blank-before-new-entry '((heading . never) (plain-list-item . auto))
    org-confirm-babel-evaluate nil ;; Evaluate Babel blocks without asking for confirmation
    org-cycle-separator-lines 0 ;; Never show blank lines in condensed view
@@ -1831,8 +1839,10 @@ Deep in there I use  ~set-face-attribute~  on ~org-verbatim~ and ~org-code~ face
   (set-face-attribute 'org-tag nil :height 0.8 :foreground "dim gray")
 
   ;; Make LOGBOOK and such fainter.  Default bold is too loud.
-  (face-spec-set 'org-drawer '((t (:foreground "dim gray" :weight normal :height 0.9))))
-  (face-spec-set 'org-special-keyword '((t (:foreground "dim gray" :weight normal :height 0.9))))
+  ;; (face-spec-set 'org-drawer '((t (:foreground "dim gray" :weight normal :height 0.9)))) ;; Worked in dark look
+  ;; (face-spec-set 'org-special-keyword '((t (:foreground "dim gray" :weight normal :height 0.9)))) ;; Worked in dark look
+  (face-spec-set 'org-drawer '((t (:weight extra-light :height 0.9))))
+  (face-spec-set 'org-special-keyword '((t (:weight extra-light :height 0.9))))
   (face-spec-set 'org-property-value '((t (:weight normal :height 0.9))))
 
   ;; Make completed items in a checkbox list less noticeable
