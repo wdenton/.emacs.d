@@ -580,6 +580,8 @@ already narrowed."
 
 (set-default 'indicate-empty-lines t)
 
+(setq whitespace-style '(space-mark tab-mark))
+
 (use-package rainbow-mode
   :init
   (add-hook 'prog-mode-hook 'rainbow-mode)
@@ -801,6 +803,7 @@ already narrowed."
    org-image-max-width nil ;; nil means "do not limit image width"
    org-image-actual-width nil ;; nil means "try to get the width from an #+ATTR.* keyword and fall back on the original width if none is found."
    org-list-allow-alphabetical t ;; Allow a b c lists
+   org-org-with-special-rows nil ;; Do not include table width and formatting rows when reading a table as a data
    org-pretty-entities t ;; org-entities displays \alpha etc. as Unicode characters.
    org-return-follows-link t ;; Hit return on a link to open it in a browser
    org-special-ctrl-a/e t ;; Make C-a and C-e understand how headings and tags work
