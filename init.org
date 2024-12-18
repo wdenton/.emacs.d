@@ -2244,13 +2244,6 @@ Flycheck and lintr.
 )
 #+end_src
 
-#+begin_src emacs-lisp :tangle no
-(use-package tree-sitter-ess-r
-  :ensure t
-  :after (ess)
-  :hook (ess-r-mode . tree-sitter-ess-r-mode-activate))
-#+end_src
-
 * Ruby
 
 This doesn't work.  Why not?
