@@ -2512,7 +2512,7 @@ To connect with [[https://www.zotero.org/][Zotero]], use [[https://gitlab.com/eg
 # xdg-mime default firefox_firefox.desktop x-scheme-handler/zotero
 # └─$ cat ~/.config/mimeapps.list
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package zotxt
   :defer t
   :diminish zotxt

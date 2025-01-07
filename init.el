@@ -1274,11 +1274,6 @@ already narrowed."
 (put 'LaTeX-narrow-to-environment 'disabled nil)
 (put 'TeX-narrow-to-group 'disabled nil)
 
-(use-package zotxt
-  :defer t
-  :diminish zotxt
-  )
-
 (use-package citeproc
   :defer t
   :diminish citeproc
