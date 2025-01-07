@@ -832,7 +832,10 @@ already narrowed."
   (org-clock-persistence-insinuate)
 
   ;; Agendas and tag inheritance
-  (setq org-agenda-files '("~/york/shared/projects/projects.org" "~/york/shared/work-diaries/work-diary.org" "~/york/shared/work-diaries/work-diary-2023-2024.org"))
+  (setq org-agenda-files '("~/york/shared/projects/projects.org"
+			   "~/york/shared/workshops/zotero/zotero-workshops.org"
+			   "~/york/shared/work-diaries/work-diary.org"
+			   "~/york/shared/work-diaries/work-diary-2023-2024.org"))
   (setq org-complete-tags-always-offer-all-agenda-tags t)
 
   ;; Automatically refresh inline images that are generated from Babel blocks
