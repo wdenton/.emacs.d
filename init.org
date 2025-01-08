@@ -1700,6 +1700,8 @@ Some things I might try:
 
 + [[https://github.com/alphapapa/org-super-agenda][org-super-agenda]]
 
+See also Sacha Chua's [[https://sachachua.com/blog/2024/12/linking-to-org-babel-source-in-a-comment-and-making-that-always-use-file-links/][Linking to Org Babel source in a comment, and making that always use file links]], which shows setting defaults for  =org-babel-default-header-args= so they don't need be set over and over the same way on every source block.
+
 ** Manage and configure with use-package
 
 The =use-package= syntax here is messy.  All of the hooks should go under =:hook= and the appearance teaks under =:custom-face=, but I don't know how to do that yet.
